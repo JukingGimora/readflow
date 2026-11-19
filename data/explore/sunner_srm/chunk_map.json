@@ -1,0 +1,6602 @@
+{
+ "322": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/npc/npcTask/query"
+  ],
+  "endpoints": [
+   "/vendormgt/npc/npcTask/batchReCall",
+   "/vendormgt/npc/npcTask/delete/",
+   "/vendormgt/npc/npcTask/query",
+   "/vendormgt/npc/npcTask/toTab/withmtrl/view/"
+  ],
+  "file": "chunks/322.d9467e116066bc01eeb2.js"
+ },
+ "332": {
+  "names": [
+   "cert-expiry-noti-vendor",
+   "show",
+   "show",
+   "show"
+  ],
+  "query_urls": [
+   "/vendormgt/certExpiryNoti/vendor/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/332.79efae6282426a7c5291.js"
+ },
+ "409": {
+  "names": [
+   "perm",
+   "first",
+   "perm",
+   "second",
+   "third",
+   "fourth"
+  ],
+  "query_urls": [
+   "/pe/pomgt/pomain/queryByPoId"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/pomgt/poitem/buyer/unlockItem/",
+   "/pe/pomgt/pomain/vendor/findByIds/"
+  ],
+  "file": "chunks/409.240ca12f97b7ebdd10be.js"
+ },
+ "239": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/jitAllocation/findItemList"
+  ],
+  "file": "chunks/239.5366c034e320ac7e290c.js"
+ },
+ "449": {
+  "names": [
+   "shipmentTaskList",
+   "perm"
+  ],
+  "query_urls": [
+   "/sl/shipment/queryPage"
+  ],
+  "endpoints": [
+   "/sl/shipment/getById/",
+   "/sl/shipment/submitBdPortClient/",
+   "/sl/shipment/submitBdTransport/",
+   "/sl/shipment/updateDeliveryNo/"
+  ],
+  "file": "chunks/449.31042d87468e896217a9.js"
+ },
+ "176": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/vendor/delivery/query",
+   "/businessconfig/vendor/delivery/saveOrUpdate"
+  ],
+  "file": "chunks/176.e41defce95711d450e9d.js"
+ },
+ "317": {
+  "names": [
+   "vdmgt-vendorchange"
+  ],
+  "query_urls": [
+   "/vendormgt/vdchange/vendor/query"
+  ],
+  "endpoints": [
+   "/organization/purgroup/getAll",
+   "/vendormgt/vdchange/vendor/getBusList",
+   "/vendorreg/invite/findCount/",
+   "/vendorreg/invite/update"
+  ],
+  "file": "chunks/317.874dbbda064c7df6711e.js"
+ },
+ "302": {
+  "names": [
+   "perm",
+   "perm",
+   "first",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/organization/company/getComByPurOrgId",
+   "/organization/factory/getFactoryByPurId/",
+   "/organization/purOrg/del/",
+   "/organization/purOrg/getById/",
+   "/organization/purOrg/getVendorByPurId/",
+   "/organization/purOrg/updateStatus"
+  ],
+  "file": "chunks/302.24fa795c1ddbf0a4eb25.js"
+ },
+ "141": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pricearchive/query/area/subsection",
+   "/pricearchive/query/factory/subsection"
+  ],
+  "endpoints": [
+   "/pricearchive/invalidPriceArchive/",
+   "/quote/getQuoteInfo/",
+   "/sourcing/item/getItemInfo/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/141.b0bb991980ed436f9ec5.js"
+ },
+ "19": {
+  "names": [
+   "orderInquiryPrint",
+   "orderInquiry",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/farmer/order/farmerCheckQuery"
+  ],
+  "endpoints": [
+   "/farmer/farmerManageQuery",
+   "/farmer/order/abolish"
+  ],
+  "file": "chunks/19.a19899430e3ea90222e6.js"
+ },
+ "70": {
+  "names": [
+   "contractmgt-template-terms",
+   "perm",
+   "perm",
+   "perm",
+   "show"
+  ],
+  "query_urls": [
+   "/contractmgt/terms/query/common"
+  ],
+  "endpoints": [
+   "/contractmgt/terms/getTemplate/",
+   "/contractmgt/terms/preView/",
+   "/contractmgt/termsType/getAll",
+   "/contractmgt/termsType/getAll/"
+  ],
+  "file": "chunks/70.30f4ed58c3ddb1e207e5.js"
+ },
+ "216": {
+  "names": [
+   "first",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/factory/material/convertunit/",
+   "/mdata/factory/material/parentBom/",
+   "/mdata/factory/material/subBom/",
+   "/mdata/materialVendor/getVendorInfoByMatIdAndFacId/"
+  ],
+  "file": "chunks/216.341b278beb9e027b9d49.js"
+ },
+ "271": {
+  "names": [
+   "report-assess-month-sourcing-win-price",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/271.3751cfaed9b8dcd6da01.js"
+ },
+ "47": {
+  "names": [
+   "second",
+   "matdev-source-list"
+  ],
+  "query_urls": [
+   "/vendormgt/vsrlist/query"
+  ],
+  "endpoints": [
+   "/mdata/material/getFactoryByMaterialId",
+   "/mdata/material/getMaterialById/",
+   "/mdata/materialVendor/getVendorByMaterialId",
+   "/system/log/getList",
+   "/vendormgt/vsrlist/query"
+  ],
+  "file": "chunks/47.e6d53a663a7c13ec1e7a.js"
+ },
+ "28": {
+  "names": [
+   "sys-attachment",
+   "attachmentFile",
+   "atta-editor"
+  ],
+  "query_urls": [
+   "/system/attachment/query"
+  ],
+  "endpoints": [
+   "/system/attachment/query"
+  ],
+  "file": "chunks/28.bcdc308c741f561cc4c3.js"
+ },
+ "427": {
+  "names": [
+   "freightPriceManage",
+   "perm"
+  ],
+  "query_urls": [
+   "/fs/wastage/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/427.a80c025d8281b417ac0e.js"
+ },
+ "179": {
+  "names": [
+   "show",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/demand/getVersion/",
+   "/pe/demand/indexTabs",
+   "/pe/demand/query",
+   "/pe/demand/tabList/",
+   "/pe/demand/update-item"
+  ],
+  "file": "chunks/179.106246dd19c5fc88a1e1.js"
+ },
+ "362": {
+  "names": [
+   "contractmgt-sign-agreement",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/init",
+   "/contractmgt/electronic/seal/handle/bestsign"
+  ],
+  "file": "chunks/362.8b4da21ec4bb50b7bef8.js"
+ },
+ "296": {
+  "names": [
+   "assess-cmpplan-quarter",
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "third"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/cmpplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/296.3cd868d70c31b9e88f98.js"
+ },
+ "460": {
+  "names": [
+   "assess-basesetting",
+   "dimTab",
+   "fpTab",
+   "perm",
+   "indexTab",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/cycle/list",
+   "/vendormgt/assess/dim/allList",
+   "/vendormgt/assess/formularParam/list",
+   "/vendormgt/assess/index/list"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/cycle/init",
+   "/vendormgt/assess/dim/allListTree",
+   "/vendormgt/assess/dim/delete",
+   "/vendormgt/assess/formularParam/delete",
+   "/vendormgt/assess/index/delete"
+  ],
+  "file": "chunks/460.5a9df87322457faf9251.js"
+ },
+ "282": {
+  "names": [
+   "assess-vendor-company"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/result/vendor/list"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/result/viewResult/"
+  ],
+  "file": "chunks/282.423eab50059cccae0cf4.js"
+ },
+ "115": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/buyer/delivery/close",
+   "/pe/vendor/delivery/loadItem/"
+  ],
+  "file": "chunks/115.3b3a8370e84cb74cf7c2.js"
+ },
+ "133": {
+  "names": [
+   "show",
+   "show",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/enquiry/getBaseInfo/"
+  ],
+  "file": "chunks/133.c536de0f7eee9401be11.js"
+ },
+ "307": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/doclib/docdir/query",
+   "/doclib/publish/nodal/toShow/",
+   "/doclib/view/query"
+  ],
+  "file": "chunks/307.7ae43cf500d41304586d.js"
+ },
+ "24": {
+  "names": [
+   "emall-aftersale",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/mall/mallaftersale/query"
+  ],
+  "endpoints": [
+   "/sunner/mall/mallaftersale/abolish/",
+   "/sunner/mall/mallaftersale/findItemById/"
+  ],
+  "file": "chunks/24.e8a6406deb79e733d639.js"
+ },
+ "6": {
+  "names": [
+   "basedta-bus-area",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/system/area/validateExportData",
+   "/system/area/add/",
+   "/system/area/queryCompanyOrFactory"
+  ],
+  "file": "chunks/6.e8b960b38b3a0d2fc935.js"
+ },
+ "356": {
+  "names": [
+   "contractmgt-apply-sign",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/apply"
+  ],
+  "endpoints": [],
+  "file": "chunks/356.fbea540c52e3699a1b55.js"
+ },
+ "88": {
+  "names": [
+   "contractFileTab",
+   "contractCounterpartyTab",
+   "templateTab",
+   "checkTab",
+   "linkContractTab",
+   "linkCompanyTab"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/init",
+   "/contractmgt/electronic/seal/handle/bestsign",
+   "/contractmgt/electronic/seal/sign/bestsign",
+   "/contractmgt/template/getEnableList",
+   "/contractmgt/template/getEnableList/"
+  ],
+  "file": "chunks/88.cbb5ebf5c0a5dbe53194.js"
+ },
+ "264": {
+  "names": [
+   "first",
+   "perm",
+   "perm",
+   "second",
+   "third"
+  ],
+  "query_urls": [
+   "/adjustmgt/pricewarning/adjust/query",
+   "/adjustmgt/pricewarning/close/query",
+   "/adjustmgt/pricewarning/wait/query"
+  ],
+  "endpoints": [
+   "/adjustmgt/pricewarning/create/"
+  ],
+  "file": "chunks/264.f15edcc72d0ead6e6584.js"
+ },
+ "386": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "/rawmatprice/archive/query"
+  ],
+  "endpoints": [
+   "/rawmatprice/archive/invalid/",
+   "/rawmatprice/archive/queryPriceHistory/"
+  ],
+  "file": "chunks/386.f72ebc5f5b9ef938ecfa.js"
+ },
+ "269": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/contractmgt/electronic/seal/sign/bestsign"
+  ],
+  "file": "chunks/269.b1c1107d8ba93194f74c.js"
+ },
+ "274": {
+  "names": [
+   "pricemgt-ebp-buy-list"
+  ],
+  "query_urls": [
+   "ebpmgt/ebpbill/vendor/getWait"
+  ],
+  "endpoints": [
+   "/ebpmgt/ebpbill/vendor/application"
+  ],
+  "file": "chunks/274.acb45fad29e6e524594f.js"
+ },
+ "167": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pricearchive/query/area/project",
+   "/pricearchive/query/factory/project"
+  ],
+  "endpoints": [
+   "/pricearchive/invalidPriceArchive/",
+   "/quote/getQuoteInfo/",
+   "/sourcing/item/getItemInfo/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/167.ff6c7e40d2754c0cec42.js"
+ },
+ "313": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/vendorrecheck/getAll",
+   "/businessconfig/vendorrecheck/getInfoById/"
+  ],
+  "file": "chunks/313.b89b6330ee23e633d63f.js"
+ },
+ "112": {
+  "names": [
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "third",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/cmpplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/112.f99494115fd27541bd80.js"
+ },
+ "17": {
+  "names": [
+   "show",
+   "add-expert",
+   "expertData",
+   "perm"
+  ],
+  "query_urls": [
+   "/organization/expert/query"
+  ],
+  "endpoints": [
+   "/organization/expert/query",
+   "/organization/expert/saveOrUpdate/",
+   "/system/usermgt/users/query",
+   "/system/usermgt/users/queryAllPurchaser"
+  ],
+  "file": "chunks/17.7525f9f36ed19cfb072c.js"
+ },
+ "49": {
+  "names": [
+   "basedata-basebus-dictionary",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/queryItem"
+  ],
+  "file": "chunks/49.619e874ce32594b85768.js"
+ },
+ "154": {
+  "names": [
+   "pevendor-fi-confirmationbill",
+   "importFile",
+   "loading"
+  ],
+  "query_urls": [
+   "/sunner/mdata/confirmation/vendorQuery"
+  ],
+  "endpoints": [
+   "/contractmgt/electronic/seal/sign/bestsign"
+  ],
+  "file": "chunks/154.d1b32e8042e3f25957b8.js"
+ },
+ "387": {
+  "names": [
+   "pricemgt-archives-ourverduewarning",
+   "first",
+   "perm",
+   "perm",
+   "second",
+   "perm"
+  ],
+  "query_urls": [
+   "/priceWaring/query"
+  ],
+  "endpoints": [
+   "/priceWaring/cloaseWaring/"
+  ],
+  "file": "chunks/387.67d7a04d77ac56b2b51a.js"
+ },
+ "158": {
+  "names": [
+   "notice-editor",
+   "noticeFile",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/158.b8951db241f2a16bcea9.js"
+ },
+ "462": {
+  "names": [
+   "vdmgt-levelResult"
+  ],
+  "query_urls": [
+   "/sunner/vendormgt/assess/vendorComprehensiveScroeQuery"
+  ],
+  "endpoints": [],
+  "file": "chunks/462.fb920acc81f28dca7e6c.js"
+ },
+ "186": {
+  "names": [
+   "mall-srmDelivery",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/mall/delivery/query"
+  ],
+  "endpoints": [
+   "/mall/delivery/confirmReceive/Delivery/",
+   "/mall/delivery/findLogisticsListByTrack",
+   "/mall/delivery/getEBusinessOrderInfo",
+   "/mall/delivery/getEMallOrderInfo",
+   "/mall/delivery/updateTransferor",
+   "/order/outOrder/confirmReceive/batch",
+   "/system/purchasedic/getPurchaseDic"
+  ],
+  "file": "chunks/186.59af0ae93ceeac393b17.js"
+ },
+ "110": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/log/getList",
+   "/vendormgt/vsrmgt/entry/query",
+   "/vendormgt/vsrmgt/fileDesc",
+   "/vendormgt/vsrmgt/publish"
+  ],
+  "file": "chunks/110.7228e517e35054b73999.js"
+ },
+ "266": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/system/purchasedic/saveOrUpdate"
+  ],
+  "file": "chunks/266.566426b29b102b40b87d.js"
+ },
+ "29": {
+  "names": [
+   "sys-module",
+   "loading",
+   "addOrEditMenu"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/module/list"
+  ],
+  "file": "chunks/29.580462dfc5192355f028.js"
+ },
+ "180": {
+  "names": [
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/cmpplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/180.4631f26772a8fb99bc0c.js"
+ },
+ "131": {
+  "names": [
+   "perm",
+   "perm",
+   "first",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/material/getMaterirlByFacId/",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/factory/removeFac/",
+   "/organization/purOrg/getPurOrgByFactoryId"
+  ],
+  "file": "chunks/131.54ee5872d34ca22ae866.js"
+ },
+ "77": {
+  "names": [
+   "first",
+   "first"
+  ],
+  "query_urls": [
+   "/adjustpricemgt/vendor/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/77.0631e04c11540b2c21a4.js"
+ },
+ "281": {
+  "names": [
+   "pricemgt-ebp-list"
+  ],
+  "query_urls": [
+   "ebpmgt/ebpbill/query"
+  ],
+  "endpoints": [
+   "/ebpmgt/ebpbill/getInfo/"
+  ],
+  "file": "chunks/281.751293bb0c170594dc7f.js"
+ },
+ "220": {
+  "names": [
+   "pricemgt-ebp-buy-list"
+  ],
+  "query_urls": [
+   "ebpmgt/ebpbill/vendor/query"
+  ],
+  "endpoints": [
+   "/ebpmgt/ebpbill/getInfo/"
+  ],
+  "file": "chunks/220.00fdd77bfb1deee7a1ef.js"
+ },
+ "420": {
+  "names": [
+   "first",
+   "show",
+   "second",
+   "show",
+   "third",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mall/order/outorder/newChecking/query"
+  ],
+  "file": "chunks/420.46ff49d0c17ef0017ff6.js"
+ },
+ "374": {
+  "names": [
+   "first",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/qm/qm8d/toView/"
+  ],
+  "file": "chunks/374.19db1458425cc0387283.js"
+ },
+ "465": {
+  "names": [
+   "vdmgt-levelResult"
+  ],
+  "query_urls": [
+   "/sunner/vendormgt/assess/levelresult/query"
+  ],
+  "endpoints": [
+   "/sunner/assess/strategymatch/getAllAssessStrategicMapping"
+  ],
+  "file": "chunks/465.b963420d083921fd90fa.js"
+ },
+ "207": {
+  "names": [
+   "model"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/precisionconfig/insert",
+   "/businessconfig/precisionconfig/queryPage"
+  ],
+  "file": "chunks/207.0c7a698168219bc9cdbe.js"
+ },
+ "371": {
+  "names": [
+   "first",
+   "second",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/adjustpricemgt/projectchange/whole/reject"
+  ],
+  "file": "chunks/371.fdac5dbb6f9f9ed08914.js"
+ },
+ "340": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/340.5ab7da748c3fcb6ee017.js"
+ },
+ "389": {
+  "names": [
+   "pricemgt-archives-area",
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/389.4430c87b006631786596.js"
+ },
+ "169": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/assess/setting/getDimMap/"
+  ],
+  "file": "chunks/169.f868711b845d7a47293d.js"
+ },
+ "394": {
+  "names": [
+   "queueSettings",
+   "perm"
+  ],
+  "query_urls": [
+   "/xcx/queue/query"
+  ],
+  "endpoints": [
+   "/xcx/queue/delete/"
+  ],
+  "file": "chunks/394.d3f306adeaea85ac0114.js"
+ },
+ "82": {
+  "names": [
+   "perm",
+   "contractmgt-sign-esignatura"
+  ],
+  "query_urls": [
+   "/contractmgt/electronic/seal/query"
+  ],
+  "endpoints": [
+   "/contractmgt/electronic/seal/handle/bestsign",
+   "/contractmgt/electronic/seal/relaunch",
+   "/contractmgt/electronic/seal/sign/bestsign"
+  ],
+  "file": "chunks/82.671be025b51984f5dd54.js"
+ },
+ "325": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/common/region/getCities/",
+   "/common/region/getProvinces",
+   "/sunner/vendormgt/questionary/bank/query/",
+   "/vendormgt/data/maintenance/bank/getBankList/",
+   "/vendormgt/questionary/bank/query/"
+  ],
+  "file": "chunks/325.7fc2bdbdaf350f1eb552.js"
+ },
+ "0": {
+  "names": [
+   "mall-item",
+   "add-user",
+   "show",
+   "perm",
+   "perm",
+   "distribute-factory"
+  ],
+  "query_urls": [
+   "/ppa/query",
+   "/pricearchive/query/area/material",
+   "/pricearchive/query/area/project",
+   "/pricearchive/query/area/subsection",
+   "/pricearchive/query/factory/material",
+   "/pricearchive/query/factory/project",
+   "/pricearchive/query/factory/subsection",
+   "/system/template/query",
+   "/vendormgt/freightfee/yearFreightFee/query"
+  ],
+  "endpoints": [
+   "/adjustpricemgt/confirm",
+   "/adjustpricemgt/linked/deleteErrorData/",
+   "/adjustpricemgt/linked/getErrorData/",
+   "/adjustpricemgt/linked/getSessionItemData",
+   "/adjustpricemgt/linked/getSessionMainData",
+   "/adjustpricemgt/linked/getUpDown/",
+   "/adjustpricemgt/linked/nextStep2",
+   "/adjustpricemgt/linked/saveAndPublish",
+   "/adjustpricemgt/linked/vendorQuote/",
+   "/adjustpricemgt/tempSave/next",
+   "/api/contract/getContractByCode/",
+   "/api/contract/getSectionInfo/",
+   "/bidmgt/bid/beforeOpenBid/",
+   "/bidmgt/bid/changeSecretRec",
+   "/bidmgt/bid/getExpert/",
+   "/bidmgt/bid/getInfo/",
+   "/bidmgt/bid/getPhaseInfo",
+   "/bidmgt/bid/getTempLateByTempId/",
+   "/bidmgt/bid/openBid/",
+   "/bidmgt/bid/sendSecretKey/",
+   "/bidmgt/bid/vendor/getBillQuoteList/",
+   "/bidmgt/bid/vendor/getPhaseInfo/",
+   "/bidmgt/bid/vendor/getPhaseInfo/1/",
+   "/bidmgt/bid/vendor/getPhaseInfo/2/",
+   "/bidmgt/bid/vendor/getPhaseInfo/3/",
+   "/bidmgt/bid/vendor/getRejectQuotes/",
+   "/bidmgt/bid/vendor/getRoundQuotes/",
+   "/bidmgt/bid/vendor/getVendorList/",
+   "/bidmgt/bid/vendor/getWinItemList/",
+   "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+   "/bidmgt/bid/vendor/quoteHistoryView/",
+   "/bidmgt/bid/vendor/signUp/",
+   "/bidmgt/bidEvaluation/beforeNextTech/",
+   "/bidmgt/bidEvaluation/evaTechViewInfo",
+   "/bidmgt/bidEvaluation/finish-tech-eva",
+   "/bidmgt/bidEvaluation/nextTech",
+   "/bidmgt/bidEvaluation/purChaseEntrace",
+   "/bidmgt/bidEvaluation/queryEntraceInfo",
+   "/bidmgt/bidEvaluation/reEvaluation/",
+   "/bidmgt/bidEvaluation/rejectPrice",
+   "/bidmgt/bidEvaluation/remindScore",
+   "/bidmgt/bidEvaluation/saveExperts/",
+   "/bidmgt/bidEvaluation/viewExpertScore/",
+   "/bidmgt/route/getDicList",
+   "/bidmgt/route/getPhaseInfo/2/",
+   "/bidmgt/route/secretKey/getInfo/",
+   "/businessconfig/factoryinspect/getByInspectType/",
+   "/businessconfig/payment/query",
+   "/businessconfig/questionary/findByType?type=-1",
+   "/common/region/getCountrys",
+   "/contractmgt/contract/check",
+   "/contractmgt/contract/getCompanyInfo/",
+   "/contractmgt/contract/getEffectiveParent",
+   "/contractmgt/contract/getVendorInfo/",
+   "/contractmgt/contract/init",
+   "/ctmgt/quote/files/getRoundFileByType",
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY"
+  ],
+  "file": "chunks/0.6d299b27fe4e81bd1c89.js"
+ },
+ "369": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/ap/price/confirm/confirm/",
+   "/ap/price/confirm/getBill/",
+   "/ap/price/confirm/getItemList/"
+  ],
+  "file": "chunks/369.010de05ee926c71450f6.js"
+ },
+ "456": {
+  "names": [
+   "dryGrainBaseData"
+  ],
+  "query_urls": [
+   "/symp/baseData/query"
+  ],
+  "endpoints": [
+   "/symp/baseData/delete/",
+   "/symp/baseData/getInfo/"
+  ],
+  "file": "chunks/456.f071a8f54f6167f1b024.js"
+ },
+ "170": {
+  "names": [
+   "commonTerms",
+   "compositeTerms"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/contractmgt/terms/getByCategory/3",
+   "/contractmgt/terms/getByCategory/4",
+   "/contractmgt/terms/getByType/",
+   "/contractmgt/termsType/getAll"
+  ],
+  "file": "chunks/170.dbdb6fe9d43dbbf79806.js"
+ },
+ "38": {
+  "names": [
+   "basedta-bus-factory",
+   "perm",
+   "perm",
+   "first",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/mdata/factory/material/query"
+  ],
+  "endpoints": [
+   "/mdata/factory/material/convertunit/",
+   "/mdata/factory/material/parentBom/",
+   "/mdata/factory/material/query",
+   "/mdata/factory/material/subBom/",
+   "/mdata/materialVendor/getVendorInfoByMatIdAndFacId/",
+   "/sunner/mdata/factory/material/validateExportData"
+  ],
+  "file": "chunks/38.03b49595e8a7e1d96a70.js"
+ },
+ "159": {
+  "names": [
+   "product-list"
+  ],
+  "query_urls": [
+   "/system/notice/query"
+  ],
+  "endpoints": [
+   "/system/notice/query"
+  ],
+  "file": "chunks/159.12d757aa7d0e5a39759d.js"
+ },
+ "205": {
+  "names": [
+   "planmgt-plan-list",
+   "text",
+   "start_date",
+   "end_date",
+   "respName",
+   "perm"
+  ],
+  "query_urls": [
+   "/planmgt/plan/query"
+  ],
+  "endpoints": [
+   "/plan/palntemp/getTemplate/",
+   "/plan/palntemp/getTemplateList",
+   "/planmgt/plan/getPlanItemInfo",
+   "/planmgt/plan/getVersionInfo/",
+   "/planmgt/plan/softDelete",
+   "/temp/node/getActive/"
+  ],
+  "file": "chunks/205.e7d5ff75fba010f3dfcd.js"
+ },
+ "305": {
+  "names": [
+   "workflowVariable",
+   "perm"
+  ],
+  "query_urls": [
+   "/process/variable/list"
+  ],
+  "endpoints": [
+   "/process/variable/saveOrUpdate"
+  ],
+  "file": "chunks/305.95f663f8f0ff29d4d7f0.js"
+ },
+ "308": {
+  "names": [
+   "reports-vad"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/report/getCity",
+   "/system/report/getDic"
+  ],
+  "file": "chunks/308.44782a27fdff12663a70.js"
+ },
+ "443": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/fi/claim/buyerAgainSub",
+   "/fi/claim/chargeClaim/",
+   "/fi/claim/closeClaim",
+   "/fi/claim/enterPrice",
+   "/system/log/getList"
+  ],
+  "file": "chunks/443.4d48e712a82476cdb88c.js"
+ },
+ "127": {
+  "names": [
+   "pebuyer-fi-quaJud",
+   "perm"
+  ],
+  "query_urls": [
+   "/qm/quajud/buyerQuery"
+  ],
+  "endpoints": [],
+  "file": "chunks/127.7ea6516de04fc000ebd4.js"
+ },
+ "60": {
+  "names": [
+   "rfi-template-list"
+  ],
+  "query_urls": [
+   "/vendormgt/vsp/rfi/template/query"
+  ],
+  "endpoints": [
+   "/vendormgt/vsp/rfi/template/deleteByTemplateId",
+   "/vendormgt/vsp/rfi/template/findByTemplateId",
+   "/vendormgt/vsp/rfi/template/updateTemplate"
+  ],
+  "file": "chunks/60.fbfc316ed2dd4d0688f1.js"
+ },
+ "62": {
+  "names": [
+   "perm",
+   "vdmgt-daily-erpdatamgt",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/data/maintenance/query"
+  ],
+  "endpoints": [
+   "/common/region/getCities/",
+   "/common/region/getProvinces",
+   "/sunner/vendormgt/data/maintenance/toAdd",
+   "/sunner/vendormgt/data/maintenance/toEdit/",
+   "/sunner/vendormgt/data/maintenance/toView/",
+   "/sunner/vendormgt/questionary/bank/query/",
+   "/system/log/getList",
+   "/vendormgt/data/maintenance/bank/getBankList/",
+   "/vendormgt/data/maintenance/publish/",
+   "/vendormgt/data/maintenance/remove/",
+   "/vendormgt/data/maintenance/validateExist/",
+   "/vendormgt/questionary/bank/query/"
+  ],
+  "file": "chunks/62.a71dc618669923d52b3a.js"
+ },
+ "329": {
+  "names": [
+   "logistics_bid_result",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/freightfee/yearFreightFee/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/329.3c93e708390ec775c65c.js"
+ },
+ "86": {
+  "names": [
+   "vdmgt-vendorInvite",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/vendorreg/invite/query"
+  ],
+  "endpoints": [
+   "/common/region/getCountrys",
+   "/sunner/vendorreg/invite/delete",
+   "/sunner/vendorreg/invite/delete/",
+   "/sunner/vendorreg/invite/save/",
+   "/sunner/vendorreg/invite/save/0",
+   "/sunner/vendorreg/invite/save/1",
+   "/sunner/vendorreg/invite/submit/",
+   "/sunner/vendorreg/invite/updateCheckStatus/",
+   "/vendorreg/invite/findCount/",
+   "/vendorreg/invite/update"
+  ],
+  "file": "chunks/86.91d5d4c12850d206751b.js"
+ },
+ "136": {
+  "names": [
+   "distribute-role"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/136.da62e908b9a7a07c33eb.js"
+ },
+ "165": {
+  "names": [
+   "top-list",
+   "perm"
+  ],
+  "query_urls": [
+   "/mall/order/top/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/165.6b8096f8674c66762eb4.js"
+ },
+ "20": {
+  "names": [
+   "reports-material-price",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/20.c0bcc0f8f23d3848ba5a.js"
+ },
+ "157": {
+  "names": [
+   "submitFinalFrom"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/order/warrantyCheck/submitFinal"
+  ],
+  "file": "chunks/157.4bd3831bfc41e74fdaea.js"
+ },
+ "261": {
+  "names": [
+   "pevendor-fi-adjust",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/fi/adjust/vendor/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/261.1f9820a5069e01b6af51.js"
+ },
+ "337": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/337.429195ce6961c89374cf.js"
+ },
+ "187": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/questionary/aptitude",
+   "/businessconfig/questionary/aptitude/delete/",
+   "/businessconfig/questionary/aptitude/query"
+  ],
+  "file": "chunks/187.d90fe93e6ca99f7a7826.js"
+ },
+ "163": {
+  "names": [
+   "emall-purchase-request",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/mall/purchaseRequest/query"
+  ],
+  "endpoints": [
+   "/mall/purchaseRequest/loadDetail/",
+   "/mall/purchaseRequest/updateCreateUserEmail",
+   "/sunner/mall/purchaseRequest/abolishItem",
+   "/sunner/mall/purchaseRequest/getRelateQty",
+   "/sunner/mall/purchaseRequest/validateEmallVendor",
+   "/sunner/mall/purchaseRequest/withdrawn"
+  ],
+  "file": "chunks/163.763d016707626853a8ec.js"
+ },
+ "117": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/orderconfig/add",
+   "/businessconfig/orderconfig/query",
+   "/businessconfig/orderconfig/queryCf/",
+   "/organization/factory/getAll"
+  ],
+  "file": "chunks/117.84a2e4cbcd3cfe0a5759.js"
+ },
+ "379": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/379.38fd647879a7b8965979.js"
+ },
+ "37": {
+  "names": [
+   "buscollaboration-deposit"
+  ],
+  "query_urls": [
+   "/sourcing/deposit/queryDeposit"
+  ],
+  "endpoints": [
+   "/sourcing/deposit/vendor/getViewInfo/"
+  ],
+  "file": "chunks/37.e440f13ae4b331188c64.js"
+ },
+ "295": {
+  "names": [
+   "product-tag-list",
+   "perm",
+   "perm",
+   "tagFile"
+  ],
+  "query_urls": [
+   "/product/producttag/query"
+  ],
+  "endpoints": [
+   "/product/producttag/delete"
+  ],
+  "file": "chunks/295.92a770a49f5315161748.js"
+ },
+ "27": {
+  "names": [
+   "sys-intfexec",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/taskexec/query"
+  ],
+  "endpoints": [
+   "/system/taskexec/callExec/",
+   "/system/taskexec/delete/",
+   "/system/taskexec/query",
+   "/system/taskexec/saveOrUpdate"
+  ],
+  "file": "chunks/27.fe989ce9f3874a6e1508.js"
+ },
+ "238": {
+  "names": [
+   "basedta-bus-yyManagement",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/mdata/yyManagement/query"
+  ],
+  "endpoints": [
+   "/mdata/yyManagement/validateExportData"
+  ],
+  "file": "chunks/238.1983d513a2bcc5003294.js"
+ },
+ "181": {
+  "names": [
+   "first",
+   "second",
+   "three",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/material/convertunit/",
+   "/mdata/material/getFactoryByMaterialId",
+   "/mdata/material/getMaterialById/",
+   "/mdata/materialVendor/getVendorByMaterialId",
+   "/system/log/getList"
+  ],
+  "file": "chunks/181.f315490ee92edaddb938.js"
+ },
+ "204": {
+  "names": [
+   "ad-position-list",
+   "perm"
+  ],
+  "query_urls": [
+   "/store/adpositionMgr/query"
+  ],
+  "endpoints": [
+   "/store/adpositionMgr/delete/"
+  ],
+  "file": "chunks/204.aef07c5870dc0e9630ce.js"
+ },
+ "242": {
+  "names": [
+   "planmgt-plan-list",
+   "text",
+   "start_date",
+   "end_date",
+   "respName",
+   "base"
+  ],
+  "query_urls": [
+   "/plan/palnhandle/getPlanHand"
+  ],
+  "endpoints": [
+   "/plan/palnhandle/loadUserTreeNode/",
+   "/plan/palntemp/getTemplate/",
+   "/planmgt/plan/completePlanItem",
+   "/planmgt/plan/getPlanItemInfo",
+   "/planmgt/plan/getVersionInfo/",
+   "/planmgt/plan/softDelete"
+  ],
+  "file": "chunks/242.e9b14765e7fc8d498fde.js"
+ },
+ "191": {
+  "names": [
+   "vehicleReservation"
+  ],
+  "query_urls": [
+   "/xcx/rez/page"
+  ],
+  "endpoints": [
+   "/xcx/rez/info/"
+  ],
+  "file": "chunks/191.96ad4460cd08ae370c0b.js"
+ },
+ "249": {
+  "names": [
+   "product-synonym-list",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/product/synonym/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/249.3c666e31a75197d053e0.js"
+ },
+ "106": {
+  "names": [
+   "report-assess-order-receive-quaty",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/106.83b8305cf5a5b5fa6adc.js"
+ },
+ "210": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/materialVendor/getByMatIdAndFacId/",
+   "/quote/template/getAllSelect",
+   "/sourcing/clause/getAllTemplate",
+   "/sunner/enquiry/validAreaChange",
+   "/sunner/mdata/material/findByMaterialId/",
+   "/sunner/mdata/material/findByMaterialIdAndPurUnitCode"
+  ],
+  "file": "chunks/210.46900f8cb69af39fa804.js"
+ },
+ "246": {
+  "names": [
+   "workflowHistory"
+  ],
+  "query_urls": [
+   "/process/history/list"
+  ],
+  "endpoints": [],
+  "file": "chunks/246.fe6ebd2382108f5368b3.js"
+ },
+ "466": {
+  "names": [
+   "assess-join-group"
+  ],
+  "query_urls": [
+   "/sunner/vendormgt/assess/join/query/2"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/join/getDic"
+  ],
+  "file": "chunks/466.61d46cabdb06eee02241.js"
+ },
+ "109": {
+  "names": [
+   "pevendor-fi-check-list",
+   "first",
+   "second",
+   "third",
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/claim/query",
+   "/sunner/fi/billableitems/vendor/query"
+  ],
+  "endpoints": [
+   "/fi/billableitems/vendor/billall",
+   "/fi/billableitems/vendor/getRedBillableItems",
+   "/fi/billableitems/vendor/query",
+   "/fi/claim/query",
+   "/sunner/fi/billableitems/vendor/queryNotPage"
+  ],
+  "file": "chunks/109.ceb6deffed3be0c67da5.js"
+ },
+ "143": {
+  "names": [
+   "addOrEditMenu"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/143.e813b1298f6d3f42b2d3.js"
+ },
+ "467": {
+  "names": [
+   "assess-join-branch"
+  ],
+  "query_urls": [
+   "/sunner/vendormgt/assess/join/query/1"
+  ],
+  "endpoints": [],
+  "file": "chunks/467.13c4ac922803f7887d10.js"
+ },
+ "326": {
+  "names": [
+   "vdmgt-vendorcycleconfig",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/lifecyclemgt/config/newQuery"
+  ],
+  "endpoints": [
+   "/vendormgt/lifecyclemgt/config/add/",
+   "/vendormgt/lifecyclemgt/config/update/",
+   "/vendormgt/lifecyclemgt/getBusType"
+  ],
+  "file": "chunks/326.b909dd9e2891dfd913e0.js"
+ },
+ "275": {
+  "names": [
+   "mall-product-management",
+   "first",
+   "second",
+   "third",
+   "forth"
+  ],
+  "query_urls": [
+   "/product/query"
+  ],
+  "endpoints": [
+   "/product/brand/queryAllBrands",
+   "/product/producttag/queryAll",
+   "/product/purAudit",
+   "/product/query",
+   "/product/removeProduct",
+   "/sunner/product/updateMarketable"
+  ],
+  "file": "chunks/275.82ca68e44a96c0c7032c.js"
+ },
+ "384": {
+  "names": [
+   "contract_purchase_report",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/contractmgt/contract/queryContractPurchaseReport"
+  ],
+  "endpoints": [
+   "/mainsupplycategory/getAllCategories",
+   "/organization/company/getAll"
+  ],
+  "file": "chunks/384.591e70837f989cef93f3.js"
+ },
+ "245": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/245.6de20a29768523fb9694.js"
+ },
+ "132": {
+  "names": [
+   "task-editor"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/132.f0e5590a8471903f1505.js"
+ },
+ "314": {
+  "names": [
+   "company-category"
+  ],
+  "query_urls": [
+   "vendormgt/vendorcategory/vendor/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/314.617e055a6bc140cb15c7.js"
+ },
+ "370": {
+  "names": [
+   "show",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/ap/price/confirm/saveAndPublish"
+  ],
+  "file": "chunks/370.1a3332bfe99661e11895.js"
+ },
+ "253": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/enquiry/query"
+  ],
+  "endpoints": [
+   "/enquiry/getDicList",
+   "/enquiry/getInfo/",
+   "/enquiry/query",
+   "/sunner/enquiry/getDicList",
+   "/sunner/enquiry/vendor/export/validateExportData"
+  ],
+  "file": "chunks/253.04242022ed843ef60cc2.js"
+ },
+ "34": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/rfs/buyer/query"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/rfs/buyer/queryVendors/",
+   "/pe/rfs/buyer/saveOrPublish/",
+   "/pe/rfs/buyer/updateRfs/",
+   "/pe/rfs/buyer/vendorItemView/",
+   "/system/orgmgt/organization/queryForDatalist"
+  ],
+  "file": "chunks/34.5245d5445e348006f08b.js"
+ },
+ "408": {
+  "names": [
+   "pebuyer-receive-diff",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/receive/contrast/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/408.f8d75ff2c1b560470bfe.js"
+ },
+ "84": {
+  "names": [
+   "show",
+   "pevendor-delivery-board",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/vendor/delivery/deliveryForbidden/query",
+   "/pe/vendor/delivery/materialDeliveryBoard/query",
+   "/pe/vendor/notpodelivery/orderDeliveryBoard/query"
+  ],
+  "endpoints": [
+   "/common/region/getCountrys",
+   "/pe/vendor/notpodelivery/deliveryBoard/deliveryDetail",
+   "/pe/vendor/notpodelivery/ordAddCart",
+   "/pe/vendor/notpodelivery/queryDeliveryCart",
+   "/pe/vendor/notpodelivery/viewDetail/"
+  ],
+  "file": "chunks/84.d2f44aa05d7955e20952.js"
+ },
+ "95": {
+  "names": [
+   "perm",
+   "first",
+   "perm",
+   "second",
+   "third",
+   "fourth"
+  ],
+  "query_urls": [
+   "/pe/pomgt/poitem/vendor/query",
+   "/pe/pomgt/pomain/queryByPoId",
+   "/pe/pomgt/pomain/vendor/query"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/pomgt/poitem/buyer/unlockItem/",
+   "/pe/pomgt/pomain/vendor/findByIds/",
+   "/pe/pomgt/pomain/vendor/view/"
+  ],
+  "file": "chunks/95.e83317ae7e41a447ea09.js"
+ },
+ "12": {
+  "names": [
+   "edit-company",
+   "basedata-org-usergroup",
+   "perm",
+   "perm",
+   "user-set"
+  ],
+  "query_urls": [
+   "/organization/usergroup/query"
+  ],
+  "endpoints": [
+   "/organization/purgroup/getAll",
+   "/organization/usergroup/saveOrUpdate",
+   "/sunner/organization/usergroup/validateExportData",
+   "/system/orgmgt/organization/findByPurGroup/",
+   "/system/orgmgt/organization/queryForDatalist",
+   "/system/orgmgt/organization/saveSupplier"
+  ],
+  "file": "chunks/12.12b6a3ea7869adf4fd8f.js"
+ },
+ "388": {
+  "names": [
+   "pricemgt-archives-factory",
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/388.f605d78ffc903542dd9f.js"
+ },
+ "359": {
+  "names": [
+   "contractFileTab",
+   "contractCounterpartyTab",
+   "templateTab",
+   "checkTab",
+   "linkContractTab",
+   "linkCompanyTab"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/contractmgt/contract/init",
+   "/contractmgt/electronic/seal/sign/bestsign",
+   "/contractmgt/template/getEnableList",
+   "/contractmgt/template/getEnableList/"
+  ],
+  "file": "chunks/359.b91e51c9e694694cd6e7.js"
+ },
+ "385": {
+  "names": [],
+  "query_urls": [
+   "/ct/sale/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/385.77dc838a24ccd68e5723.js"
+ },
+ "365": {
+  "names": [
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/adjustpricemgt/confirm",
+   "/adjustpricemgt/linked/vendorQuote/"
+  ],
+  "file": "chunks/365.f3af6b6f809f5da5f123.js"
+ },
+ "89": {
+  "names": [
+   "itemTab",
+   "contractFileTab",
+   "contractCounterpartyTab",
+   "templateTab",
+   "checkTab",
+   "linkContractTab"
+  ],
+  "query_urls": [
+   "contractmgt/contract/vendor/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/init",
+   "/contractmgt/electronic/seal/handle/bestsign",
+   "/contractmgt/electronic/seal/sign/bestsign",
+   "/contractmgt/template/getEnableList",
+   "/contractmgt/template/getEnableList/"
+  ],
+  "file": "chunks/89.679a75a23dee71bfbcb6.js"
+ },
+ "93": {
+  "names": [
+   "first",
+   "second",
+   "third",
+   "fourth"
+  ],
+  "query_urls": [
+   "/pesum/return/query"
+  ],
+  "endpoints": [
+   "/pesum/return/cancelReturn/",
+   "/pesum/return/deleteReturn/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/93.9e7c6a8ae3146c5289e3.js"
+ },
+ "135": {
+  "names": [
+   "mall-vendor-marketableProduct",
+   "first",
+   "second",
+   "third",
+   "forth"
+  ],
+  "query_urls": [
+   "/product/marketable/query"
+  ],
+  "endpoints": [
+   "/product/brand/queryAllBrands",
+   "/product/marketable/edit",
+   "/product/marketable/findSplitOrCopyShopWaitMarketableDto",
+   "/product/producttag/queryAll"
+  ],
+  "file": "chunks/135.8d342b649e61c5dfb27c.js"
+ },
+ "344": {
+  "names": [
+   "first",
+   "perm",
+   "second"
+  ],
+  "query_urls": [
+   "/vendormgt/dlv/factoryInspect/item/query",
+   "/vendormgt/dlv/factoryInspect/query"
+  ],
+  "endpoints": [
+   "/vendormgt/dlv/factoryInspect/abolish/",
+   "/vendormgt/dlv/factoryInspect/factoryInspectMgt/delete/",
+   "/vendormgt/dlv/factoryInspect/initData",
+   "/vendormgt/dlv/factoryInspect/score/getScoreFinalViewInfo/",
+   "/vendormgt/dlv/factoryInspect/toEdit/",
+   "/vendormgt/dlv/factoryInspect/toSettingExpert/",
+   "/vendormgt/dlv/factoryInspect/toView/"
+  ],
+  "file": "chunks/344.86e13bddcb38e4adb49d.js"
+ },
+ "215": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/enquiry/getInfo/"
+  ],
+  "file": "chunks/215.28216e9495608b876d2d.js"
+ },
+ "213": {
+  "names": [
+   "planmgt-plan-template-list",
+   "text",
+   "start_date",
+   "end_date",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/plan/palntemp/query"
+  ],
+  "endpoints": [
+   "/plan/palntemp/delete/",
+   "/plan/palntemp/updateOrPublish/",
+   "/temp/node/findByTempId/",
+   "/temp/node/getActive/",
+   "/temp/node/getTempInfo/",
+   "/temp/node/saveOrUpdate/"
+  ],
+  "file": "chunks/213.dae8431915b6dcc17489.js"
+ },
+ "263": {
+  "names": [
+   "assess-result-group",
+   "vendorTab",
+   "venCateTab",
+   "materialTab"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/result/buyer/list"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/result/viewResult/"
+  ],
+  "file": "chunks/263.f8cde66348d5995e202b.js"
+ },
+ "90": {
+  "names": [],
+  "query_urls": [
+   "/ap/price/confirm/query"
+  ],
+  "endpoints": [
+   "/ap/price/confirm/confirm/",
+   "/ap/price/confirm/getBill/",
+   "/ap/price/confirm/getItemList/"
+  ],
+  "file": "chunks/90.feeacb63687b6af5b8c2.js"
+ },
+ "66": {
+  "names": [
+   "perm",
+   "perm",
+   "pebuyer-receive-board",
+   "first",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/receive/board/query/1",
+   "/pe/receive/board/query/2"
+  ],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/CANCEL_REASON",
+   "/pe/receive/board/queryItem/",
+   "/pe/receive/board/queryReport",
+   "/pe/receive/board/queryReportMatView",
+   "/pe/receive/board/toAdd/",
+   "/pe/receive/board/toItem/",
+   "/sunner/pe/receive/board/back/",
+   "/sunner/pe/receive/board/delete/",
+   "/sunner/pe/receive/board/deleteItem/"
+  ],
+  "file": "chunks/66.cede07b449e63d09753c.js"
+ },
+ "175": {
+  "names": [
+   "sys-onlineuser",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/onlineusers/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/175.108b91e2da6ed0ab308b.js"
+ },
+ "311": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/vsp/rfi/template/findByTemplateId"
+  ],
+  "file": "chunks/311.bbc2a88402acd12e4c5e.js"
+ },
+ "150": {
+  "names": [
+   "show",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/demand/feedback-item",
+   "/pe/demand/getVersion/",
+   "/pe/demand/query",
+   "/pe/demand/tabList/",
+   "/pe/demand/vendorIndexTabs"
+  ],
+  "file": "chunks/150.11333b5ba7ed9c1be33e.js"
+ },
+ "407": {
+  "names": [
+   "pubuyer-receive-stock",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/receive/stock/query"
+  ],
+  "endpoints": [
+   "/pe/receive/stock/validateExpByStock"
+  ],
+  "file": "chunks/407.e54bfb99cd10139a960e.js"
+ },
+ "78": {
+  "names": [
+   "first",
+   "perm",
+   "second",
+   "third"
+  ],
+  "query_urls": [
+   "/adjustpricemgt/projectchange/vendor/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/78.8726aecf8a15d6011959.js"
+ },
+ "69": {
+  "names": [
+   "vdmgt-levelTask",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/vendormgt/assess/leveltask/query"
+  ],
+  "endpoints": [
+   "/sunner/vendormgt/assess/leveltask/delete/",
+   "/sunner/vendormgt/assess/leveltask/getMappingList",
+   "/sunner/vendormgt/assess/leveltask/getVdLevelTaskInfo",
+   "/sunner/vendormgt/assess/leveltask/queryVdLevelTaskItem"
+  ],
+  "file": "chunks/69.aa2538beb540c9cf22c5.js"
+ },
+ "199": {
+  "names": [
+   "basedata-bus-vdcat",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/vendorcategory/query/page"
+  ],
+  "endpoints": [
+   "/vendormgt/vendorcategory/delete/",
+   "/vendormgt/vendorcategory/query/page"
+  ],
+  "file": "chunks/199.83dad1094f832e218434.js"
+ },
+ "402": {
+  "names": [
+   "pevendor-receive-record",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/receive/record/query"
+  ],
+  "endpoints": [
+   "/pe/receive/record/toItem/"
+  ],
+  "file": "chunks/402.cf2f791f9aedfd99e1b1.js"
+ },
+ "318": {
+  "names": [
+   "vdmgt-risk-list"
+  ],
+  "query_urls": [
+   "/sunner/system/orgmgt/organization/query/risk"
+  ],
+  "endpoints": [],
+  "file": "chunks/318.da6f55fe562ccd0df63b.js"
+ },
+ "11": {
+  "names": [
+   "workflowTodotask"
+  ],
+  "query_urls": [
+   "/process/todotask/list"
+  ],
+  "endpoints": [
+   "/enquiry/getInfo/",
+   "/process/todotask/transfer"
+  ],
+  "file": "chunks/11.cda0a8caf7fdfc07953f.js"
+ },
+ "126": {
+  "names": [
+   "pevendor-return-record",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/return/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/126.1f5fb14fb5ceb13a4925.js"
+ },
+ "9": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pricearchive/query/area/material",
+   "/pricearchive/query/area/project",
+   "/pricearchive/query/area/subsection",
+   "/pricearchive/query/factory/material",
+   "/pricearchive/query/factory/project",
+   "/pricearchive/query/factory/subsection"
+  ],
+  "endpoints": [
+   "/pricearchive/invalidPriceArchive/",
+   "/quote/getQuoteInfo/",
+   "/sourcing/item/getItemInfo/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/9.6aa7b9c100383b8fc93b.js"
+ },
+ "85": {
+  "names": [],
+  "query_urls": [
+   "/vendor/recheck/query"
+  ],
+  "endpoints": [
+   "/businessconfig/vendorrecheck/getAll",
+   "/businessconfig/vendorrecheck/getInfoById/",
+   "/vendor/recheck/beforeDelete/",
+   "/vendor/recheck/beforeSaveVendor/",
+   "/vendor/recheck/delete/",
+   "/vendor/recheck/getPlanInfo/",
+   "/vendor/recheck/queryItem",
+   "/vendor/recheck/saveVendor/",
+   "/vendormgt/dlv/factoryInspect/initData",
+   "/vendormgt/dlv/factoryInspect/savePlan",
+   "/vendormgt/dlv/factoryInspect/toEdit/"
+  ],
+  "file": "chunks/85.dca9b804162c53c4175b.js"
+ },
+ "279": {
+  "names": [
+   "assess-templatesetting",
+   "branchTab",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/template/list"
+  ],
+  "endpoints": [
+   "/mdata/material/query",
+   "/organization/company/query",
+   "/organization/purgroup/query",
+   "/sunner/vendormgt/assess/setting/getAllOptions",
+   "/vendormgt/assess/template/getAllDimSetting",
+   "/vendormgt/assess/template/getAllDimSettingNotHaveTemplate",
+   "/vendormgt/assess/template/getIndexSetting/",
+   "/vendormgt/assess/template/getUpdate"
+  ],
+  "file": "chunks/279.c3989fa87fe2793637af.js"
+ },
+ "273": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/vendorconfig/noticeconfig/getAllScenes",
+   "/businessconfig/vendorconfig/noticeconfig/query",
+   "/businessconfig/vendorconfig/noticeconfig/saveOrUpdate"
+  ],
+  "file": "chunks/273.ca4948dc6db6de216c69.js"
+ },
+ "237": {
+  "names": [
+   "report-assess-sourcing-win",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/237.5279c066511991b4ca43.js"
+ },
+ "428": {
+  "names": [
+   "freightMaintenance",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/fs/freight/query"
+  ],
+  "endpoints": [
+   "/fs/freight/delete/",
+   "/fs/freight/getInfo/"
+  ],
+  "file": "chunks/428.34a8e7f3f7f112c183dc.js"
+ },
+ "381": {
+  "names": [
+   "purrequest_item-report",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/purchase/request/requestItemReport/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/381.d3a5e63b071043f00a7c.js"
+ },
+ "193": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "pe/dlv-skd/view/query"
+  ],
+  "endpoints": [
+   "/pe/dlv-skd/view/query"
+  ],
+  "file": "chunks/193.3d4c10c41921840df39a.js"
+ },
+ "364": {
+  "names": [
+   "contractmgt-change"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/getContractChange",
+   "/contractmgt/contract/init",
+   "/contractmgt/contract/updateContractChangeInfo",
+   "/contractmgt/electronic/seal/handle/bestsign",
+   "/pe/pomgt/poitem/buyer/getPoitemList"
+  ],
+  "file": "chunks/364.93d055d446fa8630ad88.js"
+ },
+ "55": {
+  "names": [
+   "pricemgt-offline-src"
+  ],
+  "query_urls": [
+   "/offlinesrc/query"
+  ],
+  "endpoints": [
+   "/bidmgt/route/getDicList",
+   "/offlinesrc/getInfo/",
+   "/sunner/bidmgt/route/getDicList"
+  ],
+  "file": "chunks/55.c5cbbe921ba77c095ba9.js"
+ },
+ "399": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY",
+   "/dic/dictionary/getDicItems/DEPARTMENT",
+   "/dic/dictionary/getDicItems/KY_PROJECT",
+   "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PROJECT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/dic/dictionary/getDicItems/TAX_RATE",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/usergroup/getAll",
+   "/pe/busLog/getList",
+   "/pesum/po/delete",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/sunner/mdata/material/findByMaterialId/",
+   "/sunner/organization/usergroup/getUserGroupAndOuUserGroupByCurrentUser",
+   "/sunner/pesum/poitem/getFreightOther/",
+   "/sunner/pesum/poitem/getPaymentTerms/",
+   "/sunner/system/orgmgt/organization/findFilterUserByVendorId/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/399.37ceb687479fe2ceafe3.js"
+ },
+ "416": {
+  "names": [
+   "sys-orderopen"
+  ],
+  "query_urls": [
+   "/businessconfig/orderconfig/clconfig/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/416.28dc67c025f29ef0ba62.js"
+ },
+ "301": {
+  "names": [
+   "pebuyer-order-exec",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/pomgt/execStatus/query"
+  ],
+  "endpoints": [
+   "/pesum/po/getInfo/",
+   "/pesum/po/query"
+  ],
+  "file": "chunks/301.ac5c5cfcfe588a644b05.js"
+ },
+ "171": {
+  "names": [
+   "edit-company"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/171.9f3d732abe6d48b62213.js"
+ },
+ "248": {
+  "names": [
+   "user-set"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/usermgt/users/query",
+   "/system/usermgt/users/queryRoleUser/",
+   "/system/usermgt/users/saveRoleUser"
+  ],
+  "file": "chunks/248.26e1ad8067f13281ffde.js"
+ },
+ "297": {
+  "names": [
+   "paymentAgree"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/PAY_PER_DESC"
+  ],
+  "file": "chunks/297.1c3bcae3759794143db6.js"
+ },
+ "411": {
+  "names": [
+   "first",
+   "second",
+   "third",
+   "fourth",
+   "five",
+   "six"
+  ],
+  "query_urls": [
+   "/pe/pomgt/pomain/queryByPoId"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/dlv-skd/exec/queryreqQty",
+   "/pe/dlv-skd/view/savedDeliveryplan",
+   "/pe/pomgt/poitem/buyer/unlockItem/"
+  ],
+  "file": "chunks/411.c61672d9632b7e76be7c.js"
+ },
+ "294": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/vendormgt/vsp/rfiitem/feedBackView/"
+  ],
+  "file": "chunks/294.e1ae37cd8d01aa8291d4.js"
+ },
+ "397": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/freightfee/yearFreightFee/query"
+  ],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY",
+   "/dic/dictionary/getDicItems/DEPARTMENT",
+   "/dic/dictionary/getDicItems/KY_PROJECT",
+   "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/dic/dictionary/getDicItems/TAX_RATE",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/factory/getByFactoryId/",
+   "/organization/usergroup/getAll",
+   "/pe/busLog/getList",
+   "/pesum/mileStone/getByOrder/",
+   "/pesum/po/delete",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/sunner/contractmgt/contract/getByCode",
+   "/sunner/organization/usergroup/getUserGroupAndOuUserGroupByCurrentUser",
+   "/sunner/pesum/poitem/batch/updateFreight",
+   "/sunner/pesum/poitem/getAssetItem/",
+   "/sunner/pesum/poitem/getFreightOther/",
+   "/sunner/pesum/poitem/getFreightOther/order/",
+   "/sunner/pesum/poitem/getPaymentTerms/",
+   "/sunner/pesum/poitem/updateFreight",
+   "/sunner/system/orgmgt/organization/findFilterUserByVendorId/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/397.bf484dd22b895660d5a9.js"
+ },
+ "16": {
+  "names": [
+   "show",
+   "show",
+   "show",
+   "pricemgt-import-material",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/priceaudit/query"
+  ],
+  "endpoints": [
+   "/priceaudit/createUUId",
+   "/priceaudit/priceDelete/",
+   "/priceaudit/saveAndPublish",
+   "/sunner/priceaudit/save",
+   "/sunner/priceaudit/toView/"
+  ],
+  "file": "chunks/16.0bc8c576bbba96ec5fb8.js"
+ },
+ "231": {
+  "names": [],
+  "query_urls": [
+   "/pe/dlv-skd/exec/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/231.c2c7acb2187e74653b8f.js"
+ },
+ "450": {
+  "names": [
+   "driverVehicle",
+   "drivingLicenseFile"
+  ],
+  "query_urls": [
+   "/sl/driver/vehicle/queryPage"
+  ],
+  "endpoints": [
+   "/sl/directive/carModel/queryPage",
+   "/sl/driver/vehicle/delete/"
+  ],
+  "file": "chunks/450.bee140561ead3bb91e8c.js"
+ },
+ "440": {
+  "names": [
+   "jitWaitBillList",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/fisum/fiwaitbill/queryJit"
+  ],
+  "endpoints": [
+   "/fi/billableitems/vendor/billall",
+   "/sunner/fi/billableitems/buyer/batchChangeTax",
+   "/sunner/fi/billableitems/buyer/changeMoney",
+   "/sunner/fisum/fiwaitbill/queryJitReturnList"
+  ],
+  "file": "chunks/440.dd5c9251ea9a2dfd417d.js"
+ },
+ "353": {
+  "names": [
+   "contractmgt-sign-cp",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/init",
+   "/contractmgt/contract/revocation",
+   "/contractmgt/electronic/seal/handle/bestsign"
+  ],
+  "file": "chunks/353.58012e6bd7b66abbbaaa.js"
+ },
+ "32": {
+  "names": [
+   "edit-company",
+   "basedata-org-purgroup",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/organization/purgroup/query"
+  ],
+  "endpoints": [
+   "/organization/purgroup/query"
+  ],
+  "file": "chunks/32.5052deebdf473ab36bf5.js"
+ },
+ "40": {
+  "names": [
+   "pricemgt-ebp-buy-list",
+   "pricemgt-ebpvendor-auction-list"
+  ],
+  "query_urls": [
+   "ebpmgt/ebpbill/vendor/query"
+  ],
+  "endpoints": [
+   "/ebpmgt/ebpbill/getInfo/"
+  ],
+  "file": "chunks/40.f084fe227357d35cfdd9.js"
+ },
+ "319": {
+  "names": [
+   "company-questionary"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/questionary/getPhase"
+  ],
+  "file": "chunks/319.3a2e11d8db5a1d833b8f.js"
+ },
+ "436": {
+  "names": [
+   "first",
+   "second",
+   "third",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/fi/billmgt/buyer/getBillItmes/",
+   "/fi/billmgt/vendor/getInvoices/",
+   "/payment/order/queryOrderItem/",
+   "/payment/order/toAddOrderPay/"
+  ],
+  "file": "chunks/436.bbefdd2d04d25c2a50ad.js"
+ },
+ "240": {
+  "names": [
+   "pevendor-fi-list",
+   "first",
+   "second",
+   "third",
+   "fifth",
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/billmgt/vendor/query"
+  ],
+  "endpoints": [
+   "/fi/billmgt/vendor/delete/",
+   "/fi/billmgt/vendor/getBillItmes/",
+   "/fi/billmgt/vendor/getInvoices/",
+   "/fi/billmgt/vendor/query",
+   "/fi/billmgt/vendor/removeinvoice/",
+   "/qm/quajud/findListByBillId/",
+   "/sunner/fi/billmgt/vendor/submitCheck/",
+   "/sunner/fi/billmgt/vendor/submitPurCheck/",
+   "/sunner/fisum/fibill/getOtherFile",
+   "/sunner/fisum/fibill/updateConfirmInvoice",
+   "/system/log/getList"
+  ],
+  "file": "chunks/240.bbeeefdb6f8b3a1d544a.js"
+ },
+ "76": {
+  "names": [
+   "pebuyer-order-list",
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "first"
+  ],
+  "query_urls": [
+   "/pe/pomgt/poitem/buyer/query",
+   "/pe/pomgt/pomain/buyer/query",
+   "/pe/pomgt/pomain/queryByPoId"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/dlv-skd/exec/queryreqQty",
+   "/pe/dlv-skd/view/savedDeliveryplan",
+   "/pe/pomgt/poitem/buyer/unlockItem/",
+   "/pe/pomgt/pomain/buyer/view/"
+  ],
+  "file": "chunks/76.2779627cac88a04c7393.js"
+ },
+ "382": {
+  "names": [
+   "purrequest_item-report",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/purchase/request/requestItemReport/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/382.edb1aa66f8b9cf2d5109.js"
+ },
+ "42": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "pe/dlv-skd/view/query"
+  ],
+  "endpoints": [
+   "/pe/dlv-skd/history/page",
+   "/pe/dlv-skd/view/query"
+  ],
+  "file": "chunks/42.b30835c12a928a5ba2df.js"
+ },
+ "107": {
+  "names": [
+   "report-assess-order-receive-pro",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/107.de9983e69231b8f14634.js"
+ },
+ "219": {
+  "names": [
+   "mall-buyer-marketableProduct",
+   "perm",
+   "perm",
+   "perm",
+   "first",
+   "second"
+  ],
+  "query_urls": [
+   "/product/marketable/query"
+  ],
+  "endpoints": [
+   "/product/marketable/confirmAudit",
+   "/product/marketable/delete",
+   "/product/marketable/findSplitOrCopyShopWaitMarketableDto",
+   "/product/marketable/updateMarket"
+  ],
+  "file": "chunks/219.2c541bd7a311f5ac0e83.js"
+ },
+ "87": {
+  "names": [
+   "buscollaboration-contractmgt-contract",
+   "perm",
+   "perm",
+   "itemTab",
+   "contractFileTab",
+   "contractCounterpartyTab"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/vendor/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/init",
+   "/contractmgt/electronic/seal/handle/bestsign",
+   "/contractmgt/electronic/seal/sign/bestsign",
+   "/contractmgt/template/getByTerms/"
+  ],
+  "file": "chunks/87.6c4031abae36380e70e3.js"
+ },
+ "403": {
+  "names": [
+   "pebuyer-receive-record",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/receive/record/query"
+  ],
+  "endpoints": [
+   "/pe/receive/record/toItem/",
+   "/pe/receive/record/validateExpByReceive"
+  ],
+  "file": "chunks/403.6381a6675f37bbc46abc.js"
+ },
+ "72": {
+  "names": [
+   "show",
+   "show",
+   "vdmgt-daily-rfi",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/vsp/rfi/query"
+  ],
+  "endpoints": [
+   "/vendormgt/vsp/rfi/saveAndPublish"
+  ],
+  "file": "chunks/72.1d682ba5674b0177ad82.js"
+ },
+ "396": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY",
+   "/dic/dictionary/getDicItems/DEPARTMENT",
+   "/dic/dictionary/getDicItems/KY_PROJECT",
+   "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PROJECT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/dic/dictionary/getDicItems/TAX_RATE",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/usergroup/getAll",
+   "/pe/busLog/getList",
+   "/pesum/po/delete",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/sunner/mdata/material/findByMaterialId/",
+   "/sunner/organization/usergroup/getUserGroupAndOuUserGroupByCurrentUser",
+   "/sunner/pesum/poitem/getFreightOther/",
+   "/sunner/pesum/poitem/getPaymentTerms/",
+   "/sunner/system/orgmgt/organization/findFilterUserByVendorId/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/396.abbad899a6cbe5b3a7b8.js"
+ },
+ "44": {
+  "names": [
+   "bid-list",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/bidmgt/bid/query"
+  ],
+  "endpoints": [
+   "/bidmgt/bid/adjustEndTime/",
+   "/bidmgt/bid/getInfo/",
+   "/bidmgt/bid/query",
+   "/bidmgt/route/getDicList",
+   "/sunner/bidmgt/route/getDicList"
+  ],
+  "file": "chunks/44.a193befc0e58af96e969.js"
+ },
+ "22": {
+  "names": [
+   "weighingList",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/weighorder/query"
+  ],
+  "endpoints": [
+   "/farmer/info/",
+   "/weighorder/getInfo/",
+   "/weighorder/print/"
+  ],
+  "file": "chunks/22.5226b6506f032bd68d35.js"
+ },
+ "119": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/mall/mallaftersale/abolish/",
+   "/sunner/mall/mallaftersale/findItemById/"
+  ],
+  "file": "chunks/119.e07d533e48e66da89a30.js"
+ },
+ "422": {
+  "names": [
+   "mall-aftersale-list"
+  ],
+  "query_urls": [
+   "/mall/fiBill/queryMall"
+  ],
+  "endpoints": [
+   "/mall/fiBill/view/"
+  ],
+  "file": "chunks/422.863aed4f02a854ade61e.js"
+ },
+ "145": {
+  "names": [
+   "model"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/vendorrecheck/delete/",
+   "/businessconfig/vendorrecheck/get/"
+  ],
+  "file": "chunks/145.661b118bbfa2e94c8812.js"
+ },
+ "361": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/init"
+  ],
+  "file": "chunks/361.c2f0d1cd0faab541ad25.js"
+ },
+ "276": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/vsrlist/query",
+   "/vendormgt/vsrmgt/entry/query",
+   "/vendormgt/vsrmgt/publish"
+  ],
+  "file": "chunks/276.92de913ec8ad52b1b1af.js"
+ },
+ "51": {
+  "names": [
+   "show",
+   "show",
+   "show",
+   "buscollaboration-rfqquote"
+  ],
+  "query_urls": [
+   "/enquiry/vendor/query"
+  ],
+  "endpoints": [
+   "/enquiry/getBaseInfo/",
+   "/enquiry/getDicList",
+   "/enquiry/vendor/getPhase/"
+  ],
+  "file": "chunks/51.58ef0d14635807523262.js"
+ },
+ "354": {
+  "names": [
+   "contractmgt-sign-company",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/delete",
+   "/contractmgt/contract/init",
+   "/contractmgt/contract/revocation",
+   "/contractmgt/electronic/seal/handle/bestsign"
+  ],
+  "file": "chunks/354.2c5c89d3c6f2c485f594.js"
+ },
+ "303": {
+  "names": [
+   "pricemgt-clarify"
+  ],
+  "query_urls": [
+   "/sourcing/clarify/queryClarify"
+  ],
+  "endpoints": [
+   "/sourcing/clarify/getViewInfo"
+  ],
+  "file": "chunks/303.b160bb1a1e3ff98ae0bb.js"
+ },
+ "33": {
+  "names": [
+   "first",
+   "second",
+   "three",
+   "perm",
+   "perm",
+   "basedta-bus-material"
+  ],
+  "query_urls": [
+   "/mdata/material/query"
+  ],
+  "endpoints": [
+   "/mdata/material/convertunit/",
+   "/mdata/material/getFactoryByMaterialId",
+   "/mdata/material/getMaterialById/",
+   "/mdata/material/query",
+   "/mdata/materialVendor/getVendorByMaterialId",
+   "/system/log/getList"
+  ],
+  "file": "chunks/33.db9a6da7103cb075b194.js"
+ },
+ "256": {
+  "names": [
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/material/getFactoryByMaterialId",
+   "/mdata/material/getMaterialById/",
+   "/mdata/materialVendor/getVendorByMaterialId",
+   "/system/log/getList"
+  ],
+  "file": "chunks/256.d5c57e81d441c9cb96b1.js"
+ },
+ "328": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/vendorreg/invite/save/",
+   "/sunner/vendorreg/invite/save/0",
+   "/sunner/vendorreg/invite/save/1"
+  ],
+  "file": "chunks/328.c6e52e68a43d196c4337.js"
+ },
+ "424": {
+  "names": [
+   "deliveryRecord",
+   "perm"
+  ],
+  "query_urls": [
+   "/fs/signer/query"
+  ],
+  "endpoints": [
+   "/fs/signer/getInfo/"
+  ],
+  "file": "chunks/424.e52bc7b67e87d10af4a7.js"
+ },
+ "43": {
+  "names": [
+   "jitAllocation",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/jitAllocation/query"
+  ],
+  "endpoints": [
+   "/sunner/jitAllocation/findItemList",
+   "/sunner/jitAllocation/reloadCreateOrder",
+   "/sunner/jitAllocation/reloadCreateReturnOrder"
+  ],
+  "file": "chunks/43.b10d76bb71cf161a5051.js"
+ },
+ "48": {
+  "names": [
+   "assess-adjustaudit",
+   "first",
+   "second",
+   "third",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/assess/result/adjust/audit/query",
+   "/vendormgt/assess/setting/getDimMap/"
+  ],
+  "file": "chunks/48.ab68fe6817f3a821df8a.js"
+ },
+ "421": {
+  "names": [
+   "mall-aftersale-list",
+   "show"
+  ],
+  "query_urls": [
+   "/jd/accountbill/query"
+  ],
+  "endpoints": [
+   "/jd/accountbill/submit/fi/",
+   "/jd/accountbill/update/dif/"
+  ],
+  "file": "chunks/421.7d8e51ae2ae1f21c50b3.js"
+ },
+ "120": {
+  "names": [
+   "vdmgt-pool",
+   "show",
+   "all",
+   "perm",
+   "regist",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/lgort/delete/",
+   "/vendormgt/vsp/formalvendor/active/",
+   "/vendormgt/vsp/formalvendor/black/",
+   "/vendormgt/vsp/formalvendor/findUSerByVendorId/",
+   "/vendormgt/vsp/formalvendor/openMall",
+   "/vendormgt/vsp/registvendor/query/audit/",
+   "/vendormgt/vsp/registvendor/query/audit/ZYZXZJ"
+  ],
+  "file": "chunks/120.0de9aba96a561d6970ae.js"
+ },
+ "280": {
+  "names": [
+   "sys-loginlog"
+  ],
+  "query_urls": [
+   "/system/userlog/userslog/query"
+  ],
+  "endpoints": [
+   "/system/userlog/userslog/getChartData",
+   "/system/userlog/userslog/query"
+  ],
+  "file": "chunks/280.19dd7d94ae9499645c32.js"
+ },
+ "7": {
+  "names": [
+   "user-set",
+   "addOrEditRole",
+   "sys-role"
+  ],
+  "query_urls": [
+   "/system/rolemgt/roles/query"
+  ],
+  "endpoints": [
+   "/system/rolemgt/roles/delete/",
+   "/system/rolemgt/roles/query",
+   "/system/rolemgt/roles/queryUser/",
+   "/system/rolemgt/roles/saveOrUpdate",
+   "/system/usermgt/users/query",
+   "/system/usermgt/users/queryRoleUser/",
+   "/system/usermgt/users/saveRoleUser"
+  ],
+  "file": "chunks/7.50d6a7b528961c4ab34d.js"
+ },
+ "68": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/claim/query"
+  ],
+  "endpoints": [
+   "/fi/claim/buyerAgainSub",
+   "/fi/claim/chargeClaim/",
+   "/fi/claim/closeClaim",
+   "/fi/claim/enterPrice",
+   "/fi/claim/findById/",
+   "/fi/claim/query",
+   "/system/log/getList"
+  ],
+  "file": "chunks/68.de887f637ee24940bbd0.js"
+ },
+ "31": {
+  "names": [
+   "notice-editor",
+   "noticeFile",
+   "show",
+   "sys-notice"
+  ],
+  "query_urls": [
+   "/system/notice/query"
+  ],
+  "endpoints": [
+   "/system/notice/query",
+   "/system/notice/updateTopFlag"
+  ],
+  "file": "chunks/31.0f2bddefd2f9bbfeff46.js"
+ },
+ "342": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/342.394fe555f015902d41c4.js"
+ },
+ "284": {
+  "names": [
+   "ad-list",
+   "perm",
+   "show",
+   "adFile",
+   "show"
+  ],
+  "query_urls": [
+   "/store/adMgr/query"
+  ],
+  "endpoints": [
+   "/store/adMgr/delete/",
+   "/store/adpositionMgr/getAll"
+  ],
+  "file": "chunks/284.14ab9405eee8813d50fd.js"
+ },
+ "111": {
+  "names": [
+   "report-assess-order-unfinish",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/111.e23e8dfb3ba3b300f50d.js"
+ },
+ "255": {
+  "names": [
+   "assess-groupplan-year",
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "third"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/groupplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/255.8adccf83db018502ab3f.js"
+ },
+ "18": {
+  "names": [
+   "rfiFile",
+   "VD-RFI-INFO"
+  ],
+  "query_urls": [
+   "/vendormgt/vsp/rfiitem/findByVendorId"
+  ],
+  "endpoints": [
+   "/sunner/vendormgt/vsp/rfiitem/feedBackView/",
+   "/vendormgt/vsp/rfiitem/feedBack/changeStatus/",
+   "/vendormgt/vsp/rfiitem/feedBackEd/",
+   "/vendormgt/vsp/rfiitem/findByVendorId"
+  ],
+  "file": "chunks/18.67dba06cf70a14949694.js"
+ },
+ "151": {
+  "names": [
+   "rel-factory-company"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/151.bb5b14cbaa98c48e487c.js"
+ },
+ "30": {
+  "names": [
+   "contractmgt-template-list",
+   "perm",
+   "commonTerms",
+   "compositeTerms"
+  ],
+  "query_urls": [
+   "/contractmgt/template/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/init",
+   "/contractmgt/template/getByTerms/",
+   "/contractmgt/terms/getByCategory/3",
+   "/contractmgt/terms/getByCategory/4",
+   "/contractmgt/terms/getByType/",
+   "/contractmgt/termsType/getAll"
+  ],
+  "file": "chunks/30.d9f9decdf57dd3556299.js"
+ },
+ "463": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/vendormgt/assess/leveltask/getMappingList",
+   "/sunner/vendormgt/assess/leveltask/getVdLevelTaskInfo"
+  ],
+  "file": "chunks/463.317cf9bdaca504e694e9.js"
+ },
+ "188": {
+  "names": [
+   "report-quota-exe",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/188.3b7bb98dac16e602754c.js"
+ },
+ "435": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "third",
+   "fourth"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/fi/billmgt/buyer/getBillItmes/",
+   "/fi/billmgt/vendor/getInvoices/",
+   "/fi/claim/query",
+   "/payment/order/closeOrderReq/",
+   "/payment/order/getReqItemsByReqId/"
+  ],
+  "file": "chunks/435.91f7b5f2a8eae8660631.js"
+ },
+ "390": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pesum/return/cancelReturn/",
+   "/pesum/return/deleteReturn/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/390.3bdff7dc76c53aa949ec.js"
+ },
+ "202": {
+  "names": [
+   "model",
+   "configFile"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/factoryinspect/delete/",
+   "/businessconfig/factoryinspect/getDic",
+   "/businessconfig/factoryinspect/query",
+   "/businessconfig/factoryinspect/saveOrUpdate",
+   "/businessconfig/vendorrecheck/get/"
+  ],
+  "file": "chunks/202.fa6bf1e57a429bd2de67.js"
+ },
+ "341": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/341.744862a758131d1829b9.js"
+ },
+ "91": {
+  "names": [
+   "first",
+   "perm",
+   "second"
+  ],
+  "query_urls": [
+   "/qm/qm8d/query"
+  ],
+  "endpoints": [
+   "/qm/qm8d/toView/"
+  ],
+  "file": "chunks/91.f80f4fffffea14155d63.js"
+ },
+ "96": {
+  "names": [
+   "receivingDetails",
+   "transportType",
+   "packingType",
+   "dumperType",
+   "vendorVehicleType",
+   "weighQty"
+  ],
+  "query_urls": [
+   "/fs/receive/query"
+  ],
+  "endpoints": [
+   "/fs/signer/getInfo/"
+  ],
+  "file": "chunks/96.d855ca7c9f3009b86a92.js"
+ },
+ "184": {
+  "names": [
+   "show",
+   "show",
+   "show",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/orgmgt/organization/getName/",
+   "/system/orgmgt/organization/queryForDatalist",
+   "/vendormgt/dlv/dlvApply/getInfo",
+   "/vendormgt/dlv/dlvApply/queryLabel",
+   "/vendormgt/vsp/rfi/showSelTemplate"
+  ],
+  "file": "chunks/184.593c02699ace6bdceda1.js"
+ },
+ "351": {
+  "names": [
+   "contractmgt-template-terms-type",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/termsType/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/351.c1b556bb70cfd5bafce5.js"
+ },
+ "431": {
+  "names": [
+   "transportType",
+   "packingType",
+   "dumperType",
+   "vendorVehicleType",
+   "weighQty",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/fs/signer/getInfo/"
+  ],
+  "file": "chunks/431.93b9c74c02d6fc6ba660.js"
+ },
+ "172": {
+  "names": [],
+  "query_urls": [
+   "/adjustpricemgt/linked/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/172.8fe1e3f40cba3bb93210.js"
+ },
+ "445": {
+  "names": [
+   "pebuyer-fi-lockconfig"
+  ],
+  "query_urls": [
+   "/fi/ficonfig/query"
+  ],
+  "endpoints": [
+   "/fi/ficonfig/update",
+   "/system/log/getList"
+  ],
+  "file": "chunks/445.78ec867b25ab871a3898.js"
+ },
+ "81": {
+  "names": [
+   "show",
+   "add-expert"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/organization/expert/saveOrUpdate/",
+   "/system/usermgt/users/query",
+   "/system/usermgt/users/queryAllPurchaser"
+  ],
+  "file": "chunks/81.b22441a968dc50480625.js"
+ },
+ "348": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/system/usermgt/users/query",
+   "/system/usermgt/users/queryReceviceUser"
+  ],
+  "file": "chunks/348.9f02340f56e34e97ed92.js"
+ },
+ "144": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/demand/delete/",
+   "/businessconfig/demand/findById/",
+   "/businessconfig/demand/query",
+   "/businessconfig/demand/saveOrPublish/"
+  ],
+  "file": "chunks/144.f9a149047df59ea24d60.js"
+ },
+ "400": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/rfs/buyer/saveOrPublish/",
+   "/system/orgmgt/organization/queryForDatalist"
+  ],
+  "file": "chunks/400.222e5f0a3d83610bf523.js"
+ },
+ "289": {
+  "names": [],
+  "query_urls": [
+   "/system/parameter/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/289.a5684903429ef308453b.js"
+ },
+ "414": {
+  "names": [
+   "pevendor-delivery-record",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/vendor/delivery/query"
+  ],
+  "endpoints": [
+   "/pe/vendor/delivery/validateExpByQuery",
+   "/pe/vendor/delivery/viewDetail/",
+   "/sunner/pe/vendor/delivery/viewDetail/"
+  ],
+  "file": "chunks/414.99df7cab48eeddd1c31d.js"
+ },
+ "122": {
+  "names": [
+   "emall-longtail-product-material",
+   "perm",
+   "perm",
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [
+   "/sunner/order/lpm/query"
+  ],
+  "endpoints": [
+   "/organization/factory/getAll",
+   "/product/query"
+  ],
+  "file": "chunks/122.8a6d700e8fc1dfa44e11.js"
+ },
+ "56": {
+  "names": [
+   "basedata-org-company",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/organization/company/query"
+  ],
+  "endpoints": [
+   "/organization/company/delete",
+   "/organization/company/getById/",
+   "/organization/company/query",
+   "/organization/company/query2/",
+   "/organization/factory/getFactoryByCmpId",
+   "/organization/purOrg/getPurOrgByCmpId"
+  ],
+  "file": "chunks/56.9cca6bfe6699e8575ce6.js"
+ },
+ "14": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/project/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/project/closeAssess/",
+   "/vendormgt/assess/project/getPlanInfo",
+   "/vendormgt/assess/project/query",
+   "/vendormgt/assess/project/queryIndexExpert/",
+   "/vendormgt/assess/project/setExpert/",
+   "/vendormgt/assess/project/setTime/"
+  ],
+  "file": "chunks/14.dd58cc33364ae53dac86.js"
+ },
+ "3": {
+  "names": [
+   "purrequest_create",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/purchase/request/createQuery"
+  ],
+  "endpoints": [
+   "/sunner/purchase/request/deleteRequest"
+  ],
+  "file": "chunks/3.18edeedcb127d634c70b.js"
+ },
+ "230": {
+  "names": [
+   "vdmgt-vendorcycle",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/lifecyclemgt/query"
+  ],
+  "endpoints": [
+   "/sunner/vendormgt/lifecyclemgt/freezeRelation/",
+   "/vendormgt/lifecyclemgt/getBusType",
+   "/vendormgt/lifecyclemgt/withdraw"
+  ],
+  "file": "chunks/230.738a59c7e9f2f07bc004.js"
+ },
+ "448": {
+  "names": [
+   "vendorProducer",
+   "perm"
+  ],
+  "query_urls": [
+   "/sl/vendorProducer/query"
+  ],
+  "endpoints": [
+   "/sl/vendorProducer/delete/",
+   "/sl/vendorProducer/getInfo/"
+  ],
+  "file": "chunks/448.7131c63c9b715407d847.js"
+ },
+ "13": {
+  "names": [
+   "perm",
+   "perm",
+   "matdev-source-mgt",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/vsrmgt/query"
+  ],
+  "endpoints": [
+   "/sunner/vendormgt/vsrmgt/deleteMatSource",
+   "/system/log/getList",
+   "/vendormgt/vsrlist/query",
+   "/vendormgt/vsrmgt/entry/query",
+   "/vendormgt/vsrmgt/fileDesc",
+   "/vendormgt/vsrmgt/publish",
+   "/vendormgt/vsrmgt/query"
+  ],
+  "file": "chunks/13.129426f2a4b5f4d3b783.js"
+ },
+ "5": {
+  "names": [
+   "sumpurchase-order",
+   "first",
+   "perm",
+   "perm",
+   "perm",
+   "second"
+  ],
+  "query_urls": [
+   "/pesum/po/query",
+   "/vendormgt/freightfee/yearFreightFee/query"
+  ],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY",
+   "/dic/dictionary/getDicItems/DEPARTMENT",
+   "/dic/dictionary/getDicItems/KY_PROJECT",
+   "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PROJECT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/dic/dictionary/getDicItems/TAX_RATE",
+   "/mdata/factory/material/query",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/usergroup/getAll",
+   "/pe/busLog/getList",
+   "/pesum/mileStone/getByOrder/",
+   "/pesum/po/delete",
+   "/pesum/po/getInfo/",
+   "/pesum/po/query",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/sunner/contractmgt/contract/getByCode",
+   "/sunner/mdata/material/findByMaterialId/",
+   "/sunner/organization/usergroup/getUserGroupAndOuUserGroupByCurrentUser",
+   "/sunner/pesum/poitem/batch/updateFreight",
+   "/sunner/pesum/poitem/getAssetItem/",
+   "/sunner/pesum/poitem/getFreightOther/",
+   "/sunner/pesum/poitem/getFreightOther/order/",
+   "/sunner/pesum/poitem/getPaymentTerms/",
+   "/sunner/pesum/poitem/updateFreight",
+   "/sunner/system/orgmgt/organization/findFilterUserByVendorId/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/system/purchasedic/query",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/5.fdceeabad0c4767a5707.js"
+ },
+ "236": {
+  "names": [
+   "rel-srm-category"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/236.85adeba61ef44b7c839e.js"
+ },
+ "291": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/sourcing/deposit/buyer/getViewInfo/",
+   "/sourcing/deposit/getDepositByBillId/",
+   "/sourcing/deposit/returnDeposit/"
+  ],
+  "file": "chunks/291.034ee12762e3045324c2.js"
+ },
+ "4": {
+  "names": [
+   "catalog-mall",
+   "model",
+   "model",
+   "show",
+   "model",
+   "sys-busconfig"
+  ],
+  "query_urls": [
+   "/mall/order/setting/query",
+   "/mall/order/setting/queryMallConfDetail"
+  ],
+  "endpoints": [
+   "/businessconfig/cfbusinessaction/findByModelId/",
+   "/businessconfig/cfbusinessattribute/findByModelAndAction/",
+   "/businessconfig/cfbusinessconfig/delete/",
+   "/businessconfig/cfbusinessconfig/query",
+   "/businessconfig/cfbusinessconfig/saveOrUpdate",
+   "/businessconfig/cfbusinessmodel/findAll",
+   "/businessconfig/demand/delete/",
+   "/businessconfig/demand/findById/",
+   "/businessconfig/demand/query",
+   "/businessconfig/demand/saveOrPublish/",
+   "/businessconfig/factoryinspect/delete/",
+   "/businessconfig/factoryinspect/getDic",
+   "/businessconfig/factoryinspect/query",
+   "/businessconfig/factoryinspect/saveOrUpdate",
+   "/businessconfig/getPpaNPAConfig",
+   "/businessconfig/orderconfig/add",
+   "/businessconfig/orderconfig/query",
+   "/businessconfig/orderconfig/queryCf/",
+   "/businessconfig/precisionconfig/insert",
+   "/businessconfig/precisionconfig/queryPage",
+   "/businessconfig/price/query",
+   "/businessconfig/priceconfig/updatePriceType",
+   "/businessconfig/questionary/aptitude",
+   "/businessconfig/questionary/aptitude/delete/",
+   "/businessconfig/questionary/aptitude/query",
+   "/businessconfig/questionary/query",
+   "/businessconfig/vendor/delivery/query",
+   "/businessconfig/vendor/delivery/saveOrUpdate",
+   "/businessconfig/vendorconfig/noticeconfig/getAllScenes",
+   "/businessconfig/vendorconfig/noticeconfig/query",
+   "/businessconfig/vendorconfig/noticeconfig/saveOrUpdate",
+   "/businessconfig/vendorrecheck/delete/",
+   "/businessconfig/vendorrecheck/get/",
+   "/mall/order/setting/delMallItemRow",
+   "/mall/order/setting/query",
+   "/mall/order/setting/update",
+   "/organization/factory/getAll",
+   "/organization/purOrg/query"
+  ],
+  "file": "chunks/4.065c920705ff3c8025a2.js"
+ },
+ "292": {
+  "names": [
+   "pevendor-consignment-inventory-query"
+  ],
+  "query_urls": [
+   "sunner/consignmentinventory/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/292.4c4f07d9c7d8cf94a686.js"
+ },
+ "113": {
+  "names": [
+   "reports-vendor-trade",
+   "show",
+   "vdCmp"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/113.90bff58d46419c9b575a.js"
+ },
+ "347": {
+  "names": [
+   "orderInquiry",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/enquiry/AliSms/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/347.1948d7b1759d3353b746.js"
+ },
+ "405": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/receive/board/queryReport",
+   "/pe/receive/board/queryReportMatView"
+  ],
+  "file": "chunks/405.fed99c66e9f45751f71a.js"
+ },
+ "229": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/doclib/publish/nodal/toShow/",
+   "/doclib/view/query",
+   "/doclib/view/query/vendor",
+   "/doclib/view/queryVendorDir"
+  ],
+  "file": "chunks/229.b2b24f97d7bdde4f3592.js"
+ },
+ "434": {
+  "names": [
+   "first",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/api/contract/getContractByCode/",
+   "/businessconfig/payment/query",
+   "/fi/claim/query",
+   "/organization/company/getById/",
+   "/payment/order/getOrderContractInfo/",
+   "/vendormgt/questionary/bank/query/"
+  ],
+  "file": "chunks/434.ab7c367e628cc4650896.js"
+ },
+ "383": {
+  "names": [
+   "purrequest_company"
+  ],
+  "query_urls": [
+   "/purchase/request/createQuery"
+  ],
+  "endpoints": [],
+  "file": "chunks/383.76f8dbb3fd3ea6b97c13.js"
+ },
+ "226": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/questionary/query"
+  ],
+  "file": "chunks/226.62f0206dfca9f0df1385.js"
+ },
+ "404": {
+  "names": [
+   "pevendor-receive-diff",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/receive/contrast/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/404.67b4f721d1d61fbc28d1.js"
+ },
+ "71": {
+  "names": [
+   "strategymatchscore",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/assess/strategymatch/query"
+  ],
+  "endpoints": [
+   "/sunner/assess/strategymatch/del/",
+   "/sunner/assess/strategymatch/loadItem/"
+  ],
+  "file": "chunks/71.ac4b75ede1aacaf9388c.js"
+ },
+ "149": {
+  "names": [
+   "basedata-basebus-region",
+   "country",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/common/region/queryArea",
+   "/common/region/queryCity",
+   "/common/region/queryCountry",
+   "/common/region/queryProvince",
+   "/common/region/updateErpCode"
+  ],
+  "file": "chunks/149.75f01eb7b98daa8fe0e2.js"
+ },
+ "73": {
+  "names": [],
+  "query_urls": [
+   "/vendormgt/npc/npcTask/query"
+  ],
+  "endpoints": [
+   "/vendormgt/npc/npcTask/query",
+   "/vendormgt/npc/npcTask/toTab/withmtrl/view/",
+   "/vendormgt/npc/npcTaskItem/query/",
+   "/vendormgt/npc/npcTaskItemVendor/confirm/",
+   "/vendormgt/npc/npcTaskItemVendor/query/",
+   "/vendormgt/npc/npcTaskItemVendor/reject/"
+  ],
+  "file": "chunks/73.f60c2aaf15db4846b1d5.js"
+ },
+ "270": {
+  "names": [
+   "edit-company"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/organization/purgroup/getAll",
+   "/organization/usergroup/saveOrUpdate"
+  ],
+  "file": "chunks/270.39f3421b27e5d4e2c833.js"
+ },
+ "26": {
+  "names": [
+   "buscollaboration-tender"
+  ],
+  "query_urls": [
+   "/bidmgt/bid/vendor/query"
+  ],
+  "endpoints": [
+   "/bidmgt/bid/vendor/getPhase/",
+   "/bidmgt/bid/vendor/getPhaseInfo/",
+   "/enquiry/getDicList"
+  ],
+  "file": "chunks/26.cb87cea78f9185a86e74.js"
+ },
+ "160": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/system/taskexec/saveOrUpdate"
+  ],
+  "file": "chunks/160.33785195aa3b41e4369b.js"
+ },
+ "367": {
+  "names": [
+   "show",
+   "show",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/adjustpricemgt/saveAndPublish"
+  ],
+  "file": "chunks/367.fe13f9c324ba1a1bc960.js"
+ },
+ "288": {
+  "names": [
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/common/region/getCountrys",
+   "/pe/vendor/notpodelivery/deliveryBoard/deliveryDetail",
+   "/pe/vendor/notpodelivery/viewDetail/"
+  ],
+  "file": "chunks/288.7856570b9feff6b5c78f.js"
+ },
+ "429": {
+  "names": [
+   "deliveryRecord",
+   "perm"
+  ],
+  "query_urls": [
+   "/fs/signer/query"
+  ],
+  "endpoints": [
+   "/fs/signer/cancel/",
+   "/fs/signer/confirm/",
+   "/fs/signer/getInfo/",
+   "/fs/signer/revokeConfirm/"
+  ],
+  "file": "chunks/429.aafef41b9697e5ec5c8a.js"
+ },
+ "36": {
+  "names": [
+   "vdmgt-dev-apply",
+   "perm",
+   "show",
+   "show",
+   "show",
+   "show"
+  ],
+  "query_urls": [
+   "/vendormgt/dlv/dlvApply/query"
+  ],
+  "endpoints": [
+   "/system/orgmgt/organization/getName/",
+   "/system/orgmgt/organization/queryForDatalist",
+   "/vendormgt/dlv/dlvApply/delete/",
+   "/vendormgt/dlv/dlvApply/getInfo",
+   "/vendormgt/dlv/dlvApply/queryLabel",
+   "/vendormgt/dlv/dlvApply/revocation",
+   "/vendormgt/vsp/rfi/showSelTemplate"
+  ],
+  "file": "chunks/36.6ebfd6e1653857331134.js"
+ },
+ "304": {
+  "names": [
+   "pricemgt-bid-evaluation"
+  ],
+  "query_urls": [
+   "/bidmgt/bidEvaluation/queryEvaluationUser"
+  ],
+  "endpoints": [
+   "/bidmgt/bidEvaluation/purChaseEntrace"
+  ],
+  "file": "chunks/304.cda5cb5e6747e905e002.js"
+ },
+ "200": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sourcing/deposit/vendor/getViewInfo/"
+  ],
+  "file": "chunks/200.f9e1ce02195ac3111691.js"
+ },
+ "398": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY",
+   "/dic/dictionary/getDicItems/DEPARTMENT",
+   "/dic/dictionary/getDicItems/KY_PROJECT",
+   "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PROJECT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/dic/dictionary/getDicItems/TAX_RATE",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/usergroup/getAll",
+   "/pe/busLog/getList",
+   "/pesum/po/delete",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/sunner/contractmgt/contract/getByCode",
+   "/sunner/mdata/material/findByMaterialId/",
+   "/sunner/organization/usergroup/getUserGroupAndOuUserGroupByCurrentUser",
+   "/sunner/pesum/poitem/batch/updateFreight",
+   "/sunner/pesum/poitem/getAssetItem/",
+   "/sunner/pesum/poitem/getFreightOther/",
+   "/sunner/pesum/poitem/getFreightOther/order/",
+   "/sunner/pesum/poitem/getPaymentTerms/",
+   "/sunner/pesum/poitem/updateFreight",
+   "/sunner/system/orgmgt/organization/findFilterUserByVendorId/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/system/purchasedic/query",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/398.3fbbde52b44b1f550648.js"
+ },
+ "331": {
+  "names": [
+   "fre_mis_subsidy",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/freightfee/fremissubsidy/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/331.d4a45db7c46b7a0f5f72.js"
+ },
+ "452": {
+  "names": [
+   "directiveList",
+   "perm"
+  ],
+  "query_urls": [
+   "/sl/directive/queryPage"
+  ],
+  "endpoints": [
+   "/sl/directive/getById/"
+  ],
+  "file": "chunks/452.b5d25b630ca06bfac64d.js"
+ },
+ "287": {
+  "names": [
+   "upload-package"
+  ],
+  "query_urls": [
+   "/doclib/publish/nodal/query"
+  ],
+  "endpoints": [
+   "/doclib/publish/nodal/query"
+  ],
+  "file": "chunks/287.a7fbd9b1d704504bf204.js"
+ },
+ "260": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/doclib/docdir/add",
+   "/doclib/docdir/getTreeByPurOrg/"
+  ],
+  "file": "chunks/260.807eaa32be8e2aec69c2.js"
+ },
+ "442": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/log/getList"
+  ],
+  "file": "chunks/442.35656e6ae0ffbae8c916.js"
+ },
+ "377": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/qm/busLog/getList",
+   "/qm/iqc/cancelPublish/"
+  ],
+  "file": "chunks/377.a458da3c73b0111597d6.js"
+ },
+ "79": {
+  "names": [
+   "perm",
+   "first",
+   "second",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/adjustpricemgt/projectchange/query"
+  ],
+  "endpoints": [
+   "/adjustpricemgt/projectchange/delete/",
+   "/adjustpricemgt/projectchange/whole/reject"
+  ],
+  "file": "chunks/79.30d1d938e6d18f4a00c7.js"
+ },
+ "104": {
+  "names": [
+   "reports-category-amount",
+   "show",
+   "cat",
+   "catCmp"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/104.15af288d4c5faaa12cec.js"
+ },
+ "439": {
+  "names": [
+   "stampDuty"
+  ],
+  "query_urls": [
+   "/contractmgt/stamptax/query"
+  ],
+  "endpoints": [
+   "/fi/billableitems/vendor/billall",
+   "/sunner/fi/billableitems/buyer/batchChangeTax",
+   "/sunner/fi/billableitems/buyer/changeMoney",
+   "/sunner/fisum/fiwaitbill/queryJitReturnList"
+  ],
+  "file": "chunks/439.f92b93129dece1c7c0ec.js"
+ },
+ "224": {
+  "names": [
+   "rel-pur-group",
+   "perm"
+  ],
+  "query_urls": [
+   "/organization/rel/purgroup/query"
+  ],
+  "endpoints": [
+   "/mdata/lgort/getByLgortFactortIds",
+   "/organization/rel/purgroup/deleteById"
+  ],
+  "file": "chunks/224.ad043cd10b29d306397f.js"
+ },
+ "83": {
+  "names": [
+   "orderInquiryPrint"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/farmer/farmerManageQuery"
+  ],
+  "file": "chunks/83.873f15b953abee6829e5.js"
+ },
+ "212": {
+  "names": [
+   "perm",
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [
+   "/fi/billmgt/buyer/query",
+   "/fi/claim/query"
+  ],
+  "endpoints": [
+   "/fi/billmgt/buyer/getBillItmes/",
+   "/fi/claim/query"
+  ],
+  "file": "chunks/212.ec97a569475947f76acf.js"
+ },
+ "74": {
+  "names": [
+   "materialBom",
+   "importFile",
+   "add",
+   "update",
+   "stop"
+  ],
+  "query_urls": [
+   "/organization/bom/query"
+  ],
+  "endpoints": [
+   "/organization/bom/getDic",
+   "/organization/bom/imp-confirm",
+   "/organization/bom/query"
+  ],
+  "file": "chunks/74.36748dd8081427d4d799.js"
+ },
+ "425": {
+  "names": [
+   "freight-delivery-details"
+  ],
+  "query_urls": [
+   "/fs/signerItem/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/425.e7bc14554cee4e902993.js"
+ },
+ "355": {
+  "names": [
+   "contractmgt-exec-qtyexec"
+  ],
+  "query_urls": [
+   "/contractmgt/exec/list"
+  ],
+  "endpoints": [],
+  "file": "chunks/355.e5a148acab655114673a.js"
+ },
+ "45": {
+  "names": [
+   "first",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/doclib/archiveRepo/list/vdRepoDown",
+   "/doclib/base/archive/list",
+   "/doclib/base/material/list",
+   "/doclib/vendor/",
+   "/doclib/vendor/query"
+  ],
+  "file": "chunks/45.097168f9903d7f8608aa.js"
+ },
+ "372": {
+  "names": [
+   "first",
+   "perm",
+   "second",
+   "third"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/372.edb172d1c70fcfa42521.js"
+ },
+ "426": {
+  "names": [
+   "transportType",
+   "packingType",
+   "dumperType",
+   "vendorVehicleType",
+   "weighQty",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/fs/signer/getInfo/"
+  ],
+  "file": "chunks/426.d8eb6529a82826b5bc81.js"
+ },
+ "338": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/338.27090584b393068ebaf0.js"
+ },
+ "57": {
+  "names": [
+   "basedata-org-purorg",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "first"
+  ],
+  "query_urls": [
+   "/organization/purOrg/query"
+  ],
+  "endpoints": [
+   "/organization/company/getComByPurOrgId",
+   "/organization/factory/getFactoryByPurId/",
+   "/organization/purOrg/del/",
+   "/organization/purOrg/getById/",
+   "/organization/purOrg/getVendorByPurId/",
+   "/organization/purOrg/query",
+   "/organization/purOrg/updateStatus"
+  ],
+  "file": "chunks/57.77f277963e2f86a31129.js"
+ },
+ "401": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/receive/board/toAdd/",
+   "/pe/receive/board/toAdd/1/",
+   "/pe/receive/scan/check/"
+  ],
+  "file": "chunks/401.9d13118437fdeb1d0d99.js"
+ },
+ "417": {
+  "names": [
+   "mall-product-management",
+   "first",
+   "second",
+   "third",
+   "forth"
+  ],
+  "query_urls": [
+   "/product/query"
+  ],
+  "endpoints": [
+   "/product/brand/queryAllBrands",
+   "/product/producttag/queryAll",
+   "/product/query"
+  ],
+  "file": "chunks/417.16389c00791ca1e09f83.js"
+ },
+ "278": {
+  "names": [
+   "catalog-mall"
+  ],
+  "query_urls": [
+   "/mall/order/setting/query",
+   "/mall/order/setting/queryMallConfDetail"
+  ],
+  "endpoints": [
+   "/mall/order/setting/delMallItemRow",
+   "/mall/order/setting/query",
+   "/mall/order/setting/update"
+  ],
+  "file": "chunks/278.c46e02255af839de5552.js"
+ },
+ "41": {
+  "names": [
+   "task-editor",
+   "sys-job"
+  ],
+  "query_urls": [
+   "/task/query"
+  ],
+  "endpoints": [
+   "/task/changeStatus/",
+   "/task/query",
+   "/task/runJobNow"
+  ],
+  "file": "chunks/41.d66de87c13dce3e2fb32.js"
+ },
+ "251": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/assess/project/getPlanInfo",
+   "/vendormgt/assess/project/query",
+   "/vendormgt/assess/project/queryIndexExpert/",
+   "/vendormgt/assess/project/submitMarks"
+  ],
+  "file": "chunks/251.a002b6a3e73974008625.js"
+ },
+ "102": {
+  "names": [
+   "report-category-handle",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/102.c9673d71ae20e6bc25ab.js"
+ },
+ "8": {
+  "names": [
+   "perm",
+   "factoryScore",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/dlv/factoryInspect/score/queryScoreItem"
+  ],
+  "endpoints": [
+   "/vendormgt/dlv/factoryInspect/improve/toFeedback/",
+   "/vendormgt/dlv/factoryInspect/initData",
+   "/vendormgt/dlv/factoryInspect/score/queryScoreItem",
+   "/vendormgt/dlv/factoryInspect/score/revocation",
+   "/vendormgt/dlv/factoryInspect/score/self/",
+   "/vendormgt/dlv/factoryInspect/score/toViewScoreItem/"
+  ],
+  "file": "chunks/8.193f83f01dac44446b78.js"
+ },
+ "189": {
+  "names": [
+   "sys-intf",
+   "first",
+   "second",
+   "third",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/log/erp2Srm_query",
+   "/system/log/srm2Erp_query",
+   "/system/sendemail/emails/query"
+  ],
+  "endpoints": [
+   "/system/log/erp2Srm_active",
+   "/system/sendemail/emails/closeEmailBeach",
+   "/system/sendemail/emails/restEmailBeach",
+   "/system/sendemail/emails/updateReceiveEmail"
+  ],
+  "file": "chunks/189.434dbcf050c9fd89e52d.js"
+ },
+ "53": {
+  "names": [
+   "pricemgt-ebp-list",
+   "pricemgt-ebp-auction-list"
+  ],
+  "query_urls": [
+   "ebpmgt/ebpbill/query"
+  ],
+  "endpoints": [
+   "/ebpmgt/ebpbill/getInfo/"
+  ],
+  "file": "chunks/53.075d179320bb29f41e14.js"
+ },
+ "196": {
+  "names": [
+   "pebuyer-consignment-inventory-query",
+   "perm"
+  ],
+  "query_urls": [
+   "sunner/consignmentinventory/buyer/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/196.3226621157d2a603693b.js"
+ },
+ "316": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/questionary/aptitude/query/1/",
+   "/vendormgt/vdchange/vendor/add"
+  ],
+  "file": "chunks/316.d16f2ae3369bc74aeca6.js"
+ },
+ "46": {
+  "names": [],
+  "query_urls": [
+   "/vendormgt/assess/project/queryExpert"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/project/getPlanInfo",
+   "/vendormgt/assess/project/query",
+   "/vendormgt/assess/project/queryExpert",
+   "/vendormgt/assess/project/queryIndexExpert/",
+   "/vendormgt/assess/project/submitMarks"
+  ],
+  "file": "chunks/46.95cc2e8750fa8f3fca83.js"
+ },
+ "446": {
+  "names": [],
+  "query_urls": [
+   "/fi/estimatedPriceitems/buyer/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/446.874d070be56701f4dcd7.js"
+ },
+ "267": {
+  "names": [
+   "emall-bid-product",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/product/emallSourcingProduct/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/267.3e20086f55586e41934c.js"
+ },
+ "103": {
+  "names": [
+   "report-assess-sourcing-quote",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/103.c476816391a40dfafc72.js"
+ },
+ "142": {
+  "names": [
+   "pevendor-fi-list",
+   "first",
+   "second",
+   "third",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/billmgt/vendor/query"
+  ],
+  "endpoints": [
+   "/fi/billmgt/vendor/delete/",
+   "/fi/billmgt/vendor/getBillItmes/",
+   "/fi/billmgt/vendor/getInvoices/",
+   "/fi/billmgt/vendor/query",
+   "/fi/billmgt/vendor/removeinvoice/",
+   "/qm/quajud/findListByBillId/",
+   "/sunner/fisum/fibill/updateConfirmInvoice",
+   "/system/log/getList"
+  ],
+  "file": "chunks/142.d4b3adc4291a8e7f705d.js"
+ },
+ "306": {
+  "names": [
+   "upload-user"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/306.2802f3e6abe9f9d70276.js"
+ },
+ "225": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pricearchive/query/area/material",
+   "/pricearchive/query/factory/material"
+  ],
+  "endpoints": [
+   "/pricearchive/invalidPriceArchive/",
+   "/quote/getQuoteInfo/",
+   "/sourcing/item/getItemInfo/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/225.2c25fecca4cb8265f2c9.js"
+ },
+ "258": {
+  "names": [
+   "basedta-bus-categoryerp",
+   "perm",
+   "first",
+   "second",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/matCategory/queryVendorByCategoryErpId",
+   "/mdata/material/query",
+   "/sunner/mainsupplycategory/validateErpExportData"
+  ],
+  "file": "chunks/258.eeea6ad91dd5b5279030.js"
+ },
+ "343": {
+  "names": [
+   "vdmgt-dlvfactoryinspect",
+   "first",
+   "perm",
+   "second"
+  ],
+  "query_urls": [
+   "/vendormgt/dlv/factoryInspect/item/query",
+   "/vendormgt/dlv/factoryInspect/query"
+  ],
+  "endpoints": [
+   "/vendormgt/dlv/factoryInspect/abolish/",
+   "/vendormgt/dlv/factoryInspect/factoryInspectMgt/delete/",
+   "/vendormgt/dlv/factoryInspect/initData",
+   "/vendormgt/dlv/factoryInspect/score/getScoreFinalViewInfo/",
+   "/vendormgt/dlv/factoryInspect/toEdit/",
+   "/vendormgt/dlv/factoryInspect/toSettingExpert/",
+   "/vendormgt/dlv/factoryInspect/toView/"
+  ],
+  "file": "chunks/343.dd9d8f1934f7380cefe7.js"
+ },
+ "61": {
+  "names": [
+   "company-change"
+  ],
+  "query_urls": [
+   "/vendormgt/vdchange/vendor/query"
+  ],
+  "endpoints": [
+   "/vendormgt/questionary/aptitude/query/1/",
+   "/vendormgt/vdchange/vendor/add",
+   "/vendormgt/vdchange/vendor/delete/",
+   "/vendormgt/vdchange/vendor/edit/",
+   "/vendormgt/vdchange/vendor/getVdChangeInfo"
+  ],
+  "file": "chunks/61.cd004449bd0886ac9a2a.js"
+ },
+ "418": {
+  "names": [
+   "vendor-order-management"
+  ],
+  "query_urls": [
+   "/order/orderMgr/query"
+  ],
+  "endpoints": [
+   "/order/orderMgr/delilvery",
+   "/order/orderMgr/loadItem",
+   "/order/orderMgr/updateOrderTaking"
+  ],
+  "file": "chunks/418.58cf1ef0161daf2ce4f2.js"
+ },
+ "324": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/log/getList",
+   "/vendormgt/data/maintenance/bank/getBankList/"
+  ],
+  "file": "chunks/324.67fedaea99b3022a6553.js"
+ },
+ "39": {
+  "names": [
+   "submitFinalFrom",
+   "orderFinal",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/order/warrantyCheck/query"
+  ],
+  "endpoints": [
+   "/sunner/order/warrantyCheck/submitFinal"
+  ],
+  "file": "chunks/39.6754391ceb5d13a4294e.js"
+ },
+ "454": {
+  "names": [
+   "farmerInforInquiry"
+  ],
+  "query_urls": [
+   "/farmer/farmerManageQuery"
+  ],
+  "endpoints": [
+   "/farmer/farmerManageQuery"
+  ],
+  "file": "chunks/454.7d5160e97e5bba615d51.js"
+ },
+ "262": {
+  "names": [
+   "first",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/enquiry/getItemAndVendorInfo/",
+   "/enquiry/getPhaseInfo/3/",
+   "/enquiry/submit/comparePrice/",
+   "/enquiry/submit/submitSecretKey/",
+   "/enquiry/vendor/getQuoteById/",
+   "/quote/item/getDetailFeeList/"
+  ],
+  "file": "chunks/262.f626422b4860eb38b07c.js"
+ },
+ "222": {
+  "names": [
+   "pevendor-fi-quaJud"
+  ],
+  "query_urls": [
+   "/qm/quajud/vendorQuery"
+  ],
+  "endpoints": [
+   "/qm/quajud/vendorConfirm/"
+  ],
+  "file": "chunks/222.60d73b8d5b1f2cf46cd3.js"
+ },
+ "10": {
+  "names": [
+   "perm",
+   "perm",
+   "vdmgt-daily-grade",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/dlv/factoryInspect/score/queryScoreItem"
+  ],
+  "endpoints": [
+   "/vendormgt/dlv/factoryInspect/initData",
+   "/vendormgt/dlv/factoryInspect/revocationByScore",
+   "/vendormgt/dlv/factoryInspect/score/queryScoreItem",
+   "/vendormgt/dlv/factoryInspect/score/toEditScoreItem/",
+   "/vendormgt/dlv/factoryInspect/score/toViewScoreItem/"
+  ],
+  "file": "chunks/10.d7a6178252a84d8bf472.js"
+ },
+ "58": {
+  "names": [
+   "upload-user",
+   "sys-user",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/usermgt/users/query"
+  ],
+  "endpoints": [
+   "/system/usermgt/users/lock/",
+   "/system/usermgt/users/query",
+   "/system/usermgt/users/resetPwd/",
+   "/system/usermgt/users/unLock/"
+  ],
+  "file": "chunks/58.8eedcabf2dc3a5961617.js"
+ },
+ "206": {
+  "names": [
+   "basedta-bus-lgort",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/mdata/lgort/queryList"
+  ],
+  "endpoints": [
+   "/mdata/lgort/delete/",
+   "/mdata/lgort/queryList",
+   "/sunner/mdata/lgort/validateExportData"
+  ],
+  "file": "chunks/206.2f0827cbba2a8f0d1a12.js"
+ },
+ "164": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/price/query"
+  ],
+  "file": "chunks/164.7f08c9453520e701699e.js"
+ },
+ "168": {
+  "names": [
+   "assess-vendor-group"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/result/vendor/list"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/result/viewResult/"
+  ],
+  "file": "chunks/168.9f0f4063aa5f546b81f3.js"
+ },
+ "363": {
+  "names": [
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/signagreement/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/init",
+   "/contractmgt/template/getEnableList",
+   "/contractmgt/template/getEnableList/",
+   "/contractmgt/template/getEnableList/2"
+  ],
+  "file": "chunks/363.052f166f20fff372a697.js"
+ },
+ "438": {
+  "names": [
+   "pebuyer-fi-item",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/fisum/fiwaitbill/query"
+  ],
+  "endpoints": [
+   "/fi/billableitems/vendor/billall",
+   "/sunner/fi/billableitems/buyer/batchChangeTax",
+   "/sunner/fi/billableitems/buyer/changeMoney",
+   "/sunner/fi/billableitems/buyer/validateExpByQuery",
+   "/sunner/fisum/fibill/query"
+  ],
+  "file": "chunks/438.b1a5a024ee5e0b27088d.js"
+ },
+ "198": {
+  "names": [
+   "report-assess-order-receive-ship",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/198.c05857f9838064d3d266.js"
+ },
+ "116": {
+  "names": [
+   "pebuyer-return-list",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/return/query"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList"
+  ],
+  "file": "chunks/116.b4c21373ddb63155deab.js"
+ },
+ "451": {
+  "names": [
+   "deliveryLocation",
+   "perm"
+  ],
+  "query_urls": [
+   "/sl/vendor/address/queryPage"
+  ],
+  "endpoints": [
+   "/sl/vendor/address/delete/"
+  ],
+  "file": "chunks/451.af9e4f8e848b180c152f.js"
+ },
+ "101": {
+  "names": [
+   "workflowVariable",
+   "perm"
+  ],
+  "query_urls": [
+   "/workflow/config/list"
+  ],
+  "endpoints": [
+   "/workflow/config/saveOrUpdate"
+  ],
+  "file": "chunks/101.2d670bfad3b28722afd9.js"
+ },
+ "346": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/CURRENCY",
+   "/dic/dictionary/getDicItems/DEPARTMENT",
+   "/dic/dictionary/getDicItems/KY_PROJECT",
+   "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PROJECT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/dic/dictionary/getDicItems/TAX_RATE",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/usergroup/getAll",
+   "/pe/busLog/getList",
+   "/pesum/po/delete",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/sunner/mdata/material/findByMaterialId/",
+   "/sunner/pesum/poitem/getFreightOther/",
+   "/sunner/pesum/poitem/getPaymentTerms/",
+   "/sunner/system/orgmgt/organization/findFilterUserByVendorId/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/346.735d44bf65446471f39d.js"
+ },
+ "334": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/dlv/factoryInspect/score/self/"
+  ],
+  "file": "chunks/334.75b7e0eb060b9759d2a6.js"
+ },
+ "190": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "/adjustpricemgt/linked/query"
+  ],
+  "endpoints": [
+   "/adjustpricemgt/linked/cleanSession"
+  ],
+  "file": "chunks/190.8cf11e95413939fe9cb0.js"
+ },
+ "286": {
+  "names": [
+   "freightSettlement",
+   "vendorTab",
+   "buyerTab"
+  ],
+  "query_urls": [
+   "/fs/fsbill/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/286.52407a7735a904719949.js"
+ },
+ "250": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/mdata/material/jatco/update"
+  ],
+  "file": "chunks/250.995ee5c2272ee938c84d.js"
+ },
+ "183": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/ppa/buildSendData/",
+   "/ppa/getPpaVendorByPpaId/",
+   "/ppa/updateSendPackageStatus/"
+  ],
+  "file": "chunks/183.3baf0dc016360acc9205.js"
+ },
+ "285": {
+  "names": [
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/assess/project/getPlanInfo",
+   "/vendormgt/assess/project/query",
+   "/vendormgt/assess/project/queryIndexExpert/",
+   "/vendormgt/assess/project/setExpert/",
+   "/vendormgt/assess/project/setTime/"
+  ],
+  "file": "chunks/285.8a01cdc2821e1aa657e6.js"
+ },
+ "228": {
+  "names": [
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "third",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/groupplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/228.33b152f1e596dfe8b27f.js"
+ },
+ "52": {
+  "names": [
+   "perm",
+   "perm",
+   "first",
+   "perm",
+   "perm",
+   "basedata-org-factory"
+  ],
+  "query_urls": [
+   "/organization/factory/query"
+  ],
+  "endpoints": [
+   "/mdata/material/getMaterirlByFacId/",
+   "/organization/company/getComByFacId",
+   "/organization/factory/getByFactoryId/",
+   "/organization/factory/query",
+   "/organization/factory/removeFac/",
+   "/organization/purOrg/getPurOrgByFactoryId"
+  ],
+  "file": "chunks/52.9045acccec8edad69d00.js"
+ },
+ "336": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/336.88842e1bf78ef2ec2328.js"
+ },
+ "156": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/bidmgt/bid/vendor/getPhaseInfo/"
+  ],
+  "file": "chunks/156.1b59ade2df7e7b4b05dc.js"
+ },
+ "349": {
+  "names": [
+   "sign-contract-wait-to-order-list"
+  ],
+  "query_urls": [
+   "/sunner/contractmgt/contract/signContractWaitToOrder/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/getContractChange",
+   "/contractmgt/contract/updateContractChangeInfo",
+   "/pe/pomgt/poitem/buyer/getPoitemList"
+  ],
+  "file": "chunks/349.961e46390afc8e1c7114.js"
+ },
+ "323": {
+  "names": [
+   "first",
+   "perm",
+   "second"
+  ],
+  "query_urls": [
+   "/vendormgt/npc/npcTask/query"
+  ],
+  "endpoints": [
+   "/vendormgt/npc/npcTask/delete/",
+   "/vendormgt/npc/npcTask/query"
+  ],
+  "file": "chunks/323.fe991a17d71b2c4961b6.js"
+ },
+ "333": {
+  "names": [
+   "vdmgt-daily-aptitudeouverdue",
+   "perm",
+   "show"
+  ],
+  "query_urls": [
+   "/vendormgt/certExpiryNoti/buyer/query"
+  ],
+  "endpoints": [
+   "/sunner/vendormgt/certExpiryNoti/buyer/rejected",
+   "/vendormgt/certExpiryNoti/buyer/new/updateCloseNoti/",
+   "/vendorreg/invite/findCount/",
+   "/vendorreg/invite/update"
+  ],
+  "file": "chunks/333.a25205bb51d07b864479.js"
+ },
+ "395": {
+  "names": [
+   "first",
+   "second",
+   "third",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+   "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+   "/dic/dictionary/getDicItems/PAYMENT_METHOD",
+   "/dic/dictionary/getDicItems/PAYMENT_TERMS",
+   "/dic/dictionary/getDicItems/PROJECT_TYPE",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/mdata/matCategory/getAll",
+   "/mdata/matCategory/getAllLeaf",
+   "/organization/factory/getByFactoryId/",
+   "/pe/busLog/getList",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/system/purchasedic/getPurchaseDic",
+   "/system/purchasedic/getPurchaseDic/1",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/395.0964af43ef1af437f3ae.js"
+ },
+ "139": {
+  "names": [
+   "emall-discount-propricechange",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/product/emallDiscountProduct/query"
+  ],
+  "endpoints": [
+   "/sunner/product/updateMarketable"
+  ],
+  "file": "chunks/139.cb9c80011f6ad2d981f5.js"
+ },
+ "63": {
+  "names": [
+   "perm",
+   "first",
+   "second",
+   "perm",
+   "perm",
+   "show"
+  ],
+  "query_urls": [
+   "/adjustpricemgt/query"
+  ],
+  "endpoints": [
+   "/adjustpricemgt/confirm",
+   "/adjustpricemgt/linked/vendorQuote/",
+   "/adjustpricemgt/saveAndPublish"
+  ],
+  "file": "chunks/63.c1c42de7621281fe4c2a.js"
+ },
+ "124": {
+  "names": [
+   "rfiFile"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/vsp/rfiitem/feedBack/changeStatus/",
+   "/vendormgt/vsp/rfiitem/feedBackEd/"
+  ],
+  "file": "chunks/124.19624284cb4d2b043798.js"
+ },
+ "298": {
+  "names": [
+   "pr-refuse-list"
+  ],
+  "query_urls": [
+   "/sunner/pur/refuse/mall/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/298.408ea85c95e2a706ced6.js"
+ },
+ "54": {
+  "names": [
+   "perm",
+   "perm",
+   "pricemgt-deposit"
+  ],
+  "query_urls": [
+   "/sourcing/deposit/queryDeposit"
+  ],
+  "endpoints": [
+   "/sourcing/deposit/buyer/getViewInfo/",
+   "/sourcing/deposit/getDepositByBillId/",
+   "/sourcing/deposit/returnDeposit/"
+  ],
+  "file": "chunks/54.5fe9742d24bf430945e5.js"
+ },
+ "98": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "third",
+   "fourth"
+  ],
+  "query_urls": [
+   "/payment/order/queryOrderReq"
+  ],
+  "endpoints": [
+   "/fi/billmgt/buyer/getBillItmes/",
+   "/fi/billmgt/vendor/getInvoices/",
+   "/fi/claim/query",
+   "/payment/order/closeOrderReq/",
+   "/payment/order/getReqItemsByReqId/",
+   "/payment/order/viewOrderPay/"
+  ],
+  "file": "chunks/98.4c7b15f04b7a82983d76.js"
+ },
+ "195": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/system/task/todo/saveOrUpdate"
+  ],
+  "file": "chunks/195.3c32d4f40022055585a9.js"
+ },
+ "380": {
+  "names": [
+   "purrequest_asset_report"
+  ],
+  "query_urls": [
+   "/pur/asset/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/380.1d0a87bbd52d362f92d6.js"
+ },
+ "234": {
+  "names": [
+   "emall-order"
+  ],
+  "query_urls": [
+   "/order/orderMgr/query"
+  ],
+  "endpoints": [
+   "/mall/delivery/confirmReceive/Delivery/",
+   "/mall/order/outorder/loadDetail",
+   "/mall/order/setting/query",
+   "/mall/purchaseRequest/loadDetail/",
+   "/order/orderMgr/initiateCampOn",
+   "/order/orderMgr/loadItem",
+   "/sunner/mall/purchaseRequest/loadDetail/"
+  ],
+  "file": "chunks/234.d3454dca2852e3f43d6d.js"
+ },
+ "166": {
+  "names": [
+   "report-assess-base-deliver",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/166.ed70e82483376d6ee090.js"
+ },
+ "105": {
+  "names": [
+   "pebuyer-fi-confirmationbill",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "show"
+  ],
+  "query_urls": [
+   "/sunner/mdata/confirmation/query"
+  ],
+  "endpoints": [
+   "/sunner/mdata/confirmation/abolish/",
+   "/sunner/mdata/confirmation/confirmFile",
+   "/sunner/mdata/confirmation/release/",
+   "/sunner/mdata/confirmation/releaseBatch"
+  ],
+  "file": "chunks/105.0c85d3066b78776082b9.js"
+ },
+ "366": {
+  "names": [
+   "first",
+   "first"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/366.8d08d73059ab68dd6dfb.js"
+ },
+ "339": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/339.25c98005bb5ed3810234.js"
+ },
+ "94": {
+  "names": [
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [
+   "/pesum/receive/query"
+  ],
+  "endpoints": [
+   "/pesum/receive/auditReceive/",
+   "/pesum/receive/cancelReceive",
+   "/pesum/receive/deleteReceive/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/94.1b7a2c0f12d72986a449.js"
+ },
+ "25": {
+  "names": [
+   "pebuyer-delivery-record",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/vendor/delivery/query"
+  ],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/buyer/delivery/close",
+   "/pe/buyer/delivery/viewDetail/",
+   "/pe/vendor/delivery/loadItem/",
+   "/pe/vendor/delivery/validateExpByQuery"
+  ],
+  "file": "chunks/25.1ca14c83a8b9c6eb4572.js"
+ },
+ "413": {
+  "names": [
+   "pevendor-notpodelivery-record"
+  ],
+  "query_urls": [
+   "pe/vendor/notpodelivery/query"
+  ],
+  "endpoints": [
+   "/pe/vendor/delivery/validateExpByQuery",
+   "/pe/vendor/notpodelivery/deliveryCancel/",
+   "/pe/vendor/notpodelivery/validateExpByQuery",
+   "/pe/vendor/notpodelivery/viewDetail/"
+  ],
+  "file": "chunks/413.17baa4601998a2f3f33c.js"
+ },
+ "197": {
+  "names": [
+   "mall-receiveaddress",
+   "perm"
+  ],
+  "query_urls": [
+   "/mall/receiver/query"
+  ],
+  "endpoints": [
+   "/mall/receiver/delete/",
+   "/mall/receiver/editInitAddress/",
+   "/mall/receiver/loadArea",
+   "/mall/receiver/saveOrUpdate",
+   "/mdata/lgort/getByLgortFactortIds"
+  ],
+  "file": "chunks/197.bc3bd1b23b181836091f.js"
+ },
+ "259": {
+  "names": [
+   "store-list",
+   "logoFile"
+  ],
+  "query_urls": [
+   "/store/storeMgr/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/259.d3f27e5655bb96bb87a1.js"
+ },
+ "23": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/qm/iqc/query"
+  ],
+  "endpoints": [
+   "/qm/busLog/getList",
+   "/qm/iqc/cancelPublish/",
+   "/qm/iqc/toEdit/",
+   "/qm/iqc/toJudgement/",
+   "/qm/iqc/toView/"
+  ],
+  "file": "chunks/23.f30c26b87399a1a7ecf5.js"
+ },
+ "357": {
+  "names": [
+   "contractmgt-apply-series",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/contractmgt/contract/apply"
+  ],
+  "endpoints": [],
+  "file": "chunks/357.69cc756ab6142608070f.js"
+ },
+ "65": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "first",
+   "second"
+  ],
+  "query_urls": [
+   "/qm/qm8d/query"
+  ],
+  "endpoints": [
+   "/qm/qm8d/toAdd",
+   "/qm/qm8d/toView/"
+  ],
+  "file": "chunks/65.7802775702a52ac5da20.js"
+ },
+ "254": {
+  "names": [
+   "basedata-bus-suppiler",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/orgmgt/organization/query-simple"
+  ],
+  "endpoints": [
+   "/sunner/system/orgmgt/organization/updateElectronTagFlag/",
+   "/sunner/system/orgmgt/organization/updateEmallFlag",
+   "/sunner/system/orgmgt/organization/updateGroupName",
+   "/sunner/system/orgmgt/organization/updateInvoiceFlag",
+   "/sunner/system/orgmgt/organization/updatePriceFlag/",
+   "/sunner/system/orgmgt/organization/updateStorageFee",
+   "/sunner/system/orgmgt/organization/updateVendorFiFlag",
+   "/system/orgmgt/organization/query-simple"
+  ],
+  "file": "chunks/254.0f528aec77251d53a37f.js"
+ },
+ "393": {
+  "names": [
+   "sunvalleyMaterial"
+  ],
+  "query_urls": [
+   "/mdata/sunvalley/query"
+  ],
+  "endpoints": [
+   "/mdata/sunvalley/delete/",
+   "/mdata/sunvalley/query"
+  ],
+  "file": "chunks/393.3c9d98edd18e6d07b24c.js"
+ },
+ "358": {
+  "names": [
+   "itemTab",
+   "contractFileTab",
+   "contractCounterpartyTab",
+   "templateTab",
+   "linkContractTab",
+   "checkTab"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/contractmgt/contract/init",
+   "/contractmgt/template/getByTerms/"
+  ],
+  "file": "chunks/358.11dccf997f5e4df6ba3a.js"
+ },
+ "433": {
+  "names": [
+   "first",
+   "second",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/api/contract/getContractByCode/",
+   "/fi/claim/query",
+   "/payment/order/closePrePayReq/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/433.6c621e16be86b39e2954.js"
+ },
+ "21": {
+  "names": [
+   "reports-company-amount",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/21.4832f8d287f643363924.js"
+ },
+ "174": {
+  "names": [
+   "message"
+  ],
+  "query_urls": [
+   "/system/sysmessage/query"
+  ],
+  "endpoints": [
+   "/system/sysmessage/query",
+   "/system/sysmessage/readAll",
+   "/system/sysmessage/updateReadStatus/"
+  ],
+  "file": "chunks/174.8ba9d597bbd76e5d9d24.js"
+ },
+ "123": {
+  "names": [
+   "register"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/common/region/getCountrys",
+   "/mainsupplycategory/getCategories",
+   "/newAccount/register"
+  ],
+  "file": "chunks/123.3ce03c5e3c1f5b80a49d.js"
+ },
+ "201": {
+  "names": [
+   "user-set"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/orgmgt/organization/findByPurGroup/",
+   "/system/orgmgt/organization/queryForDatalist",
+   "/system/orgmgt/organization/saveSupplier"
+  ],
+  "file": "chunks/201.44887cffc6589bb5ed2f.js"
+ },
+ "455": {
+  "names": [
+   "dryGrainReport"
+  ],
+  "query_urls": [
+   "/weighorder/dryGrainReportQuery"
+  ],
+  "endpoints": [],
+  "file": "chunks/455.25740b0d5356c4012b38.js"
+ },
+ "315": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/vdchange/vendor/edit/"
+  ],
+  "file": "chunks/315.d218d54be55efdb19821.js"
+ },
+ "453": {
+  "names": [
+   "freightPriceManage",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/freight/price/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/453.ba4c57f08acfdaa54558.js"
+ },
+ "447": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/billableitems/buyer/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/447.a2acd7603f77b5507b53.js"
+ },
+ "227": {
+  "names": [
+   "rel-area-company"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/227.563197b56ff1184c2246.js"
+ },
+ "80": {
+  "names": [
+   "product-category-select",
+   "product-category-list",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/product/cateGory/deleteById/",
+   "/product/cateGory/findAllCategories",
+   "/product/cateGory/getTreeValue",
+   "/product/cateGory/saveOrUpdate"
+  ],
+  "file": "chunks/80.e361f0c7d3a126b34b43.js"
+ },
+ "430": {
+  "names": [
+   "freight-delivery-details"
+  ],
+  "query_urls": [
+   "/fs/signerItem/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/430.82621fbab34f868ef5e9.js"
+ },
+ "211": {
+  "names": [
+   "first",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/doclib/archiveRepo/list/vdRepoDown",
+   "/doclib/base/archive/list",
+   "/doclib/base/material/list",
+   "/doclib/vendor/"
+  ],
+  "file": "chunks/211.059e044e5ed9f9dc0d13.js"
+ },
+ "153": {
+  "names": [
+   "product-sku"
+  ],
+  "query_urls": [
+   "/product/queryProductAndSku"
+  ],
+  "endpoints": [
+   "/product/productSku/updateMarketable",
+   "/product/query"
+  ],
+  "file": "chunks/153.7b6090e3371fb20a311b.js"
+ },
+ "152": {
+  "names": [
+   "pebuyer-fi-invoice",
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/billableitems/buyer/queryInvoice"
+  ],
+  "endpoints": [
+   "/sunner/fi/billmgt/vendor/findInvoiceItemList"
+  ],
+  "file": "chunks/152.e7883cabd7f8a8d2682c.js"
+ },
+ "108": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/enquiry/getItemAndVendorInfo/",
+   "/enquiry/getPhaseInfo/4/",
+   "/enquiry/vendor/getQuoteById/",
+   "/quote/item/getDetailFeeList/"
+  ],
+  "file": "chunks/108.6e777610136c498f979a.js"
+ },
+ "310": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/assess/strategymatch/loadItem/"
+  ],
+  "file": "chunks/310.ae726016a6c3747d3130.js"
+ },
+ "277": {
+  "names": [
+   "show",
+   "show",
+   "show",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/PREPAYMENT_TYPE",
+   "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE",
+   "/mdata/factory/material/query",
+   "/mdata/lgort/getByLgortFactortIds",
+   "/process/instance/submitAudit",
+   "/process/variable/getVariable/",
+   "/workflow/config/getByModule/"
+  ],
+  "file": "chunks/277.9b8cf4f6ee992ce81d17.js"
+ },
+ "272": {
+  "names": [
+   "pebuyer-fi-adjust",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/sunner/fi/adjust/query"
+  ],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/FI_ADJUST_TYPE",
+   "/organization/factory/getFactoryByCmpId",
+   "/sunner/fi/adjust/delete",
+   "/sunner/fi/adjust/getAsset/",
+   "/sunner/fi/adjust/getOrder/",
+   "/sunner/fi/adjust/revocation/",
+   "/system/purchasedic/query"
+  ],
+  "file": "chunks/272.e1e9fb8784c945dfeab6.js"
+ },
+ "15": {
+  "names": [
+   "basedta-bus-categorysrm",
+   "perm",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mainsupplycategory/add/",
+   "/mainsupplycategory/getCategories",
+   "/mainsupplycategory/queryMaterial",
+   "/mainsupplycategory/queryVendor",
+   "/sunner/mainsupplycategory/getCategoryAuthConfigInfo",
+   "/sunner/mainsupplycategory/saveCategoryAuthConfig",
+   "/sunner/mainsupplycategory/validateExportData"
+  ],
+  "file": "chunks/15.87632f18384bc35cd422.js"
+ },
+ "217": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/enquiry/vendor/getItemList/",
+   "/sourcing/vendor/"
+  ],
+  "file": "chunks/217.8e74b9308c0c9e315895.js"
+ },
+ "464": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/sunner/vendormgt/assess/leveltask/getMappingList",
+   "/sunner/vendormgt/assess/leveltask/getVdLevelTaskInfo",
+   "/sunner/vendormgt/assess/leveltask/queryVdLevelTaskItem"
+  ],
+  "file": "chunks/464.eeb9b9f019c11b3aa4d4.js"
+ },
+ "221": {
+  "names": [
+   "assess-result-company",
+   "vendorTab",
+   "venCateTab",
+   "materialTab"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/result/buyer/list"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/result/viewResult/"
+  ],
+  "file": "chunks/221.ee6c63929b46e2842122.js"
+ },
+ "114": {
+  "names": [
+   "pebuyer-fi-list",
+   "vendorTab",
+   "perm",
+   "perm",
+   "buyerTab",
+   "perm"
+  ],
+  "query_urls": [
+   "/fisum/fibill/query"
+  ],
+  "endpoints": [
+   "/fi/billmgt/vendor/delete/",
+   "/fisum/fiwaitbill/toPublishBill/",
+   "/sunner/fisum/fibill/getFsscUrl",
+   "/sunner/fisum/fibill/validateExportAdjustItem",
+   "/sunner/fisum/fibill/validateExportData",
+   "/sunner/fisum/fibill/validateExportItem"
+  ],
+  "file": "chunks/114.87362f9fa4095285c70a.js"
+ },
+ "406": {
+  "names": [
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/dic/dictionary/getDicItems/",
+   "/dic/dictionary/getDicItems/CANCEL_REASON",
+   "/pe/receive/board/queryItem/",
+   "/sunner/pe/receive/board/deleteItem/"
+  ],
+  "file": "chunks/406.f8889b9e0f260f080c54.js"
+ },
+ "147": {
+  "names": [
+   "processList"
+  ],
+  "query_urls": [
+   "/process/definition/list"
+  ],
+  "endpoints": [
+   "/process/definition/remove/",
+   "/process/definition/suspendOrActiveApply"
+  ],
+  "file": "chunks/147.d8258cd643244dcb4ac1.js"
+ },
+ "241": {
+  "names": [
+   "first",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/enquiry/getAbolishItem/",
+   "/enquiry/getPhaseInfo/5/",
+   "/enquiry/vendor/getWinBySourcingBillId/"
+  ],
+  "file": "chunks/241.b240d739d29a96111d8c.js"
+ },
+ "121": {
+  "names": [
+   "assess-cmpplan-year",
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "third"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/cmpplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/121.5390bf0fbbed6c603bbd.js"
+ },
+ "178": {
+  "names": [
+   "pevendor-plan-deliveryboard",
+   "first",
+   "perm",
+   "perm",
+   "second"
+  ],
+  "query_urls": [
+   "/pe/delivery/plan/query"
+  ],
+  "endpoints": [
+   "/pe/delivery/plan/validate"
+  ],
+  "file": "chunks/178.c7803c2d8e33e968389a.js"
+ },
+ "461": {
+  "names": [
+   "vdmgt-levelResult"
+  ],
+  "query_urls": [
+   "/sunner/vendormgt/assess/yearPerformanceScoreQuery"
+  ],
+  "endpoints": [],
+  "file": "chunks/461.c8ed03dfa6fadfa3a13b.js"
+ },
+ "412": {
+  "names": [
+   "shipmentTaskList",
+   "perm"
+  ],
+  "query_urls": [
+   "/sl/shipment/queryPage"
+  ],
+  "endpoints": [
+   "/sl/shipment/getById/"
+  ],
+  "file": "chunks/412.db58cb93431c52fbb28e.js"
+ },
+ "299": {
+  "names": [
+   "sys-buslog"
+  ],
+  "query_urls": [
+   "/system/log/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/299.2ee4fa4025716a152356.js"
+ },
+ "419": {
+  "names": [
+   "emall-order-online"
+  ],
+  "query_urls": [
+   "/mall/order/outorder/query"
+  ],
+  "endpoints": [
+   "/mall/order/outorder/batchUpdateInfo",
+   "/mall/order/outorder/batchUpdateTrack",
+   "/mall/order/outorder/getTrack",
+   "/mall/order/outorder/loadDetail",
+   "/system/purchasedic/getPurchaseDic"
+  ],
+  "file": "chunks/419.831b7d953cc0dfce822d.js"
+ },
+ "173": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/system/rolemgt/roles/query",
+   "/system/rolemgt/roles/queryUser/"
+  ],
+  "file": "chunks/173.4dac63a98b8c4f2068a1.js"
+ },
+ "118": {
+  "names": [
+   "addOrEditRole"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/rolemgt/roles/saveOrUpdate"
+  ],
+  "file": "chunks/118.84f9bf0f3da68f05029c.js"
+ },
+ "268": {
+  "names": [
+   "purchaseRequestToOrder"
+  ],
+  "query_urls": [
+   "/purchase/request/query"
+  ],
+  "endpoints": [
+   "/organization/usergroup/getAll",
+   "/purchase/request/getRequestInfo",
+   "/purchase/request/query",
+   "/purchase/request/receive",
+   "/system/log/getList"
+  ],
+  "file": "chunks/268.bbe8c50d7a796c24ffc6.js"
+ },
+ "312": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/vsp/rfi/template/findByTemplateId",
+   "/vendormgt/vsp/rfi/template/updateTemplate"
+  ],
+  "file": "chunks/312.9618c2fd32555854460b.js"
+ },
+ "209": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/priceaudit/createUUId",
+   "/priceaudit/saveAndPublish",
+   "/sunner/priceaudit/save",
+   "/sunner/priceaudit/toView/"
+  ],
+  "file": "chunks/209.72c124856ba2849fa7af.js"
+ },
+ "134": {
+  "names": [
+   "attachmentFile",
+   "atta-editor"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/134.2359cf9a71c750f6969e.js"
+ },
+ "218": {
+  "names": [
+   "report-assess-month-sourcing-win",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/218.f3b1eee42f1855f0fb67.js"
+ },
+ "155": {
+  "names": [
+   "add-area"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/system/area/add/"
+  ],
+  "file": "chunks/155.6e64eda0da4cc99a4184.js"
+ },
+ "50": {
+  "names": [
+   "basedata-basebus-purchasedic",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/purchasedic/query"
+  ],
+  "endpoints": [
+   "/system/purchasedic/query",
+   "/system/purchasedic/saveOrUpdate"
+  ],
+  "file": "chunks/50.428f1db68649214188ee.js"
+ },
+ "444": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/444.6d317885dece3b6149c8.js"
+ },
+ "423": {
+  "names": [
+   "mall-aftersale-list"
+  ],
+  "query_urls": [
+   "/mall/mallaftersale/query"
+  ],
+  "endpoints": [
+   "/mall/mallaftersale/loadAftersaleRefund",
+   "/mall/order/outorder/getTrack"
+  ],
+  "file": "chunks/423.bb9b0929da76950e5cc9.js"
+ },
+ "283": {
+  "names": [
+   "publish-package"
+  ],
+  "query_urls": [
+   "/doclib/publish/direct/query"
+  ],
+  "endpoints": [
+   "/doclib/publish/direct/query"
+  ],
+  "file": "chunks/283.df96b9b3b4577d1fb634.js"
+ },
+ "137": {
+  "names": [
+   "assess-groupplan-quarter",
+   "first",
+   "perm",
+   "perm",
+   "second",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/groupplan/query"
+  ],
+  "endpoints": [
+   "/sunner/vendormgt/assess/compute/plan/deleteJoinVendor",
+   "/sunner/vendormgt/assess/compute/plan/resetInitVendor",
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/137.e00b2b3946eaed8abc88.js"
+ },
+ "368": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/ap/price/confirm/getBill/",
+   "/ap/price/confirm/getItemList/",
+   "/ap/price/confirm/submitAwardAudit/"
+  ],
+  "file": "chunks/368.06f18b3b53919118dbb4.js"
+ },
+ "162": {
+  "names": [
+   "show",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/vsp/rfi/saveAndPublish"
+  ],
+  "file": "chunks/162.f5dc21d970ad26289bba.js"
+ },
+ "235": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/dlv-skd/history/page"
+  ],
+  "file": "chunks/235.a0cb30a7974fd5886679.js"
+ },
+ "391": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pesum/receive/auditReceive/",
+   "/pesum/receive/cancelReceive",
+   "/pesum/receive/deleteReceive/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/391.a22810e30454a78c9657.js"
+ },
+ "146": {
+  "names": [
+   "purrequest"
+  ],
+  "query_urls": [
+   "/purchase/request/query"
+  ],
+  "endpoints": [
+   "/organization/usergroup/getAll",
+   "/purchase/request/getRequestInfo",
+   "/purchase/request/query",
+   "/purchase/request/receive",
+   "/system/log/getList"
+  ],
+  "file": "chunks/146.b97e5a1f9f824d78c9d5.js"
+ },
+ "244": {
+  "names": [
+   "modelerList",
+   "perm"
+  ],
+  "query_urls": [
+   "/modeler/list"
+  ],
+  "endpoints": [],
+  "file": "chunks/244.09d0affb175516086a65.js"
+ },
+ "300": {
+  "names": [
+   "perm",
+   "perm",
+   "perm",
+   "first",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/organization/company/delete",
+   "/organization/company/getById/",
+   "/organization/company/query",
+   "/organization/company/query2/",
+   "/organization/factory/getFactoryByCmpId",
+   "/organization/purOrg/getPurOrgByCmpId"
+  ],
+  "file": "chunks/300.1e62a05ad445a2cb8401.js"
+ },
+ "330": {
+  "names": [
+   "material_rebate",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/freightfee/materialrebate/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/330.b995bb55bc0f0003f230.js"
+ },
+ "233": {
+  "names": [
+   "show",
+   "model"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/cfbusinessaction/findByModelId/",
+   "/businessconfig/cfbusinessattribute/findByModelAndAction/",
+   "/businessconfig/cfbusinessconfig/delete/",
+   "/businessconfig/cfbusinessconfig/query",
+   "/businessconfig/cfbusinessconfig/saveOrUpdate",
+   "/businessconfig/cfbusinessmodel/findAll"
+  ],
+  "file": "chunks/233.e762bb22ec2c1c2a964e.js"
+ },
+ "59": {
+  "names": [
+   "deductionIndicator",
+   "perm"
+  ],
+  "query_urls": [
+   "/symp/deduction/query"
+  ],
+  "endpoints": [
+   "/symp/deduction/delete/",
+   "/symp/deduction/getInfo/"
+  ],
+  "file": "chunks/59.ea4bdd11a3b97ed0204c.js"
+ },
+ "185": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/priceconfig/updatePriceType",
+   "/organization/purOrg/query"
+  ],
+  "file": "chunks/185.5655b7bec6896542ba95.js"
+ },
+ "223": {
+  "names": [
+   "sys-operate",
+   "buyer",
+   "vendor",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/223.35929c562c2747481755.js"
+ },
+ "1": {
+  "names": [
+   "notFind",
+   "sidebarLogoFade"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/1.66044417797fbb059f6a.js"
+ },
+ "75": {
+  "names": [],
+  "query_urls": [
+   "/rawmatprice/entry/query"
+  ],
+  "endpoints": [
+   "/rawmatprice/archive/queryPriceHistory/",
+   "/rawmatprice/entry/check"
+  ],
+  "file": "chunks/75.2cb82b53c4ce22ba526a.js"
+ },
+ "247": {
+  "names": [
+   "brand-list",
+   "perm",
+   "perm",
+   "logoFile"
+  ],
+  "query_urls": [
+   "/product/brand/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/247.5835fb4a818f2b03cdfd.js"
+ },
+ "148": {
+  "names": [
+   "add-category"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/mainsupplycategory/add/"
+  ],
+  "file": "chunks/148.948f053693c4632594d7.js"
+ },
+ "140": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/assess/project/getPlanInfo",
+   "/vendormgt/assess/project/query",
+   "/vendormgt/assess/project/queryIndexExpert/"
+  ],
+  "file": "chunks/140.28b3258a347b12d63c86.js"
+ },
+ "437": {
+  "names": [
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/contractmgt/contract/mileStone/getMilestoneContract/",
+   "/fi/claim/query",
+   "/payment/milestone/closeMilestoneReq/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/437.8c79bb56cc8478690dd4.js"
+ },
+ "203": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/npc/npcTaskItem/query/",
+   "/vendormgt/npc/npcTaskItemVendor/confirm/",
+   "/vendormgt/npc/npcTaskItemVendor/query/",
+   "/vendormgt/npc/npcTaskItemVendor/reject/"
+  ],
+  "file": "chunks/203.cb73f5e83606f99a0482.js"
+ },
+ "352": {
+  "names": [
+   "contractmgt-template-terms-composite"
+  ],
+  "query_urls": [
+   "/contractmgt/terms/query/composite"
+  ],
+  "endpoints": [
+   "/contractmgt/terms/composite/getTermsList/",
+   "/contractmgt/termsType/getAll",
+   "/contractmgt/termsType/getAll/"
+  ],
+  "file": "chunks/352.5c7e417ba840b5e8ac23.js"
+ },
+ "129": {
+  "names": [
+   "basedata-basebus-bank",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/mdata/bank/query"
+  ],
+  "endpoints": [
+   "/mdata/bank/query"
+  ],
+  "file": "chunks/129.ef8824371657175b8cbd.js"
+ },
+ "293": {
+  "names": [
+   "freightSettlement"
+  ],
+  "query_urls": [
+   "/fs/fsbill/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/293.37689c50b647e4fea929.js"
+ },
+ "441": {
+  "names": [
+   "first",
+   "second",
+   "third"
+  ],
+  "query_urls": [],
+  "endpoints": [],
+  "file": "chunks/441.27d2fd82f4028cfc50ee.js"
+ },
+ "64": {
+  "names": [
+   "show",
+   "show",
+   "perm"
+  ],
+  "query_urls": [
+   "/ap/price/confirm/query"
+  ],
+  "endpoints": [
+   "/ap/price/confirm/getBill/",
+   "/ap/price/confirm/getItemList/",
+   "/ap/price/confirm/saveAndPublish",
+   "/ap/price/confirm/submitAwardAudit/"
+  ],
+  "file": "chunks/64.1083ad69152fc1144b4a.js"
+ },
+ "373": {
+  "names": [
+   "first",
+   "perm",
+   "second"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/qm/qm8d/toView/"
+  ],
+  "file": "chunks/373.7422370ebf627873ce68.js"
+ },
+ "194": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/pe/busLog/getList",
+   "/pe/rfs/buyer/queryVendors/",
+   "/pe/rfs/buyer/updateRfs/",
+   "/pe/rfs/buyer/vendorItemView/"
+  ],
+  "file": "chunks/194.5da94303d5414d58527b.js"
+ },
+ "309": {
+  "names": [
+   "strategymatchscoreview"
+  ],
+  "query_urls": [
+   "/sunner/assess/strategymatch/queryview"
+  ],
+  "endpoints": [
+   "/sunner/assess/strategymatch/getAllAssessStrategicMapping"
+  ],
+  "file": "chunks/309.e7eac341782246e9f1b3.js"
+ },
+ "257": {
+  "names": [
+   "submitFinalFrom"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/api/contract/getContractByCode/"
+  ],
+  "file": "chunks/257.f9401d6f9291350cad9c.js"
+ },
+ "125": {
+  "names": [
+   "first",
+   "perm",
+   "second",
+   "perm",
+   "third",
+   "perm"
+  ],
+  "query_urls": [
+   "/vendormgt/assess/compute/groupplan/query"
+  ],
+  "endpoints": [
+   "/vendormgt/assess/compute/plan/del/"
+  ],
+  "file": "chunks/125.2014342de66aaefd7945.js"
+ },
+ "252": {
+  "names": [
+   "perm",
+   "vdmgt-dev-factorytemplate-create"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/dlv/factoryInspect/getTemplatePath",
+   "/vendormgt/dlv/factoryInspect/queryTemplate"
+  ],
+  "file": "chunks/252.b4f1807b45a139cb385e.js"
+ },
+ "161": {
+  "names": [
+   "marketable-list"
+  ],
+  "query_urls": [
+   "/system/notice/query"
+  ],
+  "endpoints": [
+   "/system/notice/query"
+  ],
+  "file": "chunks/161.07e257e1630371890666.js"
+ },
+ "321": {
+  "names": [],
+  "query_urls": [
+   "/vendormgt/npc/npcTaskItemVendor/query"
+  ],
+  "endpoints": [
+   "/system/log/getList",
+   "/vendormgt/npc/npcTask/toTab/withmtrl/view/"
+  ],
+  "file": "chunks/321.31cf25e26cd590d5a9a7.js"
+ },
+ "100": {
+  "names": [
+   "perm"
+  ],
+  "query_urls": [
+   "/fi/claim/query"
+  ],
+  "endpoints": [
+   "/fi/claim/findById/",
+   "/fi/claim/query",
+   "/system/log/getList"
+  ],
+  "file": "chunks/100.6e6633c448d959c56cdb.js"
+ },
+ "415": {
+  "names": [
+   "pevendor-delivery-board",
+   "perm",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/vendor/delivery/deliveryForbidden/query",
+   "/pe/vendor/delivery/materialDeliveryBoard/query",
+   "/pe/vendor/delivery/orderDeliveryBoard/query"
+  ],
+  "endpoints": [
+   "/pe/vendor/delivery/ordAddCart",
+   "/pe/vendor/delivery/queryDeliveryCart"
+  ],
+  "file": "chunks/415.21c1a379e013b3c06232.js"
+ },
+ "35": {
+  "names": [
+   "sys-todomgt",
+   "perm"
+  ],
+  "query_urls": [
+   "/system/task/todo/query"
+  ],
+  "endpoints": [
+   "/system/task/todo/delete/",
+   "/system/task/todo/query",
+   "/system/task/todo/saveOrUpdate"
+  ],
+  "file": "chunks/35.1c9bd44c66973966a98b.js"
+ },
+ "290": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/system/orgmgt/organization/findByPurGroup/",
+   "/system/orgmgt/organization/queryForDatalist"
+  ],
+  "file": "chunks/290.882c1697e63a19a8e156.js"
+ },
+ "320": {
+  "names": [
+   "npc-list",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/npc/npcTask/delete/",
+   "/vendormgt/npc/npcTask/query"
+  ],
+  "file": "chunks/320.c4399b963a7df019cd60.js"
+ },
+ "392": {
+  "names": [
+   "vehicleReservationInquiry",
+   "perm"
+  ],
+  "query_urls": [
+   "/ei/api/xcx/rez/rezCheckQuery"
+  ],
+  "endpoints": [],
+  "file": "chunks/392.79460611ceb8fc8804ff.js"
+ },
+ "232": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/businessconfig/getPpaNPAConfig"
+  ],
+  "file": "chunks/232.8acc51e8b1f6225158b8.js"
+ },
+ "457": {
+  "names": [
+   "cornPrice",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/farmer/price/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/457.eb634af5cf240f7b3003.js"
+ },
+ "243": {
+  "names": [
+   "orderFinal"
+  ],
+  "query_urls": [
+   "/sunner/order/finalCheck/query"
+  ],
+  "endpoints": [
+   "/sunner/order/finalCheck/delete/"
+  ],
+  "file": "chunks/243.3920420a2a990a7c0a26.js"
+ },
+ "459": {
+  "names": [],
+  "query_urls": [],
+  "endpoints": [
+   "/vendormgt/assess/join/getTemplateDimSetting",
+   "/vendormgt/assess/join/loadExpert"
+  ],
+  "file": "chunks/459.142f3bd8a8cc758c68e8.js"
+ },
+ "350": {
+  "names": [],
+  "query_urls": [
+   "/contractmgt/contract/mileStone/list"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/init"
+  ],
+  "file": "chunks/350.1662981391be44c2538a.js"
+ },
+ "345": {
+  "names": [],
+  "query_urls": [
+   "/ctmgt/rfq/template/query"
+  ],
+  "endpoints": [
+   "/ctmgt/rfq/template/getTemplatePath"
+  ],
+  "file": "chunks/345.17a614eb20f168a5870b.js"
+ },
+ "67": {
+  "names": [
+   "first",
+   "second",
+   "first",
+   "second",
+   "third",
+   "perm"
+  ],
+  "query_urls": [
+   "/payment/order/queryBillList",
+   "/payment/order/queryPrePayOrder"
+  ],
+  "endpoints": [
+   "/api/contract/getContractByCode/",
+   "/businessconfig/payment/query",
+   "/fi/billmgt/buyer/getBillItmes/",
+   "/fi/billmgt/vendor/getInvoices/",
+   "/fi/claim/query",
+   "/organization/company/getById/",
+   "/payment/order/getOrderContractInfo/",
+   "/payment/order/queryOrderItem/",
+   "/payment/order/toAddOrderPay/",
+   "/payment/order/toAddOrderPayBefore/",
+   "/vendormgt/questionary/bank/query/"
+  ],
+  "file": "chunks/67.7197331f5b1010e41b82.js"
+ },
+ "99": {
+  "names": [
+   "first",
+   "second",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/payment/milestone/query"
+  ],
+  "endpoints": [
+   "/contractmgt/contract/mileStone/getMilestoneContract/",
+   "/fi/claim/query",
+   "/payment/milestone/closeMilestoneReq/",
+   "/payment/milestone/view/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/99.ce50ba3e84710a5246a2.js"
+ },
+ "177": {
+  "names": [
+   "show",
+   "show",
+   "show"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/priceaudit/saveAndPublish"
+  ],
+  "file": "chunks/177.1257db6535b7a02bef4c.js"
+ },
+ "360": {
+  "names": [
+   "itemTab",
+   "contractFileTab",
+   "contractCounterpartyTab",
+   "templateTab",
+   "checkTab",
+   "linkContractTab"
+  ],
+  "query_urls": [],
+  "endpoints": [
+   "/contractmgt/contract/init",
+   "/contractmgt/electronic/seal/sign/bestsign",
+   "/contractmgt/template/getEnableList",
+   "/contractmgt/template/getEnableList/"
+  ],
+  "file": "chunks/360.87d9a0339606f32c0e6d.js"
+ },
+ "92": {
+  "names": [],
+  "query_urls": [
+   "/qm/iqc/query"
+  ],
+  "endpoints": [
+   "/qm/iqc/toView/"
+  ],
+  "file": "chunks/92.8f42d282c141a6a3bea7.js"
+ },
+ "410": {
+  "names": [
+   "pevendor-order-exec",
+   "perm"
+  ],
+  "query_urls": [
+   "/pe/pomgt/execStatus/query"
+  ],
+  "endpoints": [],
+  "file": "chunks/410.711fe2e2b46cd69c92ec.js"
+ },
+ "97": {
+  "names": [
+   "first",
+   "second",
+   "perm",
+   "perm",
+   "perm"
+  ],
+  "query_urls": [
+   "/payment/order/queryOrderReq"
+  ],
+  "endpoints": [
+   "/api/contract/getContractByCode/",
+   "/fi/claim/query",
+   "/payment/order/closePrePayReq/",
+   "/payment/order/viewPrePay/",
+   "/system/log/getList"
+  ],
+  "file": "chunks/97.aeabc26d36458c196f85.js"
+ }
+}

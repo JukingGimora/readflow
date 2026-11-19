@@ -1,0 +1,314 @@
+[
+  {
+    "name": "工厂考察评估",
+    "menu": [
+      "准入协同"
+    ],
+    "route": "/#/vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "询报价",
+    "menu": [
+      "商务报价"
+    ],
+    "route": "/#/sourcing/enquiry/vendor/quote-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "招投标",
+    "menu": [
+      "商务报价"
+    ],
+    "route": "/#/sourcing/bid/vendor-bid-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "合同清单",
+    "menu": [
+      "商务报价",
+      "合同管理"
+    ],
+    "route": "/#/sourcing/contract/vendor/contract-list-sign",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "文本协议",
+    "menu": [
+      "商务报价",
+      "合同管理"
+    ],
+    "route": "/#/sourcing/contract/vendor/agreement_list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "补充协议",
+    "menu": [
+      "商务报价",
+      "合同管理"
+    ],
+    "route": "/#/sourcing/contract/vendor/addendum-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "保证金",
+    "menu": [
+      "商务报价"
+    ],
+    "route": "/#/sourcing/components/deposit/vendor/deposit-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "电子调查表",
+    "menu": [
+      "商务报价",
+      "我的公司信息"
+    ],
+    "route": "/#/vendor/regist/questionary-mid",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "信息反馈",
+    "menu": [
+      "商务报价",
+      "我的公司信息"
+    ],
+    "route": "/#/vendor/vsp/rfi/vendor/rfiList",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "资质过期提醒",
+    "menu": [
+      "商务报价",
+      "我的公司信息"
+    ],
+    "route": "/#/vendor/expirynoti/vendor/query-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "供应商变更申请",
+    "menu": [
+      "商务报价",
+      "我的公司信息"
+    ],
+    "route": "/#/vendor/vdchange/vendor/vdchange-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "供应品类",
+    "menu": [
+      "商务报价",
+      "我的公司信息"
+    ],
+    "route": "/#/vendor/vendorcategory/vd-category-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "订单列表",
+    "menu": [
+      "采购协同",
+      "采购订单"
+    ],
+    "route": "/#/pe/po/vendor/poTab",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "执行情况",
+    "menu": [
+      "采购协同",
+      "采购订单"
+    ],
+    "route": "/#/pe/po/vendor/poExecStatusList",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "寄售库存查询",
+    "menu": [
+      "采购协同",
+      "寄售库存"
+    ],
+    "route": "/#/pe/po/vendor/consignment-inventory-query",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "发货记录",
+    "menu": [
+      "采购协同",
+      "发货管理"
+    ],
+    "route": "/#/pe/delivery/vendor/deliveryList",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "发货看板",
+    "menu": [
+      "采购协同",
+      "发货管理"
+    ],
+    "route": "/#/pe/delivery/orderDeliveryBoard",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "收货记录",
+    "menu": [
+      "采购协同",
+      "收货管理"
+    ],
+    "route": "/#/pe/receive/receiverecord/vendor/receiveList",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "收货差异",
+    "menu": [
+      "采购协同",
+      "收货管理"
+    ],
+    "route": "/#/pe/receive/receivecontrast/vendor/receiveContrastList",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "退货记录",
+    "menu": [
+      "采购协同",
+      "退货管理"
+    ],
+    "route": "/#/pe/purchasereturn/vendor-return-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "结算调整单",
+    "menu": [
+      "采购协同",
+      "开票管理"
+    ],
+    "route": "/#/fi/vendor/fi-adjust-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "货物往来明细",
+    "menu": [
+      "采购协同",
+      "开票管理"
+    ],
+    "route": "/#/fi/vendor/billable-items-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "采购发起结算单",
+    "menu": [
+      "采购协同",
+      "开票管理"
+    ],
+    "route": "/#/fi/vendor/bill-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "我司发起结算单",
+    "menu": [
+      "采购协同",
+      "开票管理"
+    ],
+    "route": "/#/fi/vendor/bill-list-vendor",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "质量扣款明细",
+    "menu": [
+      "采购协同",
+      "开票管理"
+    ],
+    "route": "/#/quajud/qua-jud-vendor-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "询证函",
+    "menu": [
+      "采购协同",
+      "开票管理"
+    ],
+    "route": "/#/confirmation/vendor/confirmation-bill-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "上架商品",
+    "menu": [
+      "商城"
+    ],
+    "route": "/#/mall/product/vendor-management-list",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "待上架商品",
+    "menu": [
+      "商城"
+    ],
+    "route": "/#/mall/product/vendor-marketable-product",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  },
+  {
+    "name": "订单管理",
+    "menu": [
+      "商城"
+    ],
+    "route": "/#/mall/order/vendor-order-management",
+    "apis": [],
+    "api_count": 0,
+    "status": "structure_only"
+  }
+]

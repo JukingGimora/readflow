@@ -1,0 +1,91 @@
+{
+  "name": "sunner_srm",
+  "label": "圣农 SRM",
+  "base_url": "https://srm.sunnercn.com:10001",
+  "auth": {
+    "mode": "form",
+    "fields": [
+      {
+        "key": "username",
+        "contains": "账号/邮箱"
+      },
+      {
+        "key": "password",
+        "contains": "密码"
+      },
+      {
+        "key": "captcha",
+        "contains": "验证码"
+      }
+    ],
+    "captcha": {
+      "css": "img.vcode"
+    },
+    "submit": {
+      "css": "button.login-btn"
+    },
+    "logged_in_marker": {
+      "any": [
+        {
+          "match": "url",
+          "contains": "/login",
+          "negate": true
+        }
+      ]
+    },
+    "credentials_env": {
+      "username": "SRM_USER",
+      "password": "SRM_PASS"
+    }
+  },
+  "crawl": {
+    "start": "/#/board",
+    "expand_selectors": [
+      ".el-submenu__title"
+    ],
+    "menu_selectors": [
+      "ul.el-menu .el-menu-item",
+      ".el-menu--popup .el-menu-item",
+      "a[role=menuitem]"
+    ],
+    "page_wait_s": 1.2,
+    "max_pages": 30,
+    "seeds": [
+      "/#/vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+      "/#/sourcing/enquiry/vendor/quote-list",
+      "/#/sourcing/bid/vendor-bid-list",
+      "/#/sourcing/contract/vendor/contract-list-sign",
+      "/#/sourcing/contract/vendor/agreement_list",
+      "/#/sourcing/contract/vendor/addendum-list",
+      "/#/sourcing/components/deposit/vendor/deposit-list",
+      "/#/vendor/regist/questionary-mid",
+      "/#/vendor/vsp/rfi/vendor/rfiList",
+      "/#/vendor/expirynoti/vendor/query-list",
+      "/#/vendor/vdchange/vendor/vdchange-list",
+      "/#/vendor/vendorcategory/vd-category-list",
+      "/#/pe/po/vendor/poTab",
+      "/#/pe/po/vendor/poExecStatusList",
+      "/#/pe/po/vendor/consignment-inventory-query",
+      "/#/pe/delivery/vendor/deliveryList",
+      "/#/pe/delivery/orderDeliveryBoard",
+      "/#/pe/receive/receiverecord/vendor/receiveList",
+      "/#/pe/receive/receivecontrast/vendor/receiveContrastList",
+      "/#/pe/purchasereturn/vendor-return-list",
+      "/#/fi/vendor/fi-adjust-list",
+      "/#/fi/vendor/billable-items-list",
+      "/#/fi/vendor/bill-list",
+      "/#/fi/vendor/bill-list-vendor",
+      "/#/quajud/qua-jud-vendor-list",
+      "/#/confirmation/vendor/confirmation-bill-list",
+      "/#/mall/product/vendor-management-list",
+      "/#/mall/product/vendor-marketable-product",
+      "/#/mall/order/vendor-order-management"
+    ]
+  },
+  "explore": {
+    "menu_source": "POST /srm/system/getLayoutInfo",
+    "menu_tree": "data/explore/sunner_srm/menu_tree.json",
+    "captured_at": "2026-11-18T22:44:56+08:00",
+    "leaf_count": 29
+  }
+}

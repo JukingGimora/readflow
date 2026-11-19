@@ -1,0 +1,2031 @@
+{
+  "version": "2.0",
+  "system": "sunner_srm",
+  "generated_at": "2026-11-18T22:50:20+08:00",
+  "source": "getLayoutInfo menu tree + webpack chunk static analysis (no browser)",
+  "read_only": true,
+  "nodes": [
+    {
+      "id": "app.sunner_srm",
+      "type": "app",
+      "label": "圣农 SRM",
+      "base_url": "https://srm.sunnercn.com:10001",
+      "read_only": true
+    },
+    {
+      "id": "module.f1fa0499",
+      "type": "module",
+      "label": "准入协同",
+      "read_only": true
+    },
+    {
+      "id": "module.67e6e937",
+      "type": "module",
+      "label": "商务报价",
+      "read_only": true
+    },
+    {
+      "id": "module.69f2e875",
+      "type": "module",
+      "label": "采购协同",
+      "read_only": true
+    },
+    {
+      "id": "module.c0745f30",
+      "type": "module",
+      "label": "商城",
+      "read_only": true
+    },
+    {
+      "id": "page.c131af5f9c",
+      "type": "page",
+      "label": "准入协同 > 工厂考察评估",
+      "route": "/#/vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+      "read_only": true,
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/dlv/factoryInspect/score/queryScoreItem",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        8
+      ]
+    },
+    {
+      "id": "api.493079fc56",
+      "type": "api",
+      "label": "/srm/ppa/query",
+      "method": "POST",
+      "path": "/srm/ppa/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.7a0e612c3c",
+      "type": "api",
+      "label": "/srm/pricearchive/query/area/material",
+      "method": "POST",
+      "path": "/srm/pricearchive/query/area/material",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.f12e7eacea",
+      "type": "api",
+      "label": "/srm/pricearchive/query/area/project",
+      "method": "POST",
+      "path": "/srm/pricearchive/query/area/project",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.a5940b3886",
+      "type": "api",
+      "label": "/srm/pricearchive/query/area/subsection",
+      "method": "POST",
+      "path": "/srm/pricearchive/query/area/subsection",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.f00004d422",
+      "type": "api",
+      "label": "/srm/pricearchive/query/factory/material",
+      "method": "POST",
+      "path": "/srm/pricearchive/query/factory/material",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.91c1df3c99",
+      "type": "api",
+      "label": "/srm/pricearchive/query/factory/project",
+      "method": "POST",
+      "path": "/srm/pricearchive/query/factory/project",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.9d60e0ca58",
+      "type": "api",
+      "label": "/srm/pricearchive/query/factory/subsection",
+      "method": "POST",
+      "path": "/srm/pricearchive/query/factory/subsection",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.d2fe5cd3b1",
+      "type": "api",
+      "label": "/srm/system/template/query",
+      "method": "POST",
+      "path": "/srm/system/template/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.42cd5a69fe",
+      "type": "api",
+      "label": "/srm/vendormgt/dlv/factoryInspect/score/queryScoreItem",
+      "method": "POST",
+      "path": "/srm/vendormgt/dlv/factoryInspect/score/queryScoreItem",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.9d9443c05d",
+      "type": "api",
+      "label": "/srm/vendormgt/freightfee/yearFreightFee/query",
+      "method": "POST",
+      "path": "/srm/vendormgt/freightfee/yearFreightFee/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.b14ad84ae5",
+      "type": "page",
+      "label": "商务报价 > 询报价",
+      "route": "/#/sourcing/enquiry/vendor/quote-list",
+      "read_only": true,
+      "query_urls": [
+        "/enquiry/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        51
+      ]
+    },
+    {
+      "id": "api.99f240d567",
+      "type": "api",
+      "label": "/srm/enquiry/vendor/query",
+      "method": "POST",
+      "path": "/srm/enquiry/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.00284f0364",
+      "type": "page",
+      "label": "商务报价 > 招投标",
+      "route": "/#/sourcing/bid/vendor-bid-list",
+      "read_only": true,
+      "query_urls": [
+        "/bidmgt/bid/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        26
+      ]
+    },
+    {
+      "id": "api.a9941a2096",
+      "type": "api",
+      "label": "/srm/bidmgt/bid/vendor/query",
+      "method": "POST",
+      "path": "/srm/bidmgt/bid/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.e0de16ea",
+      "type": "menu",
+      "label": "合同管理",
+      "read_only": true
+    },
+    {
+      "id": "page.71a397c0ef",
+      "type": "page",
+      "label": "商务报价 > 合同管理 > 合同清单",
+      "route": "/#/sourcing/contract/vendor/contract-list-sign",
+      "read_only": true,
+      "query_urls": [
+        "/contractmgt/contract/vendor/query"
+      ],
+      "chunks": [
+        87
+      ]
+    },
+    {
+      "id": "api.04c8cbcccf",
+      "type": "api",
+      "label": "/srm/contractmgt/contract/vendor/query",
+      "method": "POST",
+      "path": "/srm/contractmgt/contract/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.b1e08240d8",
+      "type": "page",
+      "label": "商务报价 > 合同管理 > 文本协议",
+      "route": "/#/sourcing/contract/vendor/agreement_list",
+      "read_only": true,
+      "query_urls": [
+        "/contractmgt/contract/query"
+      ],
+      "chunks": [
+        88
+      ]
+    },
+    {
+      "id": "api.668e7a95ee",
+      "type": "api",
+      "label": "/srm/contractmgt/contract/query",
+      "method": "POST",
+      "path": "/srm/contractmgt/contract/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.694502739b",
+      "type": "page",
+      "label": "商务报价 > 合同管理 > 补充协议",
+      "route": "/#/sourcing/contract/vendor/addendum-list",
+      "read_only": true,
+      "query_urls": [
+        "contractmgt/contract/vendor/query"
+      ],
+      "chunks": [
+        89
+      ]
+    },
+    {
+      "id": "page.c135e72fd3",
+      "type": "page",
+      "label": "商务报价 > 保证金",
+      "route": "/#/sourcing/components/deposit/vendor/deposit-list",
+      "read_only": true,
+      "query_urls": [
+        "/sourcing/deposit/queryDeposit"
+      ],
+      "chunks": [
+        37
+      ]
+    },
+    {
+      "id": "api.2e9c8714c5",
+      "type": "api",
+      "label": "/srm/sourcing/deposit/queryDeposit",
+      "method": "POST",
+      "path": "/srm/sourcing/deposit/queryDeposit",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.322cfe0c",
+      "type": "menu",
+      "label": "我的公司信息",
+      "read_only": true
+    },
+    {
+      "id": "page.5064d880fd",
+      "type": "page",
+      "label": "商务报价 > 我的公司信息 > 电子调查表",
+      "route": "/#/vendor/regist/questionary-mid",
+      "read_only": true,
+      "query_urls": [],
+      "chunks": [
+        319
+      ]
+    },
+    {
+      "id": "page.d9b3c6c0f8",
+      "type": "page",
+      "label": "商务报价 > 我的公司信息 > 信息反馈",
+      "route": "/#/vendor/vsp/rfi/vendor/rfiList",
+      "read_only": true,
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query",
+        "/vendormgt/vsp/rfiitem/findByVendorId"
+      ],
+      "chunks": [
+        0,
+        18
+      ]
+    },
+    {
+      "id": "api.a16365d3e5",
+      "type": "api",
+      "label": "/srm/vendormgt/vsp/rfiitem/findByVendorId",
+      "method": "POST",
+      "path": "/srm/vendormgt/vsp/rfiitem/findByVendorId",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.e0ab7e6154",
+      "type": "page",
+      "label": "商务报价 > 我的公司信息 > 资质过期提醒",
+      "route": "/#/vendor/expirynoti/vendor/query-list",
+      "read_only": true,
+      "query_urls": [
+        "/vendormgt/certExpiryNoti/vendor/query"
+      ],
+      "chunks": [
+        332
+      ]
+    },
+    {
+      "id": "api.fc151da612",
+      "type": "api",
+      "label": "/srm/vendormgt/certExpiryNoti/vendor/query",
+      "method": "POST",
+      "path": "/srm/vendormgt/certExpiryNoti/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.dd173657e3",
+      "type": "page",
+      "label": "商务报价 > 我的公司信息 > 供应商变更申请",
+      "route": "/#/vendor/vdchange/vendor/vdchange-list",
+      "read_only": true,
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query",
+        "/vendormgt/vdchange/vendor/query"
+      ],
+      "chunks": [
+        0,
+        61
+      ]
+    },
+    {
+      "id": "api.e0b157a91f",
+      "type": "api",
+      "label": "/srm/vendormgt/vdchange/vendor/query",
+      "method": "POST",
+      "path": "/srm/vendormgt/vdchange/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.0e055207ee",
+      "type": "page",
+      "label": "商务报价 > 我的公司信息 > 供应品类",
+      "route": "/#/vendor/vendorcategory/vd-category-list",
+      "read_only": true,
+      "query_urls": [
+        "vendormgt/vendorcategory/vendor/query"
+      ],
+      "chunks": [
+        314
+      ]
+    },
+    {
+      "id": "api.970d2adf54",
+      "type": "api",
+      "label": "/srm/vendormgt/vendorcategory/vendor/query",
+      "method": "POST",
+      "path": "/srm/vendormgt/vendorcategory/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.be28d34b",
+      "type": "menu",
+      "label": "采购订单",
+      "read_only": true
+    },
+    {
+      "id": "page.c2caae08b4",
+      "type": "page",
+      "label": "采购协同 > 采购订单 > 订单列表",
+      "route": "/#/pe/po/vendor/poTab",
+      "read_only": true,
+      "query_urls": [
+        "/pe/pomgt/poitem/vendor/query",
+        "/pe/pomgt/pomain/queryByPoId",
+        "/pe/pomgt/pomain/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        95
+      ]
+    },
+    {
+      "id": "api.adcf36589e",
+      "type": "api",
+      "label": "/srm/pe/pomgt/poitem/vendor/query",
+      "method": "POST",
+      "path": "/srm/pe/pomgt/poitem/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.ef859fce77",
+      "type": "api",
+      "label": "/srm/pe/pomgt/pomain/queryByPoId",
+      "method": "POST",
+      "path": "/srm/pe/pomgt/pomain/queryByPoId",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.754480e770",
+      "type": "api",
+      "label": "/srm/pe/pomgt/pomain/vendor/query",
+      "method": "POST",
+      "path": "/srm/pe/pomgt/pomain/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.dd50268284",
+      "type": "page",
+      "label": "采购协同 > 采购订单 > 执行情况",
+      "route": "/#/pe/po/vendor/poExecStatusList",
+      "read_only": true,
+      "query_urls": [
+        "/pe/pomgt/execStatus/query"
+      ],
+      "chunks": [
+        410
+      ]
+    },
+    {
+      "id": "api.685d94c65f",
+      "type": "api",
+      "label": "/srm/pe/pomgt/execStatus/query",
+      "method": "POST",
+      "path": "/srm/pe/pomgt/execStatus/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.11961887",
+      "type": "menu",
+      "label": "寄售库存",
+      "read_only": true
+    },
+    {
+      "id": "page.1faf1b9881",
+      "type": "page",
+      "label": "采购协同 > 寄售库存 > 寄售库存查询",
+      "route": "/#/pe/po/vendor/consignment-inventory-query",
+      "read_only": true,
+      "query_urls": [
+        "sunner/consignmentinventory/query"
+      ],
+      "chunks": [
+        292
+      ]
+    },
+    {
+      "id": "api.3923ad6d19",
+      "type": "api",
+      "label": "/srm/sunner/consignmentinventory/query",
+      "method": "POST",
+      "path": "/srm/sunner/consignmentinventory/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.ddb2d4e2",
+      "type": "menu",
+      "label": "发货管理",
+      "read_only": true
+    },
+    {
+      "id": "page.2687c0dbe5",
+      "type": "page",
+      "label": "采购协同 > 发货管理 > 发货记录",
+      "route": "/#/pe/delivery/vendor/deliveryList",
+      "read_only": true,
+      "query_urls": [
+        "/pe/vendor/delivery/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        414
+      ]
+    },
+    {
+      "id": "api.dcdd70e68c",
+      "type": "api",
+      "label": "/srm/pe/vendor/delivery/query",
+      "method": "POST",
+      "path": "/srm/pe/vendor/delivery/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.70213ea5dd",
+      "type": "page",
+      "label": "采购协同 > 发货管理 > 发货看板",
+      "route": "/#/pe/delivery/orderDeliveryBoard",
+      "read_only": true,
+      "query_urls": [
+        "/pe/vendor/delivery/deliveryForbidden/query",
+        "/pe/vendor/delivery/materialDeliveryBoard/query",
+        "/pe/vendor/delivery/orderDeliveryBoard/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        415
+      ]
+    },
+    {
+      "id": "api.3f4ac0c85c",
+      "type": "api",
+      "label": "/srm/pe/vendor/delivery/deliveryForbidden/query",
+      "method": "POST",
+      "path": "/srm/pe/vendor/delivery/deliveryForbidden/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.4cfb50e0b2",
+      "type": "api",
+      "label": "/srm/pe/vendor/delivery/materialDeliveryBoard/query",
+      "method": "POST",
+      "path": "/srm/pe/vendor/delivery/materialDeliveryBoard/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.a0c973b863",
+      "type": "api",
+      "label": "/srm/pe/vendor/delivery/orderDeliveryBoard/query",
+      "method": "POST",
+      "path": "/srm/pe/vendor/delivery/orderDeliveryBoard/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.3bc17a8a",
+      "type": "menu",
+      "label": "收货管理",
+      "read_only": true
+    },
+    {
+      "id": "page.2b1d3722c9",
+      "type": "page",
+      "label": "采购协同 > 收货管理 > 收货记录",
+      "route": "/#/pe/receive/receiverecord/vendor/receiveList",
+      "read_only": true,
+      "query_urls": [
+        "/pe/receive/record/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        402
+      ]
+    },
+    {
+      "id": "api.fe136e4dec",
+      "type": "api",
+      "label": "/srm/pe/receive/record/query",
+      "method": "POST",
+      "path": "/srm/pe/receive/record/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.82b7f8f6e1",
+      "type": "page",
+      "label": "采购协同 > 收货管理 > 收货差异",
+      "route": "/#/pe/receive/receivecontrast/vendor/receiveContrastList",
+      "read_only": true,
+      "query_urls": [
+        "/pe/receive/contrast/query"
+      ],
+      "chunks": [
+        404
+      ]
+    },
+    {
+      "id": "api.0c1d66eeac",
+      "type": "api",
+      "label": "/srm/pe/receive/contrast/query",
+      "method": "POST",
+      "path": "/srm/pe/receive/contrast/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.9aca88cc",
+      "type": "menu",
+      "label": "退货管理",
+      "read_only": true
+    },
+    {
+      "id": "page.5810c6963f",
+      "type": "page",
+      "label": "采购协同 > 退货管理 > 退货记录",
+      "route": "/#/pe/purchasereturn/vendor-return-list",
+      "read_only": true,
+      "query_urls": [
+        "/pe/return/query"
+      ],
+      "chunks": [
+        126
+      ]
+    },
+    {
+      "id": "api.84bf79117b",
+      "type": "api",
+      "label": "/srm/pe/return/query",
+      "method": "POST",
+      "path": "/srm/pe/return/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "menu.7b7f1afd",
+      "type": "menu",
+      "label": "开票管理",
+      "read_only": true
+    },
+    {
+      "id": "page.1c06c4b54c",
+      "type": "page",
+      "label": "采购协同 > 开票管理 > 结算调整单",
+      "route": "/#/fi/vendor/fi-adjust-list",
+      "read_only": true,
+      "query_urls": [
+        "/sunner/fi/adjust/vendor/query"
+      ],
+      "chunks": [
+        261
+      ]
+    },
+    {
+      "id": "api.654cdb4397",
+      "type": "api",
+      "label": "/srm/sunner/fi/adjust/vendor/query",
+      "method": "POST",
+      "path": "/srm/sunner/fi/adjust/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.a9041ef360",
+      "type": "page",
+      "label": "采购协同 > 开票管理 > 货物往来明细",
+      "route": "/#/fi/vendor/billable-items-list",
+      "read_only": true,
+      "query_urls": [
+        "/fi/claim/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/sunner/fi/billableitems/vendor/query",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        109
+      ]
+    },
+    {
+      "id": "api.9565a6284a",
+      "type": "api",
+      "label": "/srm/fi/claim/query",
+      "method": "POST",
+      "path": "/srm/fi/claim/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.257819cb5b",
+      "type": "api",
+      "label": "/srm/sunner/fi/billableitems/vendor/query",
+      "method": "POST",
+      "path": "/srm/sunner/fi/billableitems/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.e4b181302c",
+      "type": "page",
+      "label": "采购协同 > 开票管理 > 采购发起结算单",
+      "route": "/#/fi/vendor/bill-list",
+      "read_only": true,
+      "query_urls": [
+        "/fi/billmgt/vendor/query"
+      ],
+      "chunks": [
+        142
+      ]
+    },
+    {
+      "id": "api.987f98fce6",
+      "type": "api",
+      "label": "/srm/fi/billmgt/vendor/query",
+      "method": "POST",
+      "path": "/srm/fi/billmgt/vendor/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.bd50064b67",
+      "type": "page",
+      "label": "采购协同 > 开票管理 > 我司发起结算单",
+      "route": "/#/fi/vendor/bill-list-vendor",
+      "read_only": true,
+      "query_urls": [
+        "/fi/billmgt/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        240
+      ]
+    },
+    {
+      "id": "page.dbffe2fe32",
+      "type": "page",
+      "label": "采购协同 > 开票管理 > 质量扣款明细",
+      "route": "/#/quajud/qua-jud-vendor-list",
+      "read_only": true,
+      "query_urls": [
+        "/qm/quajud/vendorQuery"
+      ],
+      "chunks": [
+        222
+      ]
+    },
+    {
+      "id": "api.724a23fd17",
+      "type": "api",
+      "label": "/srm/qm/quajud/vendorQuery",
+      "method": "POST",
+      "path": "/srm/qm/quajud/vendorQuery",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.fd9b102a62",
+      "type": "page",
+      "label": "采购协同 > 开票管理 > 询证函",
+      "route": "/#/confirmation/vendor/confirmation-bill-list",
+      "read_only": true,
+      "query_urls": [
+        "/sunner/mdata/confirmation/vendorQuery"
+      ],
+      "chunks": [
+        154
+      ]
+    },
+    {
+      "id": "api.a1d57e007a",
+      "type": "api",
+      "label": "/srm/sunner/mdata/confirmation/vendorQuery",
+      "method": "POST",
+      "path": "/srm/sunner/mdata/confirmation/vendorQuery",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.c67c798ef9",
+      "type": "page",
+      "label": "商城 > 上架商品",
+      "route": "/#/mall/product/vendor-management-list",
+      "read_only": true,
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/product/query",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "chunks": [
+        0,
+        417
+      ]
+    },
+    {
+      "id": "api.3ee576d852",
+      "type": "api",
+      "label": "/srm/product/query",
+      "method": "POST",
+      "path": "/srm/product/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.76c0560971",
+      "type": "page",
+      "label": "商城 > 待上架商品",
+      "route": "/#/mall/product/vendor-marketable-product",
+      "read_only": true,
+      "query_urls": [
+        "/product/marketable/query"
+      ],
+      "chunks": [
+        135
+      ]
+    },
+    {
+      "id": "api.6cb8f67205",
+      "type": "api",
+      "label": "/srm/product/marketable/query",
+      "method": "POST",
+      "path": "/srm/product/marketable/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "page.f479354d87",
+      "type": "page",
+      "label": "商城 > 订单管理",
+      "route": "/#/mall/order/vendor-order-management",
+      "read_only": true,
+      "query_urls": [
+        "/order/orderMgr/query"
+      ],
+      "chunks": [
+        418
+      ]
+    },
+    {
+      "id": "api.36713106c3",
+      "type": "api",
+      "label": "/srm/order/orderMgr/query",
+      "method": "POST",
+      "path": "/srm/order/orderMgr/query",
+      "read_only": true,
+      "source": "static"
+    },
+    {
+      "id": "api.d9d1b7a317",
+      "type": "api",
+      "label": "/srm/system/getUserType/862722762@qq.com",
+      "method": "POST",
+      "path": "/srm/system/getUserType/862722762@qq.com",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.7e4bc3814e",
+      "type": "api",
+      "label": "/srm/system/login",
+      "method": "POST",
+      "path": "/srm/system/login",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.c48243917c",
+      "type": "api",
+      "label": "/srm/system/getLayoutInfo",
+      "method": "POST",
+      "path": "/srm/system/getLayoutInfo",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.595184bffe",
+      "type": "api",
+      "label": "/srm/organization/company/query",
+      "method": "POST",
+      "path": "/srm/organization/company/query",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.cc4588df7c",
+      "type": "api",
+      "label": "/srm/system/orgmgt/organization/query-simple",
+      "method": "POST",
+      "path": "/srm/system/orgmgt/organization/query-simple",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.ca0b040a57",
+      "type": "api",
+      "label": "/srm/system/sysmessage/query",
+      "method": "POST",
+      "path": "/srm/system/sysmessage/query",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.885e120471",
+      "type": "api",
+      "label": "/srm/system/task/todo/getAll",
+      "method": "POST",
+      "path": "/srm/system/task/todo/getAll",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.d8d6de04da",
+      "type": "api",
+      "label": "/srm/system/notice/getContentList",
+      "method": "POST",
+      "path": "/srm/system/notice/getContentList",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.2ef09d3f71",
+      "type": "api",
+      "label": "/srm/system/firstPage/findToolList",
+      "method": "POST",
+      "path": "/srm/system/firstPage/findToolList",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.f0550a2ce4",
+      "type": "api",
+      "label": "/srm/system/attachment/query",
+      "method": "POST",
+      "path": "/srm/system/attachment/query",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.6b6737417c",
+      "type": "api",
+      "label": "/srm/mall/order/setting/queryMallConfig",
+      "method": "POST",
+      "path": "/srm/mall/order/setting/queryMallConfig",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.108aab209d",
+      "type": "api",
+      "label": "/srm/organization/purOrg/getAll",
+      "method": "POST",
+      "path": "/srm/organization/purOrg/getAll",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.83eb7b5826",
+      "type": "api",
+      "label": "/srm/organization/usergroup/getAll",
+      "method": "POST",
+      "path": "/srm/organization/usergroup/getAll",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.f39f74866d",
+      "type": "api",
+      "label": "/srm/vendormgt/dlv/factoryInspect/initData",
+      "method": "POST",
+      "path": "/srm/vendormgt/dlv/factoryInspect/initData",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.9b6315822c",
+      "type": "api",
+      "label": "/srm/enquiry/getDicList",
+      "method": "POST",
+      "path": "/srm/enquiry/getDicList",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.9f96e5848a",
+      "type": "api",
+      "label": "/srm/product/producttag/queryAll",
+      "method": "POST",
+      "path": "/srm/product/producttag/queryAll",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.74025620c4",
+      "type": "api",
+      "label": "/srm/product/brand/queryAllBrands",
+      "method": "POST",
+      "path": "/srm/product/brand/queryAllBrands",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.0c52d9f084",
+      "type": "api",
+      "label": "/srm/organization/company/getAll",
+      "method": "POST",
+      "path": "/srm/organization/company/getAll",
+      "read_only": true,
+      "source": "captured"
+    },
+    {
+      "id": "api.a8a6daae47",
+      "type": "api",
+      "label": "/srm/organization/factory/getAll",
+      "method": "POST",
+      "path": "/srm/organization/factory/getAll",
+      "read_only": true,
+      "source": "captured"
+    }
+  ],
+  "edges": [
+    {
+      "from": "app.sunner_srm",
+      "to": "module.f1fa0499",
+      "type": "contains"
+    },
+    {
+      "from": "app.sunner_srm",
+      "to": "module.67e6e937",
+      "type": "contains"
+    },
+    {
+      "from": "app.sunner_srm",
+      "to": "module.69f2e875",
+      "type": "contains"
+    },
+    {
+      "from": "app.sunner_srm",
+      "to": "module.c0745f30",
+      "type": "contains"
+    },
+    {
+      "from": "module.f1fa0499",
+      "to": "page.c131af5f9c",
+      "type": "contains"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.42cd5a69fe",
+      "type": "calls"
+    },
+    {
+      "from": "page.c131af5f9c",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "module.67e6e937",
+      "to": "page.b14ad84ae5",
+      "type": "contains"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.99f240d567",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.b14ad84ae5",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "module.67e6e937",
+      "to": "page.00284f0364",
+      "type": "contains"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.a9941a2096",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.00284f0364",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "module.67e6e937",
+      "to": "menu.e0de16ea",
+      "type": "contains"
+    },
+    {
+      "from": "menu.e0de16ea",
+      "to": "page.71a397c0ef",
+      "type": "contains"
+    },
+    {
+      "from": "page.71a397c0ef",
+      "to": "api.04c8cbcccf",
+      "type": "calls"
+    },
+    {
+      "from": "menu.e0de16ea",
+      "to": "page.b1e08240d8",
+      "type": "contains"
+    },
+    {
+      "from": "page.b1e08240d8",
+      "to": "api.668e7a95ee",
+      "type": "calls"
+    },
+    {
+      "from": "menu.e0de16ea",
+      "to": "page.694502739b",
+      "type": "contains"
+    },
+    {
+      "from": "page.694502739b",
+      "to": "api.04c8cbcccf",
+      "type": "calls"
+    },
+    {
+      "from": "module.67e6e937",
+      "to": "page.c135e72fd3",
+      "type": "contains"
+    },
+    {
+      "from": "page.c135e72fd3",
+      "to": "api.2e9c8714c5",
+      "type": "calls"
+    },
+    {
+      "from": "module.67e6e937",
+      "to": "menu.322cfe0c",
+      "type": "contains"
+    },
+    {
+      "from": "menu.322cfe0c",
+      "to": "page.5064d880fd",
+      "type": "contains"
+    },
+    {
+      "from": "menu.322cfe0c",
+      "to": "page.d9b3c6c0f8",
+      "type": "contains"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "page.d9b3c6c0f8",
+      "to": "api.a16365d3e5",
+      "type": "calls"
+    },
+    {
+      "from": "menu.322cfe0c",
+      "to": "page.e0ab7e6154",
+      "type": "contains"
+    },
+    {
+      "from": "page.e0ab7e6154",
+      "to": "api.fc151da612",
+      "type": "calls"
+    },
+    {
+      "from": "menu.322cfe0c",
+      "to": "page.dd173657e3",
+      "type": "contains"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "page.dd173657e3",
+      "to": "api.e0b157a91f",
+      "type": "calls"
+    },
+    {
+      "from": "menu.322cfe0c",
+      "to": "page.0e055207ee",
+      "type": "contains"
+    },
+    {
+      "from": "page.0e055207ee",
+      "to": "api.970d2adf54",
+      "type": "calls"
+    },
+    {
+      "from": "module.69f2e875",
+      "to": "menu.be28d34b",
+      "type": "contains"
+    },
+    {
+      "from": "menu.be28d34b",
+      "to": "page.c2caae08b4",
+      "type": "contains"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.adcf36589e",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.ef859fce77",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.754480e770",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.c2caae08b4",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "menu.be28d34b",
+      "to": "page.dd50268284",
+      "type": "contains"
+    },
+    {
+      "from": "page.dd50268284",
+      "to": "api.685d94c65f",
+      "type": "calls"
+    },
+    {
+      "from": "module.69f2e875",
+      "to": "menu.11961887",
+      "type": "contains"
+    },
+    {
+      "from": "menu.11961887",
+      "to": "page.1faf1b9881",
+      "type": "contains"
+    },
+    {
+      "from": "page.1faf1b9881",
+      "to": "api.3923ad6d19",
+      "type": "calls"
+    },
+    {
+      "from": "module.69f2e875",
+      "to": "menu.ddb2d4e2",
+      "type": "contains"
+    },
+    {
+      "from": "menu.ddb2d4e2",
+      "to": "page.2687c0dbe5",
+      "type": "contains"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.dcdd70e68c",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.2687c0dbe5",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "menu.ddb2d4e2",
+      "to": "page.70213ea5dd",
+      "type": "contains"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.3f4ac0c85c",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.4cfb50e0b2",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.a0c973b863",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.70213ea5dd",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "module.69f2e875",
+      "to": "menu.3bc17a8a",
+      "type": "contains"
+    },
+    {
+      "from": "menu.3bc17a8a",
+      "to": "page.2b1d3722c9",
+      "type": "contains"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.fe136e4dec",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.2b1d3722c9",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "menu.3bc17a8a",
+      "to": "page.82b7f8f6e1",
+      "type": "contains"
+    },
+    {
+      "from": "page.82b7f8f6e1",
+      "to": "api.0c1d66eeac",
+      "type": "calls"
+    },
+    {
+      "from": "module.69f2e875",
+      "to": "menu.9aca88cc",
+      "type": "contains"
+    },
+    {
+      "from": "menu.9aca88cc",
+      "to": "page.5810c6963f",
+      "type": "contains"
+    },
+    {
+      "from": "page.5810c6963f",
+      "to": "api.84bf79117b",
+      "type": "calls"
+    },
+    {
+      "from": "module.69f2e875",
+      "to": "menu.7b7f1afd",
+      "type": "contains"
+    },
+    {
+      "from": "menu.7b7f1afd",
+      "to": "page.1c06c4b54c",
+      "type": "contains"
+    },
+    {
+      "from": "page.1c06c4b54c",
+      "to": "api.654cdb4397",
+      "type": "calls"
+    },
+    {
+      "from": "menu.7b7f1afd",
+      "to": "page.a9041ef360",
+      "type": "contains"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.9565a6284a",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.257819cb5b",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.a9041ef360",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "menu.7b7f1afd",
+      "to": "page.e4b181302c",
+      "type": "contains"
+    },
+    {
+      "from": "page.e4b181302c",
+      "to": "api.987f98fce6",
+      "type": "calls"
+    },
+    {
+      "from": "menu.7b7f1afd",
+      "to": "page.bd50064b67",
+      "type": "contains"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.987f98fce6",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.bd50064b67",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "menu.7b7f1afd",
+      "to": "page.dbffe2fe32",
+      "type": "contains"
+    },
+    {
+      "from": "page.dbffe2fe32",
+      "to": "api.724a23fd17",
+      "type": "calls"
+    },
+    {
+      "from": "menu.7b7f1afd",
+      "to": "page.fd9b102a62",
+      "type": "contains"
+    },
+    {
+      "from": "page.fd9b102a62",
+      "to": "api.a1d57e007a",
+      "type": "calls"
+    },
+    {
+      "from": "module.c0745f30",
+      "to": "page.c67c798ef9",
+      "type": "contains"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.493079fc56",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.7a0e612c3c",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.f12e7eacea",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.a5940b3886",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.f00004d422",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.91c1df3c99",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.9d60e0ca58",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.3ee576d852",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.d2fe5cd3b1",
+      "type": "calls"
+    },
+    {
+      "from": "page.c67c798ef9",
+      "to": "api.9d9443c05d",
+      "type": "calls"
+    },
+    {
+      "from": "module.c0745f30",
+      "to": "page.76c0560971",
+      "type": "contains"
+    },
+    {
+      "from": "page.76c0560971",
+      "to": "api.6cb8f67205",
+      "type": "calls"
+    },
+    {
+      "from": "module.c0745f30",
+      "to": "page.f479354d87",
+      "type": "contains"
+    },
+    {
+      "from": "page.f479354d87",
+      "to": "api.36713106c3",
+      "type": "calls"
+    }
+  ]
+}

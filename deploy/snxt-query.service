@@ -1,0 +1,13 @@
+[Unit]
+Description=readflow read-only query service
+After=network.target
+
+[Service]
+WorkingDirectory=%h/projects/snxt-query
+EnvironmentFile=%h/projects/snxt-query/.env
+ExecStart=/usr/bin/python3 -m qflow serve --host 127.0.0.1 --port 8790
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,44 @@
+{
+  "request": {
+    "name": "query_business_data",
+    "arguments": {
+      "intent": "deduction.summary",
+      "params": {
+        "month": "2025-11",
+        "item": "水分"
+      }
+    }
+  },
+  "http_equivalent": {
+    "method": "POST",
+    "path": "/query",
+    "body": {
+      "intent": "deduction.summary",
+      "params": {
+        "month": "2025-11",
+        "item": "水分"
+      }
+    }
+  },
+  "response_example": {
+    "ok": true,
+    "intent": "deduction.summary",
+    "answer": "2025-11-01 至 2025-11-30 共 7 笔扣款，合计 4,552.94 元，涉及 7 个收货单。\n按检测项目：水分 7 笔 / 4,552.94 元。\n本地库同步于 2026-11-16T17:22:01+08:00。",
+    "data": {
+      "count": 7,
+      "total_amount": 4552.94,
+      "asn_count": 7,
+      "groups": [
+        {"bucket": "水分", "n": 7, "total": 4552.94}
+      ]
+    },
+    "plan": {
+      "intent": "deduction.summary",
+      "entity": {"id": "entity.deduction", "label": "扣款明细"},
+      "provider": {"id": "provider.cache.deductions", "kind": "cache", "label": "本地缓存·扣款", "available": true},
+      "bindings": {"month": {"field": "biz_date", "value": "2025-11"}},
+      "read_only": true
+    },
+    "data_as_of": "2026-11-16T17:22:01+08:00"
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "generated_at": "2026-11-17T13:40:00+08:00",
+  "nodes": [
+    {
+      "id": "app.srm",
+      "type": "app",
+      "label": "圣农 SRM",
+      "base_url": "https://srm.sunnercn.com:10001",
+      "read_only": true
+    },
+    {
+      "id": "entity.shipment",
+      "type": "entity",
+      "label": "发货单",
+      "key": [
+        "asn"
+      ],
+      "fields": [
+        {
+          "name": "asn",
+          "label": "发货单号"
+        },
+        {
+          "name": "biz_date",
+          "label": "业务日期"
+        },
+        {
+          "name": "plate",
+          "label": "车牌号"
+        },
+        {
+          "name": "received_qty",
+          "label": "实收数量"
+        },
+        {
+          "name": "amount",
+          "label": "含税金额"
+        },
+        {
+          "name": "receive_date",
+          "label": "收货日期"
+        }
+      ]
+    },
+    {
+      "id": "entity.deduction",
+      "type": "entity",
+      "label": "扣款明细",
+      "key": [
+        "asn",
+        "item"
+      ],
+      "fields": [
+        {
+          "name": "asn",
+          "label": "收货单号"
+        },
+        {
+          "name": "biz_date",
+          "label": "业务日期"
+        },
+        {
+          "name": "item",
+          "label": "检测项目"
+        },
+        {
+          "name": "result_text",
+          "label": "检测值"
+        },
+        {
+          "name": "amount",
+          "label": "扣罚金额"
+        },
+        {
+          "name": "formula",
+          "label": "扣罚公式"
+        }
+      ]
+    },
+    {
+      "id": "entity.reconciliation",
+      "type": "entity",
+      "label": "对账",
+      "key": [
+        "asn"
+      ],
+      "fields": [
+        {
+          "name": "asn",
+          "label": "单号"
+        },
+        {
+          "name": "ship_amount",
+          "label": "发货含税金额"
+        },
+        {
+          "name": "ded_amount",
+          "label": "扣款金额"
+        },
+        {
+          "name": "net",
+          "label": "净额"
+        },
+        {
+          "name": "ded_count",
+          "label": "扣款笔数"
+        }
+      ]
+    },
+    {
+      "id": "provider.cache.shipments",
+      "type": "provider",
+      "kind": "cache",
+      "label": "本地缓存·发货",
+      "entity": "entity.shipment",
+      "read_only": true,
+      "available": true,
+      "priority": 10
+    },
+    {
+      "id": "provider.cache.deductions",
+      "type": "provider",
+      "kind": "cache",
+      "label": "本地缓存·扣款",
+      "entity": "entity.deduction",
+      "read_only": true,
+      "available": true,
+      "priority": 10
+    },
+    {
+      "id": "provider.cache.reconciliation",
+      "type": "provider",
+      "kind": "cache",
+      "label": "本地缓存·对账",
+      "entity": "entity.reconciliation",
+      "read_only": true,
+      "available": true,
+      "priority": 10
+    },
+    {
+      "id": "provider.cache.local",
+      "type": "provider",
+      "kind": "cache",
+      "label": "本地缓存·概览",
+      "entity": null,
+      "read_only": true,
+      "available": true,
+      "priority": 10
+    },
+    {
+      "id": "api.deduction.list",
+      "type": "api",
+      "label": "扣款列表接口（待发现）",
+      "method": "POST",
+      "path": "/srm/qm/quajud/vendorQuery",
+      "entity": "entity.deduction",
+      "read_only": true,
+      "available": true,
+      "reason": "",
+      "body_keys": [
+        "page",
+        "rows"
+      ],
+      "confidence": 0.95,
+      "note": "2026-11-18 抓包确认：POST form page/rows，cookie 会话鉴权，无需额外头；rows=200 一次拉全量",
+      "response_keys": [
+        "rows",
+        "total",
+        "page",
+        "pageCount",
+        "pageSize",
+        "success"
+      ]
+    },
+    {
+      "id": "page.deduction",
+      "type": "page",
+      "label": "扣款明细页（待确认）",
+      "menu": [
+        "采购协同",
+        "质量扣款明细"
+      ],
+      "route": "/#/quajud/qua-jud-vendor-list",
+      "entity": "entity.deduction",
+      "read_only": true,
+      "available": true,
+      "confidence": 0.9
+    },
+    {
+      "id": "cap.deduction.summary",
+      "type": "capability",
+      "intent": "deduction.summary",
+      "label": "扣款汇总",
+      "entity": "entity.deduction",
+      "bind": {
+        "month": "biz_date",
+        "start": "biz_date",
+        "end": "biz_date",
+        "asn": "asn",
+        "item": "item"
+      },
+      "providers": [
+        "provider.cache.deductions",
+        "api.deduction.list",
+        "page.deduction"
+      ],
+      "read_only": true
+    },
+    {
+      "id": "cap.deduction.detail",
+      "type": "capability",
+      "intent": "deduction.detail",
+      "label": "扣款明细",
+      "entity": "entity.deduction",
+      "bind": {
+        "month": "biz_date",
+        "start": "biz_date",
+        "end": "biz_date",
+        "asn": "asn",
+        "item": "item"
+      },
+      "providers": [
+        "provider.cache.deductions",
+        "api.deduction.list",
+        "page.deduction"
+      ],
+      "read_only": true
+    },
+    {
+      "id": "cap.shipment.summary",
+      "type": "capability",
+      "intent": "shipment.summary",
+      "label": "发货汇总",
+      "entity": "entity.shipment",
+      "bind": {
+        "month": "biz_date",
+        "start": "biz_date",
+        "end": "biz_date",
+        "asn": "asn",
+        "plate": "plate"
+      },
+      "providers": [
+        "provider.cache.shipments"
+      ],
+      "read_only": true
+    },
+    {
+      "id": "cap.shipment.detail",
+      "type": "capability",
+      "intent": "shipment.detail",
+      "label": "发货明细",
+      "entity": "entity.shipment",
+      "bind": {
+        "month": "biz_date",
+        "start": "biz_date",
+        "end": "biz_date",
+        "asn": "asn",
+        "plate": "plate"
+      },
+      "providers": [
+        "provider.cache.shipments"
+      ],
+      "read_only": true
+    },
+    {
+      "id": "cap.reconcile",
+      "type": "capability",
+      "intent": "reconcile",
+      "label": "发货-扣款对账",
+      "entity": "entity.reconciliation",
+      "bind": {
+        "month": "biz_date",
+        "start": "biz_date",
+        "end": "biz_date"
+      },
+      "providers": [
+        "provider.cache.reconciliation"
+      ],
+      "read_only": true
+    },
+    {
+      "id": "cap.overview",
+      "type": "capability",
+      "intent": "overview",
+      "label": "数据概览",
+      "entity": null,
+      "bind": {},
+      "providers": [
+        "provider.cache.local"
+      ],
+      "read_only": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "app.srm",
+      "to": "page.deduction",
+      "type": "contains"
+    },
+    {
+      "from": "page.deduction",
+      "to": "api.deduction.list",
+      "type": "calls"
+    },
+    {
+      "from": "api.deduction.list",
+      "to": "entity.deduction",
+      "type": "returns"
+    },
+    {
+      "from": "provider.cache.shipments",
+      "to": "entity.shipment",
+      "type": "returns"
+    },
+    {
+      "from": "provider.cache.deductions",
+      "to": "entity.deduction",
+      "type": "returns"
+    },
+    {
+      "from": "provider.cache.reconciliation",
+      "to": "entity.reconciliation",
+      "type": "returns"
+    },
+    {
+      "from": "provider.cache.local",
+      "to": "app.srm",
+      "type": "reads"
+    },
+    {
+      "from": "entity.deduction",
+      "to": "entity.shipment",
+      "type": "references",
+      "on": "asn"
+    },
+    {
+      "from": "entity.reconciliation",
+      "to": "entity.shipment",
+      "type": "derives_from"
+    },
+    {
+      "from": "entity.reconciliation",
+      "to": "entity.deduction",
+      "type": "derives_from"
+    },
+    {
+      "from": "cap.deduction.summary",
+      "to": "entity.deduction",
+      "type": "queries"
+    },
+    {
+      "from": "cap.deduction.detail",
+      "to": "entity.deduction",
+      "type": "queries"
+    },
+    {
+      "from": "cap.shipment.summary",
+      "to": "entity.shipment",
+      "type": "queries"
+    },
+    {
+      "from": "cap.shipment.detail",
+      "to": "entity.shipment",
+      "type": "queries"
+    },
+    {
+      "from": "cap.reconcile",
+      "to": "entity.reconciliation",
+      "type": "queries"
+    },
+    {
+      "from": "cap.overview",
+      "to": "app.srm",
+      "type": "queries"
+    }
+  ]
+}

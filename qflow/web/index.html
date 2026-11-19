@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>SNXT · 智能图谱与语音交互中心</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090b;
+    --surface: #141417;
+    --surface-hover: #1c1c21;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.16);
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+    --accent: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.15);
+    --orb-gradient: radial-gradient(circle, #38bdf8 0%, #818cf8 40%, rgba(14, 165, 233, 0) 70%);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 顶部极简导航 */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 36px;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: rgba(9, 9, 11, 0.7);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+  }
+  .brand-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+  .tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    padding: 3px;
+    border-radius: 20px;
+    gap: 2px;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tab-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  .tab-btn:hover:not(.active) {
+    color: #fff;
+  }
+  .status-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+  }
+
+  /* 主体视窗 */
+  main {
+    flex: 1;
+    max-width: 1040px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .view-panel { display: none; }
+  .view-panel.active { display: block; animation: fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 🎙️ 极简语音交互核心 (Voice Orb) */
+  .voice-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0 24px;
+    text-align: center;
+  }
+  .orb-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 24px;
+  }
+  .orb-ambient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--orb-gradient);
+    opacity: 0.35;
+    filter: blur(28px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .orb-core {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 8px 32px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+  }
+  .orb-wrapper:hover .orb-ambient {
+    opacity: 0.6;
+    transform: scale(1.15);
+  }
+  .orb-wrapper:hover .orb-core {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .orb-wrapper.active .orb-ambient {
+    opacity: 0.9;
+    animation: orbPulse 1.6s infinite ease-in-out;
+  }
+  .orb-wrapper.active .orb-core {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(99, 102, 241, 0.4));
+    border-color: #38bdf8;
+    transform: scale(1.1);
+  }
+  @keyframes orbPulse {
+    0%, 100% { transform: scale(1); filter: blur(28px); }
+    50% { transform: scale(1.4); filter: blur(36px); }
+  }
+  .orb-caption {
+    font-size: 14px;
+    color: var(--text-secondary);
+    letter-spacing: -0.1px;
+    margin-bottom: 28px;
+  }
+
+  /* 输入栏 */
+  .input-capsule {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 6px 6px 6px 18px;
+    transition: all 0.2s ease;
+  }
+  .input-capsule:focus-within {
+    border-color: var(--border-hover);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.04);
+  }
+  .input-capsule input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .input-capsule input::placeholder {
+    color: var(--text-tertiary);
+  }
+  .send-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 16px;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .send-btn:hover {
+    background: #fff;
+    color: #000;
+  }
+
+  /* 快捷预设提问 */
+  .pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .pill {
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+  }
+
+  /* 对话流 */
+  .conversation-wrap {
+    max-width: 720px;
+    width: 100%;
+    margin: 32px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .chat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: fadeUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .chat-item.user {
+    align-items: flex-end;
+  }
+  .chat-item.ai {
+    align-items: flex-start;
+  }
+  .chat-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 4px;
+  }
+  .chat-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 90%;
+  }
+  .chat-item.user .chat-content {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.2);
+    color: #e0f2fe;
+  }
+
+  /* 极简表格 */
+  .table-box {
+    margin-top: 12px;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  table.clean-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    text-align: left;
+  }
+  table.clean-table th {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px 14px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  table.clean-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+  }
+
+  /* 🌐 极简系统图谱网格 */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .node-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .node-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-hover);
+  }
+  .node-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .node-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+  }
+  .node-badge.app { color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
+  .node-badge.entity { color: #a78bfa; background: rgba(167, 139, 250, 0.1); }
+  .node-badge.capability { color: #34d399; background: rgba(52, 211, 153, 0.1); }
+
+  .node-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .node-id {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-family: monospace;
+    margin-top: 2px;
+  }
+  .node-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* 极简弹窗 */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-box {
+    background: #141417;
+    border: 1px solid var(--border-hover);
+    border-radius: 18px;
+    max-width: 480px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+  }
+  .modal-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    margin-top: 6px;
+    outline: none;
+  }
+  .modal-input:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <div class="brand-logo">S</div>
+    <div>
+      <div class="brand-title">SNXT · 系统图谱与 VoiceAI</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('voice-view')">语音交互台</button>
+    <button class="tab-btn" onclick="switchTab('graph-view')">系统图谱建模</button>
+    <button class="tab-btn" onclick="switchTab('safety-view')">安全防护</button>
+  </div>
+
+  <div class="status-tag">
+    <span class="status-dot"></span>
+    <span id="conn-status">服务端在线 (8790)</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ================= 视图 1：灵动声波语音交互 ================= -->
+  <div id="voice-view" class="view-panel active">
+    <div class="voice-stage">
+      <div class="orb-wrapper" id="voice-orb" onclick="toggleVoiceRecording()">
+        <div class="orb-ambient"></div>
+        <div class="orb-core">🎙️</div>
+      </div>
+      <div class="orb-caption" id="orb-hint">点击光环开始说话，或在下方直接键入</div>
+
+      <div class="input-capsule">
+        <input type="text" id="query-input" placeholder="例如：查一下上周益农金穗的扣款明细..." onkeydown="if(event.key==='Enter') sendQuery()">
+        <button class="send-btn" onclick="sendQuery()">发送</button>
+      </div>
+
+      <div class="pills">
+        <span class="pill" onclick="quickAsk('上周有哪些质量扣款明细？')">上周扣款明细</span>
+        <span class="pill" onclick="quickAsk('查询本月的扣款总金额')">本月扣款总额</span>
+        <span class="pill" onclick="quickAsk('益农金穗最近的发货单')">益农金穗发货单</span>
+        <span class="pill" onclick="quickAsk('今天玉米的运输记录')">今日运输记录</span>
+      </div>
+    </div>
+
+    <!-- 对话流容器 -->
+    <div class="conversation-wrap" id="chat-stream">
+      <div class="chat-item ai">
+        <span class="chat-label">系统</span>
+        <div class="chat-content">
+          您好！业务查询大脑已在服务器就绪。您可直接点击上方光环对讲，或输入具体业务问题。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 视图 2：系统图谱中心 ================= -->
+  <div id="graph-view" class="view-panel">
+    <div class="section-header">
+      <div>
+        <div class="section-title">全域系统图谱 (System Graph)</div>
+        <div class="section-sub">通过大模型统一抽象的业务系统实体与能力网络</div>
+      </div>
+      <button class="send-btn" onclick="openGenModal()">✨ 由大模型生成新系统</button>
+    </div>
+
+    <div class="cards-grid" id="graph-cards-box">
+      <!-- 动态加载节点 -->
+    </div>
+
+    <div style="margin-top:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:13px;color:var(--text-secondary)">底层图谱 Schema 规范 (JSON)</span>
+        <button class="pill" onclick="saveGraphJson()">保存更改</button>
+      </div>
+      <textarea id="graph-editor" style="width:100%;height:200px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;color:var(--text-secondary);font-family:monospace;font-size:12px;outline:none"></textarea>
+    </div>
+  </div>
+
+  <!-- ================= 视图 3：安全防护 ================= -->
+  <div id="safety-view" class="view-panel">
+    <div class="section-title" style="margin-bottom:16px">安全与执行架构</div>
+    <div class="cards-grid">
+      <div class="node-card">
+        <div>
+          <div class="node-badge" style="color:#34d399;background:rgba(52,211,153,0.1)">已激活</div>
+          <div class="node-name" style="margin-top:10px">DOM 级防写与越权拦截器</div>
+          <div class="node-desc">
+            吸收自 Codex 架构设计：底层注入事件级断言，严密拦截 20+ 个写操作动作（提交、删除、修改、审核、作废等），绝不触碰任何写事件。
+          </div>
+        </div>
+      </div>
+
+      <div class="node-card">
+        <div>
+          <div class="node-badge" style="color:#38bdf8;background:rgba(56,189,248,0.1)">双通道架构</div>
+          <div class="node-name" style="margin-top:10px">API 直连 + 浏览器降级</div>
+          <div class="node-desc">
+            吸收自 DeepSeek 架构设计：首选直连后台 HTTP 接口获取纯净结构化数据；遇到复杂图形验证码时自动调用无头浏览器会话进行会话桥接。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- 大模型建图弹窗 -->
+<div class="modal-overlay" id="gen-modal">
+  <div class="modal-box">
+    <div style="font-size:16px;font-weight:600;margin-bottom:4px">✨ 智能系统建模</div>
+    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">告诉大模型新系统的业务说明，系统将自动生成节点与能力边：</div>
+
+    <div style="margin-bottom:12px">
+      <label style="font-size:12px;color:var(--text-tertiary)">系统标识 (ID)</label>
+      <input type="text" id="sys-id" class="modal-input" placeholder="如: app.oa 或 app.kingdee">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="font-size:12px;color:var(--text-tertiary)">系统名称</label>
+      <input type="text" id="sys-name" class="modal-input" placeholder="如: 泛微OA审批中心">
+    </div>
+
+    <div style="margin-bottom:20px">
+      <label style="font-size:12px;color:var(--text-tertiary)">业务场景与查询能力描述</label>
+      <textarea id="sys-desc" class="modal-input" style="height:70px;resize:none" placeholder="如: 查询采购对账进度、入库审批流状态"></textarea>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:8px">
+      <button class="pill" onclick="closeGenModal()">取消</button>
+      <button class="send-btn" onclick="submitGenSystem()">生成并挂载</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let isRecording = false;
+  let recognition = null;
+  let mediaRecorder = null;
+  let audioChunks = [];
+  let voiceLabSessionId = null;
+
+  function switchTab(viewId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(viewId).classList.add('active');
+    if (viewId === 'graph-view') loadGraph();
+  }
+
+  // 语音识别与录音
+  function initSpeech() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.lang = 'zh-CN';
+      recognition.onresult = (e) => {
+        const text = e.results[0][0].transcript;
+        document.getElementById('query-input').value = text;
+        sendQuery();
+      };
+      recognition.onend = () => stopVoiceRecording();
+      recognition.onerror = () => stopVoiceRecording();
+    }
+  }
+
+  async function startMediaRecorder() {
+    audioChunks = [];
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) audioChunks.push(e.data); };
+      mediaRecorder.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop());
+        const blob = new Blob(audioChunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+        await sendAudioToServer(blob);
+      };
+      mediaRecorder.start();
+      setOrbActive(true, '正在倾听您的声音...');
+    } catch (err) {
+      alert('请使用 HTTPS 或通过 SSH 端口转发映射到 localhost 访问以开启麦克风。');
+      stopVoiceRecording();
+    }
+  }
+
+  async function sendAudioToServer(blob) {
+    const thinkingId = appendChat('ai', '正在上传语音到服务器 VoiceLab 识别...');
+    try {
+      if (!voiceLabSessionId) {
+        const sResp = await fetch('/desk/api/voice/session', { method: 'POST' });
+        const sData = await sResp.json();
+        if (sData.ok && sData.session_id) voiceLabSessionId = sData.session_id;
+      }
+      const formData = new FormData();
+      formData.append('audio', blob, 'turn.webm');
+      const url = voiceLabSessionId ? `/desk/api/voice/turn?sid=${encodeURIComponent(voiceLabSessionId)}` : '/desk/api/query';
+      const resp = await fetch(url, { method: 'POST', body: formData });
+      const data = await resp.json();
+      removeChat(thinkingId);
+      if (data.ok && data.heard) appendChat('user', data.heard);
+      if (data.ok && data.reply) {
+        appendChat('ai', data.reply);
+        speak(data.reply);
+      } else {
+        appendChat('ai', data.error || '语音未识别出结果，请重试。');
+      }
+    } catch(e) {
+      removeChat(thinkingId);
+      appendChat('ai', '语音处理失败: ' + e.message);
+    }
+  }
+
+  function toggleVoiceRecording() {
+    if (isRecording) {
+      stopVoiceRecording();
+      return;
+    }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition && window.isSecureContext) {
+      if (!recognition) initSpeech();
+      try {
+        recognition.start();
+        setOrbActive(true, '正在倾听您的声音...');
+        return;
+      } catch(e) {}
+    }
+    startMediaRecorder();
+  }
+
+  function stopVoiceRecording() {
+    isRecording = false;
+    if (recognition) try { recognition.stop(); } catch(e){}
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') try { mediaRecorder.stop(); } catch(e){}
+    setOrbActive(false, '点击光环开始说话，或在下方直接键入');
+  }
+
+  function setOrbActive(active, text) {
+    isRecording = active;
+    const orb = document.getElementById('voice-orb');
+    const hint = document.getElementById('orb-hint');
+    if (active) {
+      orb.classList.add('active');
+      hint.innerText = text;
+      hint.style.color = '#38bdf8';
+    } else {
+      orb.classList.remove('active');
+      hint.innerText = text;
+      hint.style.color = 'var(--text-secondary)';
+    }
+  }
+
+  function speak(text) {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'zh-CN';
+      u.rate = 1.05;
+      window.speechSynthesis.speak(u);
+    }
+  }
+
+  async function sendQuery(custom) {
+    const input = document.getElementById('query-input');
+    const text = custom || input.value.trim();
+    if (!text) return;
+    input.value = '';
+
+    appendChat('user', text);
+    const thinkingId = appendChat('ai', '检索中...');
+
+    try {
+      const resp = await fetch('/desk/api/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text })
+      });
+      const data = await resp.json();
+      removeChat(thinkingId);
+
+      if (data.ok && data.reply) {
+        appendChat('ai', data.reply, data.table || data.rows);
+        speak(data.reply);
+      } else {
+        appendChat('ai', data.error || '未查到匹配记录。');
+      }
+    } catch(e) {
+      removeChat(thinkingId);
+      appendChat('ai', '请求出错，请检查服务端连接。');
+    }
+  }
+
+  function quickAsk(text) {
+    sendQuery(text);
+  }
+
+  function appendChat(role, text, tableData) {
+    const wrap = document.getElementById('chat-stream');
+    const item = document.createElement('div');
+    const id = 'chat-' + Date.now() + Math.random().toString(36).substr(2, 3);
+    item.id = id;
+    item.className = 'chat-item ' + role;
+
+    let html = `<span class="chat-label">${role === 'user' ? '用户' : '业务大脑'}</span><div class="chat-content">${text}`;
+    if (tableData && Array.isArray(tableData) && tableData.length > 0) {
+      const cols = Object.keys(tableData[0]).slice(0, 5);
+      html += `<div class="table-box"><table class="clean-table"><thead><tr>`;
+      cols.forEach(c => html += `<th>${c}</th>`);
+      html += `</tr></thead><tbody>`;
+      tableData.slice(0, 5).forEach(r => {
+        html += `<tr>`;
+        cols.forEach(c => html += `<td>${r[c] !== undefined ? r[c] : '-'}</td>`);
+        html += `</tr>`;
+      });
+      html += `</tbody></table></div>`;
+    }
+    html += `</div>`;
+    item.innerHTML = html;
+    wrap.appendChild(item);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    return id;
+  }
+
+  function removeChat(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  // 图谱管理
+  async function loadGraph() {
+    try {
+      const resp = await fetch('/desk/api/graph');
+      const res = await resp.json();
+      if (res.ok && res.graph) {
+        renderGraph(res.graph);
+        document.getElementById('graph-editor').value = JSON.stringify(res.graph, null, 2);
+      }
+    } catch(e) {}
+  }
+
+  function renderGraph(graph) {
+    const box = document.getElementById('graph-cards-box');
+    box.innerHTML = '';
+    (graph.nodes || []).forEach(n => {
+      const card = document.createElement('div');
+      card.className = 'node-card';
+      let badge = '应用 (App)';
+      if (n.type === 'entity') badge = '实体 (Entity)';
+      if (n.type === 'capability') badge = '能力 (Capability)';
+
+      card.innerHTML = `
+        <div>
+          <div class="node-top">
+            <span class="node-badge ${n.type}">${badge}</span>
+            <span style="font-size:11px;color:var(--text-tertiary)">${n.read_only ? '🔒 只读' : ''}</span>
+          </div>
+          <div class="node-name">${n.label || n.id}</div>
+          <div class="node-id">${n.id}</div>
+          <div class="node-desc">${n.description || (n.fields ? '字段: ' + n.fields.map(f=>f.label||f.name).slice(0,4).join(', ') : '标准图谱节点')}</div>
+        </div>
+      `;
+      box.appendChild(card);
+    });
+  }
+
+  async function saveGraphJson() {
+    try {
+      const graph = JSON.parse(document.getElementById('graph-editor').value);
+      const resp = await fetch('/desk/api/graph/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ graph: graph })
+      });
+      const d = await resp.json();
+      if (d.ok) { alert('已保存生效'); loadGraph(); }
+      else alert(d.error);
+    } catch(e) { alert('JSON 语法错误'); }
+  }
+
+  function openGenModal() { document.getElementById('gen-modal').style.display = 'flex'; }
+  function closeGenModal() { document.getElementById('gen-modal').style.display = 'none'; }
+
+  async function submitGenSystem() {
+    const id = document.getElementById('sys-id').value.trim();
+    const name = document.getElementById('sys-name').value.trim();
+    const desc = document.getElementById('sys-desc').value.trim();
+    if (!id || !name) return alert('请填写系统 ID 和名称');
+
+    const resp = await fetch('/desk/api/graph/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system_id: id, system_name: name, description: desc })
+    });
+    const d = await resp.json();
+    if (d.ok) {
+      alert(`系统 [${name}] 已生成！`);
+      closeGenModal();
+      loadGraph();
+    } else alert(d.error);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => initSpeech());
+</script>
+</body>
+</html>

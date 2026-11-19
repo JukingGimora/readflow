@@ -1,0 +1,8 @@
+# 在线只读抓取（Selenium + ddddocr）依赖；离线查询不需要
+selenium>=4.10
+ddddocr
+onnxruntime==1.17.3
+numpy==1.26.4
+pandas==2.2.2
+openpyxl>=3.1
+xlrd>=2.0

@@ -1,0 +1,3896 @@
+{
+ "/vendormgt/npc/npcTask/batchReCall": [
+  "0",
+  "322"
+ ],
+ "/vendormgt/npc/npcTask/toTab/withmtrl/view/": [
+  "0",
+  "321",
+  "322",
+  "73"
+ ],
+ "/vendormgt/npc/npcTask/delete/": [
+  "320",
+  "322",
+  "323"
+ ],
+ "/pe/pomgt/pomain/vendor/findByIds/": [
+  "409",
+  "95"
+ ],
+ "/pe/pomgt/poitem/buyer/unlockItem/": [
+  "409",
+  "411",
+  "76",
+  "95"
+ ],
+ "/pe/busLog/getList": [
+  "0",
+  "194",
+  "34",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "409",
+  "411",
+  "5",
+  "76",
+  "95"
+ ],
+ "/sunner/jitAllocation/findItemList": [
+  "239",
+  "43"
+ ],
+ "/sl/shipment/submitBdPortClient/": [
+  "449"
+ ],
+ "/sl/shipment/submitBdTransport/": [
+  "449"
+ ],
+ "/sl/shipment/updateDeliveryNo/": [
+  "449"
+ ],
+ "/sl/shipment/getById/": [
+  "412",
+  "449"
+ ],
+ "/businessconfig/vendor/delivery/query": [
+  "176",
+  "4"
+ ],
+ "/businessconfig/vendor/delivery/saveOrUpdate": [
+  "176",
+  "4"
+ ],
+ "/organization/purgroup/getAll": [
+  "0",
+  "317"
+ ],
+ "/vendormgt/vdchange/vendor/getBusList": [
+  "317"
+ ],
+ "/vendorreg/invite/findCount/": [
+  "317",
+  "333",
+  "86"
+ ],
+ "/organization/purOrg/getVendorByPurId/": [
+  "302",
+  "57"
+ ],
+ "/organization/factory/getFactoryByPurId/": [
+  "302",
+  "57"
+ ],
+ "/organization/company/getComByPurOrgId": [
+  "302",
+  "57"
+ ],
+ "/organization/purOrg/getById/": [
+  "302",
+  "57"
+ ],
+ "/organization/purOrg/updateStatus": [
+  "302",
+  "57"
+ ],
+ "/organization/purOrg/del/": [
+  "302",
+  "57"
+ ],
+ "/quote/getQuoteInfo/": [
+  "0",
+  "141",
+  "167",
+  "225",
+  "9",
+  "app"
+ ],
+ "/sourcing/item/getItemInfo/": [
+  "0",
+  "141",
+  "167",
+  "225",
+  "9",
+  "app"
+ ],
+ "/system/log/getList": [
+  "0",
+  "100",
+  "110",
+  "13",
+  "141",
+  "142",
+  "146",
+  "167",
+  "181",
+  "225",
+  "240",
+  "256",
+  "268",
+  "321",
+  "324",
+  "33",
+  "390",
+  "391",
+  "433",
+  "437",
+  "442",
+  "443",
+  "47",
+  "62",
+  "68",
+  "9",
+  "93",
+  "94",
+  "97",
+  "99"
+ ],
+ "/pricearchive/invalidPriceArchive/": [
+  "0",
+  "141",
+  "167",
+  "225",
+  "9"
+ ],
+ "/farmer/farmerManageQuery": [
+  "19",
+  "83"
+ ],
+ "/farmer/order/abolish": [
+  "19"
+ ],
+ "/contractmgt/termsType/getAll/": [
+  "352",
+  "70"
+ ],
+ "/contractmgt/terms/preView/": [
+  "70"
+ ],
+ "/contractmgt/terms/getTemplate/": [
+  "70"
+ ],
+ "/mdata/materialVendor/getVendorInfoByMatIdAndFacId/": [
+  "216",
+  "38"
+ ],
+ "/mdata/factory/material/convertunit/": [
+  "0",
+  "216",
+  "38"
+ ],
+ "/mdata/factory/material/subBom/": [
+  "216",
+  "38"
+ ],
+ "/mdata/factory/material/parentBom/": [
+  "216",
+  "38"
+ ],
+ "/mdata/material/getFactoryByMaterialId": [
+  "181",
+  "256",
+  "33",
+  "47"
+ ],
+ "/mdata/material/getMaterialById/": [
+  "181",
+  "256",
+  "33",
+  "47"
+ ],
+ "/mdata/materialVendor/getVendorByMaterialId": [
+  "181",
+  "256",
+  "33",
+  "47"
+ ],
+ "/vendormgt/vsrlist/query": [
+  "13",
+  "276",
+  "47"
+ ],
+ "/system/attachment/query": [
+  "28",
+  "app"
+ ],
+ "/pe/demand/indexTabs": [
+  "179"
+ ],
+ "/pe/demand/query": [
+  "150",
+  "179"
+ ],
+ "/pe/demand/tabList/": [
+  "150",
+  "179"
+ ],
+ "/pe/demand/update-item": [
+  "179"
+ ],
+ "/pe/demand/getVersion/": [
+  "150",
+  "179"
+ ],
+ "/contractmgt/contract/init": [
+  "0",
+  "30",
+  "350",
+  "353",
+  "354",
+  "358",
+  "359",
+  "360",
+  "361",
+  "362",
+  "363",
+  "364",
+  "87",
+  "88",
+  "89",
+  "app"
+ ],
+ "/contractmgt/electronic/seal/handle/bestsign": [
+  "353",
+  "354",
+  "362",
+  "364",
+  "82",
+  "87",
+  "88",
+  "89"
+ ],
+ "/contractmgt/contract/delete": [
+  "353",
+  "354",
+  "361",
+  "362",
+  "364",
+  "88",
+  "89"
+ ],
+ "/vendormgt/assess/compute/plan/del/": [
+  "112",
+  "121",
+  "125",
+  "137",
+  "180",
+  "228",
+  "255",
+  "296"
+ ],
+ "/vendormgt/assess/dim/allListTree": [
+  "460"
+ ],
+ "/vendormgt/assess/dim/delete": [
+  "460"
+ ],
+ "/vendormgt/assess/formularParam/delete": [
+  "460"
+ ],
+ "/vendormgt/assess/index/delete": [
+  "460"
+ ],
+ "/vendormgt/assess/cycle/init": [
+  "460"
+ ],
+ "/vendormgt/assess/result/viewResult/": [
+  "168",
+  "221",
+  "263",
+  "282"
+ ],
+ "/pe/vendor/delivery/loadItem/": [
+  "0",
+  "115",
+  "25"
+ ],
+ "/pe/buyer/delivery/close": [
+  "115",
+  "25"
+ ],
+ "/enquiry/getBaseInfo/": [
+  "133",
+  "51"
+ ],
+ "/doclib/docdir/query": [
+  "307"
+ ],
+ "/doclib/view/query": [
+  "307"
+ ],
+ "/doclib/publish/nodal/toShow/": [
+  "0",
+  "229",
+  "307"
+ ],
+ "/sunner/mall/mallaftersale/abolish/": [
+  "119",
+  "24"
+ ],
+ "/sunner/mall/mallaftersale/findItemById/": [
+  "119",
+  "24"
+ ],
+ "/system/area/queryCompanyOrFactory": [
+  "6"
+ ],
+ "/sunner/system/area/validateExportData": [
+  "6"
+ ],
+ "/system/area/add/": [
+  "155",
+  "6"
+ ],
+ "/contractmgt/template/getEnableList/": [
+  "359",
+  "360",
+  "88",
+  "89"
+ ],
+ "/contractmgt/electronic/seal/sign/bestsign": [
+  "154",
+  "269",
+  "359",
+  "360",
+  "82",
+  "87",
+  "88",
+  "89"
+ ],
+ "/adjustmgt/pricewarning/create/": [
+  "264"
+ ],
+ "/rawmatprice/archive/queryPriceHistory/": [
+  "386",
+  "75"
+ ],
+ "/rawmatprice/archive/invalid/": [
+  "386"
+ ],
+ "/ebpmgt/ebpbill/vendor/application": [
+  "274"
+ ],
+ "/businessconfig/vendorrecheck/getAll": [
+  "313",
+  "85"
+ ],
+ "/businessconfig/vendorrecheck/getInfoById/": [
+  "313",
+  "85"
+ ],
+ "/system/usermgt/users/queryAllPurchaser": [
+  "17",
+  "81"
+ ],
+ "/organization/expert/saveOrUpdate/": [
+  "17",
+  "81"
+ ],
+ "/organization/expert/query": [
+  "0",
+  "17"
+ ],
+ "/dic/dictionary/queryItem": [
+  "49"
+ ],
+ "/priceWaring/cloaseWaring/": [
+  "387"
+ ],
+ "/system/purchasedic/getPurchaseDic": [
+  "186",
+  "419",
+  "app"
+ ],
+ "/order/outOrder/confirmReceive/batch": [
+  "186"
+ ],
+ "/mall/delivery/confirmReceive/Delivery/": [
+  "186",
+  "234"
+ ],
+ "/mall/delivery/findLogisticsListByTrack": [
+  "186"
+ ],
+ "/mall/delivery/getEBusinessOrderInfo": [
+  "186"
+ ],
+ "/mall/delivery/getEMallOrderInfo": [
+  "186"
+ ],
+ "/mall/delivery/updateTransferor": [
+  "186"
+ ],
+ "/vendormgt/vsrmgt/publish": [
+  "110",
+  "13",
+  "276"
+ ],
+ "/vendormgt/vsrmgt/entry/query": [
+  "0",
+  "110",
+  "13",
+  "276"
+ ],
+ "/vendormgt/vsrmgt/fileDesc": [
+  "110",
+  "13"
+ ],
+ "/system/purchasedic/saveOrUpdate": [
+  "266",
+  "50"
+ ],
+ "/system/module/list": [
+  "29"
+ ],
+ "/mdata/material/getMaterirlByFacId/": [
+  "131",
+  "52"
+ ],
+ "/organization/purOrg/getPurOrgByFactoryId": [
+  "131",
+  "52"
+ ],
+ "/organization/company/getComByFacId": [
+  "0",
+  "131",
+  "346",
+  "396",
+  "398",
+  "399",
+  "5",
+  "52"
+ ],
+ "/organization/factory/removeFac/": [
+  "131",
+  "52"
+ ],
+ "/organization/factory/getByFactoryId/": [
+  "0",
+  "131",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5",
+  "52",
+  "app"
+ ],
+ "/ebpmgt/ebpbill/getInfo/": [
+  "0",
+  "220",
+  "281",
+  "40",
+  "53"
+ ],
+ "/mall/order/outorder/newChecking/query": [
+  "420"
+ ],
+ "/qm/qm8d/toView/": [
+  "373",
+  "374",
+  "65",
+  "91"
+ ],
+ "/sunner/assess/strategymatch/getAllAssessStrategicMapping": [
+  "309",
+  "465"
+ ],
+ "/businessconfig/precisionconfig/queryPage": [
+  "207",
+  "4"
+ ],
+ "/businessconfig/precisionconfig/insert": [
+  "207",
+  "4"
+ ],
+ "/adjustpricemgt/projectchange/whole/reject": [
+  "371",
+  "79"
+ ],
+ "/vendormgt/assess/setting/getDimMap/": [
+  "169",
+  "48"
+ ],
+ "/xcx/queue/delete/": [
+  "394"
+ ],
+ "/contractmgt/electronic/seal/relaunch": [
+  "82"
+ ],
+ "/sunner/vendormgt/questionary/bank/query/": [
+  "0",
+  "325",
+  "62"
+ ],
+ "/common/region/getProvinces": [
+  "325",
+  "62"
+ ],
+ "/common/region/getCities/": [
+  "325",
+  "62"
+ ],
+ "/vendormgt/data/maintenance/bank/getBankList/": [
+  "324",
+  "325",
+  "62"
+ ],
+ "/system/orgmgt/organization/getName/": [
+  "0",
+  "184",
+  "36",
+  "app"
+ ],
+ "/sunner/enquiry/getDicList": [
+  "0",
+  "253"
+ ],
+ "/sourcing/clause/getAllTemplate": [
+  "0",
+  "210"
+ ],
+ "/quote/template/getAllSelect": [
+  "0",
+  "210"
+ ],
+ "/enquiry/getPhaseInfo/2/": [
+  "0"
+ ],
+ "/enquiry/submit/submitSecretKey/": [
+  "0",
+  "262"
+ ],
+ "/sunner/enquiry/submit/submitSecretKey/": [
+  "0"
+ ],
+ "/organization/factory/query": [
+  "0",
+  "52"
+ ],
+ "/vendormgt/dlv/factoryInspect/queryScoreItem": [
+  "0"
+ ],
+ "/sourcing/file/getFileByModeId/": [
+  "0"
+ ],
+ "/sourcing/file/deleteFile/": [
+  "0"
+ ],
+ "/sourcing/file/abolish/": [
+  "0"
+ ],
+ "/sourcing/file/viewVersion/": [
+  "0"
+ ],
+ "/plan/palntemp/getTemplateList": [
+  "0",
+  "205"
+ ],
+ "/plan/palntemp/getTemplate/": [
+  "0",
+  "205",
+  "242"
+ ],
+ "/ebpmgt/ebpbill/vendor/getWinItemList/": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/getDim/": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/totalhis": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/result/getAdjustList": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTaskVendorNode/confirm/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTaskVendorNode/reject/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTaskVendorNode/query": [
+  "0"
+ ],
+ "/mdata/material/update": [
+  "0"
+ ],
+ "/sunner/system/usermgt/users/query": [
+  "0"
+ ],
+ "/tyc/vendor/risk/": [
+  "0"
+ ],
+ "/tyc/vendor/punish/": [
+  "0"
+ ],
+ "/bidmgt/bid/getExpert/": [
+  "0"
+ ],
+ "/bidmgt/bid/getPhaseInfo": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getVendorList/": [
+  "0"
+ ],
+ "/bidmgt/bid/getInfo/": [
+  "0",
+  "44"
+ ],
+ "/bidmgt/bid/beforeOpenBid/": [
+  "0"
+ ],
+ "/vendormgt/vsp/common/devlog/query/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getPhaseInfo/3/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getRoundQuotes/": [
+  "0"
+ ],
+ "/sunner/pesum/poitem/getAssetItem/": [
+  "0",
+  "397",
+  "398",
+  "5"
+ ],
+ "/sunner/pesum/poitem/getFreightOther/order/": [
+  "0",
+  "397",
+  "398",
+  "5"
+ ],
+ "/pesum/po/getInfo/": [
+  "0",
+  "301",
+  "5"
+ ],
+ "/mdata/lgort/getByLgortFactortIds": [
+  "0",
+  "197",
+  "224",
+  "277",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5",
+  "app"
+ ],
+ "/pesum/mileStone/completeMilestone/": [
+  "0"
+ ],
+ "/pesum/mileStone/adjustCompleteDate": [
+  "0"
+ ],
+ "/pesum/po/audit": [
+  "0"
+ ],
+ "/pesum/po/changing/audit": [
+  "0"
+ ],
+ "/pesum/mileStone/checkAcc/": [
+  "0"
+ ],
+ "/dic/dictionary/getDicItems/PAYMENT_TERMS": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/PAYMENT_METHOD": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/": [
+  "0"
+ ],
+ "/mdata/matCategory/getAllLeaf": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/system/purchasedic/getPurchaseDic/1": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5",
+  "app"
+ ],
+ "/dic/dictionary/getDicItems/TAX_RATE": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/ACCOUNT_TYPE": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/PROJECT_TYPE": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/CONTRACT_MILESTONE": [
+  "0",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/MODE_OF_TRANSPORT": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/pesum/mileStone/getByOrder/": [
+  "0",
+  "397",
+  "5"
+ ],
+ "/workflow/config/getByModule/": [
+  "0",
+  "277",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/process/variable/getVariable/": [
+  "0",
+  "277",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/process/instance/submitAudit": [
+  "0",
+  "277",
+  "346",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/sunner/contractmgt/contract/getByCode": [
+  "0",
+  "397",
+  "398",
+  "5"
+ ],
+ "/sunner/system/orgmgt/organization/findFilterUserByVendorId/": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5",
+  "app"
+ ],
+ "/vendormgt/lifecyclemgt/withdraw": [
+  "0",
+  "230"
+ ],
+ "/vendormgt/lifecyclemgt/check/": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/saveTemplate": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/showSelTemplate": [
+  "0",
+  "184",
+  "36"
+ ],
+ "/vendormgt/vsp/rfi/queryTemItem/": [
+  "0"
+ ],
+ "/vendormgt/questionary/bank/query/": [
+  "0",
+  "434",
+  "67",
+  "app"
+ ],
+ "/organization/company/getById/": [
+  "0",
+  "300",
+  "434",
+  "56",
+  "67",
+  "app"
+ ],
+ "/payment/order/queryOrderItem/": [
+  "0",
+  "436",
+  "67"
+ ],
+ "/fi/billmgt/buyer/getBillItmes/": [
+  "0",
+  "435",
+  "436",
+  "67",
+  "98"
+ ],
+ "/fi/billmgt/vendor/getInvoices/": [
+  "0",
+  "142",
+  "240",
+  "435",
+  "436",
+  "67",
+  "98"
+ ],
+ "/businessconfig/payment/query": [
+  "0",
+  "434",
+  "67",
+  "app"
+ ],
+ "/fi/claim/query": [
+  "0",
+  "433",
+  "434",
+  "435",
+  "437",
+  "67",
+  "97",
+  "98",
+  "99",
+  "app"
+ ],
+ "/vendormgt/vsp/rfi/rfiDetail/": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/newCheck/": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/check/": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/batchDownload/": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/marketQuery/": [
+  "0"
+ ],
+ "/mdata/factory/material/add/convertunit": [
+  "0"
+ ],
+ "/mdata/factory/material/edit/": [
+  "0"
+ ],
+ "/mdata/factory/material/update": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/revocation/": [
+  "0"
+ ],
+ "/sunner/fi/billmgt/vendor/submitCheck/": [
+  "0",
+  "240"
+ ],
+ "/fi/billmgt/vendor/delete/": [
+  "0",
+  "114",
+  "142",
+  "240"
+ ],
+ "/sunner/fisum/fibill/buyerConfirmInvoice": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/submitVdConfirmStatus/": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/submitInvoicePrepare/": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/changeOnLineStatus/": [
+  "0"
+ ],
+ "/fi/billmgt/vendor/removeinvoice/": [
+  "0",
+  "142",
+  "240"
+ ],
+ "/fisum/fibill/toDetail/": [
+  "0"
+ ],
+ "/fi/billmgt/vendor/getBillItmes/": [
+  "0",
+  "142",
+  "240"
+ ],
+ "/qm/quajud/findQuajudByBillId/": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/getOtherFile": [
+  "0",
+  "240"
+ ],
+ "/sourcing/clarify/getDetailInfo/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getRejectQuotes/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getBillQuoteList/": [
+  "0"
+ ],
+ "/ctmgt/quote/files/getRoundFileByType": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/queryEntraceInfo": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/remindScore": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/rejectPrice": [
+  "0"
+ ],
+ "/ppa/updateCompleteStatus/": [
+  "0"
+ ],
+ "/ppa/getEvaByPpaId/": [
+  "0"
+ ],
+ "/ppa/getTempLateByTempId/": [
+  "0"
+ ],
+ "/sunner/vendormgt/lifecyclemgt/check/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getPhaseInfo/2/": [
+  "0"
+ ],
+ "/sunner/vendormgt/dlv/factoryInspect/expertUser": [
+  "0"
+ ],
+ "/businessconfig/factoryinspect/getByInspectType/": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/getSessionMainData": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/getSessionItemData": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/getUpDown/": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/getErrorData/": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/deleteErrorData/": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/saveAndPublish": [
+  "0"
+ ],
+ "/system/orgmgt/organization/queryForNpcDatalist": [
+  "0"
+ ],
+ "/purchase/request/receive/getMatchFramework": [
+  "0"
+ ],
+ "/pricearchive/getSectionInfo/": [
+  "0"
+ ],
+ "/api/contract/getSectionInfo/": [
+  "0"
+ ],
+ "/enquiry/vendor/getItemList/": [
+  "0",
+  "217"
+ ],
+ "/sunner/enquiry/quoteHistoryView/": [
+  "0"
+ ],
+ "/vendormgt/vsp/common/vendorarchive/query/": [
+  "0"
+ ],
+ "/vendormgt/vsp/common/vendorarchive/delete/": [
+  "0"
+ ],
+ "/adjustpricemgt/linked/nextStep2": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/queryVendor": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/getPhaseInfo/2/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTask/query/": [
+  "0"
+ ],
+ "/organization/factory/update": [
+  "0"
+ ],
+ "/pricearchive/priceItemToView/": [
+  "0"
+ ],
+ "/sunner/ppa/getPpaVendorByPpaId/": [
+  "0"
+ ],
+ "/pe/pomgt/pomain/vendor/toPrint": [
+  "0"
+ ],
+ "/pe/vendor/delivery/deliveryCancel/": [
+  "0"
+ ],
+ "/pe/vendor/notpodelivery/deliveryDelete/": [
+  "0"
+ ],
+ "/pe/vendor/delivery/deleteDeliveryItem/": [
+  "0"
+ ],
+ "/pe/vendor/notpodelivery/toPrint/": [
+  "0"
+ ],
+ "/pe/vendor/delivery/deliveryItemCancel": [
+  "0"
+ ],
+ "/pe/vendor/notpodelivery/loadItem/": [
+  "0"
+ ],
+ "/common/region/getCountrys": [
+  "0",
+  "123",
+  "288",
+  "84",
+  "86",
+  "app"
+ ],
+ "/purchase/request/getRequestInfo": [
+  "0",
+  "146",
+  "268"
+ ],
+ "/dic/dictionary/getDicItems/PURCHASE_REQUEST_TYPE": [
+  "0"
+ ],
+ "/mainsupplycategory/getByCurrentUser": [
+  "0"
+ ],
+ "/ppa/getPpaRqByPpaId/": [
+  "0"
+ ],
+ "/enquiry/getPhaseInfo/5/": [
+  "0",
+  "241"
+ ],
+ "/enquiry/getAbolishItem/": [
+  "0",
+  "241"
+ ],
+ "/enquiry/getItemAndVendorInfo/": [
+  "0",
+  "108",
+  "262",
+  "app"
+ ],
+ "/enquiry/vendor/getWinBySourcingBillId/": [
+  "0"
+ ],
+ "/api/contract/getContractByCode/": [
+  "0",
+  "257",
+  "433",
+  "434",
+  "67",
+  "97"
+ ],
+ "/system/usermgt/users/queryReceviceUser": [
+  "0",
+  "348"
+ ],
+ "/pe/receive/record/queryItem/": [
+  "0"
+ ],
+ "/dic/dictionary/getEnmuJSON/ppa.dic.SunnerPpaDataDictionary$SunnerPricePPATypeEnum": [
+  "0"
+ ],
+ "/enquiry/getDicList": [
+  "0",
+  "26",
+  "51"
+ ],
+ "/bidmgt/route/getDicList": [
+  "0"
+ ],
+ "/vendormgt/assess/join/loadVdExpert": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/queryScoreItem": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/toViewScoreItem/": [
+  "0",
+  "10",
+  "8"
+ ],
+ "/system/orgmgt/organization/query-simple": [
+  "0",
+  "254",
+  "app"
+ ],
+ "/sunner/sourcing/bill/validateCompanyTaxRateByBillId": [
+  "0"
+ ],
+ "/sunner/enquiry/saveFreight": [
+  "0"
+ ],
+ "/sunner/enquiry/saveStorageFee": [
+  "0"
+ ],
+ "/qm/qm8d/feedback/check/": [
+  "0"
+ ],
+ "/organization/company/query": [
+  "0",
+  "56"
+ ],
+ "/bidmgt/bidEvaluation/purChaseEntrace": [
+  "0",
+  "304"
+ ],
+ "/purchase/request/receive/matchMaterial": [
+  "0"
+ ],
+ "/organization/purOrg/saveOrUpdate": [
+  "0"
+ ],
+ "/sunner/fisum/fibill/aiReview/": [
+  "0"
+ ],
+ "/mdata/material/view/": [
+  "0"
+ ],
+ "/system/template/query": [
+  "0"
+ ],
+ "/system/template/getInfo": [
+  "0"
+ ],
+ "/system/template/delete": [
+  "0"
+ ],
+ "/fi/billableitems/vendor/getRedBillableItems": [
+  "0",
+  "109"
+ ],
+ "/contractmgt/contract/getVendorInfo/": [
+  "0",
+  "app"
+ ],
+ "/contractmgt/contract/getEffectiveParent": [
+  "0",
+  "app"
+ ],
+ "/system/orgmgt/organization/getById/": [
+  "0",
+  "app"
+ ],
+ "/contractmgt/contract/getCompanyInfo/": [
+  "0",
+  "app"
+ ],
+ "/mdata/yyManagement/findByCompanyId": [
+  "0",
+  "app"
+ ],
+ "/purchase/request/assign": [
+  "0"
+ ],
+ "/sunner/mdata/material/findByMaterialId/": [
+  "0",
+  "210",
+  "346",
+  "396",
+  "398",
+  "399",
+  "5",
+  "app"
+ ],
+ "/mdata/material/getUserFactoryByMaterialId": [
+  "0"
+ ],
+ "/mdata/materialVendor/getByMatIdAndFacId/": [
+  "0",
+  "210"
+ ],
+ "/sunner/mdata/material/findByMaterialIdAndPurUnitCode": [
+  "0",
+  "210",
+  "app"
+ ],
+ "/sunner/enquiry/validAreaChange": [
+  "0",
+  "210"
+ ],
+ "/adjustpricemgt/confirm": [
+  "0",
+  "365",
+  "63"
+ ],
+ "/adjustpricemgt/linked/vendorQuote/": [
+  "0",
+  "365",
+  "63"
+ ],
+ "/sourcing/clarify/changeClarifyUser": [
+  "0"
+ ],
+ "/dic/dictionary/getDicItems/PURCHASE_ORDER_TYPE": [
+  "0",
+  "277",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/CURRENCY": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/KY_PROJECT": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/sunner/pesum/poitem/getPaymentTerms/": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/sunner/vendormgt/dlv/dlvApply/return": [
+  "0"
+ ],
+ "/vendormgt/dlv/dlvApply/getInfo": [
+  "0",
+  "184",
+  "36"
+ ],
+ "/vendormgt/dlv/dlvApply/stopDlv/": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/initData": [
+  "0",
+  "10",
+  "343",
+  "344",
+  "8",
+  "85"
+ ],
+ "/vendormgt/npc/npcTask/deleteWithoutValidation/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTaskItemVendor/delete/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTask/publish/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTaskItem/query/": [
+  "0",
+  "203",
+  "73"
+ ],
+ "/vendormgt/npc/npcTaskItemVendor/query/": [
+  "0",
+  "203",
+  "73"
+ ],
+ "/vendormgt/dlv/dlvApply/findForVendor/": [
+  "0"
+ ],
+ "/sourcing/clarify/info/": [
+  "0"
+ ],
+ "/sunner/contractmgt/contract/getContractQty": [
+  "0"
+ ],
+ "/sunner/pricearchive/getPrice/": [
+  "0"
+ ],
+ "/purchase/request/receive/query": [
+  "0"
+ ],
+ "/sunner/purchase/request/ensureToOrder": [
+  "0"
+ ],
+ "/sunner/purchase/request/resetHandle/validate": [
+  "0"
+ ],
+ "/sunner/purchase/request/resetHandle": [
+  "0"
+ ],
+ "/purchase/request/receive/close": [
+  "0"
+ ],
+ "/purchase/request/receive/manualMatchNotEffectiveContract": [
+  "0"
+ ],
+ "/sunner/purchase/request/updatePurUnit": [
+  "0"
+ ],
+ "/sunner/purchase/request/transferByPurGroup": [
+  "0"
+ ],
+ "/sunner/purchase/request/rejectEmallSkuRequestItem": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfiitem/findByVendorId": [
+  "0"
+ ],
+ "/vendormgt/vsp/rfi/vendorView/": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/nextStep/": [
+  "0"
+ ],
+ "/vendormgt/assess/sourceData/list": [
+  "0"
+ ],
+ "/vendormgt/assess/sourceData/imp/list": [
+  "0"
+ ],
+ "/vendormgt/assess/sourceData/imp/delList": [
+  "0"
+ ],
+ "/vendormgt/assess/sourceData/init": [
+  "0"
+ ],
+ "/vendormgt/assess/sourceData/delList": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/sourceData/getQualityExpertUserIdByPlan": [
+  "0"
+ ],
+ "/priceaudit/createUUId": [
+  "0",
+  "16",
+  "209"
+ ],
+ "/sunner/vendormgt/questionary/getVendorErpInfo/": [
+  "0"
+ ],
+ "/vendormgt/vdchange/vendor/toView/": [
+  "0"
+ ],
+ "/sunner/vendormgt/vdchange/vendor/submitOa/": [
+  "0"
+ ],
+ "/doclib/publish/nodal/create": [
+  "0"
+ ],
+ "/doclib/docdir/getTreeHasSon": [
+  "0"
+ ],
+ "/doclib/publish/nodal/submit": [
+  "0"
+ ],
+ "/doclib/publish/direct/quickPub": [
+  "0"
+ ],
+ "/sunner/purchase/request/queryMatchEmallSku": [
+  "0"
+ ],
+ "/sunner/purchase/request/sureMatchEmallSku": [
+  "0"
+ ],
+ "/system/usermgt/users/query": [
+  "0",
+  "248",
+  "7",
+  "app"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/getDimMap/": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/submitAudit/": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/audit": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/nextStep/": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/abolish": [
+  "0"
+ ],
+ "/ppa/getHistoryPrItem/": [
+  "0"
+ ],
+ "/organization/purOrg/query": [
+  "0",
+  "185",
+  "4",
+  "57"
+ ],
+ "/pe/receive/board/queryDeliveryGoodsItem/query": [
+  "0"
+ ],
+ "/dic/dictionary/getDicItems/PREPAYMENT_TYPE": [
+  "0",
+  "277",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5",
+  "app"
+ ],
+ "/pesum/po/getUserInfo": [
+  "0"
+ ],
+ "/organization/usergroup/getAll": [
+  "0",
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/vendormgt/lifecyclemgt/vdDetail/": [
+  "0"
+ ],
+ "/mdata/material/add/convertunit": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/quoteHistoryView/": [
+  "0"
+ ],
+ "/mdata/material/query": [
+  "0",
+  "258",
+  "279",
+  "app"
+ ],
+ "/organization/expert/query?evaluationType=": [
+  "0"
+ ],
+ "/fi/billableitems/vendor/billall": [
+  "0",
+  "109",
+  "438",
+  "439",
+  "440"
+ ],
+ "/vendormgt/npc/npcTaskItemVendor/getAllFeedbacks/": [
+  "0"
+ ],
+ "/bidmgt/route/secretKey/getInfo/": [
+  "0"
+ ],
+ "/bidmgt/bid/changeSecretRec": [
+  "0"
+ ],
+ "/bidmgt/bid/sendSecretKey/": [
+  "0"
+ ],
+ "/bidmgt/bid/openBid/": [
+  "0"
+ ],
+ "/sunner/vendorreg/invite/newSubmit": [
+  "0"
+ ],
+ "/sunner/vendorreg/invite/delete": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/totalinit": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/getDim/": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/finalCompute": [
+  "0"
+ ],
+ "/sunner/purchase/request/getRequest": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/getAwardInfo/": [
+  "0"
+ ],
+ "/dic/dictionary/getDicItems/MATERIAL_UNIT": [
+  "0"
+ ],
+ "/purchase/request/receive/changeMaterial": [
+  "0"
+ ],
+ "/doclib/base/archive/list": [
+  "0",
+  "211",
+  "45"
+ ],
+ "/doclib/base/material/list": [
+  "0",
+  "211",
+  "45"
+ ],
+ "/doclib/base/vendor/list": [
+  "0"
+ ],
+ "/doclib/publish/nodal/delegate": [
+  "0"
+ ],
+ "/doclib/publish/nodal/audit": [
+  "0"
+ ],
+ "/doclib/tag/save": [
+  "0"
+ ],
+ "/doclib/tag/list": [
+  "0"
+ ],
+ "/doclib/publish/nodal/publish": [
+  "0"
+ ],
+ "/doclib/archiveRepo/list/vdRepoDown": [
+  "0",
+  "211",
+  "45"
+ ],
+ "/doclib/archiveRepo/list/vdRepoSel": [
+  "0"
+ ],
+ "/doclib/base/vendor/disable/": [
+  "0"
+ ],
+ "/doclib/base/vendor/enable/": [
+  "0"
+ ],
+ "/organization/company/update": [
+  "0"
+ ],
+ "/sunner/pesum/poitem/getPayterms/": [
+  "0"
+ ],
+ "/mdata/material/changeHis/": [
+  "0"
+ ],
+ "/pe/dlv-skd/exec/delDeliveryPlan": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/vendor/getHallStatus": [
+  "0"
+ ],
+ "/ebpmgt/quotemgt/getQuoRankByEbpSafe": [
+  "0"
+ ],
+ "/ebpmgt/msg/getEbpMsg": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/delay": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/completeEbp": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/openEbpHallStatus": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/closeEbpHallStatus": [
+  "0"
+ ],
+ "/ebpmgt/ebpSimpleHall/finsh/": [
+  "0"
+ ],
+ "/ebpmgt/quotemgt/getQuoList": [
+  "0"
+ ],
+ "/tyc/vendor/base/": [
+  "0"
+ ],
+ "/mall/mallMessage/findMessageByBusinessIdAndType": [
+  "0"
+ ],
+ "/ppa/buildQuoaJson/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/toView/": [
+  "0",
+  "343",
+  "344"
+ ],
+ "/vendormgt/questionary/getEditInfo/": [
+  "0",
+  "app"
+ ],
+ "/vendormgt/register/questionary/getRegisterInfo/": [
+  "0",
+  "app"
+ ],
+ "/vendormgt/vsp/registvendor/query/audit/ZYZXZJ": [
+  "0",
+  "120"
+ ],
+ "/businessconfig/questionary/findByType?type=-1": [
+  "0",
+  "app"
+ ],
+ "/sunner/bidmgt/route/getDicList": [
+  "0",
+  "44",
+  "55"
+ ],
+ "/sourcing/clarify/getViewInfo": [
+  "0",
+  "303"
+ ],
+ "/bidmgt/bidEvaluation/viewExpertScore/": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/evaTechViewInfo": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/beforeNextTech/": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/finish-tech-eva": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/reEvaluation/": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/nextTech": [
+  "0"
+ ],
+ "/ppa/getBidRuleByPpaId/": [
+  "0"
+ ],
+ "/vendormgt/npc/npcTaskVendorNode/feedback/": [
+  "0"
+ ],
+ "/organization/factory/getByCurrentUser": [
+  "0"
+ ],
+ "/purchase/package/getRequestitemList": [
+  "0"
+ ],
+ "/enquiry/openEbpValidate": [
+  "0"
+ ],
+ "/sourcing/vendor/dieout": [
+  "0"
+ ],
+ "/enquiry/getPhaseInfo/3/": [
+  "0",
+  "262"
+ ],
+ "/enquiry/getInfo/": [
+  "0",
+  "11",
+  "215",
+  "253"
+ ],
+ "/rfqmgt/quote/findQuoteSum": [
+  "0"
+ ],
+ "/quote/item/getDetailFeeList/": [
+  "0",
+  "108",
+  "262",
+  "app"
+ ],
+ "/enquiry/submit/comparePrice/": [
+  "0",
+  "262"
+ ],
+ "/sunner/enquiry/sureMultiCase": [
+  "0"
+ ],
+ "/sourcing/file/getVendorFile/": [
+  "0"
+ ],
+ "/enquiry/vendor/batchSubmitQuote": [
+  "0"
+ ],
+ "/sourcing/clarify/notice/": [
+  "0"
+ ],
+ "/sourcing/clarify/response/": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/publish/": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/getScoreFinalViewInfo/": [
+  "0",
+  "343",
+  "344"
+ ],
+ "/pe/pomgt/pomain/getPoItemSubsByPoItemId/": [
+  "0"
+ ],
+ "/bidmgt/bidEvaluation/saveExperts/": [
+  "0"
+ ],
+ "/sunner/mdata/materialVendor/getVendorByMatId/": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/vendor/getPhase/": [
+  "0"
+ ],
+ "/sunner/purchase/request/getRequestItemList": [
+  "0"
+ ],
+ "/system/purchasedic/query": [
+  "0",
+  "272",
+  "398",
+  "5",
+  "50"
+ ],
+ "/mdata/matCategory/getAll": [
+  "0",
+  "app"
+ ],
+ "/organization/purgroup/getByCurrentUser": [
+  "0"
+ ],
+ "/sunner/consignmentinventory/buyer/query": [
+  "0"
+ ],
+ "/sunner/purchase/request/validatePurUnitByItemAdd": [
+  "0"
+ ],
+ "/purchase/request/findByBillId/": [
+  "0"
+ ],
+ "/sunner/purchase/request/deleteRequest": [
+  "0",
+  "3"
+ ],
+ "/sunner/mainsupplycategory/getMatCategorySAuth": [
+  "0"
+ ],
+ "/sunner/purchase/request/deleteItemByIdList": [
+  "0"
+ ],
+ "/sunner/pe/vendor/delivery/viewDetail/": [
+  "0",
+  "414"
+ ],
+ "/pe/vendor/delivery/viewDetail/": [
+  "0"
+ ],
+ "/pe/vendor/delivery/deliveryBoard/deliveryDetail": [
+  "0"
+ ],
+ "/qm/busLog/getList": [
+  "0",
+  "23",
+  "377"
+ ],
+ "/bidmgt/bid/vendor/getPhaseInfo/1/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/signUp/": [
+  "0"
+ ],
+ "/bidmgt/bid/getTempLateByTempId/": [
+  "0"
+ ],
+ "/sunner/vendormgt/assess/setting/getAllOptions": [
+  "0",
+  "279"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/marksinit": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/expertmarksinit": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/getTotalAllMarks/": [
+  "0"
+ ],
+ "/vendormgt/assess/compute/plan/expertmarks/getVendorScores": [
+  "0"
+ ],
+ "/sunner/enquiry/getStorageVendor": [
+  "0"
+ ],
+ "/mdata/materialVendor/getVendorByMatId/": [
+  "0"
+ ],
+ "/mdata/materialVendor/updateStatus": [
+  "0"
+ ],
+ "/fs/signer/delete/": [
+  "0"
+ ],
+ "/fs/signer/getInfo/": [
+  "0",
+  "424",
+  "426",
+  "429",
+  "431",
+  "96"
+ ],
+ "/fs/signer/confirm/": [
+  "0",
+  "429"
+ ],
+ "/fs/signer/cancel/": [
+  "0",
+  "429"
+ ],
+ "/fs/signer/publish/": [
+  "0"
+ ],
+ "/dic/dictionary/getDicItems/VENDOR_TAG_COMPANY": [
+  "0"
+ ],
+ "/vendormgt/assess/join/loadVendor": [
+  "0"
+ ],
+ "/bidmgt/route/getPhaseInfo/2/": [
+  "0"
+ ],
+ "/fs/fsbill/removeinvoice/": [
+  "0"
+ ],
+ "/fs/fsbill/getInvoices/": [
+  "0"
+ ],
+ "/fs/fsbill/revocation/": [
+  "0"
+ ],
+ "/fs/fsbill/withdraw/": [
+  "0"
+ ],
+ "/fs/fsbill/check/": [
+  "0"
+ ],
+ "/fs/fsbill/submitInvoicePrepare/": [
+  "0"
+ ],
+ "/sunner/enquiry/getFreightVendor": [
+  "0"
+ ],
+ "/adjustpricemgt/tempSave/next": [
+  "0"
+ ],
+ "/priceaudit/getMaterialLastPrice": [
+  "0"
+ ],
+ "/priceaudit/upDw": [
+  "0"
+ ],
+ "/fs/fsbill/submit/": [
+  "0"
+ ],
+ "/bidmgt/bid/vendor/getWinItemList/": [
+  "0"
+ ],
+ "/vendormgt/vsp/formalvendor/findByVendorId/": [
+  "0"
+ ],
+ "/vendormgt/dlv/dlvApply/findForPass": [
+  "0"
+ ],
+ "/sourcing/vendor/getAll/": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/getBuyerHall/": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/getEbpHallVendorList": [
+  "0"
+ ],
+ "/ebpmgt/ebpbill/delay2": [
+  "0"
+ ],
+ "/ebpmgt/quotemgt/getQuoListGroupVen": [
+  "0"
+ ],
+ "/ebpmgt/quotemgt/getQuoRankByEbp": [
+  "0"
+ ],
+ "/ebpmgt/quotemgt/getQuoListByEbp": [
+  "0"
+ ],
+ "/vendormgt/vsp/common/changelog/query": [
+  "0"
+ ],
+ "/ppa/getPpaBidBookFiles": [
+  "0"
+ ],
+ "/ppa/reverseToLastState/": [
+  "0"
+ ],
+ "/sunner/ppa/award": [
+  "0"
+ ],
+ "/sunner/purchase/request/queryMatch": [
+  "0"
+ ],
+ "/sunner/purchase/request/sureQueryMatch": [
+  "0"
+ ],
+ "/purchase/request/changeItem/": [
+  "0"
+ ],
+ "/purchase/request/submit/": [
+  "0"
+ ],
+ "/sunner/purchase/request/findItemDtoList/": [
+  "0"
+ ],
+ "/pe/vendor/delivery/deliveryDelete/": [
+  "0"
+ ],
+ "/sunner/pe/vendor/delivery/toPrint/": [
+  "0"
+ ],
+ "/vendormgt/dlv/dlvApply/publish/": [
+  "0"
+ ],
+ "/vendormgt/dlv/dlvApply/submitCategory/": [
+  "0"
+ ],
+ "/vendormgt/dlv/dlvApply/submitResource/": [
+  "0"
+ ],
+ "/system/orgmgt/organization/relation/purOrg": [
+  "0"
+ ],
+ "/mainsupplycategory/getAllCategories": [
+  "0",
+  "384",
+  "app"
+ ],
+ "/system/orgmgt/organization/relation/company": [
+  "0"
+ ],
+ "/sunner/mdata/material/getMaterialByFactory": [
+  "0"
+ ],
+ "/pricearchive/splitTaxRate": [
+  "0"
+ ],
+ "/product/getProductDetail": [
+  "0"
+ ],
+ "/vendormgt/vsp/common/vendormaterial/query/": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/queryByVendor/": [
+  "0"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/saveFinalResult": [
+  "0"
+ ],
+ "/vendormgt/vendorcategory/query/page": [
+  "0"
+ ],
+ "/vendormgt/vendorcategory/add": [
+  "0"
+ ],
+ "/vendormgt/vendorcategory/delete/": [
+  "0",
+  "199"
+ ],
+ "/ap/price/confirm/getBill/": [
+  "368",
+  "369",
+  "64",
+  "90"
+ ],
+ "/ap/price/confirm/getItemList/": [
+  "368",
+  "369",
+  "64",
+  "90"
+ ],
+ "/ap/price/confirm/confirm/": [
+  "369",
+  "90"
+ ],
+ "/symp/baseData/getInfo/": [
+  "456"
+ ],
+ "/symp/baseData/delete/": [
+  "456"
+ ],
+ "/contractmgt/termsType/getAll": [
+  "170",
+  "30"
+ ],
+ "/contractmgt/terms/getByType/": [
+  "170",
+  "30"
+ ],
+ "/contractmgt/terms/getByCategory/3": [
+  "170",
+  "30"
+ ],
+ "/contractmgt/terms/getByCategory/4": [
+  "170",
+  "30"
+ ],
+ "/mdata/factory/material/query": [
+  "38"
+ ],
+ "/sunner/mdata/factory/material/validateExportData": [
+  "38"
+ ],
+ "/planmgt/plan/getVersionInfo/": [
+  "205",
+  "242"
+ ],
+ "/temp/node/getActive/": [
+  "205",
+  "213"
+ ],
+ "/planmgt/plan/softDelete": [
+  "205",
+  "242"
+ ],
+ "/process/variable/saveOrUpdate": [
+  "305"
+ ],
+ "/system/report/getDic": [
+  "308"
+ ],
+ "/system/report/getCity": [
+  "308"
+ ],
+ "/fi/claim/buyerAgainSub": [
+  "443",
+  "68"
+ ],
+ "/fi/claim/chargeClaim/": [
+  "443",
+  "68"
+ ],
+ "/fi/claim/enterPrice": [
+  "443",
+  "68"
+ ],
+ "/fi/claim/closeClaim": [
+  "443",
+  "68"
+ ],
+ "/vendormgt/vsp/rfi/template/findByTemplateId": [
+  "311",
+  "312",
+  "60"
+ ],
+ "/vendormgt/vsp/rfi/template/updateTemplate": [
+  "312",
+  "60"
+ ],
+ "/vendormgt/vsp/rfi/template/deleteByTemplateId": [
+  "60"
+ ],
+ "/vendormgt/data/maintenance/publish/": [
+  "62"
+ ],
+ "/sunner/vendormgt/data/maintenance/toEdit/": [
+  "62"
+ ],
+ "/vendormgt/data/maintenance/remove/": [
+  "62"
+ ],
+ "/vendormgt/data/maintenance/validateExist/": [
+  "62"
+ ],
+ "/sunner/vendormgt/data/maintenance/toAdd": [
+  "62"
+ ],
+ "/sunner/vendormgt/data/maintenance/toView/": [
+  "62"
+ ],
+ "/sunner/vendorreg/invite/save/0": [
+  "328",
+  "86"
+ ],
+ "/sunner/vendorreg/invite/save/1": [
+  "328",
+  "86"
+ ],
+ "/sunner/vendorreg/invite/save/": [
+  "328",
+  "86"
+ ],
+ "/vendorreg/invite/update": [
+  "86"
+ ],
+ "/sunner/vendorreg/invite/delete/": [
+  "86"
+ ],
+ "/sunner/vendorreg/invite/submit/": [
+  "86"
+ ],
+ "/sunner/vendorreg/invite/updateCheckStatus/": [
+  "86"
+ ],
+ "/sunner/order/warrantyCheck/submitFinal": [
+  "157",
+  "39"
+ ],
+ "/businessconfig/questionary/aptitude/query": [
+  "187",
+  "4"
+ ],
+ "/businessconfig/questionary/aptitude": [
+  "187",
+  "4"
+ ],
+ "/businessconfig/questionary/aptitude/delete/": [
+  "187",
+  "4"
+ ],
+ "/mall/purchaseRequest/loadDetail/": [
+  "163"
+ ],
+ "/mall/purchaseRequest/updateCreateUserEmail": [
+  "163"
+ ],
+ "/sunner/mall/purchaseRequest/validateEmallVendor": [
+  "163"
+ ],
+ "/sunner/mall/purchaseRequest/getRelateQty": [
+  "163"
+ ],
+ "/sunner/mall/purchaseRequest/withdrawn": [
+  "163"
+ ],
+ "/sunner/mall/purchaseRequest/abolishItem": [
+  "163"
+ ],
+ "/businessconfig/orderconfig/query": [
+  "117",
+  "4"
+ ],
+ "/businessconfig/orderconfig/queryCf/": [
+  "117",
+  "4"
+ ],
+ "/organization/factory/getAll": [
+  "117",
+  "122",
+  "4"
+ ],
+ "/businessconfig/orderconfig/add": [
+  "117",
+  "4"
+ ],
+ "/sourcing/deposit/vendor/getViewInfo/": [
+  "200",
+  "37"
+ ],
+ "/product/producttag/delete": [
+  "295"
+ ],
+ "/system/taskexec/query": [
+  "27"
+ ],
+ "/system/taskexec/delete/": [
+  "27"
+ ],
+ "/system/taskexec/callExec/": [
+  "27"
+ ],
+ "/system/taskexec/saveOrUpdate": [
+  "160",
+  "27"
+ ],
+ "/mdata/yyManagement/validateExportData": [
+  "238"
+ ],
+ "/mdata/material/convertunit/": [
+  "181",
+  "33"
+ ],
+ "/store/adpositionMgr/delete/": [
+  "204"
+ ],
+ "/plan/palnhandle/loadUserTreeNode/": [
+  "242"
+ ],
+ "/planmgt/plan/getPlanItemInfo": [
+  "242"
+ ],
+ "/planmgt/plan/completePlanItem": [
+  "242"
+ ],
+ "/xcx/rez/info/": [
+  "191"
+ ],
+ "/vendormgt/assess/join/getDic": [
+  "466"
+ ],
+ "/fi/billableitems/vendor/query": [
+  "109"
+ ],
+ "/sunner/fi/billableitems/vendor/queryNotPage": [
+  "109"
+ ],
+ "/vendormgt/lifecyclemgt/config/add/": [
+  "326"
+ ],
+ "/vendormgt/lifecyclemgt/config/update/": [
+  "326"
+ ],
+ "/vendormgt/lifecyclemgt/getBusType": [
+  "230",
+  "326"
+ ],
+ "/product/producttag/queryAll": [
+  "135",
+  "275",
+  "417"
+ ],
+ "/product/brand/queryAllBrands": [
+  "135",
+  "275",
+  "417"
+ ],
+ "/sunner/product/updateMarketable": [
+  "139",
+  "275"
+ ],
+ "/product/removeProduct": [
+  "275"
+ ],
+ "/product/purAudit": [
+  "275"
+ ],
+ "/organization/company/getAll": [
+  "384"
+ ],
+ "/ap/price/confirm/saveAndPublish": [
+  "370",
+  "64"
+ ],
+ "/enquiry/query": [
+  "253"
+ ],
+ "/sunner/enquiry/vendor/export/validateExportData": [
+  "253"
+ ],
+ "/pe/rfs/buyer/updateRfs/": [
+  "194",
+  "34"
+ ],
+ "/pe/rfs/buyer/queryVendors/": [
+  "194",
+  "34"
+ ],
+ "/pe/rfs/buyer/vendorItemView/": [
+  "194",
+  "34"
+ ],
+ "/pe/rfs/buyer/saveOrPublish/": [
+  "34",
+  "400"
+ ],
+ "/pe/vendor/notpodelivery/viewDetail/": [
+  "288",
+  "413",
+  "84"
+ ],
+ "/pe/vendor/notpodelivery/deliveryBoard/deliveryDetail": [
+  "288",
+  "84"
+ ],
+ "/pe/vendor/notpodelivery/ordAddCart": [
+  "84"
+ ],
+ "/pe/vendor/notpodelivery/queryDeliveryCart": [
+  "84"
+ ],
+ "/pe/pomgt/pomain/vendor/view/": [
+  "95"
+ ],
+ "/organization/usergroup/saveOrUpdate": [
+  "12",
+  "270"
+ ],
+ "/sunner/organization/usergroup/validateExportData": [
+  "12"
+ ],
+ "/system/orgmgt/organization/queryForDatalist": [
+  "12",
+  "201"
+ ],
+ "/system/orgmgt/organization/findByPurGroup/": [
+  "12",
+  "201"
+ ],
+ "/system/orgmgt/organization/saveSupplier": [
+  "12",
+  "201"
+ ],
+ "/pesum/return/deleteReturn/": [
+  "390",
+  "93"
+ ],
+ "/pesum/return/cancelReturn/": [
+  "390",
+  "93"
+ ],
+ "/product/marketable/edit": [
+  "135"
+ ],
+ "/product/marketable/findSplitOrCopyShopWaitMarketableDto": [
+  "135",
+  "219"
+ ],
+ "/vendormgt/dlv/factoryInspect/toSettingExpert/": [
+  "343",
+  "344"
+ ],
+ "/vendormgt/dlv/factoryInspect/abolish/": [
+  "343",
+  "344"
+ ],
+ "/vendormgt/dlv/factoryInspect/toEdit/": [
+  "343",
+  "344",
+  "85"
+ ],
+ "/vendormgt/dlv/factoryInspect/factoryInspectMgt/delete/": [
+  "343",
+  "344"
+ ],
+ "/temp/node/findByTempId/": [
+  "213"
+ ],
+ "/temp/node/getTempInfo/": [
+  "213"
+ ],
+ "/plan/palntemp/updateOrPublish/": [
+  "213"
+ ],
+ "/temp/node/saveOrUpdate/": [
+  "213"
+ ],
+ "/plan/palntemp/delete/": [
+  "213"
+ ],
+ "/pe/receive/board/queryReport": [
+  "405",
+  "66"
+ ],
+ "/pe/receive/board/queryReportMatView": [
+  "405",
+  "66"
+ ],
+ "/dic/dictionary/getDicItems/CANCEL_REASON": [
+  "406",
+  "66"
+ ],
+ "/sunner/pe/receive/board/deleteItem/": [
+  "406",
+  "66"
+ ],
+ "/pe/receive/board/queryItem/": [
+  "406",
+  "66"
+ ],
+ "/pe/receive/board/toItem/": [
+  "66"
+ ],
+ "/sunner/pe/receive/board/back/": [
+  "66"
+ ],
+ "/sunner/pe/receive/board/delete/": [
+  "66"
+ ],
+ "/pe/receive/board/toAdd/": [
+  "66"
+ ],
+ "/pe/demand/vendorIndexTabs": [
+  "150"
+ ],
+ "/pe/demand/feedback-item": [
+  "150"
+ ],
+ "/pe/receive/stock/validateExpByStock": [
+  "407"
+ ],
+ "/sunner/vendormgt/assess/leveltask/delete/": [
+  "69"
+ ],
+ "/sunner/vendormgt/assess/leveltask/getVdLevelTaskInfo": [
+  "463",
+  "464",
+  "69"
+ ],
+ "/sunner/vendormgt/assess/leveltask/getMappingList": [
+  "463",
+  "464",
+  "69"
+ ],
+ "/sunner/vendormgt/assess/leveltask/queryVdLevelTaskItem": [
+  "464",
+  "69"
+ ],
+ "/pe/receive/record/toItem/": [
+  "402",
+  "403"
+ ],
+ "/process/todotask/transfer": [
+  "11"
+ ],
+ "/vendor/recheck/getPlanInfo/": [
+  "85"
+ ],
+ "/vendor/recheck/queryItem": [
+  "85"
+ ],
+ "/vendor/recheck/beforeSaveVendor/": [
+  "85"
+ ],
+ "/vendor/recheck/saveVendor/": [
+  "85"
+ ],
+ "/vendor/recheck/beforeDelete/": [
+  "85"
+ ],
+ "/vendor/recheck/delete/": [
+  "85"
+ ],
+ "/vendormgt/dlv/factoryInspect/savePlan": [
+  "85"
+ ],
+ "/vendormgt/assess/template/getAllDimSetting": [
+  "279"
+ ],
+ "/vendormgt/assess/template/getUpdate": [
+  "279"
+ ],
+ "/vendormgt/assess/template/getIndexSetting/": [
+  "279"
+ ],
+ "/vendormgt/assess/template/getAllDimSettingNotHaveTemplate": [
+  "279"
+ ],
+ "/businessconfig/vendorconfig/noticeconfig/getAllScenes": [
+  "273",
+  "4"
+ ],
+ "/businessconfig/vendorconfig/noticeconfig/query": [
+  "273",
+  "4"
+ ],
+ "/businessconfig/vendorconfig/noticeconfig/saveOrUpdate": [
+  "273",
+  "4"
+ ],
+ "/fs/freight/getInfo/": [
+  "428"
+ ],
+ "/fs/freight/delete/": [
+  "428"
+ ],
+ "/pe/dlv-skd/view/query": [
+  "193",
+  "42"
+ ],
+ "/contractmgt/contract/getContractChange": [
+  "349",
+  "364"
+ ],
+ "/pe/pomgt/poitem/buyer/getPoitemList": [
+  "349",
+  "364"
+ ],
+ "/contractmgt/contract/updateContractChangeInfo": [
+  "349",
+  "364"
+ ],
+ "/offlinesrc/getInfo/": [
+  "55"
+ ],
+ "/sunner/pesum/poitem/getFreightOther/": [
+  "346",
+  "396",
+  "398",
+  "399",
+  "5"
+ ],
+ "/pesum/po/delete": [
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5"
+ ],
+ "/dic/dictionary/getDicItems/DEPARTMENT": [
+  "346",
+  "396",
+  "397",
+  "398",
+  "399",
+  "5",
+  "app"
+ ],
+ "/pesum/po/query": [
+  "301"
+ ],
+ "/system/usermgt/users/queryRoleUser/": [
+  "248",
+  "7"
+ ],
+ "/system/usermgt/users/saveRoleUser": [
+  "248",
+  "7"
+ ],
+ "/dic/dictionary/getDicItems/PAY_PER_DESC": [
+  "297"
+ ],
+ "/pe/dlv-skd/exec/queryreqQty": [
+  "411",
+  "76"
+ ],
+ "/pe/dlv-skd/view/savedDeliveryplan": [
+  "411",
+  "76"
+ ],
+ "/sunner/vendormgt/vsp/rfiitem/feedBackView/": [
+  "18",
+  "294"
+ ],
+ "/sunner/pesum/poitem/updateFreight": [
+  "397",
+  "398",
+  "5"
+ ],
+ "/sunner/pesum/poitem/batch/updateFreight": [
+  "397",
+  "398",
+  "5"
+ ],
+ "/priceaudit/saveAndPublish": [
+  "16",
+  "177",
+  "209"
+ ],
+ "/sunner/priceaudit/toView/": [
+  "16",
+  "209",
+  "app"
+ ],
+ "/sunner/priceaudit/save": [
+  "16",
+  "209"
+ ],
+ "/priceaudit/priceDelete/": [
+  "16",
+  "app"
+ ],
+ "/sl/directive/carModel/queryPage": [
+  "450"
+ ],
+ "/sl/driver/vehicle/delete/": [
+  "450"
+ ],
+ "/sunner/fisum/fiwaitbill/queryJitReturnList": [
+  "439",
+  "440"
+ ],
+ "/sunner/fi/billableitems/buyer/batchChangeTax": [
+  "438",
+  "439",
+  "440"
+ ],
+ "/sunner/fi/billableitems/buyer/changeMoney": [
+  "438",
+  "439",
+  "440"
+ ],
+ "/contractmgt/contract/revocation": [
+  "353",
+  "354"
+ ],
+ "/organization/purgroup/query": [
+  "32"
+ ],
+ "/vendormgt/questionary/getPhase": [
+  "319"
+ ],
+ "/payment/order/toAddOrderPay/": [
+  "436",
+  "67"
+ ],
+ "/sunner/fisum/fibill/updateConfirmInvoice": [
+  "142",
+  "240"
+ ],
+ "/fi/billmgt/vendor/query": [
+  "142",
+  "240"
+ ],
+ "/qm/quajud/findListByBillId/": [
+  "142",
+  "240"
+ ],
+ "/sunner/fi/billmgt/vendor/submitPurCheck/": [
+  "240"
+ ],
+ "/pe/pomgt/pomain/buyer/view/": [
+  "76"
+ ],
+ "/pe/dlv-skd/history/page": [
+  "235",
+  "42"
+ ],
+ "/product/marketable/updateMarket": [
+  "219"
+ ],
+ "/product/marketable/confirmAudit": [
+  "219"
+ ],
+ "/product/marketable/delete": [
+  "219"
+ ],
+ "/contractmgt/template/getByTerms/": [
+  "30",
+  "358",
+  "87",
+  "app"
+ ],
+ "/pe/receive/record/validateExpByReceive": [
+  "403"
+ ],
+ "/vendormgt/vsp/rfi/saveAndPublish": [
+  "162",
+  "72"
+ ],
+ "/bidmgt/bid/query": [
+  "44"
+ ],
+ "/bidmgt/bid/adjustEndTime/": [
+  "44"
+ ],
+ "/weighorder/print/": [
+  "22"
+ ],
+ "/weighorder/getInfo/": [
+  "22"
+ ],
+ "/farmer/info/": [
+  "22"
+ ],
+ "/mall/fiBill/view/": [
+  "422"
+ ],
+ "/businessconfig/vendorrecheck/delete/": [
+  "145",
+  "4"
+ ],
+ "/businessconfig/vendorrecheck/get/": [
+  "145",
+  "202",
+  "4"
+ ],
+ "/enquiry/vendor/getPhase/": [
+  "51"
+ ],
+ "/sunner/jitAllocation/reloadCreateOrder": [
+  "43"
+ ],
+ "/sunner/jitAllocation/reloadCreateReturnOrder": [
+  "43"
+ ],
+ "/vendormgt/assess/result/adjust/audit/query": [
+  "48"
+ ],
+ "/jd/accountbill/update/dif/": [
+  "421"
+ ],
+ "/jd/accountbill/submit/fi/": [
+  "421"
+ ],
+ "/mdata/lgort/delete/": [
+  "120",
+  "206"
+ ],
+ "/vendormgt/vsp/formalvendor/black/": [
+  "120"
+ ],
+ "/vendormgt/vsp/formalvendor/findUSerByVendorId/": [
+  "120"
+ ],
+ "/vendormgt/vsp/formalvendor/active/": [
+  "120"
+ ],
+ "/vendormgt/vsp/formalvendor/openMall": [
+  "120"
+ ],
+ "/vendormgt/vsp/registvendor/query/audit/": [
+  "120"
+ ],
+ "/system/userlog/userslog/query": [
+  "280"
+ ],
+ "/system/userlog/userslog/getChartData": [
+  "280"
+ ],
+ "/system/rolemgt/roles/saveOrUpdate": [
+  "118",
+  "7"
+ ],
+ "/system/rolemgt/roles/query": [
+  "7"
+ ],
+ "/system/rolemgt/roles/delete/": [
+  "7"
+ ],
+ "/system/rolemgt/roles/queryUser/": [
+  "173",
+  "7"
+ ],
+ "/fi/claim/findById/": [
+  "100",
+  "68"
+ ],
+ "/system/notice/query": [
+  "31"
+ ],
+ "/system/notice/updateTopFlag": [
+  "31"
+ ],
+ "/store/adpositionMgr/getAll": [
+  "284"
+ ],
+ "/store/adMgr/delete/": [
+  "284"
+ ],
+ "/vendormgt/vsp/rfiitem/feedBackEd/": [
+  "124",
+  "18"
+ ],
+ "/vendormgt/vsp/rfiitem/feedBack/changeStatus/": [
+  "124",
+  "18"
+ ],
+ "/payment/order/closeOrderReq/": [
+  "435",
+  "98"
+ ],
+ "/payment/order/getReqItemsByReqId/": [
+  "435",
+  "98"
+ ],
+ "/businessconfig/factoryinspect/getDic": [
+  "202",
+  "4"
+ ],
+ "/businessconfig/factoryinspect/query": [
+  "202",
+  "4"
+ ],
+ "/businessconfig/factoryinspect/saveOrUpdate": [
+  "202",
+  "4"
+ ],
+ "/businessconfig/factoryinspect/delete/": [
+  "202",
+  "4"
+ ],
+ "/vendormgt/dlv/dlvApply/queryLabel": [
+  "184",
+  "36"
+ ],
+ "/fi/ficonfig/update": [
+  "445"
+ ],
+ "/businessconfig/demand/query": [
+  "144",
+  "4"
+ ],
+ "/businessconfig/demand/delete/": [
+  "144",
+  "4"
+ ],
+ "/businessconfig/demand/findById/": [
+  "144",
+  "4"
+ ],
+ "/businessconfig/demand/saveOrPublish/": [
+  "144",
+  "4"
+ ],
+ "/pe/vendor/delivery/validateExpByQuery": [
+  "25",
+  "413",
+  "414"
+ ],
+ "/product/query": [
+  "122"
+ ],
+ "/organization/company/query2/": [
+  "300",
+  "56"
+ ],
+ "/organization/purOrg/getPurOrgByCmpId": [
+  "300",
+  "56"
+ ],
+ "/organization/factory/getFactoryByCmpId": [
+  "272",
+  "300",
+  "56"
+ ],
+ "/organization/company/delete": [
+  "300",
+  "56"
+ ],
+ "/vendormgt/assess/project/getPlanInfo": [
+  "14",
+  "140",
+  "251",
+  "285",
+  "46"
+ ],
+ "/vendormgt/assess/project/queryIndexExpert/": [
+  "14",
+  "140",
+  "251",
+  "285",
+  "46"
+ ],
+ "/vendormgt/assess/project/setExpert/": [
+  "14",
+  "285"
+ ],
+ "/vendormgt/assess/project/setTime/": [
+  "14",
+  "285"
+ ],
+ "/vendormgt/assess/project/query": [
+  "14"
+ ],
+ "/vendormgt/assess/project/closeAssess/": [
+  "14"
+ ],
+ "/sunner/vendormgt/lifecyclemgt/freezeRelation/": [
+  "230"
+ ],
+ "/sl/vendorProducer/getInfo/": [
+  "448"
+ ],
+ "/sl/vendorProducer/delete/": [
+  "448"
+ ],
+ "/vendormgt/vsrmgt/query": [
+  "13"
+ ],
+ "/sunner/vendormgt/vsrmgt/deleteMatSource": [
+  "13"
+ ],
+ "/sourcing/deposit/returnDeposit/": [
+  "291",
+  "54"
+ ],
+ "/sourcing/deposit/buyer/getViewInfo/": [
+  "291",
+  "54"
+ ],
+ "/sourcing/deposit/getDepositByBillId/": [
+  "291",
+  "54"
+ ],
+ "/businessconfig/priceconfig/updatePriceType": [
+  "185",
+  "4"
+ ],
+ "/mall/order/setting/update": [
+  "278",
+  "4"
+ ],
+ "/mall/order/setting/delMallItemRow": [
+  "278",
+  "4"
+ ],
+ "/businessconfig/questionary/query": [
+  "226",
+  "4"
+ ],
+ "/businessconfig/getPpaNPAConfig": [
+  "232",
+  "4"
+ ],
+ "/businessconfig/cfbusinessmodel/findAll": [
+  "233",
+  "4"
+ ],
+ "/businessconfig/cfbusinessconfig/query": [
+  "233",
+  "4"
+ ],
+ "/businessconfig/cfbusinessaction/findByModelId/": [
+  "233",
+  "4"
+ ],
+ "/businessconfig/cfbusinessattribute/findByModelAndAction/": [
+  "233",
+  "4"
+ ],
+ "/businessconfig/cfbusinessconfig/saveOrUpdate": [
+  "233",
+  "4"
+ ],
+ "/businessconfig/cfbusinessconfig/delete/": [
+  "233",
+  "4"
+ ],
+ "/businessconfig/price/query": [
+  "164",
+  "4"
+ ],
+ "/doclib/view/queryVendorDir": [
+  "229"
+ ],
+ "/doclib/view/query/vendor": [
+  "229"
+ ],
+ "/payment/order/getOrderContractInfo/": [
+  "434",
+  "67"
+ ],
+ "/sunner/assess/strategymatch/del/": [
+  "71"
+ ],
+ "/sunner/assess/strategymatch/loadItem/": [
+  "310",
+  "71"
+ ],
+ "/common/region/queryCountry": [
+  "149"
+ ],
+ "/common/region/queryProvince": [
+  "149"
+ ],
+ "/common/region/queryCity": [
+  "149"
+ ],
+ "/common/region/queryArea": [
+  "149"
+ ],
+ "/common/region/updateErpCode": [
+  "149"
+ ],
+ "/vendormgt/npc/npcTaskItemVendor/reject/": [
+  "203",
+  "73"
+ ],
+ "/vendormgt/npc/npcTaskItemVendor/confirm/": [
+  "203",
+  "73"
+ ],
+ "/bidmgt/bid/vendor/getPhaseInfo/": [
+  "156",
+  "26"
+ ],
+ "/bidmgt/bid/vendor/getPhase/": [
+  "26"
+ ],
+ "/adjustpricemgt/saveAndPublish": [
+  "367",
+  "63"
+ ],
+ "/fs/signer/revokeConfirm/": [
+  "429"
+ ],
+ "/vendormgt/dlv/dlvApply/delete/": [
+  "36"
+ ],
+ "/vendormgt/dlv/dlvApply/revocation": [
+  "36"
+ ],
+ "/sl/directive/getById/": [
+  "452"
+ ],
+ "/doclib/publish/nodal/query": [
+  "287"
+ ],
+ "/doclib/docdir/getTreeByPurOrg/": [
+  "260"
+ ],
+ "/doclib/docdir/add": [
+  "260"
+ ],
+ "/qm/iqc/cancelPublish/": [
+  "23",
+  "377"
+ ],
+ "/adjustpricemgt/projectchange/delete/": [
+  "79"
+ ],
+ "/organization/rel/purgroup/deleteById": [
+  "224"
+ ],
+ "/organization/bom/getDic": [
+  "74"
+ ],
+ "/organization/bom/query": [
+  "74"
+ ],
+ "/organization/bom/imp-confirm": [
+  "74"
+ ],
+ "/doclib/vendor/": [
+  "211",
+  "45"
+ ],
+ "/doclib/vendor/query": [
+  "45"
+ ],
+ "/pe/receive/scan/check/": [
+  "401"
+ ],
+ "/pe/receive/board/toAdd/1/": [
+  "401"
+ ],
+ "/task/query": [
+  "41"
+ ],
+ "/task/runJobNow": [
+  "41"
+ ],
+ "/task/changeStatus/": [
+  "41"
+ ],
+ "/vendormgt/assess/project/submitMarks": [
+  "251",
+  "46"
+ ],
+ "/vendormgt/dlv/factoryInspect/improve/toFeedback/": [
+  "8"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/self/": [
+  "8"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/revocation": [
+  "8"
+ ],
+ "/system/log/erp2Srm_active": [
+  "189"
+ ],
+ "/system/sendemail/emails/closeEmailBeach": [
+  "189"
+ ],
+ "/system/sendemail/emails/restEmailBeach": [
+  "189"
+ ],
+ "/system/sendemail/emails/updateReceiveEmail": [
+  "189"
+ ],
+ "/vendormgt/vdchange/vendor/add": [
+  "316",
+  "61"
+ ],
+ "/vendormgt/questionary/aptitude/query/1/": [
+  "316",
+  "61",
+  "app"
+ ],
+ "/vendormgt/assess/project/queryExpert": [
+  "46"
+ ],
+ "/mdata/matCategory/queryVendorByCategoryErpId": [
+  "258"
+ ],
+ "/sunner/mainsupplycategory/validateErpExportData": [
+  "258"
+ ],
+ "/vendormgt/vdchange/vendor/getVdChangeInfo": [
+  "61"
+ ],
+ "/vendormgt/vdchange/vendor/delete/": [
+  "61"
+ ],
+ "/vendormgt/vdchange/vendor/edit/": [
+  "315",
+  "61"
+ ],
+ "/order/orderMgr/updateOrderTaking": [
+  "418"
+ ],
+ "/order/orderMgr/loadItem": [
+  "234",
+  "418"
+ ],
+ "/order/orderMgr/delilvery": [
+  "418"
+ ],
+ "/qm/quajud/vendorConfirm/": [
+  "222"
+ ],
+ "/vendormgt/dlv/factoryInspect/score/toEditScoreItem/": [
+  "10"
+ ],
+ "/vendormgt/dlv/factoryInspect/revocationByScore": [
+  "10"
+ ],
+ "/system/usermgt/users/lock/": [
+  "58"
+ ],
+ "/system/usermgt/users/unLock/": [
+  "58"
+ ],
+ "/system/usermgt/users/resetPwd/": [
+  "58",
+  "app"
+ ],
+ "/mdata/lgort/queryList": [
+  "206",
+  "app"
+ ],
+ "/sunner/mdata/lgort/validateExportData": [
+  "206"
+ ],
+ "/contractmgt/template/getEnableList/2": [
+  "363"
+ ],
+ "/sunner/fisum/fibill/query": [
+  "438"
+ ],
+ "/sunner/fi/billableitems/buyer/validateExpByQuery": [
+  "438"
+ ],
+ "/sl/vendor/address/delete/": [
+  "451"
+ ],
+ "/workflow/config/saveOrUpdate": [
+  "101"
+ ],
+ "/adjustpricemgt/linked/cleanSession": [
+  "190"
+ ],
+ "/mdata/material/jatco/update": [
+  "250"
+ ],
+ "/ppa/getPpaVendorByPpaId/": [
+  "183"
+ ],
+ "/ppa/buildSendData/": [
+  "183"
+ ],
+ "/ppa/updateSendPackageStatus/": [
+  "183"
+ ],
+ "/vendormgt/certExpiryNoti/buyer/new/updateCloseNoti/": [
+  "333"
+ ],
+ "/sunner/vendormgt/certExpiryNoti/buyer/rejected": [
+  "333"
+ ],
+ "/payment/order/viewOrderPay/": [
+  "98"
+ ],
+ "/system/task/todo/saveOrUpdate": [
+  "195",
+  "35"
+ ],
+ "/mall/order/setting/query": [
+  "234"
+ ],
+ "/order/orderMgr/initiateCampOn": [
+  "234"
+ ],
+ "/sunner/mall/purchaseRequest/loadDetail/": [
+  "234"
+ ],
+ "/mall/order/outorder/loadDetail": [
+  "234",
+  "419"
+ ],
+ "/sunner/mdata/confirmation/releaseBatch": [
+  "105"
+ ],
+ "/sunner/mdata/confirmation/release/": [
+  "105"
+ ],
+ "/sunner/mdata/confirmation/confirmFile": [
+  "105"
+ ],
+ "/sunner/mdata/confirmation/abolish/": [
+  "105"
+ ],
+ "/pesum/receive/auditReceive/": [
+  "391",
+  "94"
+ ],
+ "/pesum/receive/deleteReceive/": [
+  "391",
+  "94"
+ ],
+ "/pesum/receive/cancelReceive": [
+  "391",
+  "94"
+ ],
+ "/pe/buyer/delivery/viewDetail/": [
+  "25"
+ ],
+ "/pe/vendor/notpodelivery/validateExpByQuery": [
+  "413"
+ ],
+ "/pe/vendor/notpodelivery/deliveryCancel/": [
+  "413"
+ ],
+ "/mall/receiver/loadArea": [
+  "197"
+ ],
+ "/mall/receiver/editInitAddress/": [
+  "197"
+ ],
+ "/mall/receiver/delete/": [
+  "197"
+ ],
+ "/mall/receiver/saveOrUpdate": [
+  "197"
+ ],
+ "/qm/iqc/toEdit/": [
+  "23"
+ ],
+ "/qm/iqc/toJudgement/": [
+  "23"
+ ],
+ "/qm/iqc/toView/": [
+  "23",
+  "92"
+ ],
+ "/qm/qm8d/toAdd": [
+  "65"
+ ],
+ "/sunner/system/orgmgt/organization/updatePriceFlag/": [
+  "254"
+ ],
+ "/sunner/system/orgmgt/organization/updateElectronTagFlag/": [
+  "254"
+ ],
+ "/sunner/system/orgmgt/organization/updateStorageFee": [
+  "254"
+ ],
+ "/sunner/system/orgmgt/organization/updateGroupName": [
+  "254"
+ ],
+ "/sunner/system/orgmgt/organization/updateVendorFiFlag": [
+  "254"
+ ],
+ "/sunner/system/orgmgt/organization/updateInvoiceFlag": [
+  "254"
+ ],
+ "/sunner/system/orgmgt/organization/updateEmallFlag": [
+  "254"
+ ],
+ "/mdata/sunvalley/delete/": [
+  "393"
+ ],
+ "/payment/order/closePrePayReq/": [
+  "433",
+  "97"
+ ],
+ "/system/sysmessage/query": [
+  "174",
+  "app"
+ ],
+ "/system/sysmessage/updateReadStatus/": [
+  "174"
+ ],
+ "/system/sysmessage/readAll": [
+  "174",
+  "app"
+ ],
+ "/mainsupplycategory/getCategories": [
+  "123",
+  "app"
+ ],
+ "/newAccount/register": [
+  "123",
+  "app"
+ ],
+ "/product/cateGory/findAllCategories": [
+  "80"
+ ],
+ "/product/cateGory/getTreeValue": [
+  "80"
+ ],
+ "/product/cateGory/deleteById/": [
+  "80"
+ ],
+ "/product/cateGory/saveOrUpdate": [
+  "80"
+ ],
+ "/product/productSku/updateMarketable": [
+  "153"
+ ],
+ "/sunner/fi/billmgt/vendor/findInvoiceItemList": [
+  "152"
+ ],
+ "/enquiry/getPhaseInfo/4/": [
+  "108",
+  "app"
+ ],
+ "/dic/dictionary/getDicItems/FI_ADJUST_TYPE": [
+  "272"
+ ],
+ "/sunner/fi/adjust/getOrder/": [
+  "272"
+ ],
+ "/sunner/fi/adjust/getAsset/": [
+  "272"
+ ],
+ "/sunner/fi/adjust/delete": [
+  "272"
+ ],
+ "/sunner/fi/adjust/revocation/": [
+  "272"
+ ],
+ "/mainsupplycategory/queryMaterial": [
+  "15"
+ ],
+ "/mainsupplycategory/queryVendor": [
+  "15"
+ ],
+ "/sunner/mainsupplycategory/validateExportData": [
+  "15"
+ ],
+ "/sunner/mainsupplycategory/getCategoryAuthConfigInfo": [
+  "15"
+ ],
+ "/sunner/mainsupplycategory/saveCategoryAuthConfig": [
+  "15"
+ ],
+ "/mainsupplycategory/add/": [
+  "148",
+  "15"
+ ],
+ "/sourcing/vendor/": [
+  "217"
+ ],
+ "/sunner/fisum/fibill/validateExportItem": [
+  "114"
+ ],
+ "/sunner/fisum/fibill/validateExportAdjustItem": [
+  "114"
+ ],
+ "/sunner/fisum/fibill/validateExportData": [
+  "114"
+ ],
+ "/fisum/fiwaitbill/toPublishBill/": [
+  "114"
+ ],
+ "/sunner/fisum/fibill/getFsscUrl": [
+  "114"
+ ],
+ "/process/definition/suspendOrActiveApply": [
+  "147"
+ ],
+ "/process/definition/remove/": [
+  "147"
+ ],
+ "/pe/delivery/plan/validate": [
+  "178"
+ ],
+ "/mall/order/outorder/batchUpdateInfo": [
+  "419"
+ ],
+ "/mall/order/outorder/batchUpdateTrack": [
+  "419"
+ ],
+ "/mall/order/outorder/getTrack": [
+  "419",
+  "423"
+ ],
+ "/purchase/request/query": [
+  "146",
+  "268"
+ ],
+ "/purchase/request/receive": [
+  "146",
+  "268"
+ ],
+ "/mall/mallaftersale/loadAftersaleRefund": [
+  "423"
+ ],
+ "/doclib/publish/direct/query": [
+  "283"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/deleteJoinVendor": [
+  "137"
+ ],
+ "/sunner/vendormgt/assess/compute/plan/resetInitVendor": [
+  "137"
+ ],
+ "/ap/price/confirm/submitAwardAudit/": [
+  "368",
+  "64"
+ ],
+ "/symp/deduction/getInfo/": [
+  "59"
+ ],
+ "/symp/deduction/delete/": [
+  "59"
+ ],
+ "/rawmatprice/entry/check": [
+  "75"
+ ],
+ "/payment/milestone/closeMilestoneReq/": [
+  "437",
+  "99"
+ ],
+ "/contractmgt/contract/mileStone/getMilestoneContract/": [
+  "437",
+  "99"
+ ],
+ "/contractmgt/terms/composite/getTermsList/": [
+  "352"
+ ],
+ "/vendormgt/dlv/factoryInspect/queryTemplate": [
+  "252"
+ ],
+ "/vendormgt/dlv/factoryInspect/getTemplatePath": [
+  "252"
+ ],
+ "/pe/vendor/delivery/ordAddCart": [
+  "415"
+ ],
+ "/pe/vendor/delivery/queryDeliveryCart": [
+  "415"
+ ],
+ "/system/task/todo/query": [
+  "35"
+ ],
+ "/system/task/todo/delete/": [
+  "35"
+ ],
+ "/vendormgt/npc/npcTask/query": [
+  "320"
+ ],
+ "/sunner/order/finalCheck/delete/": [
+  "243"
+ ],
+ "/vendormgt/assess/join/getTemplateDimSetting": [
+  "459"
+ ],
+ "/vendormgt/assess/join/loadExpert": [
+  "459"
+ ],
+ "/ctmgt/rfq/template/getTemplatePath": [
+  "345"
+ ],
+ "/payment/order/toAddOrderPayBefore/": [
+  "67"
+ ],
+ "/payment/milestone/view/": [
+  "99"
+ ],
+ "/payment/order/viewPrePay/": [
+  "97"
+ ],
+ "/sunner/vendormgt/assess/findTemplateAll": [
+  "app"
+ ],
+ "/contractmgt/contract/file/findContractFileList": [
+  "app"
+ ],
+ "/system/token/saveAndUpdate": [
+  "app"
+ ],
+ "/system/token/delete": [
+  "app"
+ ],
+ "/system/token/queryToken": [
+  "app"
+ ],
+ "/businessconfig/price/getWhiteIpsConfig": [
+  "app"
+ ],
+ "/vendormgt/questionary/aptitude/query/2/": [
+  "app"
+ ],
+ "/vendormgt/questionary/survey/": [
+  "app"
+ ],
+ "/vendormgt/register/questionary/save": [
+  "app"
+ ],
+ "/vendormgt/register/questionary/back/": [
+  "app"
+ ],
+ "/vendormgt/register/questionary/commit": [
+  "app"
+ ],
+ "/logout": [
+  "app"
+ ],
+ "/system/test/task": [
+  "app"
+ ],
+ "/vendormgt/questionary/techCapacity/query/1/": [
+  "app"
+ ],
+ "/vendormgt/questionary/techCapacity/query/2/": [
+  "app"
+ ],
+ "/vendormgt/questionary/techCapacity/query/3/": [
+  "app"
+ ],
+ "/vendormgt/vdchange/vendor/queryByVendorId": [
+  "app"
+ ],
+ "/vendormgt/questionary/update": [
+  "app"
+ ],
+ "/vendormgt/questionary/updateAndCommit": [
+  "app"
+ ],
+ "/vendormgt/questionary/back/": [
+  "app"
+ ],
+ "/cas/callback": [
+  "app"
+ ],
+ "/dic/dictionary/getEnmuJSON/organization.org.dic.VendorBaseInfoDictionary$FactoryTypeEnum": [
+  "app"
+ ],
+ "/vendormgt/register/questionary/updateCmpNature": [
+  "app"
+ ],
+ "/vendormgt/questionary/staff/query/": [
+  "app"
+ ],
+ "/sunner/vendormgt/assess/compute/findAll": [
+  "app"
+ ],
+ "/vendorreg/invite/register/updateInviteStatus/": [
+  "app"
+ ],
+ "/mainsupplycategory/getAllByUserId": [
+  "app"
+ ],
+ "/contractmgt/contract/getChildAndChangeContract/": [
+  "app"
+ ],
+ "/vendormgt/questionary/salemoney/query/": [
+  "app"
+ ],
+ "/system/usermgt/users/switchUser/": [
+  "app"
+ ],
+ "/enquiry/item/getDetailCompare/": [
+  "app"
+ ],
+ "/vendormgt/questionary/vdExploreCapacity/query/": [
+  "app"
+ ],
+ "/system/usermgt/users/getRunasByTo/": [
+  "app"
+ ],
+ "/sunner/contractmgt/contract/buildOrderByContract": [
+  "app"
+ ],
+ "/sunner/organization/usergroup/getUserGroupAndOuUserGroupByCurrentUser": [
+  "app"
+ ],
+ "/mdata/matCategory/queryRemote": [
+  "app"
+ ],
+ "/api/tyc/vendor/view/": [
+  "app"
+ ],
+ "/vendormgt/questionary/material/query/": [
+  "app"
+ ],
+ "/system/usermgt/users/changePwd": [
+  "app"
+ ],
+ "/system/usermgt/users/updateInfo": [
+  "app"
+ ],
+ "/portal/getDetail/": [
+  "app"
+ ],
+ "/contractmgt/contract/editContentTerms/": [
+  "app"
+ ],
+ "/contractmgt/contract/check": [
+  "app"
+ ],
+ "/common/flowcheck/checkAuth": [
+  "app"
+ ],
+ "/contractmgt/contractitem/getAreaRelCompany/": [
+  "app"
+ ],
+ "/contractmgt/contractitem/getRelCmpAndVd/": [
+  "app"
+ ],
+ "/sunner/contractmgt/contract/editFileStatus/": [
+  "app"
+ ],
+ "/contractmgt/template/getEnableList": [
+  "app"
+ ],
+ "/sunner/contractmgt/contract/validateChange": [
+  "app"
+ ],
+ "/sunner/contractmgt/contract/findPurReqInfo": [
+  "app"
+ ],
+ "/api/receive/findByReceiveInfo/": [
+  "app"
+ ],
+ "/sunner/contractmgt/contract/getContractItemSplitData?contractId=": [
+  "app"
+ ],
+ "/vendormgt/questionary/product/query/": [
+  "app"
+ ],
+ "/sunner/vendormgt/questionary/product/material/": [
+  "app"
+ ],
+ "/cas/logout": [
+  "app"
+ ],
+ "/system/usermgt/users/updatePwd": [
+  "app"
+ ],
+ "/system/sendEmail": [
+  "app"
+ ],
+ "/system/usermgt/users/saveOrUpdate": [
+  "app"
+ ],
+ "/vendormgt/questionary/equiment/query/1/": [
+  "app"
+ ],
+ "/vendormgt/questionary/equiment/query/0/": [
+  "app"
+ ],
+ "/vendormgt/questionary/vdOutsourcingFac/query/": [
+  "app"
+ ],
+ "/sso/web/login": [
+  "app"
+ ],
+ "/system/rolemgt/roles/list": [
+  "app"
+ ],
+ "/system/usermgt/users/saveUserRole": [
+  "app"
+ ],
+ "/enquiry/vendor/getVendorItemById/": [
+  "app"
+ ],
+ "/system/sysmessage/updateReadStatusByIds": [
+  "app"
+ ],
+ "/system/sysmessage/delete": [
+  "app"
+ ],
+ "/system/refreshAuthorityData": [
+  "app"
+ ],
+ "/vendormgt/questionary/vdpertesting/query/1/": [
+  "app"
+ ],
+ "/vendormgt/questionary/vdpertesting/query/2/": [
+  "app"
+ ],
+ "/mdata/bank/query": [
+  "app"
+ ],
+ "/system/firstPage/findToolList": [
+  "app"
+ ],
+ "/system/firstPage//find/notice/more": [
+  "app"
+ ],
+ "/api/notice/route/getVendorCode": [
+  "app"
+ ],
+ "/api/ppa/addPpaVendor/": [
+  "app"
+ ],
+ "/mall/order/setting/queryMallConfig": [
+  "app"
+ ],
+ "/system/usermgt/users/saveUserDataOpe/": [
+  "app"
+ ],
+ "/contractmgt/contract/saveCtRel/": [
+  "app"
+ ],
+ "/enquiry/vendor/getQuoteClause/": [
+  "app"
+ ],
+ "/quote/template/getPreInfo/": [
+  "app"
+ ],
+ "/enquiry/vendor/getQuoteById/": [
+  "app"
+ ],
+ "/quote/getQuotedMulti/": [
+  "app"
+ ],
+ "/enquiry/vendor/getSectionQty/": [
+  "app"
+ ],
+ "/quote/item/getInfo/detail/": [
+  "app"
+ ],
+ "/contractmgt/contract/getContractById": [
+  "app"
+ ],
+ "/contractmgt/contract/mileStone/getByContract/": [
+  "app"
+ ],
+ "/contractmgt/contract/mileStone/publishMilestone/": [
+  "app"
+ ],
+ "/contractmgt/contract/mileStone/completeMilestone/": [
+  "app"
+ ],
+ "/contractmgt/contract/mileStone/adjustCompleteDate": [
+  "app"
+ ],
+ "/priceaudit/check": [
+  "app"
+ ],
+ "/vendormgt/questionary/service/query/": [
+  "app"
+ ],
+ "/mdata/sunvalley/query": [
+  "app"
+ ],
+ "/portal/query": [
+  "app"
+ ],
+ "/system/usermgt/users/queryUserRole/": [
+  "app"
+ ],
+ "/system/usermgt/users/getRunasByFrom/": [
+  "app"
+ ],
+ "/organization/company/getCompanyByUserId/": [
+  "app"
+ ],
+ "/organization/purOrg/getPurOrgByUserId/": [
+  "app"
+ ],
+ "/organization/purgroup/getByUserId/": [
+  "app"
+ ],
+ "/organization/usergroup/getByUserId/": [
+  "app"
+ ],
+ "/mainsupplycategory/getByUserId/": [
+  "app"
+ ],
+ "/organization/factory/getFactoryByUserId/": [
+  "app"
+ ],
+ "/mdata/lgort/getLgortByUserId/": [
+  "app"
+ ],
+ "/sunner/organization/purgroup/findOpByUserId/": [
+  "app"
+ ],
+ "/sunner/organization/purgroup/findFpByUserId/": [
+  "app"
+ ],
+ "/sunner/organization/usergroup/findOuByUserId/": [
+  "app"
+ ],
+ "/sunner/organization/usergroup/findFuByUserId/": [
+  "app"
+ ],
+ "/system/usermgt/users/delete/": [
+  "app"
+ ],
+ "/vendormgt/questionary/supply/query/": [
+  "app"
+ ]
+}

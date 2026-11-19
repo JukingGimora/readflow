@@ -1,0 +1,1773 @@
+{
+  "system": "sunner_srm",
+  "captured_at": "2026-11-18T22:44:56+08:00",
+  "source": "POST /srm/system/getLayoutInfo (cookie session, no browser)",
+  "modules": [
+    {
+      "name": "准入协同",
+      "menu": [],
+      "route": null,
+      "code": "dev",
+      "leaf": false,
+      "children": [
+        {
+          "name": "工厂考察评估",
+          "menu": [
+            "准入协同"
+          ],
+          "route": "/#/vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+          "code": "factoryScore",
+          "leaf": true
+        }
+      ]
+    },
+    {
+      "name": "商务报价",
+      "menu": [],
+      "route": null,
+      "code": "buscollaboration",
+      "leaf": false,
+      "children": [
+        {
+          "name": "询报价",
+          "menu": [
+            "商务报价"
+          ],
+          "route": "/#/sourcing/enquiry/vendor/quote-list",
+          "code": "buscollaboration-rfqquote",
+          "leaf": true
+        },
+        {
+          "name": "招投标",
+          "menu": [
+            "商务报价"
+          ],
+          "route": "/#/sourcing/bid/vendor-bid-list",
+          "code": "buscollaboration-tender",
+          "leaf": true
+        },
+        {
+          "name": "合同管理",
+          "menu": [
+            "商务报价"
+          ],
+          "route": null,
+          "code": "buscollaboration-contractmgt",
+          "leaf": false,
+          "children": [
+            {
+              "name": "合同清单",
+              "menu": [
+                "商务报价",
+                "合同管理"
+              ],
+              "route": "/#/sourcing/contract/vendor/contract-list-sign",
+              "code": "buscollaboration-contractmgt-contract",
+              "leaf": true
+            },
+            {
+              "name": "文本协议",
+              "menu": [
+                "商务报价",
+                "合同管理"
+              ],
+              "route": "/#/sourcing/contract/vendor/agreement_list",
+              "code": "buscollaboration-contractmgt-agreement",
+              "leaf": true
+            },
+            {
+              "name": "补充协议",
+              "menu": [
+                "商务报价",
+                "合同管理"
+              ],
+              "route": "/#/sourcing/contract/vendor/addendum-list",
+              "code": "buscollaboration-contractmgt-addendum",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "name": "保证金",
+          "menu": [
+            "商务报价"
+          ],
+          "route": "/#/sourcing/components/deposit/vendor/deposit-list",
+          "code": "buscollaboration-deposit",
+          "leaf": true
+        },
+        {
+          "name": "我的公司信息",
+          "menu": [
+            "商务报价"
+          ],
+          "route": null,
+          "code": "company",
+          "leaf": false,
+          "children": [
+            {
+              "name": "电子调查表",
+              "menu": [
+                "商务报价",
+                "我的公司信息"
+              ],
+              "route": "/#/vendor/regist/questionary-mid",
+              "code": "company-questionary",
+              "leaf": true
+            },
+            {
+              "name": "信息反馈",
+              "menu": [
+                "商务报价",
+                "我的公司信息"
+              ],
+              "route": "/#/vendor/vsp/rfi/vendor/rfiList",
+              "code": "VD-RFI-INFO",
+              "leaf": true
+            },
+            {
+              "name": "资质过期提醒",
+              "menu": [
+                "商务报价",
+                "我的公司信息"
+              ],
+              "route": "/#/vendor/expirynoti/vendor/query-list",
+              "code": "cert-expiry-noti-vendor",
+              "leaf": true
+            },
+            {
+              "name": "供应商变更申请",
+              "menu": [
+                "商务报价",
+                "我的公司信息"
+              ],
+              "route": "/#/vendor/vdchange/vendor/vdchange-list",
+              "code": "company-change",
+              "leaf": true
+            },
+            {
+              "name": "供应品类",
+              "menu": [
+                "商务报价",
+                "我的公司信息"
+              ],
+              "route": "/#/vendor/vendorcategory/vd-category-list",
+              "code": "company-category",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "采购协同",
+      "menu": [],
+      "route": null,
+      "code": "pevendor",
+      "leaf": false,
+      "children": [
+        {
+          "name": "采购订单",
+          "menu": [
+            "采购协同"
+          ],
+          "route": null,
+          "code": "pevendor-order",
+          "leaf": false,
+          "children": [
+            {
+              "name": "订单列表",
+              "menu": [
+                "采购协同",
+                "采购订单"
+              ],
+              "route": "/#/pe/po/vendor/poTab",
+              "code": "pevendor-order-list",
+              "leaf": true
+            },
+            {
+              "name": "执行情况",
+              "menu": [
+                "采购协同",
+                "采购订单"
+              ],
+              "route": "/#/pe/po/vendor/poExecStatusList",
+              "code": "pevendor-order-exec",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "name": "寄售库存",
+          "menu": [
+            "采购协同"
+          ],
+          "route": null,
+          "code": "pevendor-consignment-inventory",
+          "leaf": false,
+          "children": [
+            {
+              "name": "寄售库存查询",
+              "menu": [
+                "采购协同",
+                "寄售库存"
+              ],
+              "route": "/#/pe/po/vendor/consignment-inventory-query",
+              "code": "pevendor-consignment-inventory-query",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "name": "发货管理",
+          "menu": [
+            "采购协同"
+          ],
+          "route": null,
+          "code": "pevendor-delivery",
+          "leaf": false,
+          "children": [
+            {
+              "name": "发货记录",
+              "menu": [
+                "采购协同",
+                "发货管理"
+              ],
+              "route": "/#/pe/delivery/vendor/deliveryList",
+              "code": "pevendor-delivery-record",
+              "leaf": true
+            },
+            {
+              "name": "发货看板",
+              "menu": [
+                "采购协同",
+                "发货管理"
+              ],
+              "route": "/#/pe/delivery/orderDeliveryBoard",
+              "code": "pevendor-delivery-board",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "name": "收货管理",
+          "menu": [
+            "采购协同"
+          ],
+          "route": null,
+          "code": "pevendor-receive",
+          "leaf": false,
+          "children": [
+            {
+              "name": "收货记录",
+              "menu": [
+                "采购协同",
+                "收货管理"
+              ],
+              "route": "/#/pe/receive/receiverecord/vendor/receiveList",
+              "code": "pevendor-receive-record",
+              "leaf": true
+            },
+            {
+              "name": "收货差异",
+              "menu": [
+                "采购协同",
+                "收货管理"
+              ],
+              "route": "/#/pe/receive/receivecontrast/vendor/receiveContrastList",
+              "code": "pevendor-receive-diff",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "name": "退货管理",
+          "menu": [
+            "采购协同"
+          ],
+          "route": null,
+          "code": "pevendor-return",
+          "leaf": false,
+          "children": [
+            {
+              "name": "退货记录",
+              "menu": [
+                "采购协同",
+                "退货管理"
+              ],
+              "route": "/#/pe/purchasereturn/vendor-return-list",
+              "code": "pevendor-return-record",
+              "leaf": true
+            }
+          ]
+        },
+        {
+          "name": "开票管理",
+          "menu": [
+            "采购协同"
+          ],
+          "route": null,
+          "code": "pevendor-fi",
+          "leaf": false,
+          "children": [
+            {
+              "name": "结算调整单",
+              "menu": [
+                "采购协同",
+                "开票管理"
+              ],
+              "route": "/#/fi/vendor/fi-adjust-list",
+              "code": "pevendor-fi-adjust",
+              "leaf": true
+            },
+            {
+              "name": "货物往来明细",
+              "menu": [
+                "采购协同",
+                "开票管理"
+              ],
+              "route": "/#/fi/vendor/billable-items-list",
+              "code": "pevendor-fi-check-list",
+              "leaf": true
+            },
+            {
+              "name": "采购发起结算单",
+              "menu": [
+                "采购协同",
+                "开票管理"
+              ],
+              "route": "/#/fi/vendor/bill-list",
+              "code": "pevendor-fi-list",
+              "leaf": true
+            },
+            {
+              "name": "我司发起结算单",
+              "menu": [
+                "采购协同",
+                "开票管理"
+              ],
+              "route": "/#/fi/vendor/bill-list-vendor",
+              "code": "pevendor-fi-list-vendor",
+              "leaf": true
+            },
+            {
+              "name": "质量扣款明细",
+              "menu": [
+                "采购协同",
+                "开票管理"
+              ],
+              "route": "/#/quajud/qua-jud-vendor-list",
+              "code": "pevendor-fi-quaJud",
+              "leaf": true
+            },
+            {
+              "name": "询证函",
+              "menu": [
+                "采购协同",
+                "开票管理"
+              ],
+              "route": "/#/confirmation/vendor/confirmation-bill-list",
+              "code": "pevendor-fi-confirmationbill",
+              "leaf": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "商城",
+      "menu": [],
+      "route": null,
+      "code": "mallvendor",
+      "leaf": false,
+      "children": [
+        {
+          "name": "上架商品",
+          "menu": [
+            "商城"
+          ],
+          "route": "/#/mall/product/vendor-management-list",
+          "code": "vendor-management-list",
+          "leaf": true
+        },
+        {
+          "name": "待上架商品",
+          "menu": [
+            "商城"
+          ],
+          "route": "/#/mall/product/vendor-marketable-product",
+          "code": "mall-vendor-marketableProduct",
+          "leaf": true
+        },
+        {
+          "name": "订单管理",
+          "menu": [
+            "商城"
+          ],
+          "route": "/#/mall/order/vendor-order-management",
+          "code": "vendor-order-management",
+          "leaf": true
+        }
+      ]
+    }
+  ],
+  "leaf_pages": [
+    {
+      "name": "工厂考察评估",
+      "menu": [
+        "准入协同"
+      ],
+      "route": "/#/vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+      "vue_chunk": "vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/dlv/factoryInspect/score/queryScoreItem",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        8
+      ]
+    },
+    {
+      "name": "询报价",
+      "menu": [
+        "商务报价"
+      ],
+      "route": "/#/sourcing/enquiry/vendor/quote-list",
+      "vue_chunk": "sourcing/enquiry/vendor/quote-list",
+      "query_urls": [
+        "/enquiry/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        51
+      ]
+    },
+    {
+      "name": "招投标",
+      "menu": [
+        "商务报价"
+      ],
+      "route": "/#/sourcing/bid/vendor-bid-list",
+      "vue_chunk": "sourcing/bid/vendor-bid-list",
+      "query_urls": [
+        "/bidmgt/bid/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhase/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE"
+      ],
+      "chunks": [
+        0,
+        26
+      ]
+    },
+    {
+      "name": "合同清单",
+      "menu": [
+        "商务报价",
+        "合同管理"
+      ],
+      "route": "/#/sourcing/contract/vendor/contract-list-sign",
+      "vue_chunk": "sourcing/contract/vendor/contract-list-sign",
+      "query_urls": [
+        "/contractmgt/contract/vendor/query"
+      ],
+      "endpoints": [
+        "/contractmgt/contract/init",
+        "/contractmgt/electronic/seal/handle/bestsign",
+        "/contractmgt/electronic/seal/sign/bestsign",
+        "/contractmgt/template/getByTerms/"
+      ],
+      "chunks": [
+        87
+      ]
+    },
+    {
+      "name": "文本协议",
+      "menu": [
+        "商务报价",
+        "合同管理"
+      ],
+      "route": "/#/sourcing/contract/vendor/agreement_list",
+      "vue_chunk": "sourcing/contract/vendor/agreement_list",
+      "query_urls": [
+        "/contractmgt/contract/query"
+      ],
+      "endpoints": [
+        "/contractmgt/contract/delete",
+        "/contractmgt/contract/init",
+        "/contractmgt/electronic/seal/handle/bestsign",
+        "/contractmgt/electronic/seal/sign/bestsign",
+        "/contractmgt/template/getEnableList",
+        "/contractmgt/template/getEnableList/"
+      ],
+      "chunks": [
+        88
+      ]
+    },
+    {
+      "name": "补充协议",
+      "menu": [
+        "商务报价",
+        "合同管理"
+      ],
+      "route": "/#/sourcing/contract/vendor/addendum-list",
+      "vue_chunk": "sourcing/contract/vendor/addendum-list",
+      "query_urls": [
+        "contractmgt/contract/vendor/query"
+      ],
+      "endpoints": [
+        "/contractmgt/contract/delete",
+        "/contractmgt/contract/init",
+        "/contractmgt/electronic/seal/handle/bestsign",
+        "/contractmgt/electronic/seal/sign/bestsign",
+        "/contractmgt/template/getEnableList",
+        "/contractmgt/template/getEnableList/"
+      ],
+      "chunks": [
+        89
+      ]
+    },
+    {
+      "name": "保证金",
+      "menu": [
+        "商务报价"
+      ],
+      "route": "/#/sourcing/components/deposit/vendor/deposit-list",
+      "vue_chunk": "sourcing/components/deposit/vendor/deposit-list",
+      "query_urls": [
+        "/sourcing/deposit/queryDeposit"
+      ],
+      "endpoints": [
+        "/sourcing/deposit/vendor/getViewInfo/"
+      ],
+      "chunks": [
+        37
+      ]
+    },
+    {
+      "name": "电子调查表",
+      "menu": [
+        "商务报价",
+        "我的公司信息"
+      ],
+      "route": "/#/vendor/regist/questionary-mid",
+      "vue_chunk": "vendor/regist/questionary-mid",
+      "query_urls": [],
+      "endpoints": [
+        "/vendormgt/questionary/getPhase"
+      ],
+      "chunks": [
+        319
+      ]
+    },
+    {
+      "name": "信息反馈",
+      "menu": [
+        "商务报价",
+        "我的公司信息"
+      ],
+      "route": "/#/vendor/vsp/rfi/vendor/rfiList",
+      "vue_chunk": "vendor/vsp/rfi/vendor/rfiList",
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query",
+        "/vendormgt/vsp/rfiitem/findByVendorId"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        18
+      ]
+    },
+    {
+      "name": "资质过期提醒",
+      "menu": [
+        "商务报价",
+        "我的公司信息"
+      ],
+      "route": "/#/vendor/expirynoti/vendor/query-list",
+      "vue_chunk": "vendor/expirynoti/vendor/query-list",
+      "query_urls": [
+        "/vendormgt/certExpiryNoti/vendor/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        332
+      ]
+    },
+    {
+      "name": "供应商变更申请",
+      "menu": [
+        "商务报价",
+        "我的公司信息"
+      ],
+      "route": "/#/vendor/vdchange/vendor/vdchange-list",
+      "vue_chunk": "vendor/vdchange/vendor/vdchange-list",
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query",
+        "/vendormgt/vdchange/vendor/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        61
+      ]
+    },
+    {
+      "name": "供应品类",
+      "menu": [
+        "商务报价",
+        "我的公司信息"
+      ],
+      "route": "/#/vendor/vendorcategory/vd-category-list",
+      "vue_chunk": "vendor/vendorcategory/vd-category-list",
+      "query_urls": [
+        "vendormgt/vendorcategory/vendor/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        314
+      ]
+    },
+    {
+      "name": "订单列表",
+      "menu": [
+        "采购协同",
+        "采购订单"
+      ],
+      "route": "/#/pe/po/vendor/poTab",
+      "vue_chunk": "pe/po/vendor/poTab",
+      "query_urls": [
+        "/pe/pomgt/poitem/vendor/query",
+        "/pe/pomgt/pomain/queryByPoId",
+        "/pe/pomgt/pomain/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        95
+      ]
+    },
+    {
+      "name": "执行情况",
+      "menu": [
+        "采购协同",
+        "采购订单"
+      ],
+      "route": "/#/pe/po/vendor/poExecStatusList",
+      "vue_chunk": "pe/po/vendor/poExecStatusList",
+      "query_urls": [
+        "/pe/pomgt/execStatus/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        410
+      ]
+    },
+    {
+      "name": "寄售库存查询",
+      "menu": [
+        "采购协同",
+        "寄售库存"
+      ],
+      "route": "/#/pe/po/vendor/consignment-inventory-query",
+      "vue_chunk": "pe/po/vendor/consignment-inventory-query",
+      "query_urls": [
+        "sunner/consignmentinventory/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        292
+      ]
+    },
+    {
+      "name": "发货记录",
+      "menu": [
+        "采购协同",
+        "发货管理"
+      ],
+      "route": "/#/pe/delivery/vendor/deliveryList",
+      "vue_chunk": "pe/delivery/vendor/deliveryList",
+      "query_urls": [
+        "/pe/vendor/delivery/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        414
+      ]
+    },
+    {
+      "name": "发货看板",
+      "menu": [
+        "采购协同",
+        "发货管理"
+      ],
+      "route": "/#/pe/delivery/orderDeliveryBoard",
+      "vue_chunk": "pe/delivery/orderDeliveryBoard",
+      "query_urls": [
+        "/pe/vendor/delivery/deliveryForbidden/query",
+        "/pe/vendor/delivery/materialDeliveryBoard/query",
+        "/pe/vendor/delivery/orderDeliveryBoard/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        415
+      ]
+    },
+    {
+      "name": "收货记录",
+      "menu": [
+        "采购协同",
+        "收货管理"
+      ],
+      "route": "/#/pe/receive/receiverecord/vendor/receiveList",
+      "vue_chunk": "pe/receive/receiverecord/vendor/receiveList",
+      "query_urls": [
+        "/pe/receive/record/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        402
+      ]
+    },
+    {
+      "name": "收货差异",
+      "menu": [
+        "采购协同",
+        "收货管理"
+      ],
+      "route": "/#/pe/receive/receivecontrast/vendor/receiveContrastList",
+      "vue_chunk": "pe/receive/receivecontrast/vendor/receiveContrastList",
+      "query_urls": [
+        "/pe/receive/contrast/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        404
+      ]
+    },
+    {
+      "name": "退货记录",
+      "menu": [
+        "采购协同",
+        "退货管理"
+      ],
+      "route": "/#/pe/purchasereturn/vendor-return-list",
+      "vue_chunk": "pe/purchasereturn/vendor-return-list",
+      "query_urls": [
+        "/pe/return/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        126
+      ]
+    },
+    {
+      "name": "结算调整单",
+      "menu": [
+        "采购协同",
+        "开票管理"
+      ],
+      "route": "/#/fi/vendor/fi-adjust-list",
+      "vue_chunk": "fi/vendor/fi-adjust-list",
+      "query_urls": [
+        "/sunner/fi/adjust/vendor/query"
+      ],
+      "endpoints": [],
+      "chunks": [
+        261
+      ]
+    },
+    {
+      "name": "货物往来明细",
+      "menu": [
+        "采购协同",
+        "开票管理"
+      ],
+      "route": "/#/fi/vendor/billable-items-list",
+      "vue_chunk": "fi/vendor/billable-items-list",
+      "query_urls": [
+        "/fi/claim/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/sunner/fi/billableitems/vendor/query",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        109
+      ]
+    },
+    {
+      "name": "采购发起结算单",
+      "menu": [
+        "采购协同",
+        "开票管理"
+      ],
+      "route": "/#/fi/vendor/bill-list",
+      "vue_chunk": "fi/vendor/bill-list",
+      "query_urls": [
+        "/fi/billmgt/vendor/query"
+      ],
+      "endpoints": [
+        "/fi/billmgt/vendor/delete/",
+        "/fi/billmgt/vendor/getBillItmes/",
+        "/fi/billmgt/vendor/getInvoices/",
+        "/fi/billmgt/vendor/query",
+        "/fi/billmgt/vendor/removeinvoice/",
+        "/qm/quajud/findListByBillId/",
+        "/sunner/fisum/fibill/updateConfirmInvoice",
+        "/system/log/getList"
+      ],
+      "chunks": [
+        142
+      ]
+    },
+    {
+      "name": "我司发起结算单",
+      "menu": [
+        "采购协同",
+        "开票管理"
+      ],
+      "route": "/#/fi/vendor/bill-list-vendor",
+      "vue_chunk": "fi/vendor/bill-list-vendor",
+      "query_urls": [
+        "/fi/billmgt/vendor/query",
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        240
+      ]
+    },
+    {
+      "name": "质量扣款明细",
+      "menu": [
+        "采购协同",
+        "开票管理"
+      ],
+      "route": "/#/quajud/qua-jud-vendor-list",
+      "vue_chunk": "quajud/qua-jud-vendor-list",
+      "query_urls": [
+        "/qm/quajud/vendorQuery"
+      ],
+      "endpoints": [
+        "/qm/quajud/vendorConfirm/"
+      ],
+      "chunks": [
+        222
+      ]
+    },
+    {
+      "name": "询证函",
+      "menu": [
+        "采购协同",
+        "开票管理"
+      ],
+      "route": "/#/confirmation/vendor/confirmation-bill-list",
+      "vue_chunk": "confirmation/vendor/confirmation-bill-list",
+      "query_urls": [
+        "/sunner/mdata/confirmation/vendorQuery"
+      ],
+      "endpoints": [
+        "/contractmgt/electronic/seal/sign/bestsign"
+      ],
+      "chunks": [
+        154
+      ]
+    },
+    {
+      "name": "上架商品",
+      "menu": [
+        "商城"
+      ],
+      "route": "/#/mall/product/vendor-management-list",
+      "vue_chunk": "mall/product/vendor-management-list",
+      "query_urls": [
+        "/ppa/query",
+        "/pricearchive/query/area/material",
+        "/pricearchive/query/area/project",
+        "/pricearchive/query/area/subsection",
+        "/pricearchive/query/factory/material",
+        "/pricearchive/query/factory/project",
+        "/pricearchive/query/factory/subsection",
+        "/product/query",
+        "/system/template/query",
+        "/vendormgt/freightfee/yearFreightFee/query"
+      ],
+      "endpoints": [
+        "/adjustpricemgt/confirm",
+        "/adjustpricemgt/linked/deleteErrorData/",
+        "/adjustpricemgt/linked/getErrorData/",
+        "/adjustpricemgt/linked/getSessionItemData",
+        "/adjustpricemgt/linked/getSessionMainData",
+        "/adjustpricemgt/linked/getUpDown/",
+        "/adjustpricemgt/linked/nextStep2",
+        "/adjustpricemgt/linked/saveAndPublish",
+        "/adjustpricemgt/linked/vendorQuote/",
+        "/adjustpricemgt/tempSave/next",
+        "/api/contract/getContractByCode/",
+        "/api/contract/getSectionInfo/",
+        "/bidmgt/bid/beforeOpenBid/",
+        "/bidmgt/bid/changeSecretRec",
+        "/bidmgt/bid/getExpert/",
+        "/bidmgt/bid/getInfo/",
+        "/bidmgt/bid/getPhaseInfo",
+        "/bidmgt/bid/getTempLateByTempId/",
+        "/bidmgt/bid/openBid/",
+        "/bidmgt/bid/sendSecretKey/",
+        "/bidmgt/bid/vendor/getBillQuoteList/",
+        "/bidmgt/bid/vendor/getPhaseInfo/",
+        "/bidmgt/bid/vendor/getPhaseInfo/1/",
+        "/bidmgt/bid/vendor/getPhaseInfo/2/",
+        "/bidmgt/bid/vendor/getPhaseInfo/3/",
+        "/bidmgt/bid/vendor/getRejectQuotes/",
+        "/bidmgt/bid/vendor/getRoundQuotes/",
+        "/bidmgt/bid/vendor/getVendorList/",
+        "/bidmgt/bid/vendor/getWinItemList/",
+        "/bidmgt/bid/vendor/queryVendorQuoteByRoundId/",
+        "/bidmgt/bid/vendor/quoteHistoryView/",
+        "/bidmgt/bid/vendor/signUp/",
+        "/bidmgt/bidEvaluation/beforeNextTech/",
+        "/bidmgt/bidEvaluation/evaTechViewInfo",
+        "/bidmgt/bidEvaluation/finish-tech-eva",
+        "/bidmgt/bidEvaluation/nextTech",
+        "/bidmgt/bidEvaluation/purChaseEntrace",
+        "/bidmgt/bidEvaluation/queryEntraceInfo",
+        "/bidmgt/bidEvaluation/reEvaluation/",
+        "/bidmgt/bidEvaluation/rejectPrice",
+        "/bidmgt/bidEvaluation/remindScore",
+        "/bidmgt/bidEvaluation/saveExperts/",
+        "/bidmgt/bidEvaluation/viewExpertScore/",
+        "/bidmgt/route/getDicList",
+        "/bidmgt/route/getPhaseInfo/2/",
+        "/bidmgt/route/secretKey/getInfo/",
+        "/businessconfig/factoryinspect/getByInspectType/",
+        "/businessconfig/payment/query",
+        "/businessconfig/questionary/findByType?type=-1",
+        "/common/region/getCountrys",
+        "/contractmgt/contract/check",
+        "/contractmgt/contract/getCompanyInfo/",
+        "/contractmgt/contract/getEffectiveParent",
+        "/contractmgt/contract/getVendorInfo/",
+        "/contractmgt/contract/init",
+        "/ctmgt/quote/files/getRoundFileByType",
+        "/dic/dictionary/getDicItems/",
+        "/dic/dictionary/getDicItems/ACCOUNT_TYPE",
+        "/dic/dictionary/getDicItems/CONTRACT_MILESTONE",
+        "/dic/dictionary/getDicItems/CURRENCY"
+      ],
+      "chunks": [
+        0,
+        417
+      ]
+    },
+    {
+      "name": "待上架商品",
+      "menu": [
+        "商城"
+      ],
+      "route": "/#/mall/product/vendor-marketable-product",
+      "vue_chunk": "mall/product/vendor-marketable-product",
+      "query_urls": [
+        "/product/marketable/query"
+      ],
+      "endpoints": [
+        "/product/brand/queryAllBrands",
+        "/product/marketable/edit",
+        "/product/marketable/findSplitOrCopyShopWaitMarketableDto",
+        "/product/producttag/queryAll"
+      ],
+      "chunks": [
+        135
+      ]
+    },
+    {
+      "name": "订单管理",
+      "menu": [
+        "商城"
+      ],
+      "route": "/#/mall/order/vendor-order-management",
+      "vue_chunk": "mall/order/vendor-order-management",
+      "query_urls": [
+        "/order/orderMgr/query"
+      ],
+      "endpoints": [
+        "/order/orderMgr/delilvery",
+        "/order/orderMgr/loadItem",
+        "/order/orderMgr/updateOrderTaking"
+      ],
+      "chunks": [
+        418
+      ]
+    }
+  ]
+}

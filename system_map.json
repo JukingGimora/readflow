@@ -1,0 +1,98 @@
+{
+  "app": "sunner-srm",
+  "base_url": "https://srm.sunnercn.com:10001",
+  "read_only": true,
+  "source": "页面清单从 main.py 的既有自动化路径反推；扣款明细页待登录后运行 discover 确认",
+  "auth": {
+    "type": "form",
+    "captcha": "image",
+    "state_file": "data/auth/state.json",
+    "note": "只保存 Playwright storage_state，不保存账号密码"
+  },
+  "verified_pages": [
+    {
+      "name": "发货看板",
+      "menu": [
+        "采购协同",
+        "发货管理",
+        "发货看板"
+      ],
+      "route": "/#/board",
+      "read_only": true
+    },
+    {
+      "name": "待发货清单",
+      "menu": [
+        "采购协同",
+        "发货管理",
+        "待发货清单"
+      ],
+      "route": "/#/board",
+      "read_only": true
+    },
+    {
+      "name": "发货记录",
+      "menu": [
+        "采购协同",
+        "发货管理",
+        "发货记录"
+      ],
+      "route": "/#/board",
+      "read_only": true
+    },
+    {
+      "name": "发货详情/二维码打印",
+      "menu": [
+        "采购协同",
+        "发货管理",
+        "发货记录",
+        "详情",
+        "二维码打印"
+      ],
+      "read_only": true
+    },
+    {
+      "name": "质量扣款明细",
+      "menu": [
+        "采购协同",
+        "质量扣款明细"
+      ],
+      "route": "/#/quajud/qua-jud-vendor-list",
+      "read_only": true,
+      "verified_at": "2026-11-17"
+    }
+  ],
+  "target_pages": [
+    {
+      "name": "扣款明细",
+      "status": "unknown",
+      "note": "菜单层级、查询条件、接口均未知；登录后执行 python -m qflow discover，从输出里确认"
+    }
+  ],
+  "known_apis": [
+    {
+      "method": "POST",
+      "path": "/srm/qm/quajud/vendorQuery",
+      "body_keys": [
+        "page",
+        "rows",
+        "vendorCodeAndName",
+        "poNo"
+      ],
+      "note": "页面加载时自动调用并返回 rows；直接 fetch 仍需补齐请求参数/头"
+    }
+  ],
+  "data_sources": {
+    "shipments": [
+      "1000.xls",
+      "3000.xls"
+    ],
+    "deductions": [
+      "deduct.xls",
+      "(1).xls",
+      "(2).xls",
+      "(3).xls"
+    ],
+    "note": "当前查询层以导出文件为准；在线刷新是下一步，需先完成 discover"
+  }
+}
