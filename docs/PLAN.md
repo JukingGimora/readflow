@@ -3,7 +3,7 @@
 给接手的人或 code agent 看。先读这一份，再读 [`graph-spec.md`](graph-spec.md) 和 [`explorer-brief.md`](explorer-brief.md)。
 改了代码就同步改这里的状态，否则没人知道缺口在哪。
 
-最后更新：2026-11-20
+最后更新：2026-11-20 晚
 
 ## 1. 要做成什么
 
@@ -55,18 +55,23 @@
               └─ 滑块 / 扫码：把那块画面给用户操作        ← 未实现，见 T6
 ```
 
-## 3. 部署现状（2026-11-20 实地查看）
+## 3. 部署现状（2026-11-20 晚实地查看）
 
 - 服务器：一台 4090 D。VoiceLab 四个服务只监听本机：编排 8040、识别 8030、合成 8031（按需启动）、本地模型 8050（llama.cpp，Qwen3；VoiceLab 文档写的是 4B-Q4）。
-- 运行层：`~/projects/snxt-query`，systemd 用户服务 `snxt-query`，端口 8790。**跑的还是旧版代码**。
-- VoiceLab 里登记为 agent `snxt_deduction`，`type: http`，指向 `/voice/handle`。
-- 公网入口：Cloudflare 隧道（`tradesitecloud.com` 下已有若干子域名，`me.` 指向另一个服务，不要动）。**已定：运行层用新子域名 `flow.tradesitecloud.com`，尚未配置。**
+- 运行层：`~/projects/snxt-query`，systemd 用户服务 `snxt-query`，端口 8790。**2026-11-20 19:37 已部署本分支**（含 T0 登录门）。部署前的版本备份在 `~/projects/snxt-query-backup-20261120-1937.tgz`。
+- 口令：`.env` 里 `QFLOW_TOKEN`（接口用）和 `QFLOW_DESK_PASS`（页面用，一句中文）。部署脚本不再覆盖已有的 `.env`。
+- VoiceLab 里登记为 agent `snxt_deduction`，`type: http`，指向 `/voice/handle`，登记的口令已和服务一致。
 - 部署方式：在开发机上运行仓库外的 `deploy_server.sh`（打包 → scp → 解包 → 重启服务 → 向 VoiceLab 注册 agent）。
+- 公网入口：Cloudflare 隧道，`tradesitecloud.com` 下已有若干子域名（不要动）。运行层的子域名是 `flow.tradesitecloud.com` → 8790，DNS 和隧道规则已加。
+
+**部署后实测通过的**：不带口令访问 `/desk/api/*` 返回 401；页面口令能登录并查询；用 VoiceLab 登记的口令按它的请求格式连问两轮（含追问）正常。
 
 **已知的线上问题**
 
-- VoiceLab 里登记的口令是空的，而运行层的 `/voice/handle` 要口令（不带返回 401），所以语音链路按当前配置调不通。部署脚本已修（口令改为在服务器端读取），**重新部署一次后才生效**。
-- 服务器上的旧版运行层监听 `0.0.0.0:8790`，且 `/desk/api/*` 不需要口令。T0 已在代码里修掉，**重新部署后才生效**。
+- **`flow.tradesitecloud.com` 约一半请求返回 404（未解决，等负责人决定）。** 服务器上有两个 cloudflared 进程连着同一条隧道：一个是 systemd 用户服务 `cloudflared-jukinggimora`（已带 flow 规则），另一个是 2026-11-02 从登录会话里手动启动的（不归 systemd 管，仍是旧配置）。Cloudflare 在两者间分流。解决办法是停掉手动启动的那个；它承载着其它站点的流量，没有负责人同意不要动。
+- 部署是解包覆盖，仓库里已删除的文件（`qflow/explorer.py`、`executor.py`、`live.py`）还留在服务器目录里，不会被运行。部署脚本应改为解包前先清掉旧的 `qflow/`。
+- 运行层仍监听 `0.0.0.0:8790`。有了登录门后风险降低，但只走隧道的话应改成只监听本机（见 T9）。
+- 真实麦克风 → VoiceLab → 运行层 → 播报的整条链路没有验证过。
 
 ## 4. 已经做了的
 
