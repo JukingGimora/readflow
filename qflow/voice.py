@@ -124,8 +124,10 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
         else understand.route(parsed, text, has_previous=bool(previous))
     )
     if routed["kind"] == "write":
+        # 模型常把「想查的东西这里没有」也判成想办事，所以这句话对两种情况都要成立
+        can = "、".join(understand.labels()) or "已接入的数据"
         return {
-            "reply": "我现在只能帮你查，不能替你在系统里办事。要办的话还得自己到系统里操作。",
+            "reply": f"这个我帮不上。我现在只能帮你查{can}，不能替你在系统里办事。",
             "state_patch": {},
             "handled": True,
             "intent": "refuse.write",

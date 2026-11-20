@@ -3,6 +3,9 @@
 实测（2026-11-20，Qwen3-4B-Q4，64 句口语问法，见 docs/PLAN.md）：
 - 「想查哪一类业务 / 是想办事 / 和这里无关」：模型对 60 句，关键词规则对 32 句。
 - 「要总数还是要明细」、抽时间词：模型做不好（偏向明细；会漏、会编时间），规则更准。
+- 模型分不清「想办事」和「想查的东西这里没有」（报价单在哪看 → 常被判成想办事）。
+  换了五种提示词写法都在 97–99/104 之间，属于噪声，所以不再调提示词，
+  而是让这两种情况共用一句对两边都成立的回答（见 voice.handle）。
 
 所以模型只回答一个闭集选择题（一个字母），其余都由 nlu 里的规则做：
 - 规则认出了业务关键词 → 用规则（免费、确定）。模型只保留一票否决：它说「想办事」就拒绝。
@@ -101,6 +104,10 @@ def build_prompt(text: str, options: list[Group], has_previous: bool) -> tuple[s
     return prompt, answers
 
 
+def labels(graph: Graph | None = None) -> list[str]:
+    return [group.label for group in groups(graph)]
+
+
 def enabled() -> bool:
     return bool(config.LLM_URL)
 
@@ -145,6 +152,8 @@ def route(parsed, text: str, has_previous: bool = False, graph: Graph | None = N
     verdict = ask_model(text, has_previous, graph)
     if verdict == WRITE:
         return {"kind": "write", "intent": None, "by": "model"}
+    if rule_intent == "overview" and verdict == "overview":
+        return {"kind": "intent", "intent": "overview", "by": "model"}
     if rule_intent:
         return {"kind": "intent", "intent": rule_intent, "by": "rules"}
     if verdict is None:
