@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from . import capabilities, nlu
+from . import capabilities, nlu, understand
 from .graph import Graph, GraphError
 
 STATE_KEY = "snxt"
@@ -103,11 +103,6 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
     parsed = nlu.parse(text, now)
     params = _params(parsed.params)
     overview = any(word in text for word in ("概览", "总览", "数据情况"))
-    explicit = parsed.intent != "overview"
-    followup = bool(previous) and not explicit and not overview and bool(
-        params or any(word in text for word in DETAIL_WORDS + SUMMARY_WORDS)
-    )
-
     if text in COURTESY and not params:
         return {
             "reply": "好，有需要再问。",
@@ -116,16 +111,43 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
             "intent": previous.get("intent") or "chat",
         }
 
-    if overview:
-        result = capabilities.query(conn, text=text, now=now, live=live)
+    # 规则认业务关键词；认不出来的口语说法（「被罚了多少」「拉了几车」）交给本地模型选一类。
+    # 模型没配或连不上时 route 只按规则给结果，下面的流程和原来一样。
+    looks_like_followup = bool(previous) and bool(
+        params
+        or any(word in text for word in DETAIL_WORDS + SUMMARY_WORDS)
+        or nlu.wants_detail(text)
+    )
+    routed = (
+        {"kind": "unknown", "by": "rules"}
+        if overview
+        else understand.route(parsed, text, has_previous=bool(previous))
+    )
+    if routed["kind"] == "write":
+        return {
+            "reply": "我现在只能帮你查，不能替你在系统里办事。要办的话还得自己到系统里操作。",
+            "state_patch": {},
+            "handled": True,
+            "intent": "refuse.write",
+            "followups": _examples(),
+        }
+    if routed["kind"] == "intent" and routed["by"] == "model":
+        parsed.intent = routed["intent"]
+    if overview or (routed["by"] == "model" and routed.get("intent") == "overview"):
+        result = capabilities.query(conn, intent="overview", text=text, now=now, live=live)
         payload = _out(result, "overview", {})
         payload["state_patch"] = {STATE_KEY: {}}
         return payload
 
+    explicit = parsed.intent != "overview"
+    followup = bool(previous) and not explicit and not overview and (
+        looks_like_followup or routed["kind"] == "followup"
+    )
+
     if followup:
         intent = previous["intent"]
         merged = _inherit(_params(previous.get("params")), params)
-        if any(word in text for word in DETAIL_WORDS) and intent.startswith(
+        if (any(word in text for word in DETAIL_WORDS) or nlu.wants_detail(text)) and intent.startswith(
             ("deduction", "shipment")
         ):
             intent = intent.split(".")[0] + ".detail"
@@ -145,7 +167,9 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
                 merged.pop("plate", None)
             if parsed.intent.startswith("shipment"):
                 merged.pop("item", None)
-        result = capabilities.query(conn, text=text, params=merged, now=now, live=live)
+        result = capabilities.query(
+            conn, intent=parsed.intent, text=text, params=merged, now=now, live=live
+        )
         return _out(result, parsed.intent, merged)
 
     # 没有上下文、也没有明确意图：返回概览并提示可以问什么

@@ -30,6 +30,12 @@ DEFAULT_HOST = os.environ.get("QFLOW_HOST", "0.0.0.0")
 DEFAULT_PORT = int(os.environ.get("QFLOW_PORT", "8790"))
 
 # 服务器端 VoiceLab 语音引擎地址（ASR/TTS 统一中枢）
+# 本地小模型（OpenAI 兼容的 chat/completions 地址）。不设就只用规则。
+# 只用来做一道闭集选择题，见 qflow/understand.py。
+LLM_URL = os.environ.get("QFLOW_LLM_URL", "").strip()
+LLM_MODEL = os.environ.get("QFLOW_LLM_MODEL", "qwen3")
+LLM_TIMEOUT = float(os.environ.get("QFLOW_LLM_TIMEOUT", "3"))
+
 VOICELAB_URL = os.environ.get("VOICELAB_URL", "http://127.0.0.1:8040").rstrip("/")
 VOICELAB_AGENT_ID = os.environ.get("VOICELAB_AGENT_ID", "snxt_deduction")
 
