@@ -141,6 +141,8 @@ $ python -m qflow ask "去年11月扣款合计"
 
 鉴权：启动时设置 `--token secret`（或环境变量 `QFLOW_TOKEN`），请求带 `X-API-Key: secret` 或 `Authorization: Bearer secret`。
 
+设了口令后，除 `/health` 和页面本身外的所有接口都要鉴权，包括 `/desk/api/*`。页面多一种方式：打开 `/desk` 会先要求输入口令，通过后拿到一个当天有效的会话 cookie（只对 `/desk/api/*` 有效）。页面口令默认就是 `QFLOW_TOKEN`；想给人一个好记的口令，另设 `QFLOW_DESK_PASS`。同一来源一天输错 5 次（所有来源合计 30 次）后当天不再受理，重启服务清零。不设 `QFLOW_TOKEN` 时没有任何鉴权，只适合本机开发。
+
 ```bash
 curl -s http://127.0.0.1:8765/health
 

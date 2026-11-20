@@ -16,6 +16,8 @@ from __future__ import annotations
 import hmac
 import json
 import logging
+import threading
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.error import HTTPError
@@ -42,6 +44,9 @@ def _voicelab_request(path: str, *, method: str = "POST", body: bytes | None = N
     except Exception as exc:
         raise RuntimeError(f"连接 VoiceLab 失败 ({url}): {exc}") from exc
 MAX_BODY = 1_048_576  # 1 MB
+SESSION_COOKIE = "qflow_session"
+MAX_LOGIN_FAILS = 5  # 同一来源一天最多猜错几次
+MAX_LOGIN_FAILS_TOTAL = 30  # 所有来源合计
 DESK_HTML = Path(__file__).resolve().parent / "web" / "index.html"
 
 
@@ -49,6 +54,10 @@ class Api:
     def __init__(self, db_path, token: str = "", live: bool = False):
         self.db_path = str(db_path)
         self.token = (token or "").strip()
+        # 页面口令：给人输入用，可以比 token 短；安全性靠失败次数上限
+        self.desk_pass = config.DESK_PASS
+        self._fails: dict = {}
+        self._fail_lock = threading.Lock()
         self.live = live
         db.connect(self.db_path).close()  # 启动即建表，尽早暴露路径错误
 
@@ -96,8 +105,48 @@ class Api:
             cards.append({**spec, **st})
         return {"ok": True, "mode": "live" if self.live else "cache", "systems": cards}
 
-    def _authorized(self, headers: dict) -> bool:
+    # ---- 页面登录门：口令换一个当天有效的签名会话，不落库 ----
+    def _session_value(self, day: str | None = None) -> str:
+        day = day or time.strftime("%Y%m%d")
+        msg = f"desk:{day}:{self.desk_pass}".encode("utf-8")
+        sig = hmac.new(self.token.encode("utf-8"), msg, "sha256").hexdigest()
+        return f"{day}.{sig}"
+
+    def _session_ok(self, headers: dict) -> bool:
+        normalized = {str(k).lower(): v for k, v in headers.items()}
+        for part in str(normalized.get("cookie") or "").split(";"):
+            name, _, value = part.strip().partition("=")
+            if name == SESSION_COOKIE:
+                return hmac.compare_digest(value.encode("utf-8"), self._session_value().encode("utf-8"))
+        return False
+
+    def _login(self, headers: dict, payload: dict):
+        normalized = {str(k).lower(): v for k, v in headers.items()}
+        who = str(normalized.get("cf-connecting-ip") or normalized.get("x-forwarded-for") or "direct").split(",")[0].strip()
+        day = time.strftime("%Y%m%d")
+        key = (who, day)
+        with self._fail_lock:
+            # 来源地址可以伪造，所以再加一个不分来源的总上限
+            total = sum(v for k, v in self._fails.items() if k[1] == day)
+            if self._fails.get(key, 0) >= MAX_LOGIN_FAILS or total >= MAX_LOGIN_FAILS_TOTAL:
+                return 429, {"ok": False, "error": "今天试错次数太多，明天再来", "left": 0}
+        said = str(payload.get("pass") or "").strip()
+        expected = self.desk_pass or self.token
+        if said and hmac.compare_digest(said.encode("utf-8"), expected.encode("utf-8")):
+            cookie = f"{SESSION_COOKIE}={self._session_value()}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400"
+            if str(normalized.get("x-forwarded-proto") or "").lower() == "https":
+                cookie += "; Secure"
+            return 200, {"ok": True, "_headers": [("Set-Cookie", cookie)]}
+        with self._fail_lock:
+            self._fails = {k: v for k, v in self._fails.items() if k[1] == key[1]}
+            self._fails[key] = self._fails.get(key, 0) + 1
+            left = max(0, MAX_LOGIN_FAILS - self._fails[key])
+        return 401, {"ok": False, "error": "口令不对", "left": left}
+
+    def _authorized(self, headers: dict, allow_session: bool = False) -> bool:
         if not self.token:
+            return True
+        if allow_session and self._session_ok(headers):
             return True
         normalized = {str(k).lower(): v for k, v in headers.items()}
         key = normalized.get("x-api-key") or ""
@@ -115,8 +164,20 @@ class Api:
         if method == "GET" and path == "/health":
             return 200, self._status_payload()
 
-        # /desk/api/ 路径属于内置控制台，放行免拦截
-        if not path.startswith("/desk/api/") and not self._authorized(headers):
+        desk = path.startswith("/desk/api/")
+        if method == "GET" and path == "/desk/api/session":
+            return 200, {"ok": True, "required": bool(self.token), "authed": self._authorized(headers, True)}
+        if method == "POST" and path == "/desk/api/login":
+            if not self.token:
+                return 200, {"ok": True}
+            try:
+                payload = json.loads(body.decode("utf-8") or "{}")
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                payload = {}
+            return self._login(headers, payload if isinstance(payload, dict) else {})
+
+        # 页面接口和其它接口一样要鉴权；页面多一种方式：登录后的会话 cookie
+        if not self._authorized(headers, allow_session=desk):
             return 401, {"ok": False, "error": "unauthorized"}
 
         if method == "GET" and path == "/capabilities":
@@ -376,7 +437,8 @@ class _Handler(BaseHTTPRequestHandler):
         except Exception:  # noqa: BLE001
             logger.exception("unhandled error: %s %s", method, self.path)
             status, payload = 500, {"ok": False, "error": "internal_error"}
-        self._send(status, payload)
+        extra = payload.pop("_headers", None) if isinstance(payload, dict) else None
+        self._send(status, payload, extra)
 
     def _send_bytes(self, status: int, data: bytes):
         self.send_response(status)
@@ -386,7 +448,7 @@ class _Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
-    def _send(self, status: int, payload):
+    def _send(self, status: int, payload, extra_headers=None):
         data = (
             b""
             if payload is None
@@ -398,6 +460,8 @@ class _Handler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, X-API-Key, Authorization")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+        for name, value in extra_headers or ():
+            self.send_header(name, value)
         self.end_headers()
         if data:
             self.wfile.write(data)

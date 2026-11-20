@@ -406,6 +406,19 @@ button.pill { cursor: pointer; }
   </div>
 </div>
 
+<div class="modal" id="login-modal" hidden data-locked role="dialog" aria-modal="true" aria-labelledby="login-title">
+  <form class="sheet" id="login-form" style="width:min(360px,100%)">
+    <h3 id="login-title">请输入口令</h3>
+    <p>这里能查到业务数据，需要口令才能进。</p>
+    <input id="login-pass" type="password" autocomplete="current-password" aria-label="口令" placeholder="口令" style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;outline:0;font-size:16px">
+    <div id="login-msg" role="alert" style="min-height:20px;margin-top:8px;font-size:13px;color:var(--danger,#c0392b)"></div>
+    <footer>
+      <span style="flex:1"></span>
+      <button type="submit" class="btn primary">进入</button>
+    </footer>
+  </form>
+</div>
+
 <div class="toasts" id="toasts" aria-live="assertive"></div>
 <script>
 (() => {
@@ -463,8 +476,39 @@ async function api(path, options) {
   }
   let data = null;
   try { data = await res.json(); } catch (err) { /* 非 JSON */ }
+  if (res.status === 401 && path !== '/desk/api/login') {
+    showLogin();
+    throw new Error('需要先输入口令。');
+  }
   if (!data) throw new Error('服务返回了无法解析的内容（HTTP ' + res.status + '）。');
   return data;
+}
+
+function showLogin() {
+  const modal = $('#login-modal');
+  if (!modal.hidden) return;
+  modal.hidden = false;
+  $('#login-msg').textContent = '';
+  $('#login-pass').value = '';
+  $('#login-pass').focus();
+}
+async function submitLogin(event) {
+  event.preventDefault();
+  const msg = $('#login-msg');
+  let data;
+  try {
+    data = await post('/desk/api/login', { pass: $('#login-pass').value });
+  } catch (err) {
+    msg.textContent = err.message;
+    return;
+  }
+  if (data.ok) {
+    $('#login-modal').hidden = true;
+    boot();
+    return;
+  }
+  msg.textContent = data.error + (data.left ? '，今天还能试 ' + data.left + ' 次' : '');
+  $('#login-pass').select();
 }
 const post = (path, body) => api(path, {
   method: 'POST',
@@ -1367,20 +1411,29 @@ const drop = $('#drop');
 ['dragleave', 'drop'].forEach((name) => drop.addEventListener(name, (event) => { event.preventDefault(); drop.classList.remove('over'); }));
 drop.addEventListener('drop', (event) => readFile(event.dataTransfer.files[0]));
 $('#auth-code').addEventListener('keydown', (event) => { if (event.key === 'Enter') authAction('submit'); });
-$$('.modal').forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) modal.hidden = true; }));
+$('#login-form').addEventListener('submit', submitLogin);
+const dismissable = (modal) => !modal.hasAttribute('data-locked');
+$$('.modal').filter(dismissable).forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) modal.hidden = true; }));
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape') return;
-  const open = $$('.modal').find((modal) => !modal.hidden);
+  const open = $$('.modal').filter(dismissable).find((modal) => !modal.hidden);
   if (open) open.hidden = true;
   else if (S.selected) selectNode(S.selected);
 });
 window.addEventListener('resize', applyZoom);
 window.addEventListener('pagehide', closeVoiceSession);
 
-refreshStatus();
-refreshSystems();
-loadGraph();
-setInterval(() => { if (!document.hidden) { refreshStatus(); refreshSystems(); } }, 30000);
+function boot() {
+  refreshStatus();
+  refreshSystems();
+  loadGraph();
+}
+const loggedIn = () => $('#login-modal').hidden;
+api('/desk/api/session').then((session) => {
+  if (session.required && !session.authed) showLogin();
+  else boot();
+}).catch(boot);
+setInterval(() => { if (!document.hidden && loggedIn()) { refreshStatus(); refreshSystems(); } }, 30000);
 })();
 </script>
 </body>
