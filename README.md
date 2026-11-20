@@ -7,6 +7,12 @@
 - **可接入**：一个 HTTP 接口 + 一份 OpenAI function-calling schema，你的 voiceAI 直接接。
 - **探索不在这里做**：系统的页面、接口、数据流由外部大模型探索并产出图谱；本仓库只负责加载图谱、登录接力和只读查询。
 
+## 文档
+
+- [`docs/PLAN.md`](docs/PLAN.md)：现状、数据流、没做的事和顺序。**接手先读这个。**
+- [`docs/graph-spec.md`](docs/graph-spec.md)：系统图谱标准 v1（运行层尚未按它实现）。
+- [`docs/explorer-brief.md`](docs/explorer-brief.md)：交给外部大模型的探索说明。
+
 ## 1. 架构
 
 ```
