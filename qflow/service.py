@@ -155,7 +155,12 @@ class Api:
 
             try:
                 g = graph.Graph.load()
-                return 200, {"ok": True, "graph": g.data}
+                return 200, {
+                    "ok": True,
+                    "graph": g.data,
+                    # 当前运行层真正能执行的意图；图谱里其余能力只能展示
+                    "executable_intents": list(capabilities.INTENTS),
+                }
             except Exception as exc:
                 return 500, {"ok": False, "error": str(exc)}
 
@@ -167,6 +172,8 @@ class Api:
                 graph_data = payload.get("graph")
                 if not isinstance(graph_data, dict):
                     return 400, {"ok": False, "error": "graph_must_be_object"}
+                if not graph_data.get("nodes"):
+                    return 400, {"ok": False, "error": "图谱里没有节点"}
                 graph.Graph(graph_data)  # 校验合法性
                 graph.GRAPH_PATH.write_text(json.dumps(graph_data, ensure_ascii=False, indent=2), encoding="utf-8")
                 return 200, {"ok": True}
@@ -427,6 +434,9 @@ class _Handler(BaseHTTPRequestHandler):
     def do_POST(self):  # noqa: N802
         self._dispatch("POST")
 
+    def do_DELETE(self):  # noqa: N802
+        self._dispatch("DELETE")
+
     def _dispatch(self, method: str):
         length = int(self.headers.get("Content-Length") or 0)
         if length > MAX_BODY:
@@ -459,7 +469,7 @@ class _Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(data)))
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, X-API-Key, Authorization")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
         self.end_headers()
         if data:
             self.wfile.write(data)

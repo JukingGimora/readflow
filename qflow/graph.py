@@ -93,6 +93,15 @@ class Graph:
                 return item
         return None
 
+    def examples(self, limit: int = 3) -> list[str]:
+        """每个能力取第一条示例问法，用于反问/引导。"""
+        found = []
+        for node in self.nodes_of("capability"):
+            items = node.get("examples") or []
+            if items:
+                found.append(str(items[0]))
+        return found[:limit]
+
     # ---------- planner ----------
 
     def plan(self, intent: str, params: dict | None = None) -> dict:
@@ -139,6 +148,8 @@ class Graph:
             "bindings": bindings,
             "steps": self._steps(intent, provider, entity, bindings),
             "fallbacks": fallbacks,
+            "followups": [str(item) for item in capability.get("followups") or []],
+            "metrics": list(capability.get("metrics") or []),
             "read_only": bool(capability.get("read_only", True)),
         }
 

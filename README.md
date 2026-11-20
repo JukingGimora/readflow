@@ -46,6 +46,10 @@
 - 节点：`app` / `page` / `api` / `entity` / `provider` / `capability`
 - 边：`contains` / `calls` / `returns` / `references` / `derives_from` / `queries`
 - 每个 capability 绑定实体和字段（如 `month → biz_date`），并给出 provider 顺序
+- capability 还可以带三个可选字段，换系统不用改页面和代码：
+  - `examples`：示例问法，页面首页的能力卡片、没听懂时的引导都从这里取
+  - `followups`：答完这一问后用户可能接着问什么，随每轮回答一起返回
+  - `metrics`：`[{key, label, unit, accent}]`，声明回答里哪些数字值得做成指标卡
 
 ```bash
 python -m qflow graph                 # 节点/边/覆盖率/在线待接
@@ -226,14 +230,15 @@ readflow 的 `/voice/handle` 已经按这个契约实现，并注册了 agent：
 http://<readflow-host>:8790/desk
 ```
 
-带口令直接打开（口令在服务器 `~/projects/snxt-query/.env`）：
+页面三个视图：
 
-```bash
-open "http://100.65.217.14:8790/desk?k=$(ssh -i ~/.ssh/juking_claude juking@100.65.217.14 'cut -d= -f2 ~/projects/snxt-query/.env')"
-```
+- **会话**：语音或文字提问；每轮回答展示执行路径（听懂 → 条件 → 取数路径 → 只读校验 → 结果）、
+  指标卡、分组条形图和明细表，并给出可点的后续问题。页面每轮回传 `state`，所以「那 12 月呢」「明细呢」可以连续追问。
+- **系统图谱**：按 系统 → 页面 → 接口 → 数据源 → 实体 → 能力 分层的节点连线图，点节点看字段、取数顺序和示例问法；
+  「导入图谱」把外部探索产出的 JSON 校验后加载到运行层。
+- **只读护栏**：图谱里的只读声明核对结果、取数来源和服务状态。
 
-页面支持：输入提问、示例按钮、表格展示、`data_as_of`、连续追问、原始 JSON 折叠；
-没有口令时弹窗输入，存在 `sessionStorage`，不会写进页面源码。
+> 图谱目前只驱动规划和展示；真正能执行的意图仍是代码里的 6 个。导入含有其它意图的图谱时，页面会标明「只能展示、不能查询」。
 
 ![查询页](docs/desk.png)
 
@@ -304,7 +309,7 @@ python -m qflow fetch --url "https://srm.sunnercn.com:10001/#/..." --out data/li
 ## 9. 测试
 
 ```bash
-python -m pytest tests -q        # 67 passed
+python -m pytest tests -q
 ```
 
 覆盖：日期/ASN 推断、Excel 别名与去重、多行聚合、查询、对账、中文 NLU、HTTP 鉴权与错误码、只读网闸、图谱校验与 planner。

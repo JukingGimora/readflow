@@ -117,8 +117,29 @@ class ServiceTests(unittest.TestCase):
         ) as response:
             html = response.read().decode("utf-8")
             self.assertEqual(response.status, 200)
-        self.assertIn("圣农扣款查询", html)
+        self.assertIn("readflow", html)
         self.assertIn("/desk/api/query", html)
+        # 页面不写死业务系统，也不依赖外网资源
+        self.assertNotIn("圣农", html)
+        self.assertNotIn("googleapis", html)
+
+    def test_desk_graph_lists_executable_intents(self):
+        status, payload = self._request("/desk/api/graph")
+        self.assertEqual(status, 200)
+        self.assertIn("deduction.summary", payload["executable_intents"])
+        self.assertTrue(payload["graph"]["nodes"])
+
+    def test_desk_graph_save_rejects_empty_graph(self):
+        status, payload = self._request(
+            "/desk/api/graph/save", method="POST", payload={"graph": {"nodes": []}}
+        )
+        self.assertEqual(status, 400)
+        self.assertFalse(payload["ok"])
+
+    def test_desk_voice_session_delete(self):
+        status, payload = self._request("/desk/api/voice/session?sid=", method="DELETE")
+        self.assertEqual(status, 200)
+        self.assertTrue(payload["ok"])
 
     def test_desk_followup(self):
         status, first = self._request(
