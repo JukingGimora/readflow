@@ -60,6 +60,8 @@
 
 ## 交付前自检清单
 
+能运行代码的话，先跑一遍校验器，它会逐条指出哪里不合格：`python -m qflow validate 你的文件.json`。一份能通过校验的格式示例见 [`examples/graph-example.json`](examples/graph-example.json)（虚构系统）。
+
 - [ ] 文件是合法 JSON，结构符合 `graph-spec.md`，所有 id 不重复、引用都存在
 - [ ] 每个 `operation` 的 `access` 是 `read`，且都有 `evidence`（真实调通的时间、脱敏后的请求和响应样例）
 - [ ] 用 `evidence` 里的响应样例，按 `rows_path` 和 `map` 能取出 `entity` 里声明的每个字段

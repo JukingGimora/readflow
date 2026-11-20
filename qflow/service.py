@@ -235,6 +235,15 @@ class Api:
             except Exception as exc:
                 return 500, {"ok": False, "error": str(exc)}
 
+        if method == "POST" and path == "/desk/api/spec/validate":
+            from . import spec
+
+            try:
+                doc = json.loads(body.decode("utf-8") or "null")
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                return 400, {"ok": False, "error": "invalid_json"}
+            return 200, {"ok": True, "report": spec.validate(doc.get("graph", doc) if isinstance(doc, dict) else doc)}
+
         if method == "POST" and path == "/desk/api/graph/save":
             from . import graph
 

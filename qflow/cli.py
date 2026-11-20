@@ -1,4 +1,4 @@
-"""命令行入口：sync / ask / serve / overview / datasets / tools / graph / plan."""
+"""命令行入口：sync / ask / serve / overview / datasets / tools / graph / plan / validate."""
 from __future__ import annotations
 
 import argparse
@@ -141,6 +141,14 @@ def cmd_graph(args) -> int:
     return 0
 
 
+def cmd_validate(args) -> int:
+    from . import spec
+
+    result = spec.validate_file(args.file)
+    print(json.dumps(result, ensure_ascii=False, indent=2) if args.json else spec.format_report(result))
+    return 0 if result["ok"] else 1
+
+
 def cmd_plan(args) -> int:
     if not args.text and not args.intent:
         print("需要 text 或 --intent", file=sys.stderr)
@@ -213,6 +221,11 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("graph", help="查看查询图谱（节点/边/覆盖率）")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_graph)
+
+    p = sub.add_parser("validate", help="校验外部模型产出的系统图谱（docs/graph-spec.md）")
+    p.add_argument("file")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_validate)
 
     p = sub.add_parser("plan", help="查看一个问题会走哪条图谱路径")
     p.add_argument("text", nargs="?", default=None)

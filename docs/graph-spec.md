@@ -152,6 +152,8 @@
 
 第 1 到 4 条离线就能查；第 5 条需要一个真实账号。
 
+第 1、2、3、6 条已实现：`python -m qflow validate <file>`。第 4、5 条还没做。完整的格式示例：[`examples/graph-example.json`](examples/graph-example.json)。
+
 ## 9. 已定的取舍
 
 1. **求和和分组在本地算**（`compute`），不依赖系统返回的汇总。确定、可核对；代价是数据量大的查询要翻完所有页。

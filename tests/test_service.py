@@ -206,6 +206,18 @@ class ServiceTests(unittest.TestCase):
         self.assertIn("deduction.summary", payload["executable_intents"])
         self.assertTrue(payload["graph"]["nodes"])
 
+    def test_spec_validate_endpoint(self):
+        example = Path(__file__).resolve().parent.parent / "docs" / "examples" / "graph-example.json"
+        doc = json.loads(example.read_text(encoding="utf-8"))
+        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc)
+        self.assertEqual(status, 401)
+        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc, token=self.token)
+        self.assertEqual(status, 200)
+        self.assertTrue(payload["report"]["ok"])
+        doc["operations"][0].pop("evidence")
+        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc, token=self.token)
+        self.assertFalse(payload["report"]["ok"])
+
     def test_desk_graph_save_rejects_empty_graph(self):
         status, payload = self._request(
             "/desk/api/graph/save", method="POST", payload={"graph": {"nodes": []}}, token=self.token
