@@ -16,8 +16,10 @@ from __future__ import annotations
 import hmac
 import json
 import logging
+import re
 import threading
 import time
+import unicodedata
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.error import HTTPError
@@ -47,6 +49,14 @@ MAX_BODY = 1_048_576  # 1 MB
 SESSION_COOKIE = "qflow_session"
 MAX_LOGIN_FAILS = 5  # 同一来源一天最多猜错几次
 MAX_LOGIN_FAILS_TOTAL = 30  # 所有来源合计
+_PASS_NOISE = re.compile(r"[\s,.，。！!？?、·~～-]+")
+
+
+def _normalize_pass(text: str) -> str:
+    """口令是一句话，人会多打空格和标点、混用全半角；比对前抹平。"""
+    return _PASS_NOISE.sub("", unicodedata.normalize("NFKC", text)).lower()
+
+
 DESK_HTML = Path(__file__).resolve().parent / "web" / "index.html"
 
 
@@ -130,8 +140,8 @@ class Api:
             total = sum(v for k, v in self._fails.items() if k[1] == day)
             if self._fails.get(key, 0) >= MAX_LOGIN_FAILS or total >= MAX_LOGIN_FAILS_TOTAL:
                 return 429, {"ok": False, "error": "今天试错次数太多，明天再来", "left": 0}
-        said = str(payload.get("pass") or "").strip()
-        expected = self.desk_pass or self.token
+        said = _normalize_pass(str(payload.get("pass") or ""))
+        expected = _normalize_pass(self.desk_pass or self.token)
         if said and hmac.compare_digest(said.encode("utf-8"), expected.encode("utf-8")):
             cookie = f"{SESSION_COOKIE}={self._session_value()}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400"
             if str(normalized.get("x-forwarded-proto") or "").lower() == "https":

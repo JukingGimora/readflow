@@ -107,11 +107,16 @@ class ServiceTests(unittest.TestCase):
         status, payload, _ = self._login(self.token)
         self.assertEqual(status, 429)
 
+    def test_blank_or_punctuation_only_pass_rejected(self):
+        for said in ("", "   ", "，。！"):
+            status, _, cookie = self._login(said)
+            self.assertEqual((status, cookie), (401, ""))
+
     def test_desk_pass_replaces_token_for_login(self):
         self.server.RequestHandlerClass.api.desk_pass = "芝麻开门"
         status, _, _ = self._login(self.token)
         self.assertEqual(status, 401)
-        status, _, cookie = self._login("芝麻开门")
+        status, _, cookie = self._login(" 芝麻，开门！ ")  # 多余的空格和标点不算错
         self.assertEqual(status, 200)
         status, _ = self._request("/desk/api/graph", cookie=cookie)
         self.assertEqual(status, 200)
