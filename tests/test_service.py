@@ -28,10 +28,12 @@ class ServiceTests(unittest.TestCase):
         self.thread.join(timeout=5)
         self.tmp.cleanup()
 
-    def _request(self, path, method="GET", payload=None, token=None, raw=None):
+    def _request(self, path, method="GET", payload=None, token=None, raw=None, cookie=None):
         headers = {"Content-Type": "application/json"}
         if token:
             headers["X-API-Key"] = token
+        if cookie:
+            headers["Cookie"] = cookie
         data = raw if raw is not None else (json.dumps(payload).encode() if payload is not None else None)
         request = urllib.request.Request(
             f"http://127.0.0.1:{self.port}{path}",
@@ -41,9 +43,83 @@ class ServiceTests(unittest.TestCase):
         )
         try:
             with urllib.request.urlopen(request, timeout=5) as response:
+                self.last_headers = response.headers
                 return response.status, json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
+            self.last_headers = exc.headers
             return exc.code, json.loads(exc.read().decode("utf-8"))
+
+    def _login(self, password):
+        status, payload = self._request("/desk/api/login", method="POST", payload={"pass": password})
+        cookie = (self.last_headers.get("Set-Cookie") or "").split(";")[0]
+        return status, payload, cookie
+
+    def test_desk_api_requires_auth(self):
+        for method, path, payload in [
+            ("GET", "/desk/api/status", None),
+            ("GET", "/desk/api/systems", None),
+            ("GET", "/desk/api/graph", None),
+            ("POST", "/desk/api/graph/save", {"graph": {"nodes": []}}),
+            ("POST", "/desk/api/query", {"text": "上个月扣款合计"}),
+            ("GET", "/desk/api/auth/challenge", None),
+            ("POST", "/desk/api/auth/submit", {"code": "1234"}),
+            ("POST", "/desk/api/voice/session", {}),
+            ("DELETE", "/desk/api/voice/session?sid=", None),
+        ]:
+            status, body = self._request(path, method=method, payload=payload)
+            self.assertEqual(status, 401, path)
+            self.assertEqual(body["error"], "unauthorized")
+
+    def test_desk_session_reports_login_state(self):
+        status, payload = self._request("/desk/api/session")
+        self.assertEqual((status, payload["required"], payload["authed"]), (200, True, False))
+
+    def test_desk_login_sets_session_cookie(self):
+        status, payload, cookie = self._login(self.token)
+        self.assertEqual(status, 200)
+        self.assertNotIn("_headers", payload)
+        self.assertTrue(cookie.startswith("qflow_session="))
+        self.assertIn("HttpOnly", self.last_headers.get("Set-Cookie"))
+        self.assertNotIn(self.token, cookie)
+
+        status, payload = self._request("/desk/api/session", cookie=cookie)
+        self.assertTrue(payload["authed"])
+        status, payload = self._request("/desk/api/graph", cookie=cookie)
+        self.assertEqual(status, 200)
+
+    def test_session_cookie_only_opens_desk_api(self):
+        _, _, cookie = self._login(self.token)
+        status, _ = self._request("/capabilities", cookie=cookie)
+        self.assertEqual(status, 401)
+
+    def test_forged_or_stale_cookie_rejected(self):
+        status, _ = self._request("/desk/api/graph", cookie="qflow_session=20200101.deadbeef")
+        self.assertEqual(status, 401)
+        stale = self.server.RequestHandlerClass.api._session_value("20200101")
+        status, _ = self._request("/desk/api/graph", cookie=f"qflow_session={stale}")
+        self.assertEqual(status, 401)
+
+    def test_desk_login_locks_after_too_many_failures(self):
+        for expected_left in (4, 3, 2, 1, 0):
+            status, payload, cookie = self._login("wrong")
+            self.assertEqual((status, payload["left"]), (401, expected_left))
+            self.assertEqual(cookie, "")
+        status, payload, _ = self._login(self.token)
+        self.assertEqual(status, 429)
+
+    def test_blank_or_punctuation_only_pass_rejected(self):
+        for said in ("", "   ", "，。！"):
+            status, _, cookie = self._login(said)
+            self.assertEqual((status, cookie), (401, ""))
+
+    def test_desk_pass_replaces_token_for_login(self):
+        self.server.RequestHandlerClass.api.desk_pass = "芝麻开门"
+        status, _, _ = self._login(self.token)
+        self.assertEqual(status, 401)
+        status, _, cookie = self._login(" 芝麻，开门！ ")  # 多余的空格和标点不算错
+        self.assertEqual(status, 200)
+        status, _ = self._request("/desk/api/graph", cookie=cookie)
+        self.assertEqual(status, 200)
 
     def test_health_is_public(self):
         status, payload = self._request("/health")
@@ -117,8 +193,42 @@ class ServiceTests(unittest.TestCase):
         ) as response:
             html = response.read().decode("utf-8")
             self.assertEqual(response.status, 200)
-        self.assertIn("圣农扣款查询", html)
+        self.assertIn("readflow", html)
         self.assertIn("/desk/api/query", html)
+        self.assertIn("/desk/api/login", html)
+        # 页面不写死业务系统，也不依赖外网资源
+        self.assertNotIn("圣农", html)
+        self.assertNotIn("googleapis", html)
+
+    def test_desk_graph_lists_executable_intents(self):
+        status, payload = self._request("/desk/api/graph", token=self.token)
+        self.assertEqual(status, 200)
+        self.assertIn("deduction.summary", payload["executable_intents"])
+        self.assertTrue(payload["graph"]["nodes"])
+
+    def test_spec_validate_endpoint(self):
+        example = Path(__file__).resolve().parent.parent / "docs" / "examples" / "graph-example.json"
+        doc = json.loads(example.read_text(encoding="utf-8"))
+        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc)
+        self.assertEqual(status, 401)
+        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc, token=self.token)
+        self.assertEqual(status, 200)
+        self.assertTrue(payload["report"]["ok"])
+        doc["operations"][0].pop("evidence")
+        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc, token=self.token)
+        self.assertFalse(payload["report"]["ok"])
+
+    def test_desk_graph_save_rejects_empty_graph(self):
+        status, payload = self._request(
+            "/desk/api/graph/save", method="POST", payload={"graph": {"nodes": []}}, token=self.token
+        )
+        self.assertEqual(status, 400)
+        self.assertFalse(payload["ok"])
+
+    def test_desk_voice_session_delete(self):
+        status, payload = self._request("/desk/api/voice/session?sid=", method="DELETE", token=self.token)
+        self.assertEqual(status, 200)
+        self.assertTrue(payload["ok"])
 
     def test_desk_followup(self):
         status, first = self._request(

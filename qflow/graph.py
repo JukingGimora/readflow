@@ -4,7 +4,7 @@
 - 图里存的是"语义"（实体、字段、关系、能力、提供者），不是页面坐标；
 - 页面/接口只是 provider，可替换、可降级；
 - planner 把 intent+params 解析成一条可审计的执行路径；
-- 执行仍由 engine（离线 SQL）完成，在线 provider 待 discover 后接入。
+- 执行仍由 engine（离线 SQL）完成；图谱由外部探索产出，这里只加载。
 """
 from __future__ import annotations
 
@@ -93,6 +93,15 @@ class Graph:
                 return item
         return None
 
+    def examples(self, limit: int = 3) -> list[str]:
+        """每个能力取第一条示例问法，用于反问/引导。"""
+        found = []
+        for node in self.nodes_of("capability"):
+            items = node.get("examples") or []
+            if items:
+                found.append(str(items[0]))
+        return found[:limit]
+
     # ---------- planner ----------
 
     def plan(self, intent: str, params: dict | None = None) -> dict:
@@ -100,7 +109,7 @@ class Graph:
         provider = self.choose_provider(capability)
         if provider is None:
             raise GraphError(
-                f"{intent} 没有可用 provider；在线节点是否还没 discover/配置？"
+                f"{intent} 没有可用 provider；图谱里的数据来源是否都标了不可用？"
             )
         entity = self.nodes.get(capability.get("entity") or "")
         bindings: dict[str, dict] = {}
@@ -139,6 +148,8 @@ class Graph:
             "bindings": bindings,
             "steps": self._steps(intent, provider, entity, bindings),
             "fallbacks": fallbacks,
+            "followups": [str(item) for item in capability.get("followups") or []],
+            "metrics": list(capability.get("metrics") or []),
             "read_only": bool(capability.get("read_only", True)),
         }
 
@@ -157,10 +168,10 @@ class Graph:
             return steps + ["返回结构化记录"]
         if kind == "api":
             method = provider.get("method", "GET")
-            path = provider.get("path") or "<待 discover>"
+            path = provider.get("path") or "<图谱未给出>"
             return [f"{method} {path}", "校验返回字段", "写入缓存或直接回答"]
         if kind == "page":
-            route = provider.get("route") or "<待确认>"
+            route = provider.get("route") or "<图谱未给出>"
             return [f"打开页面 {route}", "提取表格", "校验字段"]
         return [f"使用 provider {provider['id']}"]
 

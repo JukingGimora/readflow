@@ -16,9 +16,13 @@ from __future__ import annotations
 import hmac
 import json
 import logging
+import re
+import threading
+import time
+import unicodedata
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.error import HTTPError, URLError
+from urllib.error import HTTPError
 from urllib.parse import parse_qs, quote, urlparse
 from urllib.request import Request, urlopen
 
@@ -42,6 +46,17 @@ def _voicelab_request(path: str, *, method: str = "POST", body: bytes | None = N
     except Exception as exc:
         raise RuntimeError(f"连接 VoiceLab 失败 ({url}): {exc}") from exc
 MAX_BODY = 1_048_576  # 1 MB
+SESSION_COOKIE = "qflow_session"
+MAX_LOGIN_FAILS = 5  # 同一来源一天最多猜错几次
+MAX_LOGIN_FAILS_TOTAL = 30  # 所有来源合计
+_PASS_NOISE = re.compile(r"[\s,.，。！!？?、·~～-]+")
+
+
+def _normalize_pass(text: str) -> str:
+    """口令是一句话，人会多打空格和标点、混用全半角；比对前抹平。"""
+    return _PASS_NOISE.sub("", unicodedata.normalize("NFKC", text)).lower()
+
+
 DESK_HTML = Path(__file__).resolve().parent / "web" / "index.html"
 
 
@@ -49,6 +64,10 @@ class Api:
     def __init__(self, db_path, token: str = "", live: bool = False):
         self.db_path = str(db_path)
         self.token = (token or "").strip()
+        # 页面口令：给人输入用，可以比 token 短；安全性靠失败次数上限
+        self.desk_pass = config.DESK_PASS
+        self._fails: dict = {}
+        self._fail_lock = threading.Lock()
         self.live = live
         db.connect(self.db_path).close()  # 启动即建表，尽早暴露路径错误
 
@@ -96,8 +115,48 @@ class Api:
             cards.append({**spec, **st})
         return {"ok": True, "mode": "live" if self.live else "cache", "systems": cards}
 
-    def _authorized(self, headers: dict) -> bool:
+    # ---- 页面登录门：口令换一个当天有效的签名会话，不落库 ----
+    def _session_value(self, day: str | None = None) -> str:
+        day = day or time.strftime("%Y%m%d")
+        msg = f"desk:{day}:{self.desk_pass}".encode("utf-8")
+        sig = hmac.new(self.token.encode("utf-8"), msg, "sha256").hexdigest()
+        return f"{day}.{sig}"
+
+    def _session_ok(self, headers: dict) -> bool:
+        normalized = {str(k).lower(): v for k, v in headers.items()}
+        for part in str(normalized.get("cookie") or "").split(";"):
+            name, _, value = part.strip().partition("=")
+            if name == SESSION_COOKIE:
+                return hmac.compare_digest(value.encode("utf-8"), self._session_value().encode("utf-8"))
+        return False
+
+    def _login(self, headers: dict, payload: dict):
+        normalized = {str(k).lower(): v for k, v in headers.items()}
+        who = str(normalized.get("cf-connecting-ip") or normalized.get("x-forwarded-for") or "direct").split(",")[0].strip()
+        day = time.strftime("%Y%m%d")
+        key = (who, day)
+        with self._fail_lock:
+            # 来源地址可以伪造，所以再加一个不分来源的总上限
+            total = sum(v for k, v in self._fails.items() if k[1] == day)
+            if self._fails.get(key, 0) >= MAX_LOGIN_FAILS or total >= MAX_LOGIN_FAILS_TOTAL:
+                return 429, {"ok": False, "error": "今天试错次数太多，明天再来", "left": 0}
+        said = _normalize_pass(str(payload.get("pass") or ""))
+        expected = _normalize_pass(self.desk_pass or self.token)
+        if said and hmac.compare_digest(said.encode("utf-8"), expected.encode("utf-8")):
+            cookie = f"{SESSION_COOKIE}={self._session_value()}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400"
+            if str(normalized.get("x-forwarded-proto") or "").lower() == "https":
+                cookie += "; Secure"
+            return 200, {"ok": True, "_headers": [("Set-Cookie", cookie)]}
+        with self._fail_lock:
+            self._fails = {k: v for k, v in self._fails.items() if k[1] == key[1]}
+            self._fails[key] = self._fails.get(key, 0) + 1
+            left = max(0, MAX_LOGIN_FAILS - self._fails[key])
+        return 401, {"ok": False, "error": "口令不对", "left": left}
+
+    def _authorized(self, headers: dict, allow_session: bool = False) -> bool:
         if not self.token:
+            return True
+        if allow_session and self._session_ok(headers):
             return True
         normalized = {str(k).lower(): v for k, v in headers.items()}
         key = normalized.get("x-api-key") or ""
@@ -115,8 +174,20 @@ class Api:
         if method == "GET" and path == "/health":
             return 200, self._status_payload()
 
-        # /desk/api/ 路径属于内置控制台，放行免拦截
-        if not path.startswith("/desk/api/") and not self._authorized(headers):
+        desk = path.startswith("/desk/api/")
+        if method == "GET" and path == "/desk/api/session":
+            return 200, {"ok": True, "required": bool(self.token), "authed": self._authorized(headers, True)}
+        if method == "POST" and path == "/desk/api/login":
+            if not self.token:
+                return 200, {"ok": True}
+            try:
+                payload = json.loads(body.decode("utf-8") or "{}")
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                payload = {}
+            return self._login(headers, payload if isinstance(payload, dict) else {})
+
+        # 页面接口和其它接口一样要鉴权；页面多一种方式：登录后的会话 cookie
+        if not self._authorized(headers, allow_session=desk):
             return 401, {"ok": False, "error": "unauthorized"}
 
         if method == "GET" and path == "/capabilities":
@@ -155,9 +226,23 @@ class Api:
 
             try:
                 g = graph.Graph.load()
-                return 200, {"ok": True, "graph": g.data}
+                return 200, {
+                    "ok": True,
+                    "graph": g.data,
+                    # 当前运行层真正能执行的意图；图谱里其余能力只能展示
+                    "executable_intents": list(capabilities.INTENTS),
+                }
             except Exception as exc:
                 return 500, {"ok": False, "error": str(exc)}
+
+        if method == "POST" and path == "/desk/api/spec/validate":
+            from . import spec
+
+            try:
+                doc = json.loads(body.decode("utf-8") or "null")
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                return 400, {"ok": False, "error": "invalid_json"}
+            return 200, {"ok": True, "report": spec.validate(doc.get("graph", doc) if isinstance(doc, dict) else doc)}
 
         if method == "POST" and path == "/desk/api/graph/save":
             from . import graph
@@ -167,81 +252,11 @@ class Api:
                 graph_data = payload.get("graph")
                 if not isinstance(graph_data, dict):
                     return 400, {"ok": False, "error": "graph_must_be_object"}
+                if not graph_data.get("nodes"):
+                    return 400, {"ok": False, "error": "图谱里没有节点"}
                 graph.Graph(graph_data)  # 校验合法性
                 graph.GRAPH_PATH.write_text(json.dumps(graph_data, ensure_ascii=False, indent=2), encoding="utf-8")
                 return 200, {"ok": True}
-            except Exception as exc:
-                return 400, {"ok": False, "error": str(exc)}
-
-        if method == "POST" and path == "/desk/api/graph/generate":
-            from . import graph
-
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-                desc = str(payload.get("description") or "").strip()
-                system_name = str(payload.get("system_name") or "新业务系统").strip()
-                system_id = str(payload.get("system_id") or "app.custom").strip()
-                if not system_id.startswith("app."):
-                    system_id = f"app.{system_id}"
-
-                # 智能生成节点和能力模型
-                g = graph.Graph.load()
-                new_data = dict(g.data)
-                nodes = list(new_data.get("nodes", []))
-                edges = list(new_data.get("edges", []))
-
-                # 检查是否已存在同名系统
-                existing_ids = {n.get("id") for n in nodes}
-                if system_id not in existing_ids:
-                    nodes.append({
-                        "id": system_id,
-                        "type": "app",
-                        "label": system_name,
-                        "base_url": str(payload.get("base_url") or "https://api.example.com"),
-                        "read_only": True,
-                        "description": desc or "由大模型自动生成的安全只读系统节点"
-                    })
-
-                entity_id = f"entity.{system_id.split('.')[-1]}_data"
-                if entity_id not in existing_ids:
-                    nodes.append({
-                        "id": entity_id,
-                        "type": "entity",
-                        "label": f"{system_name}业务单据",
-                        "key": ["doc_no"],
-                        "fields": [
-                            {"name": "doc_no", "label": "单据编号"},
-                            {"name": "biz_date", "label": "业务日期"},
-                            {"name": "status", "label": "单据状态"},
-                            {"name": "amount", "label": "金额"}
-                        ]
-                    })
-                    edges.append({
-                        "from": system_id,
-                        "to": entity_id,
-                        "label": "管理"
-                    })
-
-                cap_id = f"cap.{system_id.split('.')[-1]}_query"
-                if cap_id not in existing_ids:
-                    nodes.append({
-                        "id": cap_id,
-                        "type": "capability",
-                        "label": f"{system_name}明细查询",
-                        "intent": f"{system_id.split('.')[-1]}_query",
-                        "params": ["date_from", "date_to", "status", "doc_no"]
-                    })
-                    edges.append({
-                        "from": entity_id,
-                        "to": cap_id,
-                        "label": "提供查询"
-                    })
-
-                new_data["nodes"] = nodes
-                new_data["edges"] = edges
-                graph.Graph(new_data)  # 校验
-                graph.GRAPH_PATH.write_text(json.dumps(new_data, ensure_ascii=False, indent=2), encoding="utf-8")
-                return 200, {"ok": True, "graph": new_data, "added_system": system_id}
             except Exception as exc:
                 return 400, {"ok": False, "error": str(exc)}
 
@@ -427,6 +442,9 @@ class _Handler(BaseHTTPRequestHandler):
     def do_POST(self):  # noqa: N802
         self._dispatch("POST")
 
+    def do_DELETE(self):  # noqa: N802
+        self._dispatch("DELETE")
+
     def _dispatch(self, method: str):
         length = int(self.headers.get("Content-Length") or 0)
         if length > MAX_BODY:
@@ -438,7 +456,8 @@ class _Handler(BaseHTTPRequestHandler):
         except Exception:  # noqa: BLE001
             logger.exception("unhandled error: %s %s", method, self.path)
             status, payload = 500, {"ok": False, "error": "internal_error"}
-        self._send(status, payload)
+        extra = payload.pop("_headers", None) if isinstance(payload, dict) else None
+        self._send(status, payload, extra)
 
     def _send_bytes(self, status: int, data: bytes):
         self.send_response(status)
@@ -448,7 +467,7 @@ class _Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
-    def _send(self, status: int, payload):
+    def _send(self, status: int, payload, extra_headers=None):
         data = (
             b""
             if payload is None
@@ -459,7 +478,9 @@ class _Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(data)))
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, X-API-Key, Authorization")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
+        for name, value in extra_headers or ():
+            self.send_header(name, value)
         self.end_headers()
         if data:
             self.wfile.write(data)

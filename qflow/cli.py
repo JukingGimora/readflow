@@ -1,4 +1,4 @@
-"""命令行入口：sync / ask / serve / overview / datasets / tools / login / discover."""
+"""命令行入口：sync / ask / serve / overview / datasets / tools / graph / plan / validate."""
 from __future__ import annotations
 
 import argparse
@@ -7,7 +7,7 @@ import logging
 import sys
 from pathlib import Path
 
-from . import capabilities, config, db, engine, graph, importer, live, nlu, service
+from . import capabilities, config, db, engine, graph, importer, nlu, service
 
 logger = logging.getLogger("qflow.cli")
 
@@ -141,6 +141,14 @@ def cmd_graph(args) -> int:
     return 0
 
 
+def cmd_validate(args) -> int:
+    from . import spec
+
+    result = spec.validate_file(args.file)
+    print(json.dumps(result, ensure_ascii=False, indent=2) if args.json else spec.format_report(result))
+    return 0 if result["ok"] else 1
+
+
 def cmd_plan(args) -> int:
     if not args.text and not args.intent:
         print("需要 text 或 --intent", file=sys.stderr)
@@ -163,66 +171,6 @@ def cmd_plan(args) -> int:
         print(json.dumps(plan, ensure_ascii=False, indent=2, default=str))
     else:
         print(graph.human_plan(plan))
-    return 0
-
-
-def cmd_explore(args) -> int:
-    from . import explorer
-
-    cfg = Path(args.config_dir) / f"{args.system}.json"
-    if not cfg.exists():
-        print(f"没有这个系统配置: {cfg}", file=sys.stderr)
-        return 2
-    result = explorer.run(str(cfg), args.out_dir)
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0
-
-
-def cmd_import_live(args) -> int:
-    payload = json.loads(Path(args.file).read_text(encoding="utf-8"))
-    table = payload.get("table") or {}
-    if not table.get("rows"):
-        print(f"{args.file} 里没有表格数据", file=sys.stderr)
-        return 2
-    conn = _open(args)
-    try:
-        stats = live.import_table(conn, table, dataset=args.dataset)
-    finally:
-        conn.close()
-    print(json.dumps(stats, ensure_ascii=False, indent=2, default=str))
-    return 0
-
-
-def cmd_login(args) -> int:
-    from . import online
-
-    online.login_and_save(args.url, args.state)
-    return 0
-
-
-def cmd_fetch(args) -> int:
-    from . import online
-
-    result = online.fetch_tables(
-        args.url,
-        args.state,
-        args.out,
-        wait_ms=args.wait_ms,
-    )
-    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
-    return 0
-
-
-def cmd_discover(args) -> int:
-    from . import online
-
-    result = online.discover(
-        args.url,
-        args.state,
-        args.out,
-        max_pages=args.max_pages,
-    )
-    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
     return 0
 
 
@@ -274,6 +222,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_graph)
 
+    p = sub.add_parser("validate", help="校验外部模型产出的系统图谱（docs/graph-spec.md）")
+    p.add_argument("file")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_validate)
+
     p = sub.add_parser("plan", help="查看一个问题会走哪条图谱路径")
     p.add_argument("text", nargs="?", default=None)
     p.add_argument("--intent", default=None, choices=list(capabilities.INTENTS))
@@ -281,36 +234,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_plan)
 
-    p = sub.add_parser("explore", help="通用探索：登录→爬页面/接口→生成图谱→销毁会话")
-    p.add_argument("--system", required=True, help="systems/<system>.json 里的名字")
-    p.add_argument("--config-dir", default="systems")
-    p.add_argument("--out-dir", default="data/explore")
-    p.set_defaults(func=cmd_explore)
 
-    p = sub.add_parser("import-live", help="把已抓取的 data/live/deduction_live.json 导入库")
-    p.add_argument("--file", default=str(config.DEFAULT_DATA_DIR / "live" / "deduction_live.json"))
-    p.add_argument("--dataset", default="live_srm")
-    _add_db(p)
-    p.set_defaults(func=cmd_import_live)
-
-    p = sub.add_parser("login", help="人工登录 SRM 并保存会话（需要 playwright）")
-    p.add_argument("--url", default="https://srm.sunnercn.com:10001")
-    p.add_argument("--state", default=str(config.DEFAULT_DATA_DIR / "auth" / "state.json"))
-    p.set_defaults(func=cmd_login)
-
-    p = sub.add_parser("fetch", help="只读抓取单个页面的表格快照（需要 playwright）")
-    p.add_argument("--url", required=True, help="目标页面完整 URL")
-    p.add_argument("--state", default=str(config.DEFAULT_DATA_DIR / "auth" / "state.json"))
-    p.add_argument("--out", default=str(config.DEFAULT_DATA_DIR / "live" / "page.json"))
-    p.add_argument("--wait-ms", type=int, default=3000)
-    p.set_defaults(func=cmd_fetch)
-
-    p = sub.add_parser("discover", help="只读探索菜单/表格并生成系统地图（需要 playwright）")
-    p.add_argument("--url", default="https://srm.sunnercn.com:10001")
-    p.add_argument("--state", default=str(config.DEFAULT_DATA_DIR / "auth" / "state.json"))
-    p.add_argument("--out", default=str(config.DEFAULT_DATA_DIR / "discovery" / "system_map.json"))
-    p.add_argument("--max-pages", type=int, default=30)
-    p.set_defaults(func=cmd_discover)
 
     return parser
 

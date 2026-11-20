@@ -24,8 +24,16 @@ class GraphTests(unittest.TestCase):
         self.assertEqual(plan["bindings"]["month"], {"field": "biz_date", "value": "2025-11"})
         self.assertTrue(plan["read_only"])
         self.assertEqual(len(plan["fallbacks"]), 2)
-        self.assertFalse(plan["fallbacks"][0]["available"])
+        self.assertTrue(plan["fallbacks"][0]["available"])
         self.assertEqual(plan["fallbacks"][0]["kind"], "api")
+        self.assertIn("明细呢", plan["followups"])
+        self.assertEqual(plan["metrics"][0]["key"], "total_amount")
+
+    def test_every_capability_declares_examples_and_followups(self):
+        for node in self.graph.nodes_of("capability"):
+            self.assertTrue(node.get("examples"), node["id"])
+            self.assertTrue(node.get("followups"), node["id"])
+        self.assertEqual(len(self.graph.examples()), 3)
 
     def test_plan_reconcile(self):
         plan = self.graph.plan("reconcile", {"start": "2025-11-01", "end": "2025-11-30"})

@@ -6,41 +6,29 @@ Selenium / ddddocr 延迟导入，缓存模式（不实时）下没有它们也�
 """
 from __future__ import annotations
 
-import ast
 import os
 import re
 import time
 from pathlib import Path
 
 READFLOW = Path(__file__).resolve().parents[1]
-PROJECT = READFLOW.parent
 
 URL = os.environ.get("QFLOW_SRM_URL", "https://srm.sunnercn.com:10001")
 DEDUCTION_ROUTE = "/#/quajud/qua-jud-vendor-list"
 DEDUCTION_URL = URL + DEDUCTION_ROUTE
-DRIVER = os.environ.get(
-    "QFLOW_CHROME_DRIVER",
-    str(READFLOW / "data" / "drivers" / "chromedriver-mac-arm64" / "chromedriver"),
-)
+# 不设就交给 Selenium 自己按当前平台找驱动
+DRIVER = os.environ.get("QFLOW_CHROME_DRIVER", "")
 PROFILE = os.environ.get("QFLOW_CHROME_PROFILE", str(READFLOW / "data" / "live" / "chrome-profile"))
 CHROME_BINARY = os.environ.get("QFLOW_CHROME_BINARY", "")
 
 
 def creds() -> dict:
+    """登录凭据只从环境变量读；不同用户各用各的账号，不写进代码和图谱。"""
     username = os.environ.get("SRM_USER", "").strip()
     password = os.environ.get("SRM_PASS", "")
-    if username and password:
-        return {"username": username, "password": password}
-    main_py = PROJECT / "main.py"
-    if not main_py.exists():
+    if not (username and password):
         raise RuntimeError("没有 SRM 凭据：请设置 SRM_USER / SRM_PASS")
-    tree = ast.parse(main_py.read_text(encoding="utf-8"))
-    for node in tree.body:
-        if isinstance(node, ast.Assign) and any(
-            isinstance(t, ast.Name) and t.id == "user" for t in node.targets
-        ):
-            return ast.literal_eval(node.value)["张桂娟"]
-    raise RuntimeError("main.py 里没有 user 配置")
+    return {"username": username, "password": password}
 
 
 def _driver_module():
@@ -77,7 +65,8 @@ def new_driver(headless: bool = True, configure=None, profile: str | None = None
         except FileNotFoundError:
             pass
     options.add_argument(f"--user-data-dir={profile}")
-    driver = webdriver.Chrome(service=Service(str(DRIVER)), options=options)
+    service = Service(DRIVER) if DRIVER else Service()
+    driver = webdriver.Chrome(service=service, options=options)
     driver.set_page_load_timeout(40)
     return driver
 
@@ -261,119 +250,3 @@ def login(driver) -> bool:
         except Exception:
             time.sleep(1)
     return False
-
-
-def goto_deduction(driver, wait: float = 4.0):
-    from selenium.webdriver.support.ui import WebDriverWait
-
-    driver.get(DEDUCTION_URL)
-    time.sleep(wait)
-    try:
-        WebDriverWait(driver, 15).until(
-            lambda d: d.execute_script(
-                "return document.querySelectorAll('.el-table__header th').length > 0"
-            )
-        )
-    except Exception:
-        pass
-
-
-def click_query(driver) -> bool:
-    from selenium.webdriver.common.by import By
-
-    for element in driver.find_elements(By.CSS_SELECTOR, "button,.el-button"):
-        if (element.text or "").strip() == "查询":
-            driver.execute_script("arguments[0].click()", element)
-            time.sleep(2.5)
-            return True
-    return False
-
-
-def reset_filters(driver):
-    from selenium.webdriver.common.by import By
-
-    for element in driver.find_elements(By.CSS_SELECTOR, "button,.el-button"):
-        if (element.text or "").strip() == "重置":
-            driver.execute_script("arguments[0].click()", element)
-            time.sleep(1.5)
-            return True
-    return False
-
-
-def extract_table(driver):
-    return driver.execute_script(
-        """
-        const clean = el => (el.innerText || el.textContent || '').replace(/\\s+/g, ' ').trim();
-        const table = document.querySelector('.el-table');
-        if (!table) return {headers: [], rows: []};
-        const headers = [...table.querySelectorAll('.el-table__header-wrapper thead th, thead th')]
-          .map(clean).filter(Boolean);
-        const rows = [...table.querySelectorAll('.el-table__body-wrapper tbody tr, tbody tr')]
-          .map(tr => [...tr.querySelectorAll('td')].map(clean))
-          .filter(row => row.length);
-        return {headers, rows};
-        """
-    )
-
-
-def next_page(driver) -> bool:
-    return bool(
-        driver.execute_script(
-            """
-            const btn = document.querySelector('.el-pagination .btn-next');
-            if (!btn || btn.disabled) return false;
-            btn.click();
-            return true;
-            """
-        )
-    )
-
-
-def pagination_total(driver) -> int | None:
-    try:
-        text = driver.execute_script(
-            "return (document.querySelector('.el-pagination__total')||{}).innerText || ''"
-        ) or ""
-        match = re.search(r"共\s*(\d+)", text)
-        return int(match.group(1)) if match else None
-    except Exception:
-        return None
-
-
-def deduction_pages(driver, max_pages: int = 30):
-    """翻完所有页，返回原始 headers/rows（未去重）。"""
-    table = {"headers": [], "rows": []}
-    for _ in range(3):
-        goto_deduction(driver)
-        reset_filters(driver)
-        table = extract_table(driver)
-        if not table.get("headers"):
-            # 有的会话第一次进来不自动查，点一次只读「查询」
-            click_query(driver)
-            table = extract_table(driver)
-        if table.get("headers"):
-            break
-        time.sleep(2)
-    headers = table.get("headers") or []
-    if not headers:
-        raise RuntimeError("质量扣款明细表格未加载（可能是会话过期）")
-    rows = list(table.get("rows") or [])
-    pages = 1
-    while pages < max_pages:
-        # 翻页按钮在表格加载时可能短暂 disabled，重试
-        advanced = False
-        for _ in range(3):
-            if next_page(driver):
-                advanced = True
-                break
-            time.sleep(1.0)
-        if not advanced:
-            break
-        time.sleep(1.0)
-        page = extract_table(driver)
-        more = page.get("rows") or []
-        if not more:
-            break
-        rows.extend(more)
-        pages += 1
-    return {"headers": headers, "rows": rows, "pages": pages, "total": pagination_total(driver)}

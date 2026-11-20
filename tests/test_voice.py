@@ -79,6 +79,27 @@ class VoiceMultiTurnTests(unittest.TestCase):
         self.assertTrue(result["handled"])
         self.assertIn("扣款", result["reply"])
         self.assertEqual(result["state_patch"]["snxt"], {})
+        self.assertTrue(result["clarify"])
+        self.assertTrue(result["followups"])
+
+    def test_answer_carries_followups(self):
+        result = self.first()
+        self.assertIn("明细呢", result["followups"])
+
+    def test_followup_with_new_time_replaces_old_range(self):
+        state = self.first()["state_patch"]
+        result = voice.handle(self.conn, "那12月呢", {"state": state}, now=NOW)
+        params = result["state_patch"]["snxt"]["params"]
+        self.assertEqual(result["intent"], "deduction.summary")
+        self.assertNotIn("2025-11", " ".join(str(v) for v in params.values()))
+
+    def test_unclear_turn_keeps_context(self):
+        state = self.first()["state_patch"]
+        unclear = voice.handle(self.conn, "帮我订个机票", {"state": state}, now=NOW)
+        self.assertTrue(unclear["clarify"])
+        self.assertEqual(unclear["state_patch"], {})
+        result = voice.handle(self.conn, "明细呢", {"state": state}, now=NOW)
+        self.assertEqual(result["intent"], "deduction.detail")
 
 
 if __name__ == "__main__":

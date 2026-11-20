@@ -9,18 +9,23 @@ voicelab 的 window 策略同时带 history 和 state；state_patch 会合并进
 - 明细呢 / 汇总呢           -> 切换 detail / summary
 - 换发货呢                 -> 换 intent，沿用上次时间
 - 谢谢 / 好的               -> 不重复上一次答案
+
+每轮返回还带 followups：下一步可能问什么（来自图谱能力节点的 followups/examples），
+调用方可以直接展示或念给用户。
 """
 from __future__ import annotations
 
 from datetime import datetime
 
-from . import capabilities, nlu
+from . import capabilities, nlu, understand
+from .graph import Graph, GraphError
 
 STATE_KEY = "snxt"
 DETAIL_WORDS = ("明细", "列表", "哪几笔", "哪几单", "详情")
 SUMMARY_WORDS = ("汇总", "合计", "总计", "统计")
 COURTESY = ("谢谢", "好的", "好", "嗯", "知道了", "收到", "可以", "行")
 PARAM_KEYS = {"start", "end", "month", "days", "asn", "plate", "item"}
+TIME_KEYS = ("start", "end", "month", "days")
 
 
 def _params(values: dict | None) -> dict:
@@ -53,6 +58,23 @@ def _previous(context: dict | None) -> dict:
     return _from_history(context)
 
 
+def _examples() -> list[str]:
+    try:
+        return Graph.load().examples()
+    except GraphError:
+        return []
+
+
+def _inherit(previous_params: dict, params: dict, keys=None) -> dict:
+    """沿用上一轮条件；时间是一组，新话里只要带了时间就整组替换。"""
+    kept = dict(previous_params)
+    if keys is not None:
+        kept = {key: value for key, value in kept.items() if key in keys}
+    if any(key in params for key in TIME_KEYS):
+        kept = {key: value for key, value in kept.items() if key not in TIME_KEYS}
+    return {**kept, **params}
+
+
 def _out(result: dict, intent: str, params: dict) -> dict:
     return {
         "reply": " ".join(result["answer"].splitlines()),
@@ -61,6 +83,7 @@ def _out(result: dict, intent: str, params: dict) -> dict:
         "intent": intent,
         "data": result.get("data"),
         "plan": result.get("plan"),
+        "followups": (result.get("plan") or {}).get("followups") or [],
         "data_as_of": result.get("data_as_of"),
     }
 
@@ -72,6 +95,7 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
             "reply": "没听清，请再说一遍。",
             "state_patch": {},
             "handled": False,
+            "followups": _examples(),
         }
 
     context = context or {}
@@ -79,11 +103,6 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
     parsed = nlu.parse(text, now)
     params = _params(parsed.params)
     overview = any(word in text for word in ("概览", "总览", "数据情况"))
-    explicit = parsed.intent != "overview"
-    followup = bool(previous) and not explicit and not overview and bool(
-        params or any(word in text for word in DETAIL_WORDS + SUMMARY_WORDS)
-    )
-
     if text in COURTESY and not params:
         return {
             "reply": "好，有需要再问。",
@@ -92,16 +111,45 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
             "intent": previous.get("intent") or "chat",
         }
 
-    if overview:
-        result = capabilities.query(conn, text=text, now=now, live=live)
+    # 规则认业务关键词；认不出来的口语说法（「被罚了多少」「拉了几车」）交给本地模型选一类。
+    # 模型没配或连不上时 route 只按规则给结果，下面的流程和原来一样。
+    looks_like_followup = bool(previous) and bool(
+        params
+        or any(word in text for word in DETAIL_WORDS + SUMMARY_WORDS)
+        or nlu.wants_detail(text)
+    )
+    routed = (
+        {"kind": "unknown", "by": "rules"}
+        if overview
+        else understand.route(parsed, text, has_previous=bool(previous))
+    )
+    if routed["kind"] == "write":
+        # 模型常把「想查的东西这里没有」也判成想办事，所以这句话对两种情况都要成立
+        can = "、".join(understand.labels()) or "已接入的数据"
+        return {
+            "reply": f"这个我帮不上。我现在只能帮你查{can}，不能替你在系统里办事。",
+            "state_patch": {},
+            "handled": True,
+            "intent": "refuse.write",
+            "followups": _examples(),
+        }
+    if routed["kind"] == "intent" and routed["by"] == "model":
+        parsed.intent = routed["intent"]
+    if overview or (routed["by"] == "model" and routed.get("intent") == "overview"):
+        result = capabilities.query(conn, intent="overview", text=text, now=now, live=live)
         payload = _out(result, "overview", {})
         payload["state_patch"] = {STATE_KEY: {}}
         return payload
 
+    explicit = parsed.intent != "overview"
+    followup = bool(previous) and not explicit and not overview and (
+        looks_like_followup or routed["kind"] == "followup"
+    )
+
     if followup:
         intent = previous["intent"]
-        merged = {**_params(previous.get("params")), **params}
-        if any(word in text for word in DETAIL_WORDS) and intent.startswith(
+        merged = _inherit(_params(previous.get("params")), params)
+        if (any(word in text for word in DETAIL_WORDS) or nlu.wants_detail(text)) and intent.startswith(
             ("deduction", "shipment")
         ):
             intent = intent.split(".")[0] + ".detail"
@@ -116,21 +164,27 @@ def handle(conn, heard: str, context: dict | None = None, now: datetime | None =
         merged = dict(params)
         # 换方向时保留上一次的时间范围（"那发货呢"）
         if previous:
-            for key in ("start", "end", "month", "days"):
-                if key not in merged and key in _params(previous.get("params")):
-                    merged[key] = _params(previous.get("params"))[key]
+            merged = _inherit(_params(previous.get("params")), merged, TIME_KEYS)
             if parsed.intent.startswith("deduction"):
                 merged.pop("plate", None)
             if parsed.intent.startswith("shipment"):
                 merged.pop("item", None)
-        result = capabilities.query(conn, text=text, params=merged, now=now, live=live)
+        result = capabilities.query(
+            conn, intent=parsed.intent, text=text, params=merged, now=now, live=live
+        )
         return _out(result, parsed.intent, merged)
 
     # 没有上下文、也没有明确意图：返回概览并提示可以问什么
     result = capabilities.query(conn, text=text, now=now, live=live)
     payload = _out(result, "overview", {})
+    examples = _examples()
     payload["reply"] = (
-        "我还没听出要查扣款、发货还是对账。可以问：2026 年 5 月扣款合计是多少？"
+        f"我还没听出要查什么。可以问：{examples[0]}"
+        if examples
+        else "我还没听出要查扣款、发货还是对账。可以问：2026 年 5 月扣款合计是多少？"
     )
-    payload["state_patch"] = {STATE_KEY: {}}
+    # 没听懂不等于换话题：已有的上下文留着，下一句追问还能接上
+    payload["state_patch"] = {} if previous else {STATE_KEY: {}}
+    payload["clarify"] = True
+    payload["followups"] = examples
     return payload

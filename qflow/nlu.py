@@ -35,11 +35,19 @@ ITEM_NAMES = [
     "气味",
 ]
 
-RECON_KEYS = ("对账", "差额", "净额", "抵扣", "扣完", "结算差")
+# 口语里的叫法 → 标准名。TODO(T3): 换成图谱 entities[].fields[].synonyms。
+ITEM_ALIASES = {"水份": "水分", "含水": "水分", "黄曲霉": "黄曲霉毒素", "赤霉烯酮": "玉米赤霉烯酮", "霉变": "霉变粒", "生霉": "生霉粒"}
+
+RECON_KEYS = ("对账", "差额", "净额", "抵扣", "扣完", "结算差", "还剩", "净剩", "净得")
 SHIP_KEYS = ("发货", "收货", "到货", "物流", "车牌", "车号", "实收", "装车", "运输")
 DED_KEYS = ("扣款", "扣罚", "罚款", "扣钱", "检测", "扣了", "扣多少", "订单号")
 OVERVIEW_KEYS = ("概览", "总体", "数据情况", "多少数据", "数据量", "统计一下")
 DETAIL_KEYS = ("明细", "列表", "哪几笔", "哪几单", "详情", "具体", "查一下", "看看", "列出", "有哪些", "哪些")
+# 明确在指「某一条 / 每一条」的说法；出现了就按明细，除非要总数的词更多。
+POINTING_KEYS = (
+    "明细", "哪几", "哪天", "哪一", "每一笔", "每笔", "每车", "每一车", "每单", "一条条", "一条一条", "一笔笔", "一笔一笔", "逐笔", "逐车",
+    "那车", "那单", "那趟", "那笔", "那几笔", "为什么", "为啥", "单号", "念一下", "报一下", "列一下", "列出",
+)
 SUMMARY_KEYS = ("多少", "合计", "总额", "总计", "统计", "汇总", "分布", "排名", "一共", "总共", "合计")
 
 
@@ -74,10 +82,52 @@ def _month_of(year: int, month: int) -> tuple[str, str] | None:
     return month_bounds(f"{year:04d}-{month:02d}")
 
 
+_CN_DIGIT = {c: i for i, c in enumerate("零一二三四五六七八九")}
+_CN_NUM_RE = re.compile(r"(?<![上这每近个第])(三十一|三十|二十[一二三四五六七八九]?|十[一二三四五六七八九]?|[一二两三四五六七八九])(?=月|号|日(?!子))")
+_SPOKEN = (
+    ("这个礼拜", "这周"), ("这礼拜", "这周"), ("这个星期", "这周"), ("本礼拜", "这周"),
+    ("上个礼拜", "上周"), ("上礼拜", "上周"), ("上个星期", "上周"), ("上星期", "上周"),
+)
+
+
+def _cn_number(word: str) -> int:
+    if word == "两":
+        return 2
+    if "十" not in word:
+        return _CN_DIGIT[word]
+    tens, _, ones = word.partition("十")
+    return (_CN_DIGIT[tens] if tens else 1) * 10 + (_CN_DIGIT[ones] if ones else 0)
+
+
+def normalize_time_words(text: str) -> str:
+    """语音识别常把月份、日期写成汉字（十一月、三号）；规则只认数字，这里先换掉。"""
+    t = text.replace(" ", "")
+    for spoken, standard in _SPOKEN:
+        t = t.replace(spoken, standard)
+    return _CN_NUM_RE.sub(lambda m: str(_cn_number(m.group(1))), t)
+
+
 def extract_time(text: str, now: datetime | None = None) -> dict:
     now = now or now_local()
     today = now.date()
-    t = text.replace(" ", "")
+    t = normalize_time_words(text)
+    year_of = {"去年": today.year - 1, "今年": today.year, "前年": today.year - 2, "": today.year}
+
+    # 0) 一段月份：今年3月到5月 / 3月至5月；上半年 / 去年下半年
+    m = re.search(r"(去年|今年|前年|)(\d{1,2})月(?:份)?(?:到|至|[-~—])(\d{1,2})月", t)
+    if m:
+        first = _month_of(year_of[m.group(1)], int(m.group(2)))
+        last = _month_of(year_of[m.group(1)], int(m.group(3)))
+        if first and last and first[0] <= last[1]:
+            return {"start": first[0], "end": last[1]}
+    m = re.search(r"(去年|今年|前年|)(上|下)半年", t)
+    if m:
+        year = year_of[m.group(1)]
+        return (
+            {"start": f"{year}-01-01", "end": f"{year}-06-30"}
+            if m.group(2) == "上"
+            else {"start": f"{year}-07-01", "end": f"{year}-12-31"}
+        )
 
     # 1) 明确日期：2025-11-21 / 2025/11/21 / 2025.11.21
     m = re.search(r"(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})", t)
@@ -180,9 +230,23 @@ def extract_entities(text: str) -> dict:
     if plate:
         entities["plate"] = plate.group(1).upper()
     item = next((name for name in ITEM_NAMES if name in text), None)
+    if not item:
+        item = next((name for alias, name in ITEM_ALIASES.items() if alias in text), None)
     if item:
         entities["item"] = item
     return entities
+
+
+def wants_detail(text: str, params: dict | None = None) -> bool:
+    """要逐条记录还是要总数。只看提示词，不问模型（实测小模型在这件事上偏向明细）。"""
+    params = params or {}
+    if "asn" in params or "plate" in params:
+        return True
+    summary = sum(1 for key in set(SUMMARY_KEYS) if key in text)
+    pointing = sum(1 for key in POINTING_KEYS if key in text)
+    if pointing:
+        return pointing >= summary
+    return sum(1 for key in DETAIL_KEYS if key in text) > summary
 
 
 def _score(text: str) -> dict[str, int]:
@@ -218,6 +282,8 @@ def parse(text: str, now: datetime | None = None) -> ParsedQuery:
     params.update(entities)
 
     scores = _score(text)
+    if "item" in entities:
+        scores["deduction"] += 1  # 检测项目只出现在扣款里
     best = max(scores, key=scores.get)
     confidence = 0.55
     notes: list[str] = []
@@ -230,21 +296,18 @@ def parse(text: str, now: datetime | None = None) -> ParsedQuery:
         intent = "reconcile"
         confidence = 0.9
     elif best == "deduction":
-        detail_hits = sum(1 for key in DETAIL_KEYS if key in text)
         summary_hits = sum(1 for key in SUMMARY_KEYS if key in text)
         if "asn" in params:
             intent = "deduction.detail"
             confidence = 0.95
-        elif detail_hits > summary_hits:
+        elif wants_detail(text, params):
             intent = "deduction.detail"
             confidence = 0.85
         else:
             intent = "deduction.summary"
             confidence = 0.85 if summary_hits else 0.75
     elif best == "shipment":
-        detail_hits = sum(1 for key in DETAIL_KEYS if key in text)
-        summary_hits = sum(1 for key in SUMMARY_KEYS if key in text)
-        if "asn" in params or "plate" in params or detail_hits > summary_hits:
+        if wants_detail(text, params):
             intent = "shipment.detail"
         else:
             intent = "shipment.summary"

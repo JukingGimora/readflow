@@ -105,6 +105,18 @@
         {
           "name": "ded_count",
           "label": "扣款笔数"
+        },
+        {
+          "name": "biz_date",
+          "label": "业务日期"
+        },
+        {
+          "name": "plate",
+          "label": "车牌号"
+        },
+        {
+          "name": "ship_qty",
+          "label": "实收数量"
         }
       ]
     },
@@ -151,7 +163,7 @@
     {
       "id": "api.deduction.list",
       "type": "api",
-      "label": "扣款列表接口（待发现）",
+      "label": "扣款列表接口",
       "method": "POST",
       "path": "/srm/qm/quajud/vendorQuery",
       "entity": "entity.deduction",
@@ -176,7 +188,7 @@
     {
       "id": "page.deduction",
       "type": "page",
-      "label": "扣款明细页（待确认）",
+      "label": "扣款明细页",
       "menu": [
         "采购协同",
         "质量扣款明细"
@@ -184,7 +196,8 @@
       "route": "/#/quajud/qua-jud-vendor-list",
       "entity": "entity.deduction",
       "read_only": true,
-      "available": true,
+      "available": false,
+      "reason": "运行层不做页面读取，只留作结构记录",
       "confidence": 0.9
     },
     {
@@ -205,7 +218,35 @@
         "api.deduction.list",
         "page.deduction"
       ],
-      "read_only": true
+      "read_only": true,
+      "examples": [
+        "上个月扣款合计是多少",
+        "本月水分扣了多少钱"
+      ],
+      "followups": [
+        "明细呢",
+        "只看水分",
+        "那发货呢"
+      ],
+      "metrics": [
+        {
+          "key": "total_amount",
+          "label": "扣款合计",
+          "unit": "元",
+          "accent": true
+        },
+        {
+          "key": "count",
+          "label": "扣款笔数",
+          "unit": "笔"
+        },
+        {
+          "key": "asn_count",
+          "label": "涉及单号",
+          "unit": "个"
+        }
+      ],
+      "hint": "质量检测不合格被扣的钱、罚款：一共多少、几笔、哪个检测项目扣得多"
     },
     {
       "id": "cap.deduction.detail",
@@ -225,7 +266,30 @@
         "api.deduction.list",
         "page.deduction"
       ],
-      "read_only": true
+      "read_only": true,
+      "examples": [
+        "上个月扣款明细",
+        "本月杂质扣款有哪几笔"
+      ],
+      "followups": [
+        "汇总呢",
+        "上个月呢",
+        "那发货呢"
+      ],
+      "metrics": [
+        {
+          "key": "total_amount",
+          "label": "扣款合计",
+          "unit": "元",
+          "accent": true
+        },
+        {
+          "key": "count",
+          "label": "扣款笔数",
+          "unit": "笔"
+        }
+      ],
+      "hint": "扣款、罚款一笔一笔的记录"
     },
     {
       "id": "cap.shipment.summary",
@@ -243,7 +307,35 @@
       "providers": [
         "provider.cache.shipments"
       ],
-      "read_only": true
+      "read_only": true,
+      "examples": [
+        "本月发了多少货",
+        "上个月发货汇总"
+      ],
+      "followups": [
+        "明细呢",
+        "上个月呢",
+        "那扣款呢"
+      ],
+      "metrics": [
+        {
+          "key": "total_amount",
+          "label": "含税金额",
+          "unit": "元",
+          "accent": true
+        },
+        {
+          "key": "count",
+          "label": "发货单数",
+          "unit": "单"
+        },
+        {
+          "key": "total_qty",
+          "label": "实收数量",
+          "unit": "吨"
+        }
+      ],
+      "hint": "送去的货、拉货、到货：几车、几趟、多少吨"
     },
     {
       "id": "cap.shipment.detail",
@@ -261,7 +353,35 @@
       "providers": [
         "provider.cache.shipments"
       ],
-      "read_only": true
+      "read_only": true,
+      "examples": [
+        "本月发货明细",
+        "上个月发货单有哪几单"
+      ],
+      "followups": [
+        "汇总呢",
+        "上个月呢",
+        "那扣款呢"
+      ],
+      "metrics": [
+        {
+          "key": "total_amount",
+          "label": "含税金额",
+          "unit": "元",
+          "accent": true
+        },
+        {
+          "key": "count",
+          "label": "发货单数",
+          "unit": "单"
+        },
+        {
+          "key": "total_qty",
+          "label": "实收数量",
+          "unit": "吨"
+        }
+      ],
+      "hint": "每一车的发货记录、车牌、实收重量、收没收到"
     },
     {
       "id": "cap.reconcile",
@@ -277,7 +397,39 @@
       "providers": [
         "provider.cache.reconciliation"
       ],
-      "read_only": true
+      "read_only": true,
+      "examples": [
+        "上个月对账",
+        "本月发货和扣款的净额"
+      ],
+      "followups": [
+        "上个月呢",
+        "扣款明细呢"
+      ],
+      "metrics": [
+        {
+          "key": "net_total",
+          "label": "净额",
+          "unit": "元",
+          "accent": true
+        },
+        {
+          "key": "ship_total",
+          "label": "发货金额",
+          "unit": "元"
+        },
+        {
+          "key": "ded_total",
+          "label": "扣款合计",
+          "unit": "元"
+        },
+        {
+          "key": "ded_only",
+          "label": "有扣款无发货",
+          "unit": "单"
+        }
+      ],
+      "hint": "货款减掉扣款以后还剩多少、能结多少、账对不对得上"
     },
     {
       "id": "cap.overview",
@@ -289,7 +441,38 @@
       "providers": [
         "provider.cache.local"
       ],
-      "read_only": true
+      "read_only": true,
+      "examples": [
+        "数据概览"
+      ],
+      "followups": [
+        "本月扣款合计",
+        "本月发货汇总",
+        "本月对账"
+      ],
+      "metrics": [
+        {
+          "key": "shipments.count",
+          "label": "发货单",
+          "unit": "单"
+        },
+        {
+          "key": "shipments.total_amount",
+          "label": "发货金额",
+          "unit": "元"
+        },
+        {
+          "key": "deductions.count",
+          "label": "扣款",
+          "unit": "笔"
+        },
+        {
+          "key": "deductions.total_amount",
+          "label": "扣款合计",
+          "unit": "元"
+        }
+      ],
+      "hint": "系统里有多少数据、数据更新到哪天"
     }
   ],
   "edges": [

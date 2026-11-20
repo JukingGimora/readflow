@@ -12,9 +12,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from http.cookiejar import Cookie, CookieJar
-from pathlib import Path
 
-from . import config, srm
+from . import config, online, srm
 
 logger = logging.getLogger("qflow.srmapi")
 
@@ -113,6 +112,7 @@ def opener_from_cookies(cookies: list[dict]) -> urllib.request.OpenerDirector:
 
 
 def post(opener, data: dict) -> dict:
+    online.assert_readonly_request("POST", srm.URL + API_PATH)
     body = urllib.parse.urlencode(data).encode()
     req = urllib.request.Request(
         srm.URL + API_PATH,
