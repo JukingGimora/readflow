@@ -62,8 +62,8 @@ python -m qflow plan "去年11月水分扣了多少"
   2. 按字段过滤：start→biz_date、end→biz_date、item→item
   3. 返回结构化记录
 兜底：
-  - api.deduction.list：未就绪（登录后运行 discover，从 XHR 里确认路径和参数）
-  - page.deduction：未就绪（需要人工登录并确认菜单层级）
+  - api.deduction.list：可用
+  - page.deduction：未就绪（运行层不做页面读取，只留作结构记录）
 ```
 
 当前 `graph.json` 是手写的种子：3 个实体、6 个能力、4 个 cache provider，只覆盖扣款、发货和对账。

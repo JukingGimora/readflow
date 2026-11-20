@@ -1,4 +1,4 @@
-"""命令行入口：sync / ask / serve / overview / datasets / tools / login / discover."""
+"""命令行入口：sync / ask / serve / overview / datasets / tools / graph / plan."""
 from __future__ import annotations
 
 import argparse

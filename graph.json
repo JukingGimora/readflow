@@ -163,7 +163,7 @@
     {
       "id": "api.deduction.list",
       "type": "api",
-      "label": "扣款列表接口（待发现）",
+      "label": "扣款列表接口",
       "method": "POST",
       "path": "/srm/qm/quajud/vendorQuery",
       "entity": "entity.deduction",
@@ -188,7 +188,7 @@
     {
       "id": "page.deduction",
       "type": "page",
-      "label": "扣款明细页（待确认）",
+      "label": "扣款明细页",
       "menu": [
         "采购协同",
         "质量扣款明细"
@@ -196,7 +196,8 @@
       "route": "/#/quajud/qua-jud-vendor-list",
       "entity": "entity.deduction",
       "read_only": true,
-      "available": true,
+      "available": false,
+      "reason": "运行层不做页面读取，只留作结构记录",
       "confidence": 0.9
     },
     {

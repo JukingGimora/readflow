@@ -13,7 +13,7 @@ class GraphTests(unittest.TestCase):
         self.assertEqual(stats["capabilities"], 6)
         self.assertEqual(stats["answerable"], 6)
         self.assertEqual(stats["coverage"], 1.0)
-        self.assertEqual(stats["online_pending"], 0)
+        self.assertEqual(stats["online_pending"], 1)
         self.assertEqual(stats["by_type"]["entity"], 3)
 
     def test_plan_deduction_summary(self):
