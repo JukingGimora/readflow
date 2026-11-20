@@ -141,6 +141,14 @@ $ python -m qflow ask "去年11月扣款合计"
 
 鉴权：启动时设置 `--token secret`（或环境变量 `QFLOW_TOKEN`），请求带 `X-API-Key: secret` 或 `Authorization: Bearer secret`。
 
+### 本地模型（可选）
+
+设 `QFLOW_LLM_URL`（OpenAI 兼容的 `chat/completions` 地址，例如 `http://127.0.0.1:8050/v1/chat/completions`）后，规则认不出业务关键词的口语问法（「上个月被罚了多少钱」「这周拉了几车」）会交给本地模型，从图谱的能力里选一类；它还负责认出「想让系统办事」的话并拒绝。模型只答一个字母，时间、条件和所有数字仍由程序处理。不设、连不上或超时（`QFLOW_LLM_TIMEOUT`，默认 3 秒）时只用规则。模型名用 `QFLOW_LLM_MODEL`，默认 `qwen3`。
+
+实测和分工的依据见 [`docs/PLAN.md`](docs/PLAN.md) 第 5 节；重跑：`python scripts/eval_understand.py`。
+
+### 鉴权
+
 设了口令后，除 `/health` 和页面本身外的所有接口都要鉴权，包括 `/desk/api/*`。页面多一种方式：打开 `/desk` 会先要求输入口令，通过后拿到一个当天有效的会话 cookie（只对 `/desk/api/*` 有效）。页面口令默认就是 `QFLOW_TOKEN`；想给人一个好记的口令，另设 `QFLOW_DESK_PASS`，可以是一句中文，比对时忽略空格、标点和全半角。同一来源一天输错 5 次（所有来源合计 30 次）后当天不再受理，重启服务清零。不设 `QFLOW_TOKEN` 时没有任何鉴权，只适合本机开发。
 
 ```bash
