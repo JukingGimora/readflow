@@ -17,7 +17,6 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
-from .config import PROJECT_ROOT
 
 DENY_TEXT = ("保存", "提交", "删除", "移除", "审批", "审核", "发货", "确认", "确定", "新增", "编辑", "修改", "作废", "退回", "付款", "结算", "导出", "打印", "上传", "停用", "启用")
 NAV_SUFFIX = ("管理", "记录", "看板", "清单", "列表", "明细", "查询", "统计", "报表", "详情", "首页", "设置", "概览", "中心", "分析", "日志", "信息", "档案")
@@ -54,8 +53,9 @@ class EphemeralBrowser:
         options.add_argument(f"--user-data-dir={self.tmp}")
         options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
         options.set_capability("goog:chromeOptions", {"prefs": {"profile.default_content_setting_values.notifications": 2}})
-        driver_path = driver_path or str(PROJECT_ROOT / "data" / "drivers" / "chromedriver-mac-arm64" / "chromedriver")
-        self.driver = webdriver.Chrome(service=Service(driver_path), options=options)
+        # 不指定就交给 Selenium 自己按当前平台找驱动
+        service = Service(driver_path) if driver_path else Service()
+        self.driver = webdriver.Chrome(service=service, options=options)
         self.driver.set_page_load_timeout(40)
         self._inject_session()
 

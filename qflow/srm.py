@@ -6,41 +6,29 @@ Selenium / ddddocr 延迟导入，缓存模式（不实时）下没有它们也�
 """
 from __future__ import annotations
 
-import ast
 import os
 import re
 import time
 from pathlib import Path
 
 READFLOW = Path(__file__).resolve().parents[1]
-PROJECT = READFLOW.parent
 
 URL = os.environ.get("QFLOW_SRM_URL", "https://srm.sunnercn.com:10001")
 DEDUCTION_ROUTE = "/#/quajud/qua-jud-vendor-list"
 DEDUCTION_URL = URL + DEDUCTION_ROUTE
-DRIVER = os.environ.get(
-    "QFLOW_CHROME_DRIVER",
-    str(READFLOW / "data" / "drivers" / "chromedriver-mac-arm64" / "chromedriver"),
-)
+# 不设就交给 Selenium 自己按当前平台找驱动
+DRIVER = os.environ.get("QFLOW_CHROME_DRIVER", "")
 PROFILE = os.environ.get("QFLOW_CHROME_PROFILE", str(READFLOW / "data" / "live" / "chrome-profile"))
 CHROME_BINARY = os.environ.get("QFLOW_CHROME_BINARY", "")
 
 
 def creds() -> dict:
+    """登录凭据只从环境变量读；不同用户各用各的账号，不写进代码和图谱。"""
     username = os.environ.get("SRM_USER", "").strip()
     password = os.environ.get("SRM_PASS", "")
-    if username and password:
-        return {"username": username, "password": password}
-    main_py = PROJECT / "main.py"
-    if not main_py.exists():
+    if not (username and password):
         raise RuntimeError("没有 SRM 凭据：请设置 SRM_USER / SRM_PASS")
-    tree = ast.parse(main_py.read_text(encoding="utf-8"))
-    for node in tree.body:
-        if isinstance(node, ast.Assign) and any(
-            isinstance(t, ast.Name) and t.id == "user" for t in node.targets
-        ):
-            return ast.literal_eval(node.value)["张桂娟"]
-    raise RuntimeError("main.py 里没有 user 配置")
+    return {"username": username, "password": password}
 
 
 def _driver_module():
@@ -77,7 +65,8 @@ def new_driver(headless: bool = True, configure=None, profile: str | None = None
         except FileNotFoundError:
             pass
     options.add_argument(f"--user-data-dir={profile}")
-    driver = webdriver.Chrome(service=Service(str(DRIVER)), options=options)
+    service = Service(DRIVER) if DRIVER else Service()
+    driver = webdriver.Chrome(service=service, options=options)
     driver.set_page_load_timeout(40)
     return driver
 
