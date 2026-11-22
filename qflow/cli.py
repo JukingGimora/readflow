@@ -156,7 +156,19 @@ def cmd_run(args) -> int:
     try:
         graph = runner.load(args.file)
         send = runner.http_sender(runner.opener_from_cookie_file(args.cookies) if args.cookies else None)
-        result = runner.run(graph, args.capability, json.loads(args.params or "{}"), send, limit=args.limit)
+        if args.ask:  # 从一句话开始：听懂 → 选能力 → 填条件 → 执行
+            from . import ask
+
+            out = ask.ask(graph, args.ask, None, send)
+            result = out.get("result") or {"answer": out["reply"]}
+            if out.get("capability"):
+                print(f"[{out['capability']} 由{'规则' if out['by'] == 'rules' else '本地模型'}选出，条件 "
+                      f"{json.dumps(out['state']['values'], ensure_ascii=False)}]", file=sys.stderr)
+        elif args.capability:
+            result = runner.run(graph, args.capability, json.loads(args.params or "{}"), send, limit=args.limit)
+        else:
+            print("需要能力 id 或 --ask 一句话", file=sys.stderr)
+            return 2
     except runner.AuthExpired as exc:
         print(f"登录态失效：{exc}", file=sys.stderr)
         return 3
@@ -247,7 +259,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("run", help="按 v1 图谱真实执行一个能力（只读），用来验收新图谱")
     p.add_argument("file")
-    p.add_argument("capability")
+    p.add_argument("capability", nargs="?", default=None)
+    p.add_argument("--ask", default=None, help="不指定能力，直接给一句话")
     p.add_argument("--params", default=None, help='条件的 JSON，例如 {"period": {"start": "2025-11-01", "end": "2025-11-30"}}')
     p.add_argument("--cookies", default=None, help="登录态 cookie 文件；不给就不带登录态")
     p.add_argument("--limit", type=int, default=50)

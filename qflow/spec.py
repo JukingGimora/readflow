@@ -243,6 +243,11 @@ def validate(doc) -> dict:
                 r.err(cid, "有 slot 缺少 name")
                 continue
             names.add(sname)
+            if slot.get("pattern"):
+                try:
+                    re.compile(str(slot["pattern"]))
+                except re.error as exc:
+                    r.err(f"{cid}.{sname}", f"pattern 不是合法的正则：{exc}")
             if slot.get("type") not in SLOT_TYPES:
                 r.err(f"{cid}.{sname}", f"slot type 必须是 {sorted(SLOT_TYPES)} 之一")
             to = slot.get("to")

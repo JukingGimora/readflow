@@ -112,12 +112,16 @@ def enabled() -> bool:
     return bool(config.LLM_URL)
 
 
-def ask_model(text: str, has_previous: bool = False, graph: Graph | None = None) -> str | None:
-    """返回业务类别的 key、FOLLOWUP、WRITE 或 NONE；模型不可用时返回 None。"""
+def ask_model(text: str, has_previous: bool = False, graph: Graph | None = None,
+              options: list[Group] | None = None) -> str | None:
+    """返回业务类别的 key、FOLLOWUP、WRITE 或 NONE；模型不可用时返回 None。
+
+    options 不给就从旧格式图谱里取；v1 图谱由 qflow/ask.py 传进来。
+    """
     global _down_until
     if not enabled() or time.monotonic() < _down_until:
         return None
-    options = groups(graph)
+    options = options or groups(graph)
     if not options:
         return None
     prompt, answers = build_prompt(text, options, has_previous)
