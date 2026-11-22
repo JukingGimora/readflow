@@ -55,21 +55,21 @@
               └─ 滑块 / 扫码：把那块画面给用户操作        ← 未实现，见 T6
 ```
 
-## 3. 部署现状（2026-11-20 晚实地查看）
+## 3. 部署现状（2026-11-22 部署并实测）
 
 - 服务器：一台 4090 D。VoiceLab 四个服务只监听本机：编排 8040、识别 8030、合成 8031（按需启动）、本地模型 8050（llama.cpp，Qwen3；VoiceLab 文档写的是 4B-Q4）。
-- 运行层：`~/projects/snxt-query`，systemd 用户服务 `snxt-query`，端口 8790。**2026-11-20 19:37 已部署本分支**（含 T0 登录门）。部署前的版本备份在 `~/projects/snxt-query-backup-20261120-1937.tgz`。
+- 运行层：`~/projects/snxt-query`，systemd 用户服务 `snxt-query`，端口 8790。**2026-11-22 18:03 已部署本分支**（含 T0 登录门、T1 校验器、T3 第一步）。上一版代码在服务器的 `~/projects/snxt-query/.prev/`（每次部署只留一份）；更早的整体备份在 `~/projects/snxt-query-backup-20261120-1937.tgz`。
 - 口令：`.env` 里 `QFLOW_TOKEN`（接口用）和 `QFLOW_DESK_PASS`（页面用，一句中文）。部署脚本不再覆盖已有的 `.env`。
+- 本地模型：`.env` 里 `QFLOW_LLM_URL=http://127.0.0.1:8050/v1/chat/completions`（部署脚本在没配过时补上）。实际加载的是 `Qwen3-4B-Q4_K_M`，上下文 4096。「翻自己」和 future 也用这一个模型服务。
 - VoiceLab 里登记为 agent `snxt_deduction`，`type: http`，指向 `/voice/handle`，登记的口令已和服务一致。
-- 部署方式：在开发机上运行仓库外的 `deploy_server.sh`（打包 → scp → 解包 → 重启服务 → 向 VoiceLab 注册 agent）。
+- 部署方式：在开发机上运行仓库外的 `deploy_server.sh`（打包 → scp → 把服务器上旧的 `qflow/`、`systems/`、`deploy/` 挪到 `.prev/` → 解包 → 重启服务 → 向 VoiceLab 注册 agent）。回滚：把 `.prev/` 里的三个目录挪回去再重启服务。**注意：脚本每次都会用开发机上的 `data/queryflow.db` 覆盖服务器上的库**；现在两边内容一样所以没问题，等服务器自己同步数据后（T5）这一步要去掉。
 - 公网入口：Cloudflare 隧道，`tradesitecloud.com` 下已有若干子域名（不要动）。运行层的子域名是 `flow.tradesitecloud.com` → 8790，DNS 和隧道规则已加。
 
-**部署后实测通过的**：不带口令访问 `/desk/api/*` 返回 401；页面口令能登录并查询；用 VoiceLab 登记的口令按它的请求格式连问两轮（含追问）正常。
+**部署后实测通过的**：不带口令访问 `/desk/api/*` 返回 401；页面口令能登录并查询；用 VoiceLab 登记的口令按它的请求格式连问两轮（含追问）正常。2026-11-22：125 句评测用例发给已部署服务的 `/voice/handle`，对 116 句，每句中位数 86 毫秒，服务日志里没有「本地模型不可用」；从公网经 `flow.tradesitecloud.com` 登录后问「上个月被罚了多少钱」「去年十一月拉了几车」能落到正确的能力。
 
 **已知的线上问题**
 
 - （已解决，2026-11-20 20:05）`flow.tradesitecloud.com` 曾有一半请求 404：服务器上有两个 cloudflared 进程连同一条隧道，其中 11-02 手动启动的那个是旧配置。经负责人同意已停掉，现在只剩 systemd 用户服务 `cloudflared-jukinggimora`。**以后改隧道配置只重启这个服务，不要再手动起进程。**
-- 部署是解包覆盖，仓库里已删除的文件（`qflow/explorer.py`、`executor.py`、`live.py`）还留在服务器目录里，不会被运行。部署脚本应改为解包前先清掉旧的 `qflow/`。
 - 运行层仍监听 `0.0.0.0:8790`。有了登录门后风险降低，但只走隧道的话应改成只监听本机（见 T9）。
 - 真实麦克风 → VoiceLab → 运行层 → 播报的整条链路没有验证过。
 
@@ -113,7 +113,7 @@
 
 **T3 第一步的实测（2026-11-20，服务器上的 Qwen3-4B-Q4_K_M，`/no_think`、温度 0、只答一个字母）**
 
-可重跑：`QFLOW_LLM_URL=http://127.0.0.1:8050/v1/chat/completions python scripts/eval_understand.py`，用例在 `tests/understand_cases.json`。走的是线上同一条路（`voice.handle`）。
+可重跑：`QFLOW_LLM_URL=http://127.0.0.1:8050/v1/chat/completions python scripts/eval_understand.py`，用例在 `tests/understand_cases.json`。走的是线上同一条路（`voice.handle`）。测已部署的服务：`QFLOW_TOKEN=... python scripts/eval_understand.py --service http://127.0.0.1:8790`（只发问题读回答）。
 
 | 批次 | 句数 | 纯规则 | 规则 + 模型 |
 |---|---|---|---|
@@ -123,7 +123,7 @@
 | 定稿后才加、从没用来调过的 | 21 | 13 | 19 |
 | 合计 | 125 | 77 | 116 |
 
-每句中位数约 140 毫秒（经 SSH 转发测的，服务器本机约 70 毫秒）。
+每句中位数约 140 毫秒（经 SSH 转发测的）；部署后在服务器本机测同一批是 116/125，中位数 86 毫秒。
 
 实测得出的分工（写代码前先看这段，不要把更多事情交给模型）：
 
