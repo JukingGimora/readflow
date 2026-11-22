@@ -203,7 +203,9 @@ def validate(doc) -> dict:
             r.err(oid, f"按 rows_path {response.get('rows_path')!r} 在样例响应里取不到非空列表")
             continue
         for fname, fpath in mapping.items():
-            if all(jpath(row, fpath) is None for row in rows):
+            # 写成列表 = 依次取，第一个有值的算（同一个字段在不同记录里放在不同的键上）
+            paths = fpath if isinstance(fpath, list) else [fpath]
+            if all(jpath(row, path) is None for row in rows for path in paths):
                 r.err(oid, f"样例响应的每一行按 {fpath!r} 都取不到 {fname}")
         if pagination and jpath(sample["response"], str(pagination.get("total_path") or "")) is None:
             r.err(oid, f"样例响应里按 total_path {pagination.get('total_path')!r} 取不到总数")
@@ -268,7 +270,7 @@ def validate(doc) -> dict:
                 if metric.get("fn") != "count" and metric.get("field") not in fields:
                     r.err(f"{cid}.{key}", f"field 不是 {entity_id} 的字段：{metric.get('field')}")
         for placeholder in _PLACEHOLDER.findall(str(cap.get("answer") or "")):
-            if placeholder not in names:
+            if placeholder not in names and placeholder != "count":  # count = 查到的条数，总是可用
                 r.err(cid, f"answer 里的 {{{placeholder}}} 不是 slots 或 metrics 里的名字")
         examples, followups = cap.get("examples") or [], cap.get("followups") or []
         if len(examples) < 3:

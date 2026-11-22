@@ -1,4 +1,4 @@
-"""实时查询执行器：登录 SRM → 翻页读取质量扣款明细 → 内存汇总。
+"""实时查询：用圣农的登录态，按图谱读取质量扣款明细 → 内存汇总。
 
 不落库：结果只存在内存快照里，TTL 过期重新读。
 服务启动时后台预热 + 周期刷新，查询命中的是最近一次实时抓取。
@@ -14,69 +14,17 @@ from .dates import resolve_range
 
 logger = logging.getLogger("qflow.livequery")
 
-DED_FIELDS = {
-    "asn": "收货单号",
-    "item": "检测项目名称",
-    "amount": "扣罚金额",
-    "biz_date": "制单日期",
-    "result_text": "检测结果",
-    "range_text": "扣罚范围",
-    "formula": "扣罚公式",
-    "qty": "数量",
-    "order_no": "订单号",
-}
+DEDUCTION_OP = "op.deduction.list"
+_GRAPH = None
 
 
-def parse_table(table: dict) -> list[dict]:
-    """把页面表格解析成内存记录（固定列重复去重、行首选择框丢弃）。"""
-    headers: list[str] = []
-    for header in table.get("headers") or []:
-        if header not in headers:
-            headers.append(header)
-    index = {name: i for i, name in enumerate(headers)}
-    required = ["收货单号", "检测项目名称", "扣罚金额", "制单日期"]
-    missing = [name for name in required if name not in index]
-    if missing:
-        raise RuntimeError(f"页面缺少字段: {', '.join(missing)}")
+def _graph():
+    global _GRAPH
+    if _GRAPH is None:
+        from . import config, runner
 
-    seen = set()
-    rows = []
-    for raw in table.get("rows") or []:
-        cells = list(raw)
-        if len(cells) == len(headers) + 1:
-            cells = cells[1:]
-        if len(cells) < len(headers):
-            continue
-        if tuple(cells) in seen:
-            continue
-        seen.add(tuple(cells))
-        record = {}
-        for key, label in DED_FIELDS.items():
-            if label in index:
-                record[key] = cells[index[label]]
-        asn = str(record.get("asn") or "").strip()
-        amount = _num(record.get("amount"))
-        if not asn or amount is None:
-            continue
-        record["asn"] = asn
-        record["amount"] = amount
-        record["biz_date"] = str(record.get("biz_date") or "").strip()[:10]
-        record["item"] = str(record.get("item") or "").strip() or None
-        record["result_text"] = str(record.get("result_text") or "").strip() or None
-        record["formula"] = str(record.get("formula") or "").strip() or None
-        record["qty"] = _num(record.get("qty"))
-        record["order_no"] = str(record.get("order_no") or "").strip() or None
-        rows.append(record)
-    return rows
-
-
-def _num(value):
-    if value in (None, ""):
-        return None
-    try:
-        return float(str(value).replace(",", "").strip())
-    except ValueError:
-        return None
+        _GRAPH = runner.load(config.PROJECT_ROOT / "systems" / "sunner_srm" / "graph.json")
+    return _GRAPH
 
 
 class LiveDeduction:
@@ -141,15 +89,24 @@ class LiveDeduction:
     # ---------- 抓取 ----------
 
     def _fetch_api(self) -> tuple[list[dict], int | None]:
-        """纯 HTTP 拉取：cookie 有效直接用；失效先自动 OCR，失败抛 AuthError 等人工。"""
-        from . import srmapi, srmlogin
+        """纯 HTTP 拉取：cookie 有效直接用；失效先自动 OCR，失败抛 AuthError 等人工。
+
+        接口地址、翻页、字段对应都来自图谱（systems/sunner_srm/graph.json），
+        由通用执行器执行；这里只剩圣农的登录态管理（T5 之后也会搬走）。
+        """
+        from . import runner, srmapi, srmlogin
+
+        def fetch(cookies):
+            send = runner.http_sender(srmapi.opener_from_cookies(cookies))
+            rows, trace = runner.fetch(_graph(), DEDUCTION_OP, {}, send)
+            return rows, trace["reported_total"]
 
         self._sync_session()
         cookies = self.cookies or srmapi.load_session()
         if cookies:
             try:
-                return srmapi.fetch_all_opener(srmapi.opener_from_cookies(cookies))
-            except srmapi.AuthError as exc:
+                return fetch(cookies)
+            except (runner.AuthExpired, runner.RunError) as exc:
                 self.last_error = f"会话失效：{exc}"
                 logger.warning("api auth failed: %s", exc)
 
@@ -162,7 +119,7 @@ class LiveDeduction:
                     self._sync_session()
                     cookies = self.cookies
                     if cookies:
-                        return srmapi.fetch_all_opener(srmapi.opener_from_cookies(cookies))
+                        return fetch(cookies)
             except Exception as exc:  # noqa: BLE001
                 logger.warning("auto_login error: %s", exc)
 

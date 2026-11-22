@@ -1,4 +1,4 @@
-"""命令行入口：sync / ask / serve / overview / datasets / tools / graph / plan / validate."""
+"""命令行入口：sync / ask / serve / overview / datasets / tools / graph / plan / validate / run."""
 from __future__ import annotations
 
 import argparse
@@ -149,6 +149,24 @@ def cmd_validate(args) -> int:
     return 0 if result["ok"] else 1
 
 
+def cmd_run(args) -> int:
+    """按 v1 图谱真实执行一个能力（只读）。用来验收一份新图谱，不经过听懂问题那一层。"""
+    from . import online, runner
+
+    try:
+        graph = runner.load(args.file)
+        send = runner.http_sender(runner.opener_from_cookie_file(args.cookies) if args.cookies else None)
+        result = runner.run(graph, args.capability, json.loads(args.params or "{}"), send, limit=args.limit)
+    except runner.AuthExpired as exc:
+        print(f"登录态失效：{exc}", file=sys.stderr)
+        return 3
+    except (runner.RunError, online.ReadOnlyViolation) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    print(json.dumps(result, ensure_ascii=False, indent=2) if args.json else result["answer"])
+    return 0
+
+
 def cmd_plan(args) -> int:
     if not args.text and not args.intent:
         print("需要 text 或 --intent", file=sys.stderr)
@@ -226,6 +244,15 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("file")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_validate)
+
+    p = sub.add_parser("run", help="按 v1 图谱真实执行一个能力（只读），用来验收新图谱")
+    p.add_argument("file")
+    p.add_argument("capability")
+    p.add_argument("--params", default=None, help='条件的 JSON，例如 {"period": {"start": "2025-11-01", "end": "2025-11-30"}}')
+    p.add_argument("--cookies", default=None, help="登录态 cookie 文件；不给就不带登录态")
+    p.add_argument("--limit", type=int, default=50)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_run)
 
     p = sub.add_parser("plan", help="查看一个问题会走哪条图谱路径")
     p.add_argument("text", nargs="?", default=None)

@@ -4,50 +4,11 @@ from datetime import datetime
 from unittest import mock
 
 from qflow import capabilities, db, livequery
-from qflow.livequery import LiveDeduction, parse_table
+from qflow.livequery import LiveDeduction
 
 from .helpers import make_seeded_db
 import tempfile
 from pathlib import Path
-
-HEADERS = [
-    "工厂", "物料编码", "物料名称", "收货单号", "年度", "检验批", "数量", "含税单价",
-    "含税金额", "检测项目名称", "验收标准", "扣罚范围", "检测结果", "扣罚标准",
-    "扣罚公式", "扣罚金额", "备注", "制单日期", "清单状态", "订单号", "行号",
-    "采购组", "批次", "库存地点", "确认状态", "操作",
-]
-
-
-def make_row(asn="5005850554", item="玉米赤霉烯酮", amount="903.8", date="2026-06-04"):
-    values = {name: "" for name in HEADERS}
-    values.update({"收货单号": asn, "检测项目名称": item, "扣罚金额": amount,
-                   "制单日期": date, "数量": "45.19", "检测结果": "423.690",
-                   "扣罚公式": "45.19000*|20.000|", "订单号": "4100227923"})
-    return [""] + [values[name] for name in HEADERS]
-
-
-class ParseTableTests(unittest.TestCase):
-    def test_dedup_and_parse(self):
-        table = {
-            "headers": HEADERS + HEADERS,
-            "rows": [
-                make_row(),
-                make_row(),  # 固定列重复
-                make_row(asn="5005850555", item="水分", amount="", date="2026-06-05"),  # 无金额
-            ],
-        }
-        rows = parse_table(table)
-        self.assertEqual(len(rows), 1)
-        row = rows[0]
-        self.assertEqual(row["asn"], "5005850554")
-        self.assertEqual(row["amount"], 903.8)
-        self.assertEqual(row["biz_date"], "2026-06-04")
-        self.assertEqual(row["item"], "玉米赤霉烯酮")
-
-    def test_missing_headers_raises(self):
-        with self.assertRaises(RuntimeError):
-            parse_table({"headers": ["收货单号"], "rows": []})
-
 
 class LiveSummaryTests(unittest.TestCase):
     def setUp(self):
@@ -133,3 +94,52 @@ class CapabilitiesLiveTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LiveFetchThroughGraphTests(unittest.TestCase):
+    """实时取数走图谱 + 通用执行器，不再有圣农专用的请求代码。"""
+
+    ROWS = [
+        {"id": "r1", "refNo": "A1", "postDate": "2026-05-01", "projectName": "水分", "itemAmount": 100.0},
+        {"id": "r2", "refNo": "A2", "postDate": "2026-05-03", "projectName": "杂质", "itemAmount": 30.0},
+    ]
+
+    def _client(self, send):
+        from qflow import runner, srmapi
+
+        client = LiveDeduction(ttl=9999)
+        patches = [
+            mock.patch.object(srmapi, "load_session", return_value=[{"name": "sid", "value": "x", "domain": "h", "path": "/"}]),
+            mock.patch.object(srmapi, "session_mtime", return_value=0.0),
+            mock.patch.object(runner, "http_sender", return_value=send),
+        ]
+        for patch in patches:
+            patch.start()
+            self.addCleanup(patch.stop)
+        return client
+
+    def test_fetch_uses_request_declared_in_graph(self):
+        import json
+
+        calls = []
+
+        def send(method, url, params, body_type, headers):
+            calls.append((method, url, dict(params), body_type))
+            return {"status": 200, "url": url, "text": json.dumps({"success": True, "total": 2, "rows": self.ROWS})}
+
+        client = self._client(send)
+        result = client.summary(start="2026-05-01", end="2026-05-31")
+        self.assertEqual(result["total_amount"], 130.0)
+        self.assertEqual(calls, [("POST", "https://srm.sunnercn.com:10001/srm/qm/quajud/vendorQuery", {"page": 1, "rows": 200}, "form")])
+        self.assertEqual(client.page_total, 2)
+
+    def test_expired_session_falls_through_to_login(self):
+        from qflow import srmapi, srmlogin
+
+        client = self._client(lambda *a: {"status": 200, "url": "https://srm.sunnercn.com:10001/#/login", "text": "<html>"})
+        session = mock.Mock()
+        session.auto_login.return_value = False
+        with mock.patch.object(srmlogin, "get_session", return_value=session):
+            with self.assertRaises(srmapi.AuthError):
+                client._fetch_api()
+        session.auto_login.assert_called_once()
