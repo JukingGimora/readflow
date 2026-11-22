@@ -133,7 +133,7 @@
 - 测试（`tests/test_runner.py`）：同一份测试数据，执行器的合计、分组、明细与 `engine.py` 写死的 SQL 结果一致；起了一个本地 HTTP 服务当圣农，验证真实发出的请求、cookie 和翻页；示例图谱（另一个虚构系统）不改代码也能跑。
 
 没做的（按顺序）：
-1. **在真实圣农上跑一次**。上面的验证都是离线的。需要服务器上有一份有效的登录态，然后 `python -m qflow run systems/sunner_srm/graph.json cap.deduction.summary --cookies data/live/session.json`，和页面上的数字核对。图谱 `evidence` 里的样例值是按 11 月 18 日抓到的键名改写的，不是真实记录，真实跑通后要换成真实脱敏样例。
+1. **带有效登录态在真实圣农上跑一次**。2026-11-22 已核对：执行器发出的请求与 11 月 18 日浏览器抓包一致；带过期登录态真实调用，接口返回 401，被正确识别为登录态失效。拿到数据的那一半还没验证。需要服务器上有一份有效的登录态，然后 `python -m qflow run systems/sunner_srm/graph.json cap.deduction.summary --cookies data/live/session.json`，和页面上的数字核对。图谱 `evidence` 里的样例值是按 11 月 18 日抓到的键名改写的，不是真实记录，真实跑通后要换成真实脱敏样例。
 2. **接进问答路径**。`voice.handle` → `capabilities.dispatch` 仍然走写死的 6 个意图。要改成：听懂 → 能力 id + 词槽 → `runner.run`。前提是 T3 的词槽改成读图谱（现在 `nlu.py` 输出的是 `month` / `item` / `asn` 这些写死的名字）。
 3. **页面展示**。页面的图表和表格读的是 `engine.py` 的结果结构（`total_amount`、`groups[].bucket`）；执行器的结果结构是 `totals`、`groups`、`rows`，页面要改成按图谱的 `metrics` 和实体字段的 `label` 来画。
 4. **发货**。没有抓过发货的接口，所以图谱里没有发货能力，线上发货数据仍来自 Excel 导入。要按 `explorer-brief.md` 探索「发货单管理」页。
