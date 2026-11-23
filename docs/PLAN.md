@@ -67,21 +67,28 @@
 
 ## 3. 部署现状
 
-**线上跑的还是旧版**（2026-11-22 18:03 部署的那一版：数据来自 Excel 导入的本地库，6 类写死的查询）。那一版的代码已经从仓库删除，服务器上有两份留底：`~/projects/snxt-query/.prev/`（上一版）和 `~/projects/snxt-query-backup-20261120-1937.tgz`。
+**线上是通用版**（2026-11-24 00:44 部署）。`/health` 返回各系统的状态；页面口令、无口令 401、VoiceLab 会话、`/voice/handle` 在服务器本机和公网都验证过。**还没填圣农账号，所以真实登录和真实取数都没验证。**
+
+回滚：旧版（Excel 本地库那一版）在 `~/projects/snxt-query-backup-20261123-pre-generic.tgz`，更早一份是 `snxt-query-backup-20261120-1937.tgz`。注意 `.prev/` 里现在是通用版自己（部署跑了两次），不是旧版。
 
 - 服务器：一台 4090 D。VoiceLab 四个服务只监听本机：编排 8040、识别 8030、合成 8031、本地模型 8050（llama.cpp，实际加载 `Qwen3-4B-Q4_K_M`，上下文 4096；「翻自己」和 future 也用这一个）。
 - 运行层：`~/projects/snxt-query`，systemd 用户服务 `snxt-query`，端口 8790。
 - `.env`：`QFLOW_TOKEN`（接口用）、`QFLOW_DESK_PASS`（页面口令，一句中文）、`QFLOW_LLM_URL=http://127.0.0.1:8050/v1/chat/completions`。部署脚本不覆盖已有的 `.env`。
 - VoiceLab 里登记为 agent `snxt_deduction`，`type: http`，指向 `/voice/handle`。
 - 公网入口：Cloudflare 隧道，`flow.tradesitecloud.com` → 8790。`tradesitecloud.com` 下其它子域名不要动。改隧道只重启 systemd 管的那个 cloudflared，不要手动另起进程（2026-11-20 出过两个进程分流、一半请求 404 的事）。
-- 服务器上已有 Chrome 和 Xvfb；运行层的 Python 环境里没有 selenium 和 ddddocr。
+- 服务器上已有 Chrome 132 和 Xvfb。同版本的驱动在 `data/drivers/chromedriver-linux64/chromedriver`，`.env` 里用 `QFLOW_CHROME_DRIVER` 指向它。
+- 登录用的库（selenium、ddddocr、onnxruntime、numpy 1.26）装在 `~/projects/snxt-query/.pylibs/`，systemd 单元的 `PYTHONPATH` 把它排在前面。**不要装进系统或用户目录**：系统 Python 里是 numpy 2.1，同机的其它项目在用。
+- 服务器到 PyPI 官方源下载速度是 0（2026-11-24 第一次部署卡了 49 分钟），部署脚本用清华镜像。
+- systemd 单元现在是 `python3 -m qflow serve`（`qflow.service` 不再能直接当模块运行）。
 
-**部署新版前必须做的**（都还没做）
+**部署后还要做的**
 
-1. 开发机上仓库外的 `deploy_server.sh` 要改：不再上传 `data/queryflow.db`；健康检查不再看「发货 / 扣款多少条」（新版 `/health` 返回的是各系统的状态）；在服务器环境里 `pip install -r requirements-live.txt`；`data/systems/` 不能被部署覆盖（里面是账号、登录态和页面导入的图谱）。
-2. `.env` 里的 `QFLOW_LIVE`、`QFLOW_DB`、`SRM_USER`、`SRM_PASS` 新版不再读，可以删。
-3. 部署后在页面上填圣农账号并登录一次，核对一个月的扣款合计和圣农页面上的数字一致，再告诉用户可以用。
-4. 新版查不了发货和对账（见第 5 节 T10、G5）。这一点要先让用户知道。
+1. 在页面上填圣农账号并登录一次，核对一个月的扣款合计和圣农页面上的数字一致。这一步过了才算真实跑通。
+2. `.env` 里旧版的 `QFLOW_LIVE`、`QFLOW_DB`、`SRM_USER`、`SRM_PASS` 新版不读，有的话可以删。服务器上的 `data/queryflow.db` 也不再使用。
+3. 线上查不了发货和对账（见第 5 节 T10、G5）。
+4. 真实麦克风没测过。语音回答用的是手机浏览器自带的朗读，只念第一句结论；服务器合成的声音（VoiceLab 8031）没接。
+
+开发机上仓库外的 `deploy_server.sh` 已按通用版改好：不带数据库，保留服务器的 `data/` 和 `.env`，依赖装进 `.pylibs/`，服务起不来会打印日志并失败退出。
 
 ## 4. 已经做了的
 

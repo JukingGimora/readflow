@@ -2,7 +2,7 @@
 
 目标：readflow 和 VoiceLab 跑在同一台机器上，VoiceLab 的 agent 调 `http://127.0.0.1:8790/voice/handle`。
 
-实际使用的是开发机上仓库外的 `deploy_server.sh`。**它还是按旧版写的，部署新版前要先改**，要改的地方见 [`../docs/PLAN.md`](../docs/PLAN.md) 第 3 节。下面是新版手工部署的步骤。
+实际使用的是开发机上仓库外的 `deploy_server.sh`，做的就是下面这些步骤。线上现状见 [`../docs/PLAN.md`](../docs/PLAN.md) 第 3 节。
 
 ## 1. 打包上传
 
@@ -20,8 +20,9 @@ ssh <server> 'mkdir -p ~/projects/snxt-query && cd ~/projects/snxt-query && tar 
 查询和服务只用标准库。登录要开浏览器：
 
 ```bash
-# 用服务实际运行的那个 Python（见 deploy/snxt-query.service 的 ExecStart）
-python3 -m pip install -r requirements-live.txt
+# 装在项目自己的目录里，不要装进系统或用户目录（会顶掉同机其它项目的 numpy）
+python3 -m pip install --target .pylibs -r requirements-live.txt   # 官方源慢就加 -i 镜像地址
+# systemd 单元里：Environment=PYTHONPATH=<项目目录>/.pylibs:<项目目录>
 google-chrome --version      # 要有 Chrome；驱动由 selenium 自己下载，下不了就设 QFLOW_CHROME_DRIVER
 ```
 

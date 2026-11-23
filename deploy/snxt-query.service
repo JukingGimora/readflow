@@ -4,8 +4,9 @@ After=network.target
 
 [Service]
 WorkingDirectory=%h/projects/snxt-query
+Environment=PYTHONPATH=%h/projects/snxt-query/.pylibs:%h/projects/snxt-query
 EnvironmentFile=%h/projects/snxt-query/.env
-ExecStart=/usr/bin/python3 -m qflow serve --host 127.0.0.1 --port 8790
+ExecStart=/usr/bin/python3 -m qflow serve
 Restart=always
 RestartSec=3
 
