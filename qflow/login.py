@@ -242,7 +242,8 @@ class Flow:
             except Exception as exc:  # noqa: BLE001
                 log.exception("转发操作出错")
                 return self._fail(f"浏览器窗口出错：{exc}")
-            browsers.wait(lambda: False, PAUSE / 2)
+            if any(e.get("type") != "move" for e in events or []):  # 拖动途中不等，画面才跟得上
+                browsers.wait(lambda: False, PAUSE / 2)
             return self.screen()
 
     def cancel(self) -> dict:

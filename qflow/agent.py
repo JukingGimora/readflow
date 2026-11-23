@@ -1,6 +1,6 @@
 """原子 agent：一个系统 = 图谱 + 账号 + 登录态，对外三个动作。
 
-    agent = agent.get("sunner_srm")
+    agent = agent.get("<系统 id>")
     agent.status()                      现在能不能查
     agent.run(capability_id, values)    执行一个能力，返回标准结果（qflow/runner.py）
     agent.ask("上个月扣了多少", state)   听懂一句话再执行（qflow/ask.py）
@@ -100,7 +100,8 @@ class Agent:
     def sender(self):
         """带着这个账号登录态的 send；同一个请求在 CACHE_TTL 秒内只真正发一次，避免连着追问时反复拉全量。"""
         jar = CookieJar()
-        for c in self.cookies():
+        saved = self.cookies()
+        for c in saved:
             domain = str(c.get("domain") or "")
             try:
                 jar.set_cookie(Cookie(
@@ -112,6 +113,8 @@ class Agent:
         real = runner.http_sender(build_opener(HTTPCookieProcessor(jar)))
 
         def send(method, url, params, body_type, headers):
+            if not saved:
+                raise runner.AuthExpired("还没有登录")  # 没有登录态就不去打扰业务系统
             key = (method, url, json.dumps(params, sort_keys=True, ensure_ascii=False), body_type)
             hit = self._cache.get(key)
             if hit and time.monotonic() - hit[0] < config.CACHE_TTL:

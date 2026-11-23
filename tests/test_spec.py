@@ -27,6 +27,25 @@ class SpecTests(unittest.TestCase):
             result["coverage"], {"leaves": 2, "with_capability": 1, "not_queryable": 1, "neither": []}
         )
 
+    def test_auth_section_is_checked(self):
+        self.doc["auth"].pop("login_url")
+        self.doc["auth"]["steps"][0]["field"] = "phone"
+        self.doc["auth"]["steps"][2].pop("answer_locator")
+        self.doc["auth"]["success"] = {"looks_ok": True}
+        self.doc["auth"]["session"]["check"] = {"operation": "op.missing"}
+        for needle in ("auth.login_url", "auth.steps[0]", "auth.steps[2]", "auth.success", "auth.session.check"):
+            self.assertHasError(needle)
+
+    def test_no_login_steps_is_allowed_but_flagged(self):
+        self.doc["auth"].pop("steps")
+        result = spec.validate(self.doc)
+        self.assertTrue(result["ok"])
+        self.assertTrue(any(w["where"] == "auth.steps" for w in result["warnings"]))
+
+    def test_slot_pattern_must_compile(self):
+        self.doc["capabilities"][0]["slots"].append({"name": "no", "type": "string", "field": "order_no", "filter": "local", "pattern": "(RK"})
+        self.assertHasError("pattern")
+
     def test_jpath(self):
         data = {"a": {"b": [{"c": 1}, {"c": 2}]}, "z": None}
         self.assertEqual(spec.jpath(data, "$.a.b[1].c"), 2)

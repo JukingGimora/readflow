@@ -15,6 +15,8 @@ from . import online
 SPEC_VERSION = "1.0"
 FIELD_TYPES = {"string", "number", "money", "date", "datetime", "enum", "bool"}
 SLOT_TYPES = FIELD_TYPES | {"date_range"}
+CHALLENGE_TYPES = {"image_captcha", "sms_code", "slider", "qr", "sso"}
+SUCCESS_KEYS = {"url_contains", "url_not_contains", "present", "absent"}
 METRIC_FNS = {"sum", "count", "avg", "min", "max"}
 ACCESS = {"read", "write", "irreversible"}
 SECRET_KEYS = re.compile(r"cookie|authorization|passw(or)?d|token|secret|session_?id", re.I)
@@ -222,6 +224,43 @@ def validate(doc) -> dict:
                 expected = m.group(2).strip("'\"")
             if jpath(sample["response"], m.group(1)) != expected:
                 r.err(oid, f"样例响应不满足 ok_when：{ok_when!r}")
+
+    # ---- auth：登录地址必填；步骤写了就得写全，没写的系统只能由人在浏览器窗口里登录 ----
+    auth = doc.get("auth") if isinstance(doc.get("auth"), dict) else {}
+    if auth:
+        if not isinstance(auth.get("login_url"), str) or not auth.get("login_url"):
+            r.err("auth.login_url", "必填：登录页的地址")
+        steps = auth.get("steps") or []
+        if not _is_list_of_dicts(steps):
+            r.err("auth.steps", "必须是对象数组")
+            steps = []
+        if not steps:
+            r.warn("auth.steps", "没有登录步骤：本地不会自动登录，每次都要人在浏览器窗口里登录")
+        for i, step in enumerate(steps):
+            where, kind = f"auth.steps[{i}]", step.get("kind")
+            if kind not in ("input", "challenge", "submit"):
+                r.err(where, "kind 必须是 input / challenge / submit 之一")
+            elif kind == "input":
+                if step.get("field") not in ("username", "password"):
+                    r.err(where, "field 必须是 username 或 password（值来自用户在页面上保存的账号）")
+                if not step.get("locator"):
+                    r.err(where, "缺少 locator（CSS 选择器）")
+            elif kind == "submit" and not step.get("locator"):
+                r.err(where, "缺少 locator（CSS 选择器）")
+            elif kind == "challenge":
+                if step.get("type") not in CHALLENGE_TYPES:
+                    r.err(where, f"type 必须是 {sorted(CHALLENGE_TYPES)} 之一")
+                elif step["type"] == "image_captcha" and not (step.get("locator") and step.get("answer_locator")):
+                    r.err(where, "图片验证码要写 locator（图片）和 answer_locator（输入框）")
+        success = auth.get("success")
+        if success is not None and (not isinstance(success, dict) or not success or set(success) - SUCCESS_KEYS):
+            r.err("auth.success", f"只能用这些键：{sorted(SUCCESS_KEYS)}")
+        session = auth.get("session") if isinstance(auth.get("session"), dict) else {}
+        check_op = (session.get("check") or {}).get("operation") if isinstance(session.get("check"), dict) else None
+        if check_op and (check_op not in index["operations"] or index["operations"][check_op].get("access") != "read"):
+            r.err("auth.session.check", f"operation 必须是一个已声明的只读操作：{check_op}")
+        if session.get("carrier", "cookie") != "cookie":
+            r.warn("auth.session.carrier", "本地目前只会取 cookie 里的登录态")
 
     # ---- capabilities ----
     for cid, cap in caps.items():

@@ -34,32 +34,36 @@
 
 ```jsonc
 {
-  "login_url": "/#/login",
-  "steps": [
+  "login_url": "/#/login",                     // 必填。相对 base_url，或完整地址
+  "steps": [                                   // 可选。写了，本地就自动填；不写，每次由人在浏览器窗口里登录
     { "kind": "input",   "field": "username", "locator": "input[placeholder*='账号']" },
     { "kind": "input",   "field": "password", "locator": "input[type=password]" },
     { "kind": "challenge", "type": "image_captcha", "locator": "img.vcode",
-      "answer_locator": "input[placeholder*='验证码']", "solver": ["ocr", "human"] },
+      "answer_locator": "input[placeholder*='验证码']", "length": 4, "solver": ["ocr", "human"] },
     { "kind": "submit",  "locator": "button.login-btn" }
   ],
+  "success": { "url_not_contains": "/login", "absent": "input[placeholder*='账号']" },
   "session": {
-    "carrier": "cookie",                       // cookie | header | local_storage
-    "check":   { "operation": "op.whoami", "ok_when": "$.success == true" },
+    "carrier": "cookie",                       // 本地目前只会取 cookie
+    "check":   { "operation": "op.whoami" },   // 登录后真调一次这个只读操作，接口认了才算登录成功
     "expired_when": [ { "status": 401 }, { "redirect_contains": "/login" } ]
   }
 }
 ```
 
-`challenge.type` 取值和本地处理方式：
+- `locator` 都是 CSS 选择器。`field` 只能是 `username` 或 `password`：值来自用户在页面上保存的账号，**图谱里不写账号密码**。
+- `success` 的键：`url_contains`、`url_not_contains`、`present`（这个元素出现了）、`absent`（这个元素不见了），写了的都要成立。不写时本地按「地址里没有 `redirect_contains` 的标志，第一个输入框也不见了」推断。
+- `session.check` 不写时，本地用图谱里第一个只读操作来检查。
+
+`challenge.type` 取值和本地处理方式（`qflow/login.py`）：
 
 | type | 本地怎么处理 |
 |---|---|
-| `image_captcha` | 先自动识别，失败就把原图给用户，用户输入后原样填回 |
-| `sms_code` | 把「已发送验证码」提示给用户，用户输入后原样填回（有时效，实时转发） |
-| `slider` / `qr` | 抄不了，把那块画面给用户，由用户自己操作 |
-| `sso` | 跳转到第三方登录，由用户完成 |
+| `image_captcha` | `solver` 里有 `ocr` 就先自动识别（最多 3 次）；有 `human` 就把原图发到页面，人输入后原样填回 |
+| `sms_code` / `slider` / `qr` / `sso` | 抄不了。把服务器上这个浏览器的画面显示在页面里，人直接点、拖、输入 |
 
-登录成功后保存会话，过期才重新登录。
+浏览器窗口是所有情况的兜底：自动那一级走不通（找不到输入框、提交后没进去）也会转到窗口。
+登录成功后保存登录态并关掉浏览器，过期才重新登录。没有验证码、或验证码能自动识别的系统，过期后本地自己重新登录，不用人管。
 
 ## 4. navigation：菜单树
 
@@ -162,7 +166,7 @@
 
 第 1 到 4 条离线就能查；第 5 条需要一个真实账号。
 
-第 1、2、3、6 条已实现：`python -m qflow validate <file>`。第 4、5 条还没做。完整的格式示例：[`examples/graph-example.json`](examples/graph-example.json)。
+第 1、2、3、6 条已实现：`python -m qflow validate <file>`，页面的「导入图谱」用的是同一套。第 4 条还没做。第 5 条没有自动做，但登录成功时本地会真调一次 `auth.session.check` 指的操作；逐个能力核对用 `python -m qflow run`。完整的格式示例：[`examples/graph-example.json`](examples/graph-example.json)。
 
 ## 9. 已定的取舍
 
@@ -177,7 +181,7 @@
 | G1 | `kind: "page"`：没有接口、要从渲染后的页面读数据；或请求带 JS 现算的签名、有反爬 | 电商比价 | `operations[].kind` 已留这个取值，结构未定 |
 | G2 | `access: "write"` / `"irreversible"`：填表、提交、删除 | 系统 A 填表这类场景 | `access` 字段已有，运行层一律拒绝 |
 | G3 | 下载、导出文件 | 用户要原始报表时 | 无 |
-| G4 | 跨系统：一个问题要用到两张图 | 系统 A + 系统 B 汇总 | 一系统一文件已为它留好边界 |
+| G4 | 跨系统：一个问题要用到两张图（串联：先查 A 再拿结果去查 B；并联：两边都查再汇总） | 系统 A + 系统 B 汇总 | 一系统一文件；每个系统是一个原子 agent（`qflow/agent.py`），对外只有「执行一个能力」这一个入口，编排层调它即可。`POST /query {"system", "capability", "values"}` 已经可以这样调。编排本身（谁先谁后、怎么把 A 的结果传给 B）没做 |
 | G5 | 一个能力串联多个接口（先查列表再逐条查详情） | 明细在二级接口里的系统 | `capabilities[].operation` 目前只能填一个 |
 | G6 | 图谱过期检测：系统改版后接口变了 | 上线后长期运行 | 可复用第 8 节第 5 条的试跑，定时执行 |
 | G7 | 请求需要动态取的值（CSRF token、从上一个响应里取的 id） | 遇到这类系统时 | 无 |

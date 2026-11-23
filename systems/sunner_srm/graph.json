@@ -31,7 +31,8 @@
         "solver": [
           "ocr",
           "human"
-        ]
+        ],
+        "length": 4
       },
       {
         "kind": "submit",
@@ -50,9 +51,16 @@
         {
           "redirect_contains": "/login"
         }
-      ]
+      ],
+      "check": {
+        "operation": "op.deduction.list"
+      }
     },
-    "note": "打开首页，未登录会被转到带 /login 的地址。定位方式抄自 qflow/srm.py；本地还没有按这一节执行登录（T5）。"
+    "note": "打开首页，未登录会被转到带 /login 的地址。输入框和按钮的定位是 2026-11 人工登录时记下的；按这一节自动登录还没有在真实系统上跑过。",
+    "success": {
+      "url_not_contains": "/login",
+      "absent": "input[placeholder*='账号']"
+    }
   },
   "navigation": [
     {

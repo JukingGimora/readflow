@@ -240,6 +240,13 @@ tbody tr:last-child td { border-bottom: 0; }
 .check.ok { background: var(--ok-soft); color: #065f46; }
 .check.err { background: var(--err-soft); color: #991b1b; }
 .check.warn { background: var(--warn-soft); color: #92400e; }
+.field { width: 100%; margin-top: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; outline: 0; font: inherit; background: var(--surface); }
+.field:focus { border-color: #a5b4fc; box-shadow: 0 0 0 4px rgba(99, 102, 241, .12); }
+.remote { position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface-2); outline: 0; touch-action: none; cursor: crosshair; }
+.remote:focus { border-color: #a5b4fc; }
+.remote img { display: block; width: 100%; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.remote-tools { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.remote-tools .field { flex: 1; min-width: 120px; margin-top: 0; }
 .sheet footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes sheetIn { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
@@ -372,37 +379,30 @@ button.pill { cursor: pointer; }
 <div class="modal" id="import-modal" hidden role="dialog" aria-modal="true" aria-labelledby="import-title">
   <div class="sheet">
     <h3 id="import-title">导入系统图谱</h3>
-    <p>把探索阶段产出的标准图谱 JSON 拖进来或粘贴进来。校验通过后加载到本机运行层，会替换当前图谱（建议先导出备份）。</p>
+    <p>把探索阶段产出的标准图谱 JSON 拖进来或粘贴进来。校验通过后就接入这个系统；系统已存在时替换它的图谱。</p>
     <label class="drop" id="drop">
       <svg style="width:22px;height:22px;color:var(--brand)"><use href="#i-import"/></svg>
       <span>拖入 <code>graph.json</code>，或 <u>选择文件</u></span>
       <input type="file" id="file" accept=".json,application/json" hidden>
     </label>
-    <textarea id="import-text" spellcheck="false" placeholder='{"version": 1, "nodes": [...], "edges": [...]}' aria-label="图谱 JSON"></textarea>
+    <textarea id="import-text" spellcheck="false" placeholder='{"spec_version": "1.0", "system": {...}, "auth": {...}, "navigation": [...], ...}' aria-label="图谱 JSON"></textarea>
     <div id="import-check"></div>
     <footer>
       <button type="button" class="btn" data-act="load-current">载入当前图谱</button>
       <span style="flex:1"></span>
       <button type="button" class="btn" data-act="close-import">取消</button>
-      <button type="button" class="btn primary" id="import-save" disabled>加载到运行层</button>
+      <button type="button" class="btn primary" id="import-save" disabled>接入</button>
     </footer>
   </div>
 </div>
 
-<div class="modal" id="auth-modal" hidden role="dialog" aria-modal="true" aria-labelledby="auth-title">
-  <div class="sheet" style="width:min(400px,100%)">
-    <h3 id="auth-title">需要人工验证</h3>
-    <p id="auth-hint">Agent 登录该系统时遇到验证码，请帮它看一眼。</p>
-    <div style="display:flex;gap:10px;align-items:center">
-      <img id="auth-img" alt="验证码" style="height:44px;min-width:120px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2)">
-      <button type="button" class="btn" data-act="auth-refresh">换一张</button>
-    </div>
-    <input id="auth-code" inputmode="latin" autocomplete="off" aria-label="验证码" placeholder="输入验证码" style="width:100%;margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;outline:0;font-size:16px;letter-spacing:3px">
-    <div id="auth-msg"></div>
-    <footer>
-      <button type="button" class="btn" data-act="close-auth">取消</button>
-      <button type="button" class="btn primary" data-act="auth-submit">提交</button>
-    </footer>
+<div class="modal" id="sys-modal" hidden role="dialog" aria-modal="true" aria-labelledby="sys-title">
+  <div class="sheet" id="sys-sheet" style="width:min(420px,100%)">
+    <h3 id="sys-title"></h3>
+    <p id="sys-hint"></p>
+    <div id="sys-body"></div>
+    <div id="sys-msg"></div>
+    <footer id="sys-foot"></footer>
   </div>
 </div>
 
@@ -458,7 +458,6 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fmt = (value) => typeof value !== 'number' ? String(value)
   : Number.isInteger(value) ? value.toLocaleString('zh-CN')
   : value.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const shortTime = (value) => value ? String(value).replace('T', ' ').slice(0, 16) : '';
 const pick = (obj, path) => String(path).split('.').reduce((cur, key) => (cur == null ? cur : cur[key]), obj);
 
 function toast(text, kind) {
@@ -519,7 +518,7 @@ const post = (path, body) => api(path, {
 const S = {
   graph: null,
   nodes: new Map(),
-  executable: null,     // 运行层能执行的意图
+  docs: {},             // 每个系统的原始图谱（导出用）
   state: {},            // 多轮会话状态，每轮回传
   busy: false,
   listening: false,
@@ -529,7 +528,8 @@ const S = {
   selected: null,
   voiceSid: null,
   srBroken: false,
-  authSystem: null,
+  online: true,
+  sys: null,            // 正在登录的系统
 };
 
 const TYPES = {
@@ -537,14 +537,10 @@ const TYPES = {
   module: { label: '模块', color: '#7c3aed' },
   page: { label: '页面', color: '#0ea5e9' },
   api: { label: '接口', color: '#06b6d4' },
-  provider: { label: '数据源', color: '#10b981' },
   entity: { label: '实体', color: '#f59e0b' },
   capability: { label: '能力', color: '#ec4899' },
 };
 const typeOf = (type) => TYPES[type] || { label: type || '节点', color: '#94a3b8' };
-const KINDS = { cache: '本地缓存', api: '接口直连', page: '页面读取', live: '实时读取' };
-const kindOf = (node) => (node && (node.kind || node.type)) || '';
-
 /* ---------- 视图切换：平时只有会话，「管理」是给部署的人看的 ---------- */
 function setView(name) {
   $('#view-desk').classList.toggle('active', name === 'desk');
@@ -559,31 +555,22 @@ function setView(name) {
   if (admin) { renderSummary(); renderGraph(); }
 }
 
-/* ---------- 服务状态与系统列表（都是真实接口，不写死） ---------- */
-async function refreshStatus() {
-  try {
-    const st = await api('/desk/api/status');
-    if (!st.ok) throw new Error(st.error || '状态异常');
-    S.status = st;
-  } catch (err) {
-    S.status = null;
-  }
-  renderAlert();
-  renderSummary();
-}
+/* ---------- 接入了哪些系统、各自能不能查（都来自服务端，不写死） ---------- */
+const needsHuman = (sys) => sys.status === 'needs_login' || sys.status === 'no_account';
+const statusWord = (sys) => sys.status === 'no_account' ? '填账号' : sys.status === 'needs_login' ? '需要登录' : '可以查';
 // 顶部平时什么都不显示，只有需要用户处理时才出现
 function renderAlert() {
   const el = $('#top-status');
-  const blocked = S.systems.find((sys) => sys.status === 'needs_auth');
+  const blocked = S.systems.find(needsHuman);
   el.onclick = null;
-  if (!S.status) {
+  if (!S.online) {
     el.className = 'pill err';
     el.textContent = '服务连不上';
     el.hidden = false;
   } else if (blocked) {
     el.className = 'pill warn';
-    el.textContent = blocked.label + ' 需要验证';
-    el.onclick = () => openAuth(blocked);
+    el.textContent = blocked.label + ' · ' + statusWord(blocked);
+    el.onclick = () => openSystem(blocked);
     el.hidden = false;
   } else {
     el.hidden = true;
@@ -593,19 +580,9 @@ function renderAlert() {
 function hostOf(url) {
   try { return new URL(url).host; } catch (err) { return url || ''; }
 }
-function allSystems() {
-  const list = S.systems.slice();
-  const known = new Set(list.map((sys) => sys.base_url).filter(Boolean));
-  // 图谱里声明、但本机还没有登录描述的系统也要列出来
-  for (const node of S.nodes.values()) {
-    if (node.type !== 'app' || known.has(node.base_url)) continue;
-    list.push({ id: node.id, label: node.label || node.id, base_url: node.base_url, status: 'graph_only' });
-  }
-  return list;
-}
 function renderSystems() {
-  const names = allSystems().map((sys) => sys.label).filter(Boolean);
-  $('#hero-sys').textContent = names.length ? '已接入 ' + names.join('、') + '，只读取、不改动。' : '还没有接入系统。';
+  const names = S.systems.map((sys) => sys.label).filter(Boolean);
+  $('#hero-sys').textContent = names.length ? '已接入 ' + names.join('、') + '，只读取、不改动。' : '还没有接入系统。到「管理」里导入一份图谱。';
   renderAlert();
   renderSummary();
 }
@@ -613,8 +590,10 @@ async function refreshSystems() {
   try {
     const data = await api('/desk/api/systems');
     S.systems = data.ok ? data.systems || [] : [];
+    S.online = true;
   } catch (err) {
     S.systems = [];
+    S.online = false;
   }
   renderSystems();
 }
@@ -624,10 +603,11 @@ async function loadGraph() {
   try {
     const data = await api('/desk/api/graph');
     if (!data.ok) throw new Error(data.error || '图谱加载失败');
-    S.graph = data.graph || { nodes: [], edges: [] };
-    S.executable = Array.isArray(data.executable_intents) ? new Set(data.executable_intents) : null;
+    S.graph = data.view || { nodes: [], edges: [] };
+    S.docs = data.docs || {};
   } catch (err) {
     S.graph = { nodes: [], edges: [] };
+    S.docs = {};
     toast(err.message, 'err');
   }
   S.nodes = new Map((S.graph.nodes || []).map((node) => [node.id, node]));
@@ -638,10 +618,9 @@ async function loadGraph() {
   if ($('#view-admin').classList.contains('active')) renderGraph();
 }
 const capabilities = () => [...S.nodes.values()].filter((node) => node.type === 'capability');
-const canRun = (cap) => !S.executable || S.executable.has(cap.intent);
 
 function renderCaps() {
-  const examples = capabilities().filter(canRun).map((cap) => cap.examples && cap.examples[0]).filter(Boolean).slice(0, 4);
+  const examples = capabilities().map((cap) => cap.examples && cap.examples[0]).filter(Boolean).slice(0, 4);
   $('#caps').replaceChildren(...examples.map((text) => h('button', { type: 'button', class: 'chip', text, onclick: () => ask(text) })));
 }
 
@@ -732,35 +711,27 @@ function buildKpis(plan, data) {
 }
 
 function buildBars(groups) {
-  if (!Array.isArray(groups) || groups.length < 2 || typeof groups[0] !== 'object') return null;
-  const keys = Object.keys(groups[0]);
-  const labelKey = keys.find((key) => typeof groups[0][key] === 'string');
-  const valueKey = ['total', 'amount', 'value', 'sum'].find((key) => typeof groups[0][key] === 'number')
-    || keys.find((key) => typeof groups[0][key] === 'number');
-  if (!labelKey || !valueKey) return null;
-  const max = Math.max(...groups.map((g) => Math.abs(Number(g[valueKey]) || 0)), 1e-9);
+  if (!Array.isArray(groups) || groups.length < 2) return null;
+  const max = Math.max(...groups.map((g) => Math.abs(Number(g.value) || 0)), 1e-9);
   const rows = groups.slice(0, 8).map((g) => {
     const fill = h('div', { class: 'fill' });
-    const pct = Math.max(2, (Math.abs(Number(g[valueKey]) || 0) / max) * 100);
+    const pct = Math.max(2, (Math.abs(Number(g.value) || 0) / max) * 100);
     setTimeout(() => { fill.style.width = pct + '%'; }, 120);
     return h('div', { class: 'bar' },
-      h('label', { text: g[labelKey], title: g[labelKey] }),
+      h('label', { text: g.label, title: g.label }),
       h('div', { class: 'track' }, fill),
-      h('output', { class: 'num', text: fmt(Number(g[valueKey]) || 0) + (typeof g.n === 'number' ? ' · ' + g.n + ' 条' : '') }));
+      h('output', { class: 'num', text: fmt(Number(g.value) || 0) + (typeof g.n === 'number' ? ' · ' + g.n + ' 条' : '') }));
   });
   return h('div', { class: 'bars' }, rows);
 }
 
-const HIDDEN_COLS = new Set(['source_file', 'dataset', 'imported_at', 'dedup_key']);
 function buildTable(rows, plan) {
   if (!Array.isArray(rows) || !rows.length || typeof rows[0] !== 'object') return null;
-  const entity = plan && plan.entity ? S.nodes.get(plan.entity.id) : null;
-  const labels = new Map(((entity && entity.fields) || []).map((f) => [f.name, f.label || f.name]));
-  const cols = Object.keys(rows[0]).filter((key) =>
-    !HIDDEN_COLS.has(key) && rows.some((row) => row[key] != null && row[key] !== '' && typeof row[key] !== 'boolean' && typeof row[key] !== 'object'));
+  const labels = new Map(((plan && plan.columns) || []).map((col) => [col.name, col.label || col.name]));
+  // 图谱声明过的字段按声明的顺序排前面；整列都空的不显示
+  const cols = [...labels.keys(), ...Object.keys(rows[0]).filter((key) => !labels.has(key))].filter((key) =>
+    rows.some((row) => row[key] != null && row[key] !== '' && typeof row[key] !== 'boolean' && typeof row[key] !== 'object'));
   if (!cols.length) return null;
-  // 图谱声明过的字段排前面
-  cols.sort((a, b) => (labels.has(b) ? 1 : 0) - (labels.has(a) ? 1 : 0));
   const numeric = new Set(cols.filter((key) => rows.every((row) => row[key] == null || typeof row[key] === 'number')));
   const makeRow = (row) => h('tr', null, cols.map((key) => h('td', {
     class: numeric.has(key) ? 'r num' : '',
@@ -783,12 +754,6 @@ function buildDetail(plan) {
   const box = h('div', { class: 'detail', hidden: true });
   if (Array.isArray(plan.steps) && plan.steps.length) {
     box.append(h('ol', null, plan.steps.map((step) => h('li', { text: step }))));
-  }
-  const fallbacks = plan.fallbacks || [];
-  if (fallbacks.length) {
-    box.append(h('div', { class: 'fb' },
-      h('span', { text: '取不到时改走：' }),
-      fallbacks.map((item) => h('span', { class: 'pill', title: item.reason || '', text: (item.label || item.id) + (item.available ? '' : '（未就绪）') }))));
   }
   return box;
 }
@@ -816,9 +781,9 @@ function headline(reply) {
 }
 function renderAnswer(pending, data, opts) {
   const { card } = pending;
-  // 反问/澄清时没有真正取数
-  const plan = data.clarify ? null : data.plan || null;
-  const payload = data.clarify ? null : data.data || null;
+  // 没听出来或需要登录时没有真正取数
+  const plan = data.plan || null;
+  const payload = data.data || null;
   const reply = data.reply || '';
   const bars = payload ? buildBars(payload.groups) : null;
   const table = payload ? buildTable(payload.rows, plan) : null;
@@ -835,9 +800,9 @@ function renderAnswer(pending, data, opts) {
   if (plan) {
     const detail = buildDetail(plan);
     const source = [
-      plan.provider ? '来自' + (KINDS[plan.provider.kind] || plan.provider.label || '数据源') : null,
+      plan.source ? '来自 ' + plan.source : null,
       plan.read_only ? '只读' : null,
-      data.data_as_of ? '数据截至 ' + shortTime(data.data_as_of) : null,
+      plan.complete === false ? '数据没取完' : '刚刚取的',
     ].filter(Boolean).join(' · ');
     const toggle = h('button', { type: 'button', class: 'src', 'aria-expanded': 'false' }, h('span', { text: source }), icon('chev'));
     toggle.addEventListener('click', () => {
@@ -880,6 +845,12 @@ async function ask(text, opts) {
     if (!data.ok) throw new Error(data.error || '查询失败');
     if (data.state_patch) S.state = { ...S.state, ...data.state_patch };
     renderAnswer(pending, data, opts);
+    if (data.needs_login) {
+      // 登录好以后把刚才那句话再问一遍，不用用户重说
+      await refreshSystems();
+      const sys = S.systems.find((item) => item.id === data.system);
+      if (sys) openSystem(sys, () => ask(text, opts));
+    }
   } catch (err) {
     renderError(pending, err.message);
   } finally {
@@ -1023,22 +994,14 @@ function closeVoiceSession() {
 
 /* ---------- 图谱视图：分层节点 + 连线 ---------- */
 const NODE_W = 172, NODE_H = 50, GAP_X = 66, GAP_Y = 14, PAD_X = 28, PAD_TOP = 50, PAD_BOTTOM = 30;
-const ORDER = ['app', 'module', 'page', 'api', 'provider', 'entity', 'capability'];
+const ORDER = ['app', 'module', 'page', 'capability', 'api', 'entity'];
 let layout = null;
 
-function implicitEdges() {
-  const out = [];
-  for (const cap of capabilities()) {
-    for (const id of cap.providers || []) if (S.nodes.has(id)) out.push({ from: cap.id, to: id, implicit: true });
-    if (cap.entity && S.nodes.has(cap.entity)) out.push({ from: cap.id, to: cap.entity, implicit: true });
-  }
-  return out;
-}
 function computeLayout() {
   const nodes = [...S.nodes.values()];
   const types = [...new Set(nodes.map((node) => node.type))];
   const cols = ORDER.filter((type) => types.includes(type)).concat(types.filter((type) => !ORDER.includes(type)));
-  const edges = (S.graph.edges || []).filter((e) => S.nodes.has(e.from) && S.nodes.has(e.to)).concat(implicitEdges());
+  const edges = (S.graph.edges || []).filter((e) => S.nodes.has(e.from) && S.nodes.has(e.to));
   const near = new Map(nodes.map((node) => [node.id, new Set()]));
   for (const e of edges) { near.get(e.from).add(e.to); near.get(e.to).add(e.from); }
   const columns = cols.map((type) => nodes.filter((node) => node.type === type));
@@ -1078,13 +1041,14 @@ function edgePath(a, b) {
   return `M${x1},${y1} C${x1 + mid},${y1} ${x2 - mid},${y2} ${x2},${y2}`;
 }
 function nodeSub(node) {
-  if (node.type === 'capability') return node.intent || node.id;
+  if (node.type === 'capability') return (node.keywords || []).slice(0, 3).join('、') || node.id.split('/').pop();
   if (node.type === 'api') return [node.method, node.path].filter(Boolean).join(' ') || node.id;
   if (node.type === 'page') return node.route || node.id;
   if (node.type === 'app') return hostOf(node.base_url) || node.id;
-  return node.id;
+  if (node.type === 'module') return '';
+  return node.id.split('/').pop();
 }
-const nodeOff = (node) => node.available === false || (node.type === 'capability' && !canRun(node));
+const nodeOff = (node) => node.available === false;
 
 function renderGraph() {
   const stage = $('#stage');
@@ -1157,14 +1121,6 @@ function focusNode(id) {
   const keep = new Set([id, ...layout.near.get(id)]);
   $$('.node', stage).forEach((el) => el.classList.toggle('hl', keep.has(el.dataset.id)));
   $$('.edge', stage).forEach((el) => el.classList.toggle('hl', el.dataset.from === id || el.dataset.to === id));
-  const node = S.nodes.get(id);
-  if (node.type === 'capability') {
-    // 标出取数的降级顺序
-    (node.providers || []).forEach((pid, index) => {
-      const el = stage.querySelector(`.node[data-id="${CSS.escape(pid)}"]`);
-      if (el) el.append(h('span', { class: 'order', text: index + 1 }));
-    });
-  }
 }
 function selectNode(id) {
   S.selected = S.selected === id ? null : id;
@@ -1172,27 +1128,16 @@ function selectNode(id) {
   if (S.selected) openInspector(S.selected); else closeInspector();
 }
 const KEY_LABELS = {
-  base_url: '地址', read_only: '只读', available: '可用', kind: '类型', entity: '实体', intent: '意图',
-  method: '方法', path: '路径', route: '路由', menu: '菜单', priority: '优先级', confidence: '置信度',
-  note: '备注', reason: '原因', key: '主键', fields: '字段', providers: '取数顺序', bind: '条件绑定',
-  examples: '示例问法', followups: '后续问题', metrics: '指标', description: '说明', params: '参数',
-  body_keys: '请求参数', response_keys: '返回字段',
+  base_url: '地址', read_only: '只读', available: '能查', method: '方法', path: '路径', route: '路由',
+  not_queryable: '为什么查不了', fields: '字段', examples: '示例问法', slots: '可以带的条件', keywords: '关键词',
+  evidence: '抓到样例的时间', generated: '图谱来源',
 };
 function valueNode(key, value) {
   if (value == null || value === '') return h('span', { style: 'color:var(--ink-3)', text: '—' });
   if (typeof value === 'boolean') return h('span', { class: 'pill ' + (value ? 'ok' : 'warn'), text: value ? '是' : '否' });
-  if (key === 'providers' && Array.isArray(value)) {
-    return h('div', { class: 'chain' }, value.map((id, index) => {
-      const node = S.nodes.get(id);
-      return h('div', null, h('span', { class: 'n', text: index + 1 }),
-        h('span', { text: node ? (node.label || id) : id }),
-        node ? h('span', { class: 'pill ' + (node.available === false ? '' : 'ok'), text: (KINDS[kindOf(node)] || kindOf(node)) + (node.available === false ? ' · 未就绪' : '') }) : h('span', { class: 'pill warn', text: '图谱中不存在' }));
-    }));
-  }
   if (key === 'examples' && Array.isArray(value)) {
     return h('div', { class: 'tags' }, value.map((text) => h('button', { type: 'button', class: 'chip', style: 'font-size:12px;padding:3px 10px', text, onclick: () => ask(text) })));
   }
-  if (key === 'entity' && S.nodes.has(value)) return h('span', { text: S.nodes.get(value).label || value });
   if (Array.isArray(value)) {
     return h('div', { class: 'tags' }, value.map((item) => {
       if (item && typeof item === 'object') {
@@ -1205,7 +1150,7 @@ function valueNode(key, value) {
   if (typeof value === 'object') {
     return h('div', { class: 'tags' }, Object.entries(value).map(([k, v]) => h('span', { class: 'pill mono', text: k + ' → ' + (typeof v === 'object' ? JSON.stringify(v) : v) })));
   }
-  return h(/^(path|route|method|intent|base_url)$/.test(key) ? 'code' : 'span', { text: String(value) });
+  return h(/^(path|route|method|base_url)$/.test(key) ? 'code' : 'span', { text: String(value) });
 }
 function openInspector(id) {
   const node = S.nodes.get(id);
@@ -1217,10 +1162,6 @@ function openInspector(id) {
     if (['id', 'type', 'label'].includes(key)) continue;
     rows.push(h('dt', { text: KEY_LABELS[key] || key }), h('dd', null, valueNode(key, value)));
   }
-  const notes = [];
-  if (node.type === 'capability' && !canRun(node)) {
-    notes.push(h('div', { class: 'check warn', style: 'margin:0 0 10px' }, '运行层还没有这个意图的执行器，目前只能展示，不能查询。'));
-  }
   box.replaceChildren(
     h('header', null,
       h('div', { style: 'flex:1;min-width:0' },
@@ -1228,7 +1169,6 @@ function openInspector(id) {
         h('h3', { text: node.label || node.id }),
         h('div', { class: 'mono', style: 'color:var(--ink-3)', text: node.id })),
       h('button', { type: 'button', class: 'icon-btn', 'aria-label': '关闭', onclick: () => selectNode(id) }, icon('x'))),
-    ...notes,
     h('dl', { class: 'kv' }, rows));
   box.classList.add('open');
   setTimeout(applyZoom, 340);
@@ -1237,68 +1177,52 @@ function closeInspector() { $('#inspector').classList.remove('open'); setTimeout
 
 /* ---------- 管理页顶部的一行现状：都是能核实的事实 ---------- */
 function renderSummary() {
-  const st = S.status;
   const pills = [];
-  if (!st) {
-    pills.push(h('span', { class: 'pill err', text: '服务连不上' }));
-  } else {
-    const total = st.counts ? Object.values(st.counts).reduce((a, b) => a + (Number(b) || 0), 0) : (st.live ? st.live.rows : null);
-    pills.push(h('span', { class: 'pill ok' }, h('i', { class: 'dot ok' }), st.mode === 'live' ? '实时读取' : '本地缓存'));
-    if (total != null) pills.push(h('span', { class: 'pill num', text: fmt(total) + ' 条记录' }));
-    if (st.data_as_of) pills.push(h('span', { class: 'pill', text: '数据截至 ' + shortTime(st.data_as_of) }));
+  if (!S.online) pills.push(h('span', { class: 'pill err', text: '服务连不上' }));
+  // 每个系统一个按钮：点开填账号、登录
+  for (const sys of S.systems) {
+    pills.push(h('button', { type: 'button', class: 'pill ' + (needsHuman(sys) ? 'warn' : 'ok'), onclick: () => openSystem(sys) },
+      needsHuman(sys) ? null : h('i', { class: 'dot ok' }), sys.label + ' · ' + statusWord(sys)));
   }
   const writable = [...S.nodes.values()].filter((node) => node.read_only === false);
   if (S.nodes.size) {
     pills.push(writable.length
-      ? h('span', { class: 'pill warn', title: writable.map((node) => node.label || node.id).join('、'), text: writable.length + ' 个节点声明为可写' })
-      : h('span', { class: 'pill ok' }, icon('lock'), '图谱里没有可写节点'));
-  }
-  for (const sys of allSystems()) {
-    pills.push(sys.status === 'needs_auth'
-      ? h('button', { type: 'button', class: 'pill warn', text: sys.label + ' · 需要验证', onclick: () => openAuth(sys) })
-      : h('span', { class: 'pill', text: sys.label + (sys.status === 'online' ? ' · 在线' : '') }));
+      ? h('span', { class: 'pill warn', title: writable.map((node) => node.label || node.id).join('、'), text: writable.length + ' 个节点声明为可写（不会执行）' })
+      : h('span', { class: 'pill ok' }, icon('lock'), '图谱里只有只读操作'));
   }
   $('#summary').replaceChildren(...pills);
 }
 
 /* ---------- 导入图谱 ---------- */
 let pendingGraph = null;
-function checkGraph(text) {
+let checkSeq = 0;
+// 校验规则只有服务端那一套（和 python -m qflow validate 相同），页面不另写一份
+async function checkGraph(text) {
   const box = $('#import-check');
   const save = $('#import-save');
+  const seq = ++checkSeq;
   pendingGraph = null;
   save.disabled = true;
   if (!text.trim()) { box.replaceChildren(); return; }
   const fail = (message) => box.replaceChildren(h('div', { class: 'check err', text: message }));
   let data;
   try { data = JSON.parse(text); } catch (err) { return fail('不是合法的 JSON：' + err.message); }
-  if (!data || typeof data !== 'object' || Array.isArray(data) || !Array.isArray(data.nodes)) return fail('图谱必须是对象，并且包含 nodes 数组。');
-  const ids = new Set();
-  for (const node of data.nodes) {
-    if (!node || !node.id) return fail('有节点缺少 id。');
-    if (ids.has(node.id)) return fail('节点 id 重复：' + node.id);
-    ids.add(node.id);
+  let report;
+  try { report = (await post('/desk/api/spec/validate', { graph: data })).report; } catch (err) { return fail(err.message); }
+  if (seq !== checkSeq) return;
+  const line = (item) => h('div', { text: item.where + '：' + item.msg });
+  const cov = report.coverage || {};
+  const parts = [];
+  if (report.ok) {
+    parts.push(h('div', { class: 'check ok' },
+      h('b', { text: '校验通过：' + ((data.system && data.system.label) || '') }),
+      cov.leaves ? h('div', { text: cov.leaves + ' 个菜单页，' + cov.with_capability + ' 个能查，' + cov.not_queryable + ' 个标了查不了' }) : null));
+  } else {
+    parts.push(h('div', { class: 'check err' }, h('b', { text: '没通过，' + report.errors.length + ' 处要改：' }), report.errors.slice(0, 12).map(line)));
   }
-  for (const edge of data.edges || []) {
-    for (const end of ['from', 'to']) if (!ids.has(edge[end])) return fail('连线引用了不存在的节点：' + edge[end]);
-  }
-  const counts = {};
-  data.nodes.forEach((node) => { counts[node.type] = (counts[node.type] || 0) + 1; });
-  const caps = data.nodes.filter((node) => node.type === 'capability');
-  const warns = [];
-  const noProvider = caps.filter((cap) => !(cap.providers || []).some((id) => ids.has(id)));
-  if (noProvider.length) warns.push(noProvider.length + ' 个能力没有可用的数据来源：' + noProvider.map((cap) => cap.label || cap.id).join('、'));
-  const notRunnable = S.executable ? caps.filter((cap) => !S.executable.has(cap.intent)) : [];
-  if (notRunnable.length) warns.push(notRunnable.length + ' 个能力在当前运行层没有执行器，导入后只能展示、不能查询：' + notRunnable.map((cap) => cap.label || cap.id).join('、'));
-  const writable = data.nodes.filter((node) => node.read_only === false);
-  if (writable.length) warns.push(writable.length + ' 个节点声明为可写：' + writable.map((node) => node.label || node.id).join('、'));
-  box.replaceChildren(
-    h('div', { class: 'check ok' },
-      h('b', { text: '结构校验通过：' + data.nodes.length + ' 个节点，' + (data.edges || []).length + ' 条连线' }),
-      h('div', { class: 'tags' }, Object.entries(counts).map(([type, n]) => h('span', { class: 'pill', text: typeOf(type).label + ' ' + n })))),
-    ...warns.map((text) => h('div', { class: 'check warn', text })));
-  pendingGraph = data;
-  save.disabled = false;
+  if ((report.warnings || []).length) parts.push(h('div', { class: 'check warn' }, report.warnings.slice(0, 8).map(line)));
+  box.replaceChildren(...parts);
+  if (report.ok) { pendingGraph = data; save.disabled = false; }
 }
 function openImport() {
   $('#import-modal').hidden = false;
@@ -1314,8 +1238,8 @@ async function saveImport() {
     const res = await post('/desk/api/graph/save', { graph: pendingGraph });
     if (!res.ok) throw new Error(res.error || '保存失败');
     $('#import-modal').hidden = true;
-    toast('图谱已加载到运行层。', 'ok');
-    await loadGraph();
+    toast('已接入。下一步：点这个系统，填账号并登录。', 'ok');
+    await Promise.all([loadGraph(), refreshSystems()]);
   } catch (err) {
     toast(err.message, 'err');
     save.disabled = false;
@@ -1328,50 +1252,164 @@ function readFile(file) {
   reader.readAsText(file);
 }
 function exportGraph() {
-  const blob = new Blob([JSON.stringify(S.graph || {}, null, 2)], { type: 'application/json' });
-  const a = h('a', { href: URL.createObjectURL(blob), download: 'graph.json' });
-  document.body.append(a);
-  a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  // 每个系统一份标准图谱文件
+  for (const [id, doc] of Object.entries(S.docs)) {
+    const blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+    const a = h('a', { href: URL.createObjectURL(blob), download: id + '.graph.json' });
+    document.body.append(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
 }
 
-/* ---------- 人工验证（验证码接力） ---------- */
-function showChallenge(data) {
-  const msg = $('#auth-msg');
-  msg.replaceChildren();
-  if (data.already_solved) {
-    $('#auth-modal').hidden = true;
-    toast('已经登录，不需要验证。', 'ok');
+/* ---------- 系统登录：填账号 → 自动登录 → 需要人时接手（验证码，或者服务器上的浏览器窗口） ---------- */
+let sysPoll = null;
+let sysAfter = null;
+const sysStep = (action, extra) => post('/desk/api/login/step', { system: S.sys.id, action, ...(extra || {}) });
+function sysClose() {
+  clearInterval(sysPoll);
+  sysPoll = null;
+  $('#sys-modal').hidden = true;
+}
+function sysShow(title, hint, body, buttons, message) {
+  $('#sys-title').textContent = title;
+  $('#sys-hint').textContent = hint || '';
+  $('#sys-body').replaceChildren(...(body || []));
+  $('#sys-msg').replaceChildren(message ? h('div', { class: 'check err', text: message }) : '');
+  $('#sys-foot').replaceChildren(...(buttons || []));
+  $('#sys-sheet').style.width = 'min(420px,100%)';
+  $('#sys-modal').hidden = false;
+}
+const btn = (text, onclick, primary) => h('button', { type: 'button', class: 'btn' + (primary ? ' primary' : ''), text, onclick });
+
+function openSystem(sys, after) {
+  S.sys = sys;
+  sysAfter = after || null;
+  clearInterval(sysPoll);
+  if (sys.account && sys.account.saved) sysReady();
+  else sysAccount();
+}
+function sysAccount(message) {
+  const user = h('input', { class: 'field', placeholder: '账号', autocomplete: 'off', autocapitalize: 'off', 'aria-label': '账号' });
+  const pass = h('input', { class: 'field', type: 'password', placeholder: '密码', autocomplete: 'new-password', 'aria-label': '密码' });
+  const save = async () => {
+    try {
+      const res = await post('/desk/api/account', { system: S.sys.id, username: user.value, password: pass.value });
+      if (!res.ok) throw new Error(res.error || '保存失败');
+      S.sys.account = res.account;
+      refreshSystems();
+      sysStart();
+    } catch (err) { sysAccount(err.message); }
+  };
+  pass.addEventListener('keydown', (event) => { if (event.key === 'Enter') save(); });
+  sysShow(S.sys.label + ' 的账号', '填一次就行。账号密码只存在服务器上，用来替你登录这个系统，之后不会再显示出来。',
+    [user, pass], [btn('取消', sysClose), btn('保存并登录', save, true)], message);
+  user.focus();
+}
+function sysReady() {
+  const online = S.sys.status === 'online';
+  sysShow(S.sys.label, (online ? '现在可以查。' : '需要登录一次。') + '账号：' + S.sys.account.username,
+    [], [btn('换账号', () => sysAccount()), btn('用浏览器窗口登录', () => sysStart(true)), btn(online ? '重新登录' : '登录', () => sysStart(), true)]);
+}
+async function sysStart(manual) {
+  sysShow(S.sys.label, '正在服务器上打开登录页…', [], [btn('取消', sysCancel)]);
+  try { sysRender(await sysStep('start', { manual: !!manual })); }
+  catch (err) { sysRender({ state: 'error', error: err.message }); }
+}
+async function sysCancel() {
+  sysClose();
+  try { await sysStep('cancel'); } catch (err) { /* 窗口已经关了 */ }
+}
+function sysRender(data) {
+  clearInterval(sysPoll);
+  if (!data.ok && !data.state) data = { state: 'error', error: data.error };
+  if (data.state === 'done') {
+    sysClose();
+    toast(S.sys.label + ' 登录成功。', 'ok');
     refreshSystems();
+    if (sysAfter) { const again = sysAfter; sysAfter = null; again(); }
     return;
   }
-  if (!data.ok) { msg.replaceChildren(h('div', { class: 'check err', text: data.error || '拿不到验证码。' })); return; }
-  if (data.image && /^data:image\//.test(data.image)) $('#auth-img').src = data.image;
-  if (data.hint) $('#auth-hint').textContent = data.hint;
+  if (data.state === 'challenge') return sysChallenge(data);
+  if (data.state === 'window') return sysWindow(data);
+  sysShow(S.sys.label, '', [], [btn('关闭', sysClose), btn('换账号', () => sysAccount()), btn('用浏览器窗口登录', () => sysStart(true), true)],
+    data.error || '没登录上。');
 }
-async function openAuth(sys) {
-  S.authSystem = sys.id;
-  $('#auth-title').textContent = sys.label + ' 需要人工验证';
-  $('#auth-hint').textContent = 'Agent 登录该系统时遇到验证码，请帮它看一眼。';
-  $('#auth-img').removeAttribute('src');
-  $('#auth-code').value = '';
-  $('#auth-modal').hidden = false;
-  try { showChallenge(await api('/desk/api/auth/challenge?system=' + encodeURIComponent(sys.id))); }
-  catch (err) { showChallenge({ ok: false, error: err.message }); }
-  $('#auth-code').focus();
+function sysChallenge(data) {
+  const img = h('img', { alt: '验证码', src: /^data:image\//.test(data.image || '') ? data.image : '',
+    style: 'height:48px;min-width:120px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2)' });
+  const code = h('input', { class: 'field', autocomplete: 'off', autocapitalize: 'off', 'aria-label': '验证码', placeholder: '输入验证码' });
+  const run = async (action, extra) => {
+    try { sysRender(await sysStep(action, extra)); } catch (err) { sysRender({ state: 'error', error: err.message }); }
+  };
+  const submit = () => run('answer', { text: code.value.trim() });
+  code.addEventListener('keydown', (event) => { if (event.key === 'Enter') submit(); });
+  sysShow(S.sys.label + ' 需要验证码', data.hint || '请帮忙看一眼图片里的字符。',
+    [h('div', { style: 'display:flex;gap:10px;align-items:center' }, img, btn('换一张', () => run('refresh'))), code],
+    [btn('取消', sysCancel), btn('提交', submit, true)], data.error);
+  code.focus();
 }
-async function authAction(kind) {
-  try {
-    if (kind === 'refresh') return showChallenge(await post('/desk/api/auth/refresh', { system: S.authSystem }));
-    const res = await post('/desk/api/auth/submit', { system: S.authSystem, code: $('#auth-code').value.trim() });
-    if (!res.ok) throw new Error(res.error || '验证失败');
-    $('#auth-modal').hidden = true;
-    toast('验证通过。', 'ok');
-    refreshSystems();
-    refreshStatus();
-  } catch (err) {
-    $('#auth-msg').replaceChildren(h('div', { class: 'check err', text: err.message }));
-  }
+// 服务器上那个浏览器的画面：在这里点、拖、打字，原样转过去。滑块、扫码、短信都这么过
+function sysWindow(first) {
+  const img = h('img', { alt: '服务器上的浏览器窗口' });
+  const box = h('div', { class: 'remote', tabindex: '0' }, img);
+  const text = h('input', { class: 'field', autocomplete: 'off', autocapitalize: 'off', placeholder: '要输入的文字（先点一下画面里的输入框）', 'aria-label': '要输入的文字' });
+  let size = { width: first.width || 1280, height: first.height || 800 };
+  let queue = Promise.resolve();
+  let alive = true;
+  const apply = (data) => {
+    if (!alive) return;
+    if (data.state !== 'window') { alive = false; return sysRender(data); }
+    if (/^data:image\//.test(data.image || '')) img.src = data.image;
+    size = { width: data.width || size.width, height: data.height || size.height };
+  };
+  // 请求排队发，保证按下、移动、松开的顺序
+  const send = (action, extra) => {
+    queue = queue.then(() => alive ? sysStep(action, extra).then(apply) : null).catch((err) => { alive = false; sysRender({ state: 'error', error: err.message }); });
+  };
+  const at = (event) => {
+    const rect = img.getBoundingClientRect();
+    return { x: Math.round((event.clientX - rect.left) * size.width / rect.width), y: Math.round((event.clientY - rect.top) * size.height / rect.height) };
+  };
+  let down = false;
+  let moves = [];
+  let lastFlush = 0;
+  const flush = () => { if (moves.length) { send('input', { events: moves }); moves = []; lastFlush = Date.now(); } };
+  box.addEventListener('pointerdown', (event) => {
+    event.preventDefault();
+    box.focus();
+    box.setPointerCapture(event.pointerId);
+    down = true;
+    send('input', { events: [{ type: 'down', ...at(event) }] });
+  });
+  box.addEventListener('pointermove', (event) => {
+    if (!down) return;
+    moves.push({ type: 'move', ...at(event) });
+    if (Date.now() - lastFlush > 120) flush();  // 拖滑块时边拖边能看到画面在动
+  });
+  const release = (event) => {
+    if (!down) return;
+    down = false;
+    flush();
+    send('input', { events: [{ type: 'up', ...at(event) }] });
+  };
+  box.addEventListener('pointerup', release);
+  box.addEventListener('pointercancel', release);
+  box.addEventListener('keydown', (event) => {
+    if (event.isComposing || event.ctrlKey || event.metaKey) return;
+    if (['Enter', 'Backspace', 'Tab', 'Escape'].includes(event.key)) { event.preventDefault(); send('input', { events: [{ type: 'key', key: event.key }] }); }
+    else if (event.key.length === 1) { event.preventDefault(); send('input', { events: [{ type: 'text', text: event.key }] }); }
+  });
+  const type = () => { if (text.value) { send('input', { events: [{ type: 'text', text: text.value }] }); text.value = ''; } };
+  text.addEventListener('keydown', (event) => { if (event.key === 'Enter' && !event.isComposing) { event.preventDefault(); type(); } });
+  const tools = h('div', { class: 'remote-tools' }, text, btn('输入', type), btn('回车', () => send('input', { events: [{ type: 'key', key: 'Enter' }] })),
+    btn('退格', () => send('input', { events: [{ type: 'key', key: 'Backspace' }] })));
+  const fill = S.sys.account && S.sys.account.saved ? [btn('填入保存的账号密码', () => send('input', { events: [{ type: 'account' }] }))] : [];
+  sysShow(S.sys.label + ' · 浏览器窗口', '这是服务器上打开的登录页。像平时一样点、拖、输入；登录成功后这个窗口会自己关掉。',
+    [box, tools], [btn('取消', () => { alive = false; sysCancel(); }), ...fill], first.error);
+  $('#sys-sheet').style.width = 'min(900px,100%)';
+  apply(first);
+  sysPoll = setInterval(() => { if (alive && !down && !document.hidden) send('screen'); else if (!alive) clearInterval(sysPoll); }, 1500);
 }
 
 /* ---------- 事件绑定 ---------- */
@@ -1380,10 +1418,7 @@ const ACTIONS = {
   import: openImport,
   export: exportGraph,
   'close-import': () => { $('#import-modal').hidden = true; },
-  'load-current': () => { $('#import-text').value = JSON.stringify(S.graph || {}, null, 2); checkGraph($('#import-text').value); },
-  'close-auth': () => { $('#auth-modal').hidden = true; },
-  'auth-refresh': () => authAction('refresh'),
-  'auth-submit': () => authAction('submit'),
+  'load-current': () => { const doc = Object.values(S.docs)[0]; if (doc) { $('#import-text').value = JSON.stringify(doc, null, 2); checkGraph($('#import-text').value); } },
 };
 $$('[data-act]').forEach((btn) => btn.addEventListener('click', ACTIONS[btn.dataset.act]));
 $$('[data-zoom]').forEach((btn) => btn.addEventListener('click', () => {
@@ -1410,21 +1445,20 @@ const drop = $('#drop');
 ['dragenter', 'dragover'].forEach((name) => drop.addEventListener(name, (event) => { event.preventDefault(); drop.classList.add('over'); }));
 ['dragleave', 'drop'].forEach((name) => drop.addEventListener(name, (event) => { event.preventDefault(); drop.classList.remove('over'); }));
 drop.addEventListener('drop', (event) => readFile(event.dataTransfer.files[0]));
-$('#auth-code').addEventListener('keydown', (event) => { if (event.key === 'Enter') authAction('submit'); });
 $('#login-form').addEventListener('submit', submitLogin);
 const dismissable = (modal) => !modal.hasAttribute('data-locked');
-$$('.modal').filter(dismissable).forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) modal.hidden = true; }));
+const closeModal = (modal) => { if (modal.id === 'sys-modal') sysCancel(); else modal.hidden = true; };
+$$('.modal').filter(dismissable).forEach((modal) => modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal); }));
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape') return;
   const open = $$('.modal').filter(dismissable).find((modal) => !modal.hidden);
-  if (open) open.hidden = true;
+  if (open) closeModal(open);
   else if (S.selected) selectNode(S.selected);
 });
 window.addEventListener('resize', applyZoom);
 window.addEventListener('pagehide', closeVoiceSession);
 
 function boot() {
-  refreshStatus();
   refreshSystems();
   loadGraph();
 }
@@ -1433,7 +1467,7 @@ api('/desk/api/session').then((session) => {
   if (session.required && !session.authed) showLogin();
   else boot();
 }).catch(boot);
-setInterval(() => { if (!document.hidden && loggedIn()) { refreshStatus(); refreshSystems(); } }, 30000);
+setInterval(() => { if (!document.hidden && loggedIn()) refreshSystems(); }, 30000);
 })();
 </script>
 </body>
