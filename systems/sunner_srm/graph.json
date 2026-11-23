@@ -1,0 +1,746 @@
+{
+  "spec_version": "1.0",
+  "system": {
+    "id": "sunner_srm",
+    "label": "圣农 SRM",
+    "base_url": "https://srm.sunnercn.com:10001"
+  },
+  "generated": {
+    "at": "2026-11-22T18:30:00+08:00",
+    "by": "人工整理：菜单来自 2026-11-18 的 getLayoutInfo 抓取，扣款接口来自同日抓包和 qflow/srmapi.py",
+    "account_role": "供应商"
+  },
+  "auth": {
+    "login_url": "/",
+    "steps": [
+      {
+        "kind": "input",
+        "field": "username",
+        "locator": "input[placeholder*='账号']"
+      },
+      {
+        "kind": "input",
+        "field": "password",
+        "locator": "input[placeholder*='密码']"
+      },
+      {
+        "kind": "challenge",
+        "type": "image_captcha",
+        "locator": "img.vcode",
+        "answer_locator": "input[placeholder*='验证码']",
+        "solver": [
+          "ocr",
+          "human"
+        ],
+        "length": 4
+      },
+      {
+        "kind": "submit",
+        "locator": "button.login-btn"
+      }
+    ],
+    "session": {
+      "carrier": "cookie",
+      "expired_when": [
+        {
+          "status": 401
+        },
+        {
+          "status": 403
+        },
+        {
+          "redirect_contains": "/login"
+        }
+      ],
+      "check": {
+        "operation": "op.deduction.list"
+      }
+    },
+    "note": "打开首页，未登录会被转到带 /login 的地址。输入框和按钮的定位是 2026-11 人工登录时记下的；按这一节自动登录还没有在真实系统上跑过。",
+    "success": {
+      "url_not_contains": "/login",
+      "absent": "input[placeholder*='账号']"
+    }
+  },
+  "navigation": [
+    {
+      "id": "nav.factoryscorelist",
+      "path": [
+        "准入协同",
+        "工厂考察评估"
+      ],
+      "route": "/#/vendor/dlv/factoryinspect/vendor/score/factoryScoreList",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.quote_list",
+      "path": [
+        "商务报价",
+        "询报价"
+      ],
+      "route": "/#/sourcing/enquiry/vendor/quote-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vendor_bid_list",
+      "path": [
+        "商务报价",
+        "招投标"
+      ],
+      "route": "/#/sourcing/bid/vendor-bid-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.contract_list_sign",
+      "path": [
+        "商务报价",
+        "合同管理",
+        "合同清单"
+      ],
+      "route": "/#/sourcing/contract/vendor/contract-list-sign",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.agreement_list",
+      "path": [
+        "商务报价",
+        "合同管理",
+        "文本协议"
+      ],
+      "route": "/#/sourcing/contract/vendor/agreement_list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.addendum_list",
+      "path": [
+        "商务报价",
+        "合同管理",
+        "补充协议"
+      ],
+      "route": "/#/sourcing/contract/vendor/addendum-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.deposit_list",
+      "path": [
+        "商务报价",
+        "保证金"
+      ],
+      "route": "/#/sourcing/components/deposit/vendor/deposit-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.questionary_mid",
+      "path": [
+        "商务报价",
+        "我的公司信息",
+        "电子调查表"
+      ],
+      "route": "/#/vendor/regist/questionary-mid",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.rfilist",
+      "path": [
+        "商务报价",
+        "我的公司信息",
+        "信息反馈"
+      ],
+      "route": "/#/vendor/vsp/rfi/vendor/rfiList",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.query_list",
+      "path": [
+        "商务报价",
+        "我的公司信息",
+        "资质过期提醒"
+      ],
+      "route": "/#/vendor/expirynoti/vendor/query-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vdchange_list",
+      "path": [
+        "商务报价",
+        "我的公司信息",
+        "供应商变更申请"
+      ],
+      "route": "/#/vendor/vdchange/vendor/vdchange-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vd_category_list",
+      "path": [
+        "商务报价",
+        "我的公司信息",
+        "供应品类"
+      ],
+      "route": "/#/vendor/vendorcategory/vd-category-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.potab",
+      "path": [
+        "采购协同",
+        "采购订单",
+        "订单列表"
+      ],
+      "route": "/#/pe/po/vendor/poTab",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.poexecstatuslist",
+      "path": [
+        "采购协同",
+        "采购订单",
+        "执行情况"
+      ],
+      "route": "/#/pe/po/vendor/poExecStatusList",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.consignment_inventory_query",
+      "path": [
+        "采购协同",
+        "寄售库存",
+        "寄售库存查询"
+      ],
+      "route": "/#/pe/po/vendor/consignment-inventory-query",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.deliverylist",
+      "path": [
+        "采购协同",
+        "发货管理",
+        "发货记录"
+      ],
+      "route": "/#/pe/delivery/vendor/deliveryList",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.orderdeliveryboard",
+      "path": [
+        "采购协同",
+        "发货管理",
+        "发货看板"
+      ],
+      "route": "/#/pe/delivery/orderDeliveryBoard",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.receivelist",
+      "path": [
+        "采购协同",
+        "收货管理",
+        "收货记录"
+      ],
+      "route": "/#/pe/receive/receiverecord/vendor/receiveList",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.receivecontrastlist",
+      "path": [
+        "采购协同",
+        "收货管理",
+        "收货差异"
+      ],
+      "route": "/#/pe/receive/receivecontrast/vendor/receiveContrastList",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vendor_return_list",
+      "path": [
+        "采购协同",
+        "退货管理",
+        "退货记录"
+      ],
+      "route": "/#/pe/purchasereturn/vendor-return-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.fi_adjust_list",
+      "path": [
+        "采购协同",
+        "开票管理",
+        "结算调整单"
+      ],
+      "route": "/#/fi/vendor/fi-adjust-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.billable_items_list",
+      "path": [
+        "采购协同",
+        "开票管理",
+        "货物往来明细"
+      ],
+      "route": "/#/fi/vendor/billable-items-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.bill_list",
+      "path": [
+        "采购协同",
+        "开票管理",
+        "采购发起结算单"
+      ],
+      "route": "/#/fi/vendor/bill-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.bill_list_vendor",
+      "path": [
+        "采购协同",
+        "开票管理",
+        "我司发起结算单"
+      ],
+      "route": "/#/fi/vendor/bill-list-vendor",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.qua_jud_vendor_list",
+      "path": [
+        "采购协同",
+        "开票管理",
+        "质量扣款明细"
+      ],
+      "route": "/#/quajud/qua-jud-vendor-list",
+      "capabilities": [
+        "cap.deduction.summary",
+        "cap.deduction.detail"
+      ],
+      "not_queryable": null
+    },
+    {
+      "id": "nav.confirmation_bill_list",
+      "path": [
+        "采购协同",
+        "开票管理",
+        "询证函"
+      ],
+      "route": "/#/confirmation/vendor/confirmation-bill-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vendor_management_list",
+      "path": [
+        "商城",
+        "上架商品"
+      ],
+      "route": "/#/mall/product/vendor-management-list",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vendor_marketable_product",
+      "path": [
+        "商城",
+        "待上架商品"
+      ],
+      "route": "/#/mall/product/vendor-marketable-product",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    },
+    {
+      "id": "nav.vendor_order_management",
+      "path": [
+        "商城",
+        "订单管理"
+      ],
+      "route": "/#/mall/order/vendor-order-management",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "还没有探索这个页面的接口"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "entity.deduction",
+      "label": "扣款明细",
+      "key": [
+        "row_id",
+        "item"
+      ],
+      "fields": [
+        {
+          "name": "row_id",
+          "label": "收货行编号",
+          "type": "string"
+        },
+        {
+          "name": "asn",
+          "label": "收货单号",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "biz_date",
+          "label": "业务日期",
+          "type": "date"
+        },
+        {
+          "name": "item",
+          "label": "检测项目",
+          "type": "enum",
+          "values": [
+            "玉米赤霉烯酮",
+            "黄曲霉毒素",
+            "不完善粒",
+            "霉变粒",
+            "生霉粒",
+            "破损粒",
+            "水分",
+            "杂质",
+            "容重",
+            "色泽",
+            "气味"
+          ],
+          "synonyms": {
+            "水分": [
+              "水份",
+              "含水"
+            ],
+            "黄曲霉毒素": [
+              "黄曲霉"
+            ],
+            "玉米赤霉烯酮": [
+              "赤霉烯酮"
+            ],
+            "霉变粒": [
+              "霉变"
+            ],
+            "生霉粒": [
+              "生霉"
+            ]
+          }
+        },
+        {
+          "name": "result_text",
+          "label": "检测值",
+          "type": "string"
+        },
+        {
+          "name": "range_text",
+          "label": "扣罚范围",
+          "type": "number"
+        },
+        {
+          "name": "amount",
+          "label": "扣罚金额",
+          "type": "money",
+          "unit": "元",
+          "required": true
+        },
+        {
+          "name": "formula",
+          "label": "扣罚公式",
+          "type": "string"
+        },
+        {
+          "name": "qty",
+          "label": "数量",
+          "type": "number"
+        },
+        {
+          "name": "order_no",
+          "label": "订单号",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "id": "op.deduction.list",
+      "kind": "http",
+      "access": "read",
+      "request": {
+        "method": "POST",
+        "path": "/srm/qm/quajud/vendorQuery",
+        "body_type": "form",
+        "params": [],
+        "headers": {
+          "Referer": "https://srm.sunnercn.com:10001/"
+        }
+      },
+      "pagination": {
+        "style": "page",
+        "page_param": "page",
+        "size_param": "rows",
+        "max_size": 200,
+        "total_path": "$.total"
+      },
+      "response": {
+        "ok_when": "$.success == true",
+        "rows_path": "$.rows",
+        "entity": "entity.deduction",
+        "map": {
+          "row_id": "$.id",
+          "asn": "$.refNo",
+          "biz_date": [
+            "$.postDate",
+            "$.createTime"
+          ],
+          "item": "$.projectName",
+          "result_text": "$.projectResult",
+          "amount": "$.itemAmount",
+          "formula": "$.formula",
+          "qty": "$.qty",
+          "order_no": "$.poNo",
+          "range_text": "$.dedRange"
+        }
+      },
+      "evidence": {
+        "verified_at": "2026-11-18T22:50:00+08:00",
+        "sample_rows": 2,
+        "note": "请求的地址、方法、参数、请求头与 2026-11-18 浏览器抓包一致（抓包里每页 10 条，这里按 200 条请求，200 是否被接受没有重新验证）。返回的键名来自同日抓取；下面样例里的值是改写的，不是真实记录。2026-11-22 用通用执行器带过期登录态真实调用过一次，接口返回 401，被正确识别为登录态失效；带有效登录态的真实调用还没做。",
+        "sample": {
+          "request": {
+            "page": 1,
+            "rows": 200
+          },
+          "response": {
+            "success": true,
+            "total": 2,
+            "page": 1,
+            "pageCount": 1,
+            "pageSize": 200,
+            "rows": [
+              {
+                "id": "R0001",
+                "refNo": "ASN2511010001",
+                "postDate": "2025-11-05",
+                "createTime": "2025-11-05 09:12:00",
+                "projectName": "水分",
+                "projectResult": "15.5",
+                "itemAmount": 100.0,
+                "formula": "(x-14)*1%*金额",
+                "qty": 32.5,
+                "poNo": "PO0001",
+                "dedRange": 14.0
+              },
+              {
+                "id": "R0001",
+                "refNo": "ASN2511010001",
+                "postDate": "2025-11-05",
+                "createTime": "2025-11-05 09:12:00",
+                "projectName": "杂质",
+                "projectResult": "1.8",
+                "itemAmount": 50.0,
+                "formula": "(x-1)*1%*金额",
+                "qty": 32.5,
+                "poNo": "PO0001",
+                "dedRange": 1.0
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "cap.deduction.summary",
+      "label": "扣款汇总",
+      "access": "read",
+      "nav": "nav.qua_jud_vendor_list",
+      "operation": "op.deduction.list",
+      "slots": [
+        {
+          "name": "period",
+          "label": "时间",
+          "type": "date_range",
+          "field": "biz_date",
+          "filter": "local"
+        },
+        {
+          "name": "item",
+          "label": "检测项目",
+          "type": "enum",
+          "field": "item",
+          "filter": "local",
+          "match": "contains"
+        },
+        {
+          "name": "asn",
+          "label": "收货单号",
+          "type": "string",
+          "field": "asn",
+          "filter": "local",
+          "pattern": "(?<![A-Za-z0-9])(ASN\\d{6,})(?![0-9])"
+        }
+      ],
+      "compute": {
+        "group_by": [
+          "item"
+        ],
+        "metrics": [
+          {
+            "key": "total",
+            "fn": "sum",
+            "field": "amount",
+            "label": "扣款合计",
+            "unit": "元"
+          },
+          {
+            "key": "count",
+            "fn": "count",
+            "label": "笔数",
+            "unit": "笔"
+          }
+        ]
+      },
+      "answer": "{period} 共 {count} 笔扣款，合计 {total} 元。",
+      "examples": [
+        "去年11月扣款合计",
+        "这个月水分扣了多少钱",
+        "按项目统计扣款"
+      ],
+      "followups": [
+        "明细呢",
+        "只看水分"
+      ],
+      "keywords": [
+        "扣款",
+        "扣罚",
+        "罚款",
+        "扣钱",
+        "检测",
+        "扣了",
+        "扣多少"
+      ]
+    },
+    {
+      "id": "cap.deduction.detail",
+      "label": "扣款明细",
+      "access": "read",
+      "nav": "nav.qua_jud_vendor_list",
+      "operation": "op.deduction.list",
+      "slots": [
+        {
+          "name": "period",
+          "label": "时间",
+          "type": "date_range",
+          "field": "biz_date",
+          "filter": "local"
+        },
+        {
+          "name": "item",
+          "label": "检测项目",
+          "type": "enum",
+          "field": "item",
+          "filter": "local",
+          "match": "contains"
+        },
+        {
+          "name": "asn",
+          "label": "收货单号",
+          "type": "string",
+          "field": "asn",
+          "filter": "local",
+          "pattern": "(?<![A-Za-z0-9])(ASN\\d{6,})(?![0-9])"
+        }
+      ],
+      "answer": "{period} 共 {count} 笔扣款，明细如下。",
+      "examples": [
+        "查一下上个月扣款明细",
+        "ASN2511210602 扣了哪些项目",
+        "11月杂质扣款列表"
+      ],
+      "followups": [
+        "合计多少"
+      ],
+      "keywords": [
+        "扣款",
+        "扣罚",
+        "罚款",
+        "扣钱",
+        "检测",
+        "扣了",
+        "扣多少"
+      ]
+    }
+  ]
+}

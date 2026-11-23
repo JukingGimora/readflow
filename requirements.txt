@@ -1,9 +1,3 @@
-pandas>=2.0
-openpyxl>=3.1
-xlrd>=2.0
-
-# 可选：在线只读探索 / 定时刷新（不装也能用离线查询与 HTTP 服务）
-# playwright>=1.40
-
-# 开发测试
-# pytest>=8.0
+# 查询和服务只用 Python 标准库，没有第三方依赖。
+# 登录要开浏览器：见 requirements-live.txt
+# 开发测试：pytest>=8.0

@@ -1,0 +1,304 @@
+{
+  "spec_version": "1.0",
+  "system": {
+    "id": "example_erp",
+    "label": "示例系统（虚构，只用来说明格式）",
+    "base_url": "https://erp.example.com"
+  },
+  "generated": {
+    "at": "2026-11-20T10:00:00+08:00",
+    "by": "example-model",
+    "account_role": "供应商"
+  },
+  "auth": {
+    "login_url": "/#/login",
+    "steps": [
+      {
+        "kind": "input",
+        "field": "username",
+        "locator": "input[name=username]"
+      },
+      {
+        "kind": "input",
+        "field": "password",
+        "locator": "input[type=password]"
+      },
+      {
+        "kind": "challenge",
+        "type": "image_captcha",
+        "locator": "img.vcode",
+        "answer_locator": "input[name=code]",
+        "solver": [
+          "ocr",
+          "human"
+        ],
+        "length": 4
+      },
+      {
+        "kind": "submit",
+        "locator": "button[type=submit]"
+      }
+    ],
+    "session": {
+      "carrier": "cookie",
+      "expired_when": [
+        {
+          "status": 401
+        }
+      ],
+      "check": {
+        "operation": "op.deduction.list"
+      }
+    },
+    "success": {
+      "url_not_contains": "/login",
+      "absent": "input[name=username]"
+    }
+  },
+  "navigation": [
+    {
+      "id": "nav.quality.deduction",
+      "path": [
+        "采购协同",
+        "质量管理",
+        "质量扣款明细"
+      ],
+      "route": "/#/quality/deduction",
+      "capabilities": [
+        "cap.deduction.summary",
+        "cap.deduction.detail"
+      ],
+      "not_queryable": null
+    },
+    {
+      "id": "nav.quote.online",
+      "path": [
+        "商务报价",
+        "在线报价"
+      ],
+      "route": "/#/quote/online",
+      "capabilities": [],
+      "not_queryable": {
+        "reason": "请求带前端现算的签名，脱离浏览器调不通",
+        "gap": "G1"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "entity.deduction",
+      "label": "扣款明细",
+      "key": [
+        "order_no",
+        "item"
+      ],
+      "fields": [
+        {
+          "name": "order_no",
+          "label": "收货单号",
+          "type": "string"
+        },
+        {
+          "name": "biz_date",
+          "label": "制单日期",
+          "type": "date"
+        },
+        {
+          "name": "item",
+          "label": "检测项目",
+          "type": "enum",
+          "values": [
+            "水分",
+            "杂质",
+            "霉变"
+          ],
+          "synonyms": {
+            "水分": [
+              "含水",
+              "水份"
+            ]
+          }
+        },
+        {
+          "name": "amount",
+          "label": "扣罚金额",
+          "type": "money",
+          "unit": "元"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "id": "op.deduction.list",
+      "kind": "http",
+      "access": "read",
+      "request": {
+        "method": "POST",
+        "path": "/api/quality/deduction/query",
+        "body_type": "form",
+        "params": [
+          {
+            "name": "startDate",
+            "type": "date",
+            "format": "YYYY-MM-DD",
+            "required": false
+          },
+          {
+            "name": "endDate",
+            "type": "date",
+            "format": "YYYY-MM-DD",
+            "required": false
+          }
+        ]
+      },
+      "pagination": {
+        "style": "page",
+        "page_param": "page",
+        "size_param": "rows",
+        "max_size": 200,
+        "total_path": "$.total"
+      },
+      "response": {
+        "ok_when": "$.success == true",
+        "rows_path": "$.rows",
+        "entity": "entity.deduction",
+        "map": {
+          "order_no": "$.orderNo",
+          "biz_date": "$.createDate",
+          "item": "$.itemName",
+          "amount": "$.deductAmt"
+        }
+      },
+      "evidence": {
+        "verified_at": "2026-11-20T09:40:00+08:00",
+        "sample_rows": 2,
+        "sample": {
+          "request": {
+            "startDate": "2026-10-01",
+            "endDate": "2026-10-31",
+            "page": 1,
+            "rows": 2
+          },
+          "response": {
+            "success": true,
+            "total": 37,
+            "rows": [
+              {
+                "orderNo": "RK20261003001",
+                "createDate": "2026-10-03",
+                "itemName": "水分",
+                "deductAmt": 120.5
+              },
+              {
+                "orderNo": "RK20261007004",
+                "createDate": "2026-10-07",
+                "itemName": "杂质",
+                "deductAmt": 86.0
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "cap.deduction.summary",
+      "label": "扣款汇总",
+      "access": "read",
+      "nav": "nav.quality.deduction",
+      "operation": "op.deduction.list",
+      "slots": [
+        {
+          "name": "period",
+          "type": "date_range",
+          "to": {
+            "start": "startDate",
+            "end": "endDate"
+          },
+          "default": "last_month"
+        },
+        {
+          "name": "item",
+          "type": "enum",
+          "field": "item",
+          "filter": "local"
+        }
+      ],
+      "compute": {
+        "group_by": [
+          "item"
+        ],
+        "metrics": [
+          {
+            "key": "total",
+            "fn": "sum",
+            "field": "amount",
+            "label": "扣款合计",
+            "unit": "元"
+          },
+          {
+            "key": "count",
+            "fn": "count",
+            "label": "笔数",
+            "unit": "笔"
+          }
+        ]
+      },
+      "answer": "{period} 共 {count} 笔扣款，合计 {total} 元。",
+      "examples": [
+        "上个月扣款合计是多少",
+        "本月水分扣了多少钱",
+        "去年11月扣了多少"
+      ],
+      "followups": [
+        "明细呢",
+        "只看水分"
+      ],
+      "keywords": [
+        "扣款",
+        "罚款",
+        "扣钱"
+      ]
+    },
+    {
+      "id": "cap.deduction.detail",
+      "label": "扣款明细",
+      "access": "read",
+      "nav": "nav.quality.deduction",
+      "operation": "op.deduction.list",
+      "slots": [
+        {
+          "name": "period",
+          "type": "date_range",
+          "to": {
+            "start": "startDate",
+            "end": "endDate"
+          },
+          "default": "last_month"
+        },
+        {
+          "name": "item",
+          "type": "enum",
+          "field": "item",
+          "filter": "local"
+        }
+      ],
+      "answer": "{period} 的扣款明细如下。",
+      "examples": [
+        "列一下上个月的扣款明细",
+        "这个月扣了哪些单",
+        "水分扣款有哪几笔"
+      ],
+      "followups": [
+        "合计多少"
+      ],
+      "keywords": [
+        "扣款",
+        "罚款",
+        "扣钱"
+      ]
+    }
+  ]
+}
