@@ -176,7 +176,7 @@ def _map_row(graph: SystemGraph, entity_id: str, mapping: dict, raw: dict) -> di
     return row
 
 
-def fetch(graph: SystemGraph, op_id: str, params: dict, send) -> tuple[list[dict], dict]:
+def fetch(graph: SystemGraph, op_id: str, params: dict, send, max_pages: int | None = None) -> tuple[list[dict], dict]:
     """调一个操作并翻完所有页。返回（按实体字段名整理好的记录，取数过程）。"""
     op = graph.operations.get(op_id)
     if op is None:
@@ -201,7 +201,7 @@ def fetch(graph: SystemGraph, op_id: str, params: dict, send) -> tuple[list[dict
     required = [f["name"] for f in entity["fields"] if f.get("required")]
 
     rows, seen, total, pages, received, complete = [], set(), None, 0, 0, False
-    for page in range(1, MAX_PAGES + 1):
+    for page in range(1, (max_pages or MAX_PAGES) + 1):
         body = dict(params)
         if paged:
             body[paging["page_param"]] = page

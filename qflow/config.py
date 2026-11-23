@@ -8,10 +8,9 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATA_DIR = PROJECT_ROOT / "data"
 
-# 可用环境变量覆盖，方便把库放到服务器挂载盘
-DEFAULT_DB = Path(
-    os.environ.get("QFLOW_DB") or (DEFAULT_DATA_DIR / "queryflow.db")
-).expanduser()
+# 账号、登录态、页面导入的图谱都放这里；可用环境变量挪到服务器挂载盘
+DATA_DIR = Path(os.environ.get("QFLOW_DATA") or DEFAULT_DATA_DIR).expanduser()
+SYSTEMS_DIR = PROJECT_ROOT / "systems"
 
 TZ_NAME = os.environ.get("QFLOW_TZ", "Asia/Shanghai")
 
@@ -21,9 +20,13 @@ DEFAULT_TOKEN = os.environ.get("QFLOW_TOKEN", "").strip()
 # 页面登录口令（给人输入）；不设就用 QFLOW_TOKEN 本身。只在设了 QFLOW_TOKEN 时生效
 DESK_PASS = os.environ.get("QFLOW_DESK_PASS", "").strip()
 
-# 实时模式：查询时登录 SRM 现场读取，不落业务数据；缓存模式只用于测试/演示
-LIVE_MODE = os.environ.get("QFLOW_LIVE", "0") == "1"
-LIVE_TTL = float(os.environ.get("QFLOW_LIVE_TTL", "120"))
+# 同一个请求多少秒内不重复发给业务系统（连着追问时不用反复拉全量）
+CACHE_TTL = float(os.environ.get("QFLOW_CACHE_TTL", "120"))
+
+# 登录用的浏览器：默认不显示窗口。设 QFLOW_BROWSER_HEADLESS=0 并提供 DISPLAY（例如 Xvfb）就用真窗口
+BROWSER_HEADLESS = os.environ.get("QFLOW_BROWSER_HEADLESS", "1") != "0"
+CHROME_BINARY = os.environ.get("QFLOW_CHROME_BINARY", "")
+CHROME_DRIVER = os.environ.get("QFLOW_CHROME_DRIVER", "")
 
 # voiceAI 侧对外的默认端口（只监听 127.0.0.1 时由本机 voiceAI 调用）
 DEFAULT_HOST = os.environ.get("QFLOW_HOST", "0.0.0.0")
@@ -38,10 +41,3 @@ LLM_TIMEOUT = float(os.environ.get("QFLOW_LLM_TIMEOUT", "3"))
 
 VOICELAB_URL = os.environ.get("VOICELAB_URL", "http://127.0.0.1:8040").rstrip("/")
 VOICELAB_AGENT_ID = os.environ.get("VOICELAB_AGENT_ID", "snxt_deduction")
-
-
-def resolve_db(path: str | os.PathLike | None = None) -> Path:
-    """把 CLI/API 传入的 db 路径统一成绝对路径。"""
-    if path:
-        return Path(path).expanduser().resolve()
-    return DEFAULT_DB

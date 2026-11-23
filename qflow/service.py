@@ -1,15 +1,14 @@
-"""只读 HTTP 服务：给 voiceAI / 内部工具调用.
+"""只读 HTTP 服务：页面、VoiceLab 和其它工具都从这里进。
 
-端点：
-    GET  /health        健康检查 + 数据量
-    GET  /capabilities  能力清单（含参数 JSON Schema）
-    GET  /tools         OpenAI function-calling 工具描述
-    GET  /datasets      导入审计（哪些文件、多少行、什么时候）
-    GET  /desk          可直接使用的查询页面（浏览器）
-    POST /query         {"text": "..."} 或 {"intent": "...", "params": {...}}
-    POST /desk/api/query 页面用：{text, state} -> 多轮回答
+    GET  /desk                 查询页面
+    GET  /health               服务是否在线，接入了哪些系统
+    GET  /capabilities         每个系统能查什么（来自图谱）
+    POST /query                {"text": "...", "state": {...}}  或  {"system": id, "capability": id, "values": {...}}
+    POST /voice/handle         VoiceLab 适配：{"heard": "...", "context": {"state": {...}}}
+    /desk/api/*                页面用：query、systems、account、login、graph、graph/save、spec/validate、voice/*
 
-设计：只用标准库，不引入 Web 框架；每个请求独立打开 SQLite 连接，天然线程安全。
+这里没有任何某个系统专用的东西：系统来自图谱（qflow/agent.py），取数走通用执行器（qflow/runner.py）。
+只用标准库，不引入 Web 框架。
 """
 from __future__ import annotations
 
@@ -26,7 +25,8 @@ from urllib.error import HTTPError
 from urllib.parse import parse_qs, quote, urlparse
 from urllib.request import Request, urlopen
 
-from . import capabilities, config, db, engine, voice
+from . import agent as agents
+from . import config, login, online, runner, spec, view
 
 logger = logging.getLogger("qflow.service")
 
@@ -61,59 +61,33 @@ DESK_HTML = Path(__file__).resolve().parent / "web" / "index.html"
 
 
 class Api:
-    def __init__(self, db_path, token: str = "", live: bool = False):
-        self.db_path = str(db_path)
+    def __init__(self, token: str = ""):
         self.token = (token or "").strip()
         # 页面口令：给人输入用，可以比 token 短；安全性靠失败次数上限
         self.desk_pass = config.DESK_PASS
         self._fails: dict = {}
         self._fail_lock = threading.Lock()
-        self.live = live
-        db.connect(self.db_path).close()  # 启动即建表，尽早暴露路径错误
 
-    def _status_payload(self) -> dict:
-        payload = {"ok": True, "mode": "live" if self.live else "cache"}
-        if self.live:
-            from . import livequery
+    # ---- 取数：页面、语音、/query 走同一条路 ----
+    def _ask(self, text: str, state: dict | None) -> dict:
+        saved = (state or {}).get(view.STATE_KEY)
+        try:
+            out = agents.ask(text, saved if isinstance(saved, dict) else None)
+        except (runner.RunError, online.ReadOnlyViolation) as exc:
+            logger.warning("查询失败：%s", exc)
+            return {"reply": "这次没查成：" + str(exc), "handled": True, "followups": [], "state_patch": {}, "error": str(exc)}
+        return view.answer(agents.get(out.get("system") or ""), out)
 
-            client = livequery.get_client()
-            payload["live"] = {
-                "rows": len(client.rows),
-                "page_total": client.page_total,
-                "fetched_at": client.fetched_iso(),
-                "age_seconds": round(client.age, 1) if client.age is not None else None,
-                "error": client.last_error,
-            }
-            payload["data_as_of"] = client.fetched_iso()
-        else:
-            conn = db.connect(self.db_path)
-            try:
-                payload.update(engine.health(conn))
-            finally:
-                conn.close()
-        return payload
+    def _systems(self) -> list[dict]:
+        return [a.status() for a in agents.all().values()]
 
-    def _systems_payload(self) -> dict:
-        from . import authbridge, systems
-
-        live_client = None
-        if self.live:
-            try:
-                from . import livequery
-
-                live_client = livequery.get_client()
-            except Exception:
-                live_client = None
-        cards = []
-        for spec in systems.list_systems():
-            sid = spec["id"]
-            bridge = authbridge.get_bridge(sid)
-            if bridge is not None:
-                st = bridge.status(live_client if sid == "sunner_srm" else None)
-            else:
-                st = {"status": "pending", "rows": None, "error": None}
-            cards.append({**spec, **st})
-        return {"ok": True, "mode": "live" if self.live else "cache", "systems": cards}
+    @staticmethod
+    def _json(body: bytes):
+        try:
+            payload = json.loads(body.decode("utf-8") or "{}")
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            return None
+        return payload if isinstance(payload, dict) else None
 
     # ---- 页面登录门：口令换一个当天有效的签名会话，不落库 ----
     def _session_value(self, day: str | None = None) -> str:
@@ -172,7 +146,7 @@ class Api:
         method = method.upper()
 
         if method == "GET" and path == "/health":
-            return 200, self._status_payload()
+            return 200, {"ok": True, "systems": [{"id": s["id"], "status": s["status"]} for s in self._systems()]}
 
         desk = path.startswith("/desk/api/")
         if method == "GET" and path == "/desk/api/session":
@@ -180,120 +154,58 @@ class Api:
         if method == "POST" and path == "/desk/api/login":
             if not self.token:
                 return 200, {"ok": True}
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                payload = {}
-            return self._login(headers, payload if isinstance(payload, dict) else {})
+            return self._login(headers, self._json(body) or {})
 
         # 页面接口和其它接口一样要鉴权；页面多一种方式：登录后的会话 cookie
         if not self._authorized(headers, allow_session=desk):
             return 401, {"ok": False, "error": "unauthorized"}
 
+        payload = None
+        if method == "POST" and not path.startswith("/desk/api/voice/"):
+            payload = self._json(body)
+            if payload is None:
+                return 400, {"ok": False, "error": "invalid_json"}
+
         if method == "GET" and path == "/capabilities":
-            conn = db.connect(self.db_path)
-            try:
-                return 200, capabilities.capabilities_payload(conn)
-            finally:
-                conn.close()
+            return 200, {"ok": True, "systems": [
+                {"id": a.id, "label": a.label, "capabilities": [
+                    {"id": c["id"], "label": c.get("label"), "slots": c.get("slots") or [], "examples": c.get("examples") or []}
+                    for c in a.graph.capabilities.values()]}
+                for a in agents.all().values()]}
 
-        if method == "GET" and path == "/tools":
-            conn = db.connect(self.db_path)
-            try:
-                return 200, capabilities.tools_payload(conn)
-            finally:
-                conn.close()
-
-        if method == "GET" and path == "/datasets":
-            conn = db.connect(self.db_path)
-            try:
-                return 200, {
-                    "ok": True,
-                    "datasets": engine.datasets(conn),
-                    "data_as_of": engine.data_as_of(conn),
-                }
-            finally:
-                conn.close()
-
-        if method == "GET" and path == "/desk/api/status":
-            return 200, self._status_payload()
-
-        if method == "GET" and path == "/desk/api/systems":
-            return 200, self._systems_payload()
+        if method == "GET" and path in {"/desk/api/status", "/desk/api/systems"}:
+            return 200, {"ok": True, "systems": self._systems(), "problems": agents.problems}
 
         if method == "GET" and path == "/desk/api/graph":
-            from . import graph
-
-            try:
-                g = graph.Graph.load()
-                return 200, {
-                    "ok": True,
-                    "graph": g.data,
-                    # 当前运行层真正能执行的意图；图谱里其余能力只能展示
-                    "executable_intents": list(capabilities.INTENTS),
-                }
-            except Exception as exc:
-                return 500, {"ok": False, "error": str(exc)}
+            found = agents.all()
+            return 200, {"ok": True, "view": view.graph_view(found), "docs": {sid: a.graph.doc for sid, a in found.items()}}
 
         if method == "POST" and path == "/desk/api/spec/validate":
-            from . import spec
-
-            try:
-                doc = json.loads(body.decode("utf-8") or "null")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                return 400, {"ok": False, "error": "invalid_json"}
-            return 200, {"ok": True, "report": spec.validate(doc.get("graph", doc) if isinstance(doc, dict) else doc)}
+            return 200, {"ok": True, "report": spec.validate(payload.get("graph", payload))}
 
         if method == "POST" and path == "/desk/api/graph/save":
-            from . import graph
+            doc = payload.get("graph")
+            report = spec.validate(doc)
+            if not report["ok"]:
+                return 400, {"ok": False, "error": "图谱没通过校验", "report": report}
+            if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", str(doc["system"]["id"])):
+                return 400, {"ok": False, "error": "system.id 只能用字母、数字、下划线和短横线"}
+            target = agents.store_dir() / doc["system"]["id"] / "graph.json"
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            return 200, {"ok": True, "system": doc["system"]["id"], "report": report}
 
+        if method == "POST" and path in {"/desk/api/account", "/desk/api/login/step"}:
+            target = agents.get(str(payload.get("system") or ""))
+            if target is None:
+                return 404, {"ok": False, "error": "没有这个系统"}
             try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-                graph_data = payload.get("graph")
-                if not isinstance(graph_data, dict):
-                    return 400, {"ok": False, "error": "graph_must_be_object"}
-                if not graph_data.get("nodes"):
-                    return 400, {"ok": False, "error": "图谱里没有节点"}
-                graph.Graph(graph_data)  # 校验合法性
-                graph.GRAPH_PATH.write_text(json.dumps(graph_data, ensure_ascii=False, indent=2), encoding="utf-8")
-                return 200, {"ok": True}
-            except Exception as exc:
+                if path == "/desk/api/account":
+                    target.save_account(str(payload.get("username") or ""), str(payload.get("password") or ""))
+                    return 200, {"ok": True, "account": target.account_public()}
+                return 200, {"ok": True, **login.handle(target, str(payload.get("action") or ""), payload)}
+            except ValueError as exc:
                 return 400, {"ok": False, "error": str(exc)}
-
-        if method == "GET" and path == "/desk/api/auth/challenge":
-            from . import authbridge
-
-            system = (parse_qs(urlparse(raw_path).query).get("system") or ["sunner_srm"])[0]
-            bridge = authbridge.get_bridge(system)
-            if bridge is None:
-                return 404, {"ok": False, "error": "system_not_supported", "system": system}
-            return 200, bridge.challenge()
-
-        if method == "POST" and path == "/desk/api/auth/refresh":
-            from . import authbridge
-
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                payload = {}
-            system = str(payload.get("system") or "sunner_srm")
-            bridge = authbridge.get_bridge(system)
-            if bridge is None:
-                return 404, {"ok": False, "error": "system_not_supported", "system": system}
-            return 200, bridge.refresh()
-
-        if method == "POST" and path == "/desk/api/auth/submit":
-            from . import authbridge
-
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                return 400, {"ok": False, "error": "invalid_json"}
-            system = str(payload.get("system") or "sunner_srm")
-            bridge = authbridge.get_bridge(system)
-            if bridge is None:
-                return 404, {"ok": False, "error": "system_not_supported", "system": system}
-            return 200, bridge.submit(payload if isinstance(payload, dict) else {})
 
         if method == "POST" and path == "/desk/api/voice/session":
             try:
@@ -337,86 +249,30 @@ class Api:
             return 200, {"ok": True}
 
         if method == "POST" and path in {"/voice/handle", "/voice"}:
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                return 400, {"ok": False, "error": "invalid_json"}
             heard = payload.get("heard") or payload.get("text")
             if not heard:
                 return 400, {"ok": False, "error": "heard_required"}
-            conn = db.connect(self.db_path)
-            try:
-                result = voice.handle(
-                    conn,
-                    str(heard),
-                    payload.get("context") if isinstance(payload.get("context"), dict) else {},
-                    live=self.live,
-                )
-                return 200, result
-            except ValueError as exc:
-                return 200, {
-                    "reply": "这个我没查到，换个说法再问一次。",
-                    "state_patch": {},
-                    "handled": False,
-                    "error": str(exc),
-                }
-            finally:
-                conn.close()
+            context = payload.get("context") if isinstance(payload.get("context"), dict) else {}
+            return 200, self._ask(str(heard), context.get("state") if isinstance(context.get("state"), dict) else None)
 
-        if method == "POST" and path == "/desk/api/query":
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                return 400, {"ok": False, "error": "invalid_json"}
-            if not isinstance(payload, dict):
-                return 400, {"ok": False, "error": "body_must_be_object"}
-            text = payload.get("text")
-            if not text:
-                return 400, {"ok": False, "error": "text_required"}
+        if method == "POST" and path in {"/desk/api/query", "/query"}:
             state = payload.get("state")
             if state is not None and not isinstance(state, dict):
                 return 400, {"ok": False, "error": "state_must_be_object"}
-            conn = db.connect(self.db_path)
-            try:
-                result = voice.handle(
-                    conn, str(text), {"state": state or {}}, live=self.live
-                )
-                return 200, {"ok": True, **result}
-            except ValueError as exc:
-                return 400, {"ok": False, "error": str(exc)}
-            finally:
-                conn.close()
-
-        if method == "POST" and path == "/query":
-            try:
-                payload = json.loads(body.decode("utf-8") or "{}")
-            except (UnicodeDecodeError, json.JSONDecodeError):
-                return 400, {"ok": False, "error": "invalid_json"}
-            if not isinstance(payload, dict):
-                return 400, {"ok": False, "error": "body_must_be_object"}
-
             text = payload.get("text") or payload.get("query")
-            intent = payload.get("intent")
-            params = payload.get("params") or {}
-            if not text and not intent:
-                return 400, {"ok": False, "error": "text_or_intent_required"}
-            if not isinstance(params, dict):
-                return 400, {"ok": False, "error": "params_must_be_object"}
-
-            conn = db.connect(self.db_path)
+            if text:
+                return 200, {"ok": True, **self._ask(str(text), state)}
+            # 不经过听懂：直接点名一个系统的一个能力（给上层编排用）
+            target = agents.get(str(payload.get("system") or ""))
+            if target is None or not payload.get("capability"):
+                return 400, {"ok": False, "error": "text_required"}
             try:
-                result = capabilities.query(
-                    conn,
-                    text=str(text) if text else None,
-                    intent=str(intent) if intent else None,
-                    params=params,
-                    live=self.live,
-                )
-                return 200, result
-            except ValueError as exc:
+                values = payload.get("values") if isinstance(payload.get("values"), dict) else {}
+                return 200, {"ok": True, "result": target.run(str(payload["capability"]), values)}
+            except runner.AuthExpired as exc:
+                return 409, {"ok": False, "error": f"登录态失效：{exc}", "needs_login": True}
+            except (runner.RunError, online.ReadOnlyViolation) as exc:
                 return 400, {"ok": False, "error": str(exc)}
-            finally:
-                conn.close()
 
         return 404, {"ok": False, "error": "not_found", "path": path}
 
@@ -489,41 +345,24 @@ class _Handler(BaseHTTPRequestHandler):
         logger.info("%s - %s", self.address_string(), fmt % args)
 
 
-def make_server(host: str, port: int, db_path, token: str = "", live: bool = False) -> ThreadingHTTPServer:
-    handler = type("BoundHandler", (_Handler,), {"api": Api(db_path, token, live)})
+def make_server(host: str, port: int, token: str = "") -> ThreadingHTTPServer:
+    handler = type("BoundHandler", (_Handler,), {"api": Api(token)})
     server = ThreadingHTTPServer((host, int(port)), handler)
     server.daemon_threads = True
     return server
 
 
-def serve(host: str, port: int, db_path, token: str = "", live: bool | None = None) -> None:
-    if live is None:
-        live = config.LIVE_MODE
-    if live:
-        from . import livequery
-
-        livequery.get_client()  # 后台预热：登录 + 第一次抓取
-    server = make_server(host, port, db_path, token, live)
+def serve(host: str, port: int, token: str = "") -> None:
+    server = make_server(host, port, token)
     actual_host, actual_port = server.server_address[:2]
-    logger.info("readflow query service on http://%s:%s (db=%s)", actual_host, actual_port, db_path)
-    print(f"readflow query service: http://{actual_host}:{actual_port}")
-    print("  GET  /desk    /health  /capabilities  /tools  /datasets")
-    print('  POST /query   {"text": "去年11月扣款合计"}')
+    found = agents.all()
+    print(f"readflow: http://{actual_host}:{actual_port}/desk")
+    print("  已接入：" + ("、".join(f"{a.label}（{a.status()['status']}）" for a in found.values()) or "还没有系统"))
+    for path, why in agents.problems.items():
+        print(f"  没加载 {path}：{why}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         print("\nbye")
     finally:
         server.server_close()
-        if live:
-            try:
-                from . import livequery
-
-                livequery.get_client().close()
-            except Exception:
-                pass
-
-
-if __name__ == "__main__":
-    serve(config.DEFAULT_HOST, config.DEFAULT_PORT, config.DEFAULT_DB, config.DEFAULT_TOKEN)
-

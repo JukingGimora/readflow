@@ -1,18 +1,11 @@
-"""听懂一句话：规则 + 本地小模型的分工。
+"""本地小模型只做一道闭集选择题：这句话想查哪一类业务（或者是想办事 / 和这里无关 / 接着上一问）。
 
-实测（2026-11-20，Qwen3-4B-Q4，64 句口语问法，见 docs/PLAN.md）：
-- 「想查哪一类业务 / 是想办事 / 和这里无关」：模型对 60 句，关键词规则对 32 句。
-- 「要总数还是要明细」、抽时间词：模型做不好（偏向明细；会漏、会编时间），规则更准。
-- 模型分不清「想办事」和「想查的东西这里没有」（报价单在哪看 → 常被判成想办事）。
-  换了五种提示词写法都在 97–99/104 之间，属于噪声，所以不再调提示词，
-  而是让这两种情况共用一句对两边都成立的回答（见 voice.handle）。
+实测（2026-11-20，Qwen3-4B-Q4，见 docs/PLAN.md）：
+- 判断业务类别：模型明显好于关键词。
+- 要总数还是要明细、抽时间：模型做不好（偏向明细；会漏、会编时间），所以这两件事只用规则（qflow/ask.py、timewords.py）。
+- 模型分不清「想办事」和「想查的东西这里没有」，所以这两种情况共用一句都成立的回答。
 
-所以模型只回答一个闭集选择题（一个字母），其余都由 nlu 里的规则做：
-- 规则认出了业务关键词 → 用规则（免费、确定）。模型只保留一票否决：它说「想办事」就拒绝。
-- 规则没认出来 → 用模型选的那一类；总数/明细仍按规则的提示词判断。
-- 模型没配、连不上或答非所问 → 退回纯规则，和没有模型时完全一样。
-
-选项来自图谱的 capability 节点（label / hint / examples），换一个系统不用改这里。
+模型没配、连不上或答非所问时返回 None，调用方按纯规则走。选项由调用方从图谱里取，这里不认识任何系统。
 """
 
 from __future__ import annotations
@@ -24,7 +17,6 @@ import urllib.request
 from dataclasses import dataclass
 
 from . import config
-from .graph import Graph, GraphError
 
 log = logging.getLogger(__name__)
 
@@ -38,10 +30,9 @@ _down_until = 0.0
 
 @dataclass
 class Group:
-    key: str  # intent 的前缀，例如 deduction
+    key: str
     label: str
     hint: str
-    intents: list[str]
 
 
 def _common_prefix(labels: list[str]) -> str:
@@ -52,34 +43,6 @@ def _common_prefix(labels: list[str]) -> str:
         while prefix and not label.startswith(prefix):
             prefix = prefix[:-1]
     return prefix or labels[0]
-
-
-def groups(graph: Graph | None = None) -> list[Group]:
-    """同一类业务的能力（汇总、明细）合成一个选项：模型分不清汇总和明细，但分得清业务。"""
-    try:
-        graph = graph or Graph.load()
-    except GraphError:
-        return []
-    found: dict[str, dict] = {}
-    for node in graph.nodes_of("capability"):
-        intent = str(node.get("intent") or "")
-        if not intent:
-            continue
-        slot = found.setdefault(intent.split(".")[0], {"labels": [], "hints": [], "examples": [], "intents": []})
-        slot["labels"].append(str(node.get("label") or intent))
-        slot["intents"].append(intent)
-        if node.get("hint"):
-            slot["hints"].append(str(node["hint"]))
-        slot["examples"] += [str(x) for x in (node.get("examples") or [])[:2]]
-    return [
-        Group(
-            key=key,
-            label=_common_prefix(slot["labels"]),
-            hint="；".join(slot["hints"]) or "例如：" + "；".join(slot["examples"][:3]),
-            intents=slot["intents"],
-        )
-        for key, slot in found.items()
-    ]
 
 
 def build_prompt(text: str, options: list[Group], has_previous: bool) -> tuple[str, dict[str, str]]:
@@ -104,24 +67,15 @@ def build_prompt(text: str, options: list[Group], has_previous: bool) -> tuple[s
     return prompt, answers
 
 
-def labels(graph: Graph | None = None) -> list[str]:
-    return [group.label for group in groups(graph)]
-
-
 def enabled() -> bool:
     return bool(config.LLM_URL)
 
 
-def ask_model(text: str, has_previous: bool = False, graph: Graph | None = None,
-              options: list[Group] | None = None) -> str | None:
-    """返回业务类别的 key、FOLLOWUP、WRITE 或 NONE；模型不可用时返回 None。
-
-    options 不给就从旧格式图谱里取；v1 图谱由 qflow/ask.py 传进来。
-    """
+def ask_model(text: str, has_previous: bool = False, options: list[Group] | None = None) -> str | None:
+    """返回业务类别的 key、FOLLOWUP、WRITE 或 NONE；模型不可用时返回 None。options 由 qflow/ask.py 从图谱里取。"""
     global _down_until
     if not enabled() or time.monotonic() < _down_until:
         return None
-    options = options or groups(graph)
     if not options:
         return None
     prompt, answers = build_prompt(text, options, has_previous)
@@ -144,39 +98,3 @@ def ask_model(text: str, has_previous: bool = False, graph: Graph | None = None,
         log.warning("本地模型不可用，%d 秒内只用规则：%s", _RETRY_AFTER, exc)
         return None
     return answers.get(letter)
-
-
-def route(parsed, text: str, has_previous: bool = False, graph: Graph | None = None) -> dict:
-    """决定这句话怎么走。
-
-    返回 {"kind": ..., "intent": ..., "by": "rules" | "model"}，kind 是：
-    intent（查这个能力）、followup（接着上一问）、write（想办事，拒绝）、unknown（没听出来）。
-    """
-    rule_intent = parsed.intent if parsed.confidence > 0.3 else None
-    verdict = ask_model(text, has_previous, graph)
-    if verdict == WRITE:
-        return {"kind": "write", "intent": None, "by": "model"}
-    if rule_intent == "overview" and verdict == "overview":
-        return {"kind": "intent", "intent": "overview", "by": "model"}
-    if rule_intent:
-        return {"kind": "intent", "intent": rule_intent, "by": "rules"}
-    if verdict is None:
-        return {"kind": "unknown", "intent": None, "by": "rules"}
-    if verdict == FOLLOWUP:
-        return {"kind": "followup", "intent": None, "by": "model"}
-    if verdict == NONE:
-        return {"kind": "unknown", "intent": None, "by": "model"}
-    group = next((g for g in groups(graph) if g.key == verdict), None)
-    if group is None:
-        return {"kind": "unknown", "intent": None, "by": "model"}
-    return {"kind": "intent", "intent": pick_in_group(group, parsed), "by": "model"}
-
-
-def pick_in_group(group: Group, parsed) -> str:
-    """一类业务里选汇总还是明细：只看规则认出的提示词，默认汇总（答错成本低，可以追问「明细呢」）。"""
-    if len(group.intents) == 1:
-        return group.intents[0]
-    from . import nlu
-
-    want = "detail" if nlu.wants_detail(parsed.text, parsed.params) else "summary"
-    return next((i for i in group.intents if i.endswith("." + want)), group.intents[0])

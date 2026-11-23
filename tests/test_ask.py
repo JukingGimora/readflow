@@ -6,21 +6,16 @@ from unittest import mock
 
 import pytest
 
-from qflow import ask, config, db, runner, understand
-from tests.helpers import make_seeded_db
-from tests.test_runner import SRM_GRAPH, srm_sender
+from qflow import ask, runner, understand
+from tests.data import EXAMPLE_GRAPH, SRM_GRAPH, srm_sender
 
 NOW = datetime(2025, 12, 20, 10, 0)
 
 
 @pytest.fixture()
-def env(tmp_path):
-    make_seeded_db(tmp_path / "t.db")
-    conn = db.connect(tmp_path / "t.db")
-    graph = runner.load(SRM_GRAPH)
+def env():
     with mock.patch.object(understand, "ask_model", return_value=None):  # 默认：模型不在线
-        yield graph, srm_sender(conn)
-    conn.close()
+        yield runner.load(SRM_GRAPH), srm_sender()
 
 
 def say(env, text, previous=None):
@@ -92,7 +87,7 @@ def test_model_write_verdict_refuses_without_calling_the_system(env):
 
 def test_same_code_answers_another_system():
     """示例图谱是另一个虚构系统：能力、关键词、枚举值都不一样，代码不用改。"""
-    graph = runner.load(config.PROJECT_ROOT / "docs" / "examples" / "graph-example.json")
+    graph = runner.load(EXAMPLE_GRAPH)
     sample = graph.operations["op.deduction.list"]["evidence"]["sample"]["response"]
     sent = []
 
@@ -104,3 +99,13 @@ def test_same_code_answers_another_system():
         out = ask.ask(graph, "去年10月含水扣款合计", None, send, now=datetime(2027, 1, 15))
     assert sent[0]["startDate"] == "2026-10-01" and sent[0]["endDate"] == "2026-10-31"
     assert out["state"]["values"]["item"] == "水分" and out["result"]["totals"]["total"] == 120.5
+
+
+def test_bare_month_follows_the_previous_year_or_the_latest_past_one(env):
+    graph, send = env
+    jan = datetime(2026, 1, 15)
+    alone = ask.ask(graph, "12月扣款合计", None, send, now=jan)
+    assert alone["state"]["values"]["period"]["start"] == "2025-12-01"  # 不是还没到的 2026 年 12 月
+    first = ask.ask(graph, "2024年11月扣款合计", None, send, now=jan)
+    moved = ask.ask(graph, "那12月呢", first["state"], send, now=jan)
+    assert moved["state"]["values"]["period"] == {"start": "2024-12-01", "end": "2024-12-31"}

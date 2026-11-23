@@ -1,23 +1,38 @@
+"""HTTP 服务：口令门，以及页面 / 语音 / /query 走同一条通用路径。业务系统用假系统「小店订单」。"""
+
 import json
-import tempfile
 import threading
 import unittest
 import urllib.error
 import urllib.request
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest import mock
 
-from qflow import service
-
-from .helpers import make_seeded_db
+from qflow import agent as agents
+from qflow import config, login, service, understand
+from tests import fakesite
+from tests.data import EXAMPLE_GRAPH
 
 
 class ServiceTests(unittest.TestCase):
     def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
-        self.db_path = Path(self.tmp.name) / "test.db"
-        make_seeded_db(self.db_path)
+        self.tmp = TemporaryDirectory()
+        self.site = fakesite.Site()
+        root = Path(self.tmp.name)
+        for patcher in (
+            mock.patch.object(config, "DATA_DIR", root / "data"),
+            mock.patch.object(config, "SYSTEMS_DIR", root / "none"),
+            mock.patch.object(understand, "ask_model", return_value=None),
+            mock.patch.object(login, "unattended", return_value=False),
+        ):
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        target = root / "data" / "systems" / "demo_shop" / "graph.json"
+        target.parent.mkdir(parents=True)
+        target.write_text(json.dumps(self.site.graph(), ensure_ascii=False), encoding="utf-8")
         self.token = "secret"
-        self.server = service.make_server("127.0.0.1", 0, self.db_path, token=self.token)
+        self.server = service.make_server("127.0.0.1", 0, token=self.token)
         self.port = self.server.server_address[1]
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
@@ -26,7 +41,12 @@ class ServiceTests(unittest.TestCase):
         self.server.shutdown()
         self.server.server_close()
         self.thread.join(timeout=5)
+        self.site.close()
         self.tmp.cleanup()
+
+    def _sign_in(self):
+        self.site.sessions.add("s1")
+        agents.get("demo_shop").save_session([{"name": "sid", "value": "s1", "domain": "127.0.0.1", "path": "/"}])
 
     def _request(self, path, method="GET", payload=None, token=None, raw=None, cookie=None):
         headers = {"Content-Type": "application/json"}
@@ -59,10 +79,10 @@ class ServiceTests(unittest.TestCase):
             ("GET", "/desk/api/status", None),
             ("GET", "/desk/api/systems", None),
             ("GET", "/desk/api/graph", None),
-            ("POST", "/desk/api/graph/save", {"graph": {"nodes": []}}),
-            ("POST", "/desk/api/query", {"text": "上个月扣款合计"}),
-            ("GET", "/desk/api/auth/challenge", None),
-            ("POST", "/desk/api/auth/submit", {"code": "1234"}),
+            ("POST", "/desk/api/graph/save", {"graph": {}}),
+            ("POST", "/desk/api/query", {"text": "上个月订单合计"}),
+            ("POST", "/desk/api/account", {"system": "demo_shop", "username": "a", "password": "b"}),
+            ("POST", "/desk/api/login/step", {"system": "demo_shop", "action": "start"}),
             ("POST", "/desk/api/voice/session", {}),
             ("DELETE", "/desk/api/voice/session?sid=", None),
         ]:
@@ -121,157 +141,117 @@ class ServiceTests(unittest.TestCase):
         status, _ = self._request("/desk/api/graph", cookie=cookie)
         self.assertEqual(status, 200)
 
-    def test_health_is_public(self):
+    def test_health_is_public_and_lists_systems(self):
         status, payload = self._request("/health")
-        self.assertEqual(status, 200)
-        self.assertTrue(payload["ok"])
-        self.assertEqual(payload["counts"]["shipments"], 3)
+        self.assertEqual((status, payload["systems"]), (200, [{"id": "demo_shop", "status": "no_account"}]))
 
-    def test_capabilities_requires_token(self):
-        status, _ = self._request("/capabilities")
-        self.assertEqual(status, 401)
-
-    def test_capabilities_with_token(self):
+    def test_capabilities_come_from_the_graph(self):
+        self.assertEqual(self._request("/capabilities")[0], 401)
         status, payload = self._request("/capabilities", token=self.token)
-        self.assertEqual(status, 200)
-        self.assertTrue(payload["read_only"])
-        self.assertIn("deduction.summary", payload["intents"])
-        self.assertTrue(all(cap["read_only"] for cap in payload["capabilities"]))
-        self.assertEqual(payload["graph"]["capabilities"], 6)
+        self.assertEqual([c["id"] for c in payload["systems"][0]["capabilities"]], ["cap.order.summary", "cap.order.detail"])
 
-    def test_tools_schema(self):
-        status, payload = self._request("/tools", token=self.token)
-        self.assertEqual(status, 200)
-        self.assertEqual(payload["tools"][0]["function"]["name"], "query_business_data")
+    def test_account_is_saved_but_never_sent_back(self):
+        status, payload = self._request("/desk/api/account", method="POST", token=self.token,
+                                        payload={"system": "demo_shop", "username": "demo", "password": "demo123"})
+        self.assertEqual((status, payload["account"]), (200, {"saved": True, "username": "demo"}))
+        status, payload = self._request("/desk/api/systems", token=self.token)
+        self.assertEqual(payload["systems"][0]["status"], "needs_login")
+        self.assertNotIn("demo123", json.dumps(payload))
+        status, _ = self._request("/desk/api/account", method="POST", token=self.token,
+                                  payload={"system": "nope", "username": "a", "password": "b"})
+        self.assertEqual(status, 404)
+        status, _ = self._request("/desk/api/account", method="POST", token=self.token,
+                                  payload={"system": "demo_shop", "username": "a", "password": ""})
+        self.assertEqual(status, 400)
 
-    def test_structured_query(self):
-        status, payload = self._request(
-            "/query",
-            method="POST",
-            token=self.token,
-            payload={"intent": "deduction.summary", "params": {"month": "2025-11"}},
-        )
-        self.assertEqual(status, 200)
-        self.assertEqual(payload["data"]["total_amount"], 180.0)
-        self.assertIn("180.00", payload["answer"])
-        self.assertEqual(payload["intent"], "deduction.summary")
-        self.assertEqual(payload["plan"]["provider"]["kind"], "cache")
-        self.assertEqual(payload["plan"]["entity"]["id"], "entity.deduction")
+    def test_login_step_is_served_by_the_generic_flow(self):
+        with mock.patch.object(login, "handle", return_value={"state": "challenge", "image": "data:image/png;base64,AA"}) as handle:
+            status, payload = self._request("/desk/api/login/step", method="POST", token=self.token,
+                                            payload={"system": "demo_shop", "action": "start"})
+        self.assertEqual((status, payload["state"]), (200, "challenge"))
+        self.assertEqual(handle.call_args.args[1], "start")
 
-    def test_text_query(self):
-        status, payload = self._request(
-            "/query",
-            method="POST",
-            token=self.token,
-            payload={"text": "2025年11月扣款合计"},
-        )
+    def test_page_voice_and_query_share_one_path(self):
+        self._sign_in()
+        status, first = self._request("/desk/api/query", method="POST", token=self.token,
+                                      payload={"text": "2025年11月订单合计", "state": {}})
         self.assertEqual(status, 200)
-        self.assertEqual(payload["data"]["count"], 3)
-        self.assertEqual(payload["data"]["total_amount"], 180.0)
+        self.assertIn("共 3 单，金额 1,580.50 元", first["reply"])
+        self.assertEqual(first["data"]["groups"][0], {"label": "已签收", "value": 1500.5, "n": 2})
+        self.assertEqual(first["plan"]["metrics"][0], {"key": "total", "label": "订单金额", "unit": "元"})
+        self.assertIn("POST /api/orders/list", first["plan"]["steps"][0])
+        status, second = self._request("/desk/api/query", method="POST", token=self.token,
+                                       payload={"text": "明细呢", "state": first["state_patch"]})
+        self.assertEqual([r["order_no"] for r in second["data"]["rows"]], ["SO20251101", "SO20251102", "SO20251103"])
+        self.assertIn({"name": "buyer", "label": "买家"}, second["plan"]["columns"])
 
-    def test_query_requires_auth(self):
-        status, _ = self._request(
-            "/query", method="POST", payload={"text": "2025年11月扣款合计"}
-        )
-        self.assertEqual(status, 401)
+        status, voice = self._request("/voice/handle", method="POST", token=self.token,
+                                      payload={"heard": "2025年11月订单合计", "context": {"state": {}}})
+        self.assertEqual((status, voice["handled"], voice["reply"]), (200, True, first["reply"]))
+        status, followup = self._request("/voice/handle", method="POST", token=self.token,
+                                         payload={"heard": "只看签收了的", "context": {"state": voice["state_patch"]}})
+        self.assertIn("1,500.50", followup["reply"])
 
-    def test_voice_handle(self):
-        status, payload = self._request(
-            "/voice/handle",
-            method="POST",
-            token=self.token,
-            payload={"heard": "2025年11月扣款合计", "context": {"history": []}},
-        )
-        self.assertEqual(status, 200)
-        self.assertTrue(payload["handled"])
-        self.assertIn("180.00", payload["reply"])
-        self.assertEqual(payload["state_patch"]["snxt"]["intent"], "deduction.summary")
+        status, plain = self._request("/query", method="POST", token=self.token, payload={"text": "2025年11月订单合计"})
+        self.assertEqual(plain["reply"], first["reply"])
+        status, direct = self._request("/query", method="POST", token=self.token, payload={
+            "system": "demo_shop", "capability": "cap.order.summary", "values": {"state": "待发货"}})
+        self.assertEqual((status, direct["result"]["totals"]), (200, {"total": 80.0, "count": 1}))
+
+    def test_needs_login_is_said_plainly(self):
+        status, payload = self._request("/desk/api/query", method="POST", token=self.token, payload={"text": "上个月订单合计"})
+        self.assertEqual((status, payload["needs_login"], payload["system"]), (200, True, "demo_shop"))
+        self.assertIn("还没有填", payload["reply"])
+        status, payload = self._request("/query", method="POST", token=self.token,
+                                        payload={"system": "demo_shop", "capability": "cap.order.summary"})
+        self.assertEqual((status, payload["needs_login"]), (409, True))
+
+    def test_unknown_question_and_bad_requests(self):
+        status, payload = self._request("/desk/api/query", method="POST", token=self.token, payload={"text": "你好啊"})
+        self.assertEqual((status, payload["handled"]), (200, False))
+        self.assertTrue(payload["followups"])
+        self.assertEqual(self._request("/query", method="POST", token=self.token, raw=b"{oops")[1]["error"], "invalid_json")
+        self.assertEqual(self._request("/query", method="POST", token=self.token, payload={})[1]["error"], "text_required")
+        status, payload = self._request("/query", method="POST", token=self.token,
+                                        payload={"system": "demo_shop", "capability": "cap.nope"})
+        self.assertEqual(status, 400)
+        self.assertEqual(self._request("/nope", token=self.token)[0], 404)
 
     def test_desk_page(self):
-        with urllib.request.urlopen(
-            f"http://127.0.0.1:{self.port}/desk", timeout=5
-        ) as response:
+        with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/desk", timeout=5) as response:
             html = response.read().decode("utf-8")
             self.assertEqual(response.status, 200)
-        self.assertIn("readflow", html)
-        self.assertIn("/desk/api/query", html)
-        self.assertIn("/desk/api/login", html)
+        for needle in ("readflow", "/desk/api/query", "/desk/api/login/step", "/desk/api/account"):
+            self.assertIn(needle, html)
         # 页面不写死业务系统，也不依赖外网资源
-        self.assertNotIn("圣农", html)
-        self.assertNotIn("googleapis", html)
+        for word in ("圣农", "扣款", "googleapis"):
+            self.assertNotIn(word, html)
 
-    def test_desk_graph_lists_executable_intents(self):
+    def test_graph_view_and_import(self):
         status, payload = self._request("/desk/api/graph", token=self.token)
-        self.assertEqual(status, 200)
-        self.assertIn("deduction.summary", payload["executable_intents"])
-        self.assertTrue(payload["graph"]["nodes"])
+        types = {node["type"] for node in payload["view"]["nodes"]}
+        self.assertEqual(types, {"app", "module", "page", "api", "entity", "capability"})
+        ids = {node["id"] for node in payload["view"]["nodes"]}
+        self.assertTrue(all(edge["from"] in ids and edge["to"] in ids for edge in payload["view"]["edges"]))
+        self.assertEqual(payload["docs"]["demo_shop"]["system"]["label"], "小店订单")
 
-    def test_spec_validate_endpoint(self):
-        example = Path(__file__).resolve().parent.parent / "docs" / "examples" / "graph-example.json"
-        doc = json.loads(example.read_text(encoding="utf-8"))
-        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc)
-        self.assertEqual(status, 401)
+        doc = json.loads(EXAMPLE_GRAPH.read_text(encoding="utf-8"))
         status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc, token=self.token)
-        self.assertEqual(status, 200)
         self.assertTrue(payload["report"]["ok"])
-        doc["operations"][0].pop("evidence")
-        status, payload = self._request("/desk/api/spec/validate", method="POST", payload=doc, token=self.token)
-        self.assertFalse(payload["report"]["ok"])
+        status, payload = self._request("/desk/api/graph/save", method="POST", payload={"graph": doc}, token=self.token)
+        self.assertEqual((status, payload["system"]), (200, "example_erp"))
+        status, payload = self._request("/desk/api/systems", token=self.token)
+        self.assertEqual({s["id"] for s in payload["systems"]}, {"demo_shop", "example_erp"})
 
-    def test_desk_graph_save_rejects_empty_graph(self):
-        status, payload = self._request(
-            "/desk/api/graph/save", method="POST", payload={"graph": {"nodes": []}}, token=self.token
-        )
+        doc["operations"][0].pop("evidence")
+        status, payload = self._request("/desk/api/graph/save", method="POST", payload={"graph": doc}, token=self.token)
         self.assertEqual(status, 400)
-        self.assertFalse(payload["ok"])
+        self.assertFalse(payload["report"]["ok"])
+        doc = json.loads(EXAMPLE_GRAPH.read_text(encoding="utf-8"))
+        doc["system"]["id"] = "../escape"
+        status, payload = self._request("/desk/api/graph/save", method="POST", payload={"graph": doc}, token=self.token)
+        self.assertEqual(status, 400)
 
     def test_desk_voice_session_delete(self):
         status, payload = self._request("/desk/api/voice/session?sid=", method="DELETE", token=self.token)
-        self.assertEqual(status, 200)
-        self.assertTrue(payload["ok"])
-
-    def test_desk_followup(self):
-        status, first = self._request(
-            "/desk/api/query",
-            method="POST",
-            token=self.token,
-            payload={"text": "2025年11月扣款合计", "state": {}},
-        )
-        self.assertEqual(status, 200)
-        self.assertIn("180.00", first["reply"])
-        status, second = self._request(
-            "/desk/api/query",
-            method="POST",
-            token=self.token,
-            payload={"text": "那水分呢", "state": first["state_patch"]},
-        )
-        self.assertEqual(status, 200)
-        self.assertIn("130.00", second["reply"])
-
-    def test_invalid_json(self):
-        status, payload = self._request(
-            "/query", method="POST", token=self.token, raw=b"{oops"
-        )
-        self.assertEqual(status, 400)
-        self.assertEqual(payload["error"], "invalid_json")
-
-    def test_unknown_intent(self):
-        status, payload = self._request(
-            "/query", method="POST", token=self.token, payload={"intent": "delete.everything"}
-        )
-        self.assertEqual(status, 400)
-        self.assertIn("未知 intent", payload["error"])
-
-    def test_missing_text_and_intent(self):
-        status, payload = self._request("/query", method="POST", token=self.token, payload={})
-        self.assertEqual(status, 400)
-        self.assertEqual(payload["error"], "text_or_intent_required")
-
-    def test_not_found(self):
-        status, payload = self._request("/nope", token=self.token)
-        self.assertEqual(status, 404)
-        self.assertEqual(payload["error"], "not_found")
-
-
-if __name__ == "__main__":
-    unittest.main()
+        self.assertEqual((status, payload["ok"]), (200, True))
