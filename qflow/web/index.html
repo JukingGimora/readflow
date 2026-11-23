@@ -817,8 +817,8 @@ function renderAnswer(pending, data, opts) {
   card.replaceChildren(...kids);
   typeInto(p, bars || table ? headline(reply) : reply);
   addChips(data.followups);
-  // 用说的问，就用说的答
-  if (opts && opts.voice) speak(reply);
+  // 用说的问，就用说的答；只念第一句结论，其余看屏幕
+  if (opts && opts.voice) speak(headline(reply));
   scrollDown();
 }
 function renderError(pending, message) {
